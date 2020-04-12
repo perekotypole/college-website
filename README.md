@@ -2,7 +2,7 @@
 
 **BACKEND**
 1. Clone
-`git clone https://github.com/`
+`git clone https://github.com/perekotypole/college`
 
 2. Change directory into backend
 `cd backend`
