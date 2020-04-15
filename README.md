@@ -1,4 +1,4 @@
-## Crystud
+## College website
 
 **BACKEND**
 1. Clone
