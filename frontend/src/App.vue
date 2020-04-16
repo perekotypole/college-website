@@ -1,32 +1,62 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <app-navigation
+      class="workspace"
+    ></app-navigation>
+
     <router-view/>
+
+    <app-footer></app-footer>
   </div>
 </template>
 
+<script>
+import AppNavigation from '@/components/ui/AppNavigation.vue'
+import AppFooter from '@/components/ui/AppFooter.vue'
+
+export default {
+  components: {
+    AppNavigation,
+    AppFooter,
+  },
+}
+</script>
+
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import (css) url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+* {
+  outline: none;
+  box-sizing: border-box;
 }
 
-#nav {
-  padding: 30px;
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+:root {
+  --color-bg-main: #FFFFFF;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  --color-accent-orange: #FEEB8C;
+  --color-accent-red: #DE9FA1;
+  --color-accent-green: #AEE1A5;
+
+  --color-font-main: #272727;
+  --color-font-dark: #313131;
+  --color-font-gray: #717171;
+}
+
+.workspace {
+  width: 1180px;
+  margin: 0 auto;
+}
+
+body {
+  font: 14px 'Montserrat', Sans-Serif, Tahoma, Arial;
+  color: var(--color-font-main);
 }
 </style>
