@@ -13,7 +13,7 @@ export default model('Specialty', new Schema({
     required: true,
     trim: true,
   },
-  departmentID: {
+  department: {
     type: Schema.Types.ObjectId,
     ref: 'Department',
     required: true,

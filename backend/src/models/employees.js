@@ -15,17 +15,23 @@ export default model('Employee', new Schema({
     type: Boolean,
     default: false,
   },
-  commissionID: {
+  commission: {
     type: Schema.Types.ObjectId,
     ref: 'Commission',
     required: true,
   },
   contacts: {
-    type: Schema.Types.Mixed,
+    type: Map,
+    of: String,
   },
   achievement: {
     type: [String],
     trim: true,
     alias: 'achv',
+  },
+  image: {
+    type: Schema.Types.ObjectId,
+    ref: 'Image',
+    unique: true,
   },
 }))

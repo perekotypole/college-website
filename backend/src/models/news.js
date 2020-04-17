@@ -6,7 +6,7 @@ export default model('News', new Schema({
     required: true,
     trim: true,
   },
-  mainImageID: {
+  mainImage: {
     type: Schema.Types.ObjectId,
     ref: 'Image',
   },
@@ -14,7 +14,7 @@ export default model('News', new Schema({
     type: String,
     trim: true,
   },
-  tagIDList: {
+  tagList: {
     type: [Schema.Types.ObjectId],
     ref: 'Tag',
   },
@@ -30,12 +30,12 @@ export default model('News', new Schema({
   page: {
     type: String,
   },
-  imageIDList: {
+  imageList: {
     type: [Schema.Types.ObjectId],
     ref: 'Image',
     alias: 'images',
   },
-  documentIDList: {
+  documentList: {
     type: [Schema.Types.ObjectId],
     ref: 'Document',
     alias: 'documents',
@@ -44,4 +44,4 @@ export default model('News', new Schema({
     type: Boolean,
     default: false,
   },
-}))
+}), 'news')

@@ -11,10 +11,15 @@ export default model('Commission', new Schema({
     type: String,
     trim: true,
   },
-  leaderID: {
+  leader: {
     type: Schema.Types.ObjectId,
     ref: 'Employee',
     unique: true,
     required: true,
+  },
+  members: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Employee',
+    unique: true,
   },
 }))

@@ -11,10 +11,14 @@ export default model('Department', new Schema({
     type: String,
     trim: true,
   },
-  leaderID: {
+  leader: {
     type: Schema.Types.ObjectId,
     ref: 'Employee',
-    unique: true,
     required: true,
+  },
+  specialties: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Specialty',
+    unique: true,
   },
 }))
