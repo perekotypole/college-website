@@ -1,91 +1,91 @@
 <template>
-  <div class="title">
-    <div 
-      :style="highlightStyle" 
-      class="title__highlight"
-    >
-    </div>
-    <span
-      :style="textStyle" 
-      ref="text" 
-      class="title__text">
+  <span
+    class="app-title"
+    :class="[
+      background,
+      (perc === 100 ? 'paralelogram' : 'sliced'),
+    ]"
+  >
+    <div
+      v-if="perc !== 100"
+      :style="{
+        width: `${perc}%`,
+      }"
+      class="slice"
+      :class="[background]"
+    ></div>
+
+    <span class="text">
       <slot></slot>
     </span>
-   
-  </div>
+  </span>
 </template>
 
 <script>
-
-import anime from 'animejs/lib/anime.es.js'; 
-
 export default {
-  name: 'app-title',
-  props: ['text', 'highlight', 'padding', 'max-width', 'slope', 'color'],
-  data: () => ({
-    height: null,
-    width: null,
-    highlightStyle: {},
-    textStyle: {}
-  }),
-  methods: {
-    // updateTextHeight(e) {
-    //   this.height = this.$refs.text.offsetHeight + this.$props.padding[0] * 2
-    // }
+  props: {
+    background: {
+      type: String,
+      required: false,
+      default: () => '',
+    },
+    perc: {
+      type: Number,
+      required: false,
+      default: () => 100,
+    },
   },
-  created() {
-    // window.addEventListener("resize", this.updateTextHeight.bind(this))
-  },
-  mounted() {
-    let { width, height } = this
-    let { slope, padding, highlight, color, maxWidth } = this.$props
-    let text = this.$refs.text
-
-    width = text.offsetWidth + padding[1] * 2 + slope 
-    height = text.offsetHeight + padding[0] * 2 
-
-    if (this.$props.maxWidth) {
-      text.style.maxWidth = maxWidth - padding[1] + 'px';
-      width = maxWidth + padding[1] + slope
-      height = text.offsetHeight + padding[0] * 2
-    }
-    
-    if (highlight) {
-      width = width / 100 * highlight
-    }
-
-    this.highlightStyle = {
-        height: `${height}px`,
-        width: `${width}px`,
-        clipPath: `polygon(0 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`,
-        background: `var(${color})`
-    }
-
-    this.textStyle = {
-      transform: `translate(${padding[1]}px, calc(-100% - ${padding[0]}px))`,
-    }
-
-    // Animations
-    anime({
-        targets: '.header__greeting .title__highlight',
-        width: [0, width],
-        easing: 'spring(1, 70, 13, 1)',
-        duration: 300
-    });
-  }
 }
 </script>
 
 <style lang="less" scoped>
+.app-title {
+  display: inline-block;
 
-.title {
-  position: relative;
-  z-index: 1;
-} 
+  .colors {
+    &.green {
+      background: var(--color-accent-green);
+    }
 
-.title__text {
-  position: absolute;
-  transform: translate(20px, -100%);
+    &.red {
+      background: var(--color-accent-red);
+    }
+
+    &.orange {
+      background: var(--color-accent-orange);
+    }
+  }
+
+  &.paralelogram {
+    padding: 10px 20px;
+    padding-right: 40px;
+    clip-path: polygon(10% 0%, 85% 0, 75% 100%, 0% 100%);
+
+    .colors();
+  }
+
+  &.sliced {
+    position: relative;
+    padding: 10px;
+
+    .text {
+      position: relative;
+      z-index: 100;
+    }
+
+    .slice {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      z-index: 95;
+
+      height: 100%;
+
+      clip-path: polygon(0% 0%, 100% 0, 80% 100%, 0% 100%);
+
+      .colors();
+    }
+  }
 }
-
 </style>

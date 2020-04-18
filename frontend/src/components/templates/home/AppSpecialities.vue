@@ -150,7 +150,7 @@ export default {
     .title {
       font-size: 20px;
       font-weight: 700;
-      color: var(--color-font-light);
+      color: var(--color-font-gray);
 
       height: 60px;
     }
@@ -179,7 +179,7 @@ export default {
         }
 
         &.years-4 {
-          background: var(--color-accent-yellow);
+          background: var(--color-accent-orange);
         }
 
         &.years-3 {

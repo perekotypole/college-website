@@ -1,31 +1,29 @@
 <template>
   <div id="app">
+    <app-navigation
+      class="workspace"
+    ></app-navigation>
 
-    <component :is="layout">
-      <router-view />
-    </component>
+    <router-view/>
 
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-
-import MainLayout from '@/layouts/MainLayout.vue'
+import AppNavigation from '@/components/ui/AppNavigation.vue'
+import AppFooter from '@/components/ui/AppFooter.vue'
 
 export default {
-  name: 'app',
   components: {
-    MainLayout,
-  },
-  computed: {
-    layout() {
-      return `${this.$route.meta.layout}-layout`
-    },
+    AppNavigation,
+    AppFooter,
   },
 }
 </script>
 
 <style lang="less">
+@import (css) url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
 
 * {
   outline: none;
@@ -40,30 +38,16 @@ export default {
   box-sizing: border-box;
 }
 
-li {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: var(--color-font-main);
-}
-
 :root {
   --color-bg-main: #FFFFFF;
 
-  --color-accent-yellow: #FEEB8C;
+  --color-accent-orange: #FEEB8C;
   --color-accent-red: #DE9FA1;
   --color-accent-green: #AEE1A5;
 
-  // --color-font-main: #272727;
-  --color-font-main: #313131;
-  --color-font-light: #565656;
-}
-
-.container {
-  width: 1170px;
-  margin: 0 auto;
+  --color-font-main: #272727;
+  --color-font-dark: #313131;
+  --color-font-gray: #717171;
 }
 
 .workspace {
@@ -73,10 +57,6 @@ a {
 
 body {
   font: 14px 'Montserrat', Sans-Serif, Tahoma, Arial;
-  font-weight: 500;
   color: var(--color-font-main);
-
-  // height: 3000px;
 }
-
 </style>

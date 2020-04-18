@@ -1,20 +1,22 @@
 <template>
   <div class="home">
-    <FullHeader />
-    <!-- <app-specialities
+    <app-header></app-header>
+
+    <app-specialities
       class="workspace specialities"
-    ></app-specialities> -->
+    ></app-specialities>
   </div>
 </template>
 
 <script>
-import FullHeader from '@/components/templates/home/FullHeader.vue'
-// import AppSpecialities from '@/components/templates/home/AppSpecialities.vue'
+import AppHeader from '@/components/templates/home/AppHeader.vue'
+import AppSpecialities from '@/components/templates/home/AppSpecialities.vue'
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
-    FullHeader, 
+    AppHeader,
+    AppSpecialities,
   },
 }
 </script>
