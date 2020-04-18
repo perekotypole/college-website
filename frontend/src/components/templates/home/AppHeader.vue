@@ -29,10 +29,28 @@
           { text: 'Знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/1.jpg' },
           { text: 'І ще знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03-300x225.jpg' },
         ]"
+        class="desktop-slider"
       ></app-slider>
     </div>
 
     <div class="shadow"></div>
+
+    <div class="mobile-slider workspace">
+      <app-title
+        :perc="50"
+        background="green"
+        class="title"
+      >Новини</app-title>
+
+      <app-slider
+        :slides="[
+          { text: '1 вересня', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/2-300x225.jpg' },
+          { text: 'День відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/1.jpg' },
+          { text: 'Критичне мислення', image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03-300x225.jpg' },
+        ]"
+        class="slider"
+      ></app-slider>
+    </div>
   </div>
 </template>
 
@@ -89,6 +107,41 @@ export default {
           cursor: pointer;
           margin-right: -20px;
         }
+      }
+    }
+  }
+
+  .mobile-slider {
+    display: none;
+  }
+
+  @media screen and (max-width: 1195px) {
+    .content {
+      grid-template-columns: 1fr;
+    }
+
+    h1 {
+      font-size: 30px !important;
+    }
+
+    .desktop-slider {
+      display: none;
+    }
+
+    .base-pages {
+      font-size: 16px;
+    }
+
+    .mobile-slider {
+      display: block;
+
+      .title {
+        font-size: 25px;
+        margin-bottom: 35px;
+      }
+
+      .slider {
+        margin: 0 auto;
       }
     }
   }

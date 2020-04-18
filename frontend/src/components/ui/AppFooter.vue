@@ -101,7 +101,7 @@ export default {
           ],
         },
         {
-          name: 'Аубітурієнтам',
+          name: 'Абітурієнтам',
           pages: [
             { name: 'Підготовчі курси', routeName: '' },
             { name: 'Освітня програма', routeName: '' },
@@ -210,8 +210,18 @@ export default {
     .copyright {
       text-align: center;
       font-size: 18px;
-      margin-top: 20px;
+      margin-top: 50px;
       font-weight: 100;
+    }
+  }
+
+  @media screen and (max-width: 1195px) {
+    .sitemap {
+      display: none !important;
+    }
+
+    .contact-info {
+      grid-template-columns: 1fr !important;
     }
   }
 }

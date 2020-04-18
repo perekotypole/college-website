@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="less">
-@import (css) url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+@import (css) url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap');
 
 * {
   outline: none;
@@ -51,12 +51,19 @@ export default {
 }
 
 .workspace {
-  width: 1180px;
+  width: 1190px;
   margin: 0 auto;
 }
 
 body {
   font: 14px 'Montserrat', Sans-Serif, Tahoma, Arial;
+  font-weight: 500;
   color: var(--color-font-main);
+}
+
+@media screen and (max-width: 1195px) {
+  .workspace {
+    width: 90%;
+  }
 }
 </style>
