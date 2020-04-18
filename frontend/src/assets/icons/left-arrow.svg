@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33.804" height="8.641" viewBox="0 0 33.804 8.641">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #403f3f;
+        stroke: #6d6d6d;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Left_Arrow" data-name="Left Arrow" transform="translate(0 1)">
+    <path id="Path_6" data-name="Path 6" class="cls-1" d="M0,0H33.8" transform="translate(0 6.642)"/>
+    <path id="Path_7" data-name="Path 7" class="cls-1" d="M0,10.1,8.561,3.453" transform="translate(0.614 -3.663)"/>
+  </g>
+</svg>
