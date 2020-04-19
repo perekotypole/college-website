@@ -1,36 +1,37 @@
 <template>
-  <div class="app-navigation">
-    <div class="links">
-      <router-link
-        v-for="(link, index) in leftSideLinks"
-        v-bind:key="index"
-        class="link"
-        :to="{ name: link.routeName }"
-      >{{link.name}}</router-link>
+  <div class="app-navigation container">
+    <div class="app-navigation__navbar">
+      <div class="app-navigation__links">
+        <router-link
+          v-for="(link, index) in leftSideLinks"
+          :key="index"
+          :to="{ name: link.routeName }"
+          class="app-navigation__link"
+        >
+          {{ link.text }}
+        </router-link>
+      </div>
+
+      <div class="app-navigation__logo">
+        <router-link to="/">
+          <img src="@/assets/img/logo.png" alt="logotype">
+        </router-link>
+      </div>
+
+      <div class="app-navigation__links">
+        <router-link
+          v-for="(link, index) in rightSideLinks"
+          :key="index"
+          :to="{ name: link.routeName }"
+          class="app-navigation__link"
+        >
+          {{ link.text }}
+        </router-link>
+      </div>
     </div>
 
-    <div class="logo">
-      <img
-        src="@/assets/KPK_LP.png"
-        alt="College logotype"
-        @click="go('Home')"
-      />
-    </div>
-
-    <div class="links">
-      <router-link
-        v-for="(link, index) in rightSideLinks"
-        v-bind:key="index"
-        class="link"
-        :to="{ name: link.routeName }"
-      >{{link.name}}</router-link>
-    </div>
-
-    <div class="search">
-      <img
-        src="@/assets/icons/SearchIcon.svg"
-        alt="search icon"
-      />
+    <div class="app-navigation__search">
+      <img class="app-navigation__search-icon" src="@/assets/icons/glass.svg" alt="search">
     </div>
   </div>
 </template>
@@ -40,61 +41,57 @@ export default {
   data() {
     return {
       leftSideLinks: [
-        { name: 'головна', routeName: '' },
-        { name: 'про коледж', routeName: '' },
-        { name: 'навчання', routeName: '' },
-        { name: 'абірурієнту', routeName: '' },
+        { text: 'ГОЛОВНА', routeName: '' },
+        { text: 'ПРО КОЛЕДЖ', routeName: '' },
+        { text: 'НАВЧАННЯ', routeName: '' },
+        { text: 'АБІТУРІЄНТУ', routeName: '' },
       ],
       rightSideLinks: [
-        { name: 'студенту', routeName: '' },
-        { name: 'новини', routeName: '' },
-        { name: 'бібліотека', routeName: '' },
-        { name: 'контакти', routeName: '' },
+        { text: 'СТУДЕНТУ', routeName: '' },
+        { text: 'НОВИНИ', routeName: '' },
+        { text: 'БІБЛІОТЕКА', routeName: '' },
+        { text: 'КОНТАКТИ', routeName: '' },
       ],
     }
-  },
-  methods: {
-    go(name) {
-      this.$router.push({ name })
-    },
   },
 }
 </script>
 
 <style lang="less" scoped>
+
 .app-navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-areas: 'empty navbar search';
+  grid-template-columns: 1fr auto 1fr;
 
-  margin: 20px auto;
+  padding: 20px 0;
 
-  .logo {
-    margin: 0 35px;
+  &__navbar {
+    grid-area: navbar;
 
-    img {
-      height: 70px;
-    }
+    display: flex;
+    align-items: center;
   }
 
-  .links {
-    .link {
-      margin: 0 20px;
-      color: var(--color-font-main);
-      font-weight: 500;
-
-      text-decoration: none;
-      text-transform: uppercase;
-    }
+  &__link {
+    margin: 0 15px;
   }
 
-  .search {
-    margin-left: 10px;
+  &__logo {
+    margin: 0 20px;
+  }
 
-    img {
-      cursor: pointer;
-      height: 25px;
-    }
+  &__search {
+    grid-area: search;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__search-icon {
+    cursor: pointer;
   }
 }
+
 </style>
