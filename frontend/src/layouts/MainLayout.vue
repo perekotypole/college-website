@@ -10,7 +10,7 @@
 
 <script>
 
-import AppNavigation from '@/components/templates/AppNavigation'
+import AppNavigation from '@/components/ui/AppNavigation'
 import AppFooter from '@/components/templates/AppFooter'
 
 export default {

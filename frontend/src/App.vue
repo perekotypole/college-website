@@ -51,17 +51,14 @@ a {
 
 :root {
   --color-bg-main: #FFFFFF;
-  --color-advert-bg: #FFFFFF;
 
   --color-accent-yellow: #FEEB8C;
   --color-accent-red: #DE9FA1;
   --color-accent-green: #AEE1A5;
 
-  --color-font-cards: #3A3A3A;
-  --color-font-dark: #2D2D2D;
+  // --color-font-main: #272727;
   --color-font-main: #313131;
   --color-font-light: #565656;
-  --color-font-super-light: #717171;
 }
 
 .container {
@@ -80,28 +77,6 @@ body {
   color: var(--color-font-main);
 
   // height: 3000px;
-}
-
-// Scrollbar
-
-::-webkit-scrollbar {
-    width: 13px;
-    height: 18px;
-}
-::-webkit-scrollbar-thumb {
-    height: 6px;
-    border: 4px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    -webkit-border-radius: 7px;
-    background-color: #717171;
-}
-::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
-    display: none;
-}
-::-webkit-scrollbar-corner {
-    background-color: transparent;
 }
 
 </style>
