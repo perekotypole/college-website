@@ -1,0 +1,17 @@
+<svg id="code-window" xmlns="http://www.w3.org/2000/svg" width="32.586" height="32.459" viewBox="0 0 32.586 32.459">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3a3a3a;
+      }
+    </style>
+  </defs>
+  <path id="Path_24" data-name="Path 24" class="cls-1" d="M29.722,1H2.864A2.867,2.867,0,0,0,0,3.864V30.595a2.867,2.867,0,0,0,2.864,2.864H29.722a2.867,2.867,0,0,0,2.864-2.864V3.864A2.867,2.867,0,0,0,29.722,1ZM2.864,2.909H29.722a.956.956,0,0,1,.955.955V8.637H1.909V3.864A.956.956,0,0,1,2.864,2.909Zm26.858,28.64H2.864a.956.956,0,0,1-.955-.955V10.547H30.677V30.595A.956.956,0,0,1,29.722,31.549Z" transform="translate(0 -1)"/>
+  <path id="Path_25" data-name="Path 25" class="cls-1" d="M203.055,196.074a.955.955,0,0,0-1.254.5l-5.728,13.365a.955.955,0,1,0,1.755.752l5.728-13.365A.955.955,0,0,0,203.055,196.074Z" transform="translate(-183.522 -183.586)"/>
+  <path id="Path_26" data-name="Path 26" class="cls-1" d="M82.477,241.358a.955.955,0,0,0-1.342-.149l-4.773,3.819a.955.955,0,0,0,0,1.491l4.773,3.819a.955.955,0,1,0,1.193-1.491l-3.841-3.073,3.841-3.073A.955.955,0,0,0,82.477,241.358Z" transform="translate(-71.167 -225.725)"/>
+  <path id="Path_27" data-name="Path 27" class="cls-1" d="M337.324,245.027l-4.773-3.819a.955.955,0,1,0-1.193,1.491l3.841,3.073-3.841,3.073a.955.955,0,1,0,1.193,1.491l4.773-3.819A.955.955,0,0,0,337.324,245.027Z" transform="translate(-309.933 -225.724)"/>
+  <circle id="Ellipse_2" data-name="Ellipse 2" class="cls-1" cx="1" cy="1" r="1" transform="translate(4 3.369)"/>
+  <circle id="Ellipse_3" data-name="Ellipse 3" class="cls-1" cx="1" cy="1" r="1" transform="translate(8 3.369)"/>
+  <circle id="Ellipse_4" data-name="Ellipse 4" class="cls-1" cx="1" cy="1" r="1" transform="translate(12 3.369)"/>
+  <path id="Path_28" data-name="Path 28" class="cls-1" d="M331.955,62.909h5.728a.955.955,0,1,0,0-1.909h-5.728a.955.955,0,1,0,0,1.909Z" transform="translate(-309.934 -57.181)"/>
+</svg>

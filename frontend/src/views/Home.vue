@@ -1,28 +1,47 @@
 <template>
   <div class="home">
     <FullHeader />
-    <!-- <app-specialities
-      class="workspace specialities"
-    ></app-specialities> -->
+
+    <Specialities class="home__section"/>
+    <Advert
+      class="home__section"
+      titleUpper="true"
+    >
+      <template v-slot:title>Відкрито набір слухачів на курси підготовки до вступу в 2020 році</template>
+      <CoursesInfo />
+    </Advert>
+    <EventsCalendar />
   </div>
 </template>
 
 <script>
 import FullHeader from '@/components/templates/home/FullHeader.vue'
-// import AppSpecialities from '@/components/templates/home/AppSpecialities.vue'
+import Specialities from '@/components/templates/home/Specialities'
+import Advert from '@/components/templates/Advert'
+import CoursesInfo from '@/components/templates/home/CoursesInfo'
+import EventsCalendar from '@/components/templates/home/EventsCalendar'
 
 export default {
   name: 'home',
   components: {
-    FullHeader, 
+    FullHeader, Specialities, Advert, CoursesInfo, EventsCalendar
   },
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+
 .home {
-  .specialities {
-    margin-top: 50px;
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .home__section {
+    margin-bottom: 145px;
   }
 }
+
 </style>
