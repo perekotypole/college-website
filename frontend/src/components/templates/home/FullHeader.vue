@@ -41,7 +41,7 @@
 <script>
 import AppTitle from "../../ui/AppTitle"
 import AppButton from "../../ui/AppButton"
-import NewsSlider from "../../ui/NewsSlider"
+import NewsSlider from "./NewsSlider"
 
 import anime from 'animejs/lib/anime.es.js'; 
 
@@ -73,6 +73,8 @@ export default {
   box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.03);
   max-height: 600px;
   padding-top: 40px;
+
+  margin-bottom: 110px;
 
   &__container {
     display: grid;

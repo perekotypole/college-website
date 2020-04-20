@@ -21,7 +21,7 @@ import anime from 'animejs/lib/anime.es.js';
 
 export default {
   name: 'app-title',
-  props: ['text', 'highlight', 'padding', 'max-width', 'slope', 'color'],
+  props: ['highlight', 'padding', 'max-width', 'slope', 'color'],
   data: () => ({
     height: null,
     width: null,
