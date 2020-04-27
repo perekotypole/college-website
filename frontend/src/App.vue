@@ -59,4 +59,10 @@ body {
   font: 14px 'Montserrat', Sans-Serif, Tahoma, Arial;
   color: var(--color-font-main);
 }
+
+@media screen and (max-width: 1195px) {
+  .workspace {
+    width: 90%;
+  }
+}
 </style>

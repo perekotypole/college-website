@@ -40,8 +40,8 @@ export default {
   data() {
     return {
       leftSideLinks: [
-        { name: 'головна', routeName: '' },
-        { name: 'про коледж', routeName: '' },
+        { name: 'головна', routeName: 'Home' },
+        { name: 'про коледж', routeName: 'about' },
         { name: 'навчання', routeName: '' },
         { name: 'абірурієнту', routeName: '' },
       ],
