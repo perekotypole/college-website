@@ -33,23 +33,8 @@
         v-for="(department, index) in departments"
         v-bind:key="index"
         class="column"
-        :class="{
-          'opened': department.opened,
-        }"
       >
-        <div
-          class="title"
-          @click="department.opened = !department.opened"
-        >
-          <div>{{department.name}}</div>
-
-          <div class="icon">
-            <img
-              src="@/assets/icons/ChevronTop.svg"
-              alt="chevron top"
-            />
-          </div>
-        </div>
+        <div class="title">{{department.name}}</div>
 
         <div
           class="specialities-list"
@@ -94,7 +79,6 @@ export default {
       departments: [
         {
           name: 'Відділення комп\'ютерних технологій',
-          opened: false,
           specialities: [
             { code: '121', years: 4, name: 'Інженерія програмного забезпечення' },
             { code: '151', years: 4, name: 'Автоматизація та комп\'ютерно-інтегровані технології' },
@@ -102,7 +86,6 @@ export default {
         },
         {
           name: 'Економічне відділення',
-          opened: false,
           specialities: [
             { code: '071', years: 3, name: 'Облік і оподаткування' },
             { code: '072', years: 3, name: 'Фінанси, банківська справа та страхування' },
@@ -112,7 +95,6 @@ export default {
         },
         {
           name: 'Механіко-технологічне відділення',
-          opened: false,
           specialities: [
             { code: '133', years: 4, name: 'Галузеве машинобудування' },
             { code: '182', years: 4, name: 'Технологія легкої промисловості' },
@@ -171,10 +153,6 @@ export default {
       color: var(--color-font-light);
 
       height: 60px;
-
-      .icon {
-        display: none;
-      }
     }
 
     .specialities-list {
@@ -206,64 +184,6 @@ export default {
 
         &.years-3 {
           background: var(--color-accent-green);
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 1195px) {
-    .header {
-      flex-direction: column;
-      align-items: flex-start;
-
-      .tips {
-        margin-top: 40px;
-
-        .tip {
-          margin-left: 0;
-          margin-right: 30px;
-        }
-      }
-    }
-
-    .list {
-      grid-template-columns: 1fr;
-      grid-gap: 20px;
-
-      .title {
-        display: grid;
-        grid-template-columns: 1fr 30px;
-        grid-gap: 20px;
-        height: auto;
-
-        align-items: center;
-
-        padding: 20px;
-
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.06);
-
-        .icon {
-          display: block;
-          text-align: center;
-
-          transform: rotate(180deg);
-          transition: all .45s;
-        }
-      }
-
-      .specialities-list {
-        display: none;
-      }
-    }
-
-    .column {
-      &.opened {
-        .specialities-list {
-          display: block;
-        }
-
-        .icon {
-          transform: rotate(0deg);
         }
       }
     }
