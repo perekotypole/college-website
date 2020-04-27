@@ -2,29 +2,27 @@
   <div class="home">
     <FullHeader />
 
-    <Specialities class="home__section"/>
-    <Advert
-      class="home__section"
-      titleUpper="true"
-    >
-      <template v-slot:title>Відкрито набір слухачів на курси підготовки до вступу в 2020 році</template>
-      <CoursesInfo />
-    </Advert>
-    <EventsCalendar />
+    <app-specialities class="workspace specialities"></app-specialities>
+
+    <app-listeners class="workspace listeners"></app-listeners>
+
+    <app-events-calendar class="workspace calendar"></app-events-calendar>
   </div>
 </template>
 
 <script>
-import FullHeader from '@/components/templates/home/FullHeader.vue'
-import Specialities from '@/components/templates/home/Specialities'
-import Advert from '@/components/templates/Advert'
-import CoursesInfo from '@/components/templates/home/CoursesInfo'
-import EventsCalendar from '@/components/templates/home/EventsCalendar'
+import AppHeader from '@/components/templates/home/AppHeader.vue'
+import AppSpecialities from '@/components/templates/home/AppSpecialities.vue'
+import AppListeners from '@/components/templates/home/AppListeners.vue'
+import AppEventsCalendar from '@/components/templates/home/AppEventsCalendar.vue'
 
 export default {
   name: 'home',
   components: {
-    FullHeader, Specialities, Advert, CoursesInfo, EventsCalendar
+    AppHeader,
+    AppSpecialities,
+    AppListeners,
+    AppEventsCalendar,
   },
 }
 </script>
@@ -32,15 +30,13 @@ export default {
 <style lang="less">
 
 .home {
-
-  .section-title {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+  .specialities,
+  .listeners {
+    margin: 50px auto;
   }
 
-  .home__section {
-    margin-bottom: 145px;
+  .calendar {
+    margin: 100px auto;
   }
 }
 

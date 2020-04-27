@@ -26,6 +26,7 @@ export default {
 </script>
 
 <style lang="less">
+@import (css) url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap');
 
 * {
   outline: none;
@@ -70,7 +71,7 @@ a {
 }
 
 .workspace {
-  width: 1180px;
+  width: 1190px;
   margin: 0 auto;
 }
 
@@ -82,26 +83,9 @@ body {
   // height: 3000px;
 }
 
-// Scrollbar
-
-::-webkit-scrollbar {
-    width: 13px;
-    height: 18px;
+@media screen and (max-width: 1195px) {
+  .workspace {
+    width: 90%;
+  }
 }
-::-webkit-scrollbar-thumb {
-    height: 6px;
-    border: 4px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    -webkit-border-radius: 7px;
-    background-color: #717171;
-}
-::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
-    display: none;
-}
-::-webkit-scrollbar-corner {
-    background-color: transparent;
-}
-
 </style>
