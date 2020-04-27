@@ -10,16 +10,28 @@
       class="title"
     >{{title}}</div>
 
-    <div class="slider">
+    <div
+      class="slider"
+      :style="{
+        width: `${width}px`,
+        height: `${height}px`,
+      }"
+    >
       <div
         v-for="({ text, image }, index) in slides"
         v-bind:key="index"
         class="slide-wrap"
         :class="{
-            'active': activeSlide === index,
-          }"
+          'active': activeSlide === index,
+        }"
       >
-        <div class="slide">
+        <div
+          class="slide"
+          :style="{
+            width: `${width}px`,
+            height: `${height}px`,
+          }"
+        >
           <img
             :src="image"
             :alt="title"
@@ -37,10 +49,16 @@
       </div>
     </div>
 
-    <div class="controls">
+    <div
+      class="controls"
+      :class="controlsColor"
+    >
       <div
         class="control prev"
-        @click="prev"
+        @click="
+          prev()
+          emitCurrentState()
+        "
       >
         <img
           src="@/assets/icons/LeftArrow.svg"
@@ -50,7 +68,10 @@
 
       <div
         class="control next"
-        @click="next"
+        @click="
+          next()
+          emitCurrentState()
+        "
       >
         <img
           src="@/assets/icons/RightArrow.svg"
@@ -59,7 +80,10 @@
       </div>
     </div>
 
-    <div class="additional-block"></div>
+    <div
+      class="additional-block"
+      v-show="showAdditionalBlock"
+    ></div>
   </div>
 </template>
 
@@ -74,6 +98,26 @@ export default {
       type: String,
       required: false,
       default: () => '',
+    },
+    showAdditionalBlock: {
+      type: Boolean,
+      required: false,
+      default: () => true,
+    },
+    controlsColor: {
+      type: String,
+      required: false,
+      default: () => 'orange',
+    },
+    width: {
+      type: Number,
+      required: false,
+      default: () => 500,
+    },
+    height: {
+      type: Number,
+      required: false,
+      default: () => 400,
     },
   },
   methods: {
@@ -95,6 +139,17 @@ export default {
         this.activeSlide -= 1
       }
     },
+    emitCurrentState() {
+      const {
+        activeSlide,
+        slides,
+      } = this
+
+      this.$emit('slide', {
+        activeSlide,
+        total: slides.length,
+      })
+    },
   },
   data() {
     return {
@@ -103,6 +158,8 @@ export default {
     }
   },
   created() {
+    this.emitCurrentState()
+
     setInterval(() => {
       if (!this.isMouseOver) this.next()
     }, 4000)
@@ -124,12 +181,15 @@ export default {
 
     .slide-wrap {
       position: absolute;
-      top: 100%;
-      left: -100%;
+      top: 0;
+      left: 0;
+
+      opacity: 0;
+      transform: scale(0.95);
 
       &.active {
-        top: 0%;
-        left: 0%;
+        opacity: 1;
+        transform: scale(1);
       }
 
       transition: all .7s;
@@ -148,18 +208,17 @@ export default {
       }
 
       img {
-        object-fit: cover;
-
+        display: flex;
         margin: auto;
         height: 100%;
+
+        transform: scale(1.5);
       }
 
       .info {
         position: absolute;
         width: 100%;
         max-height: 70%;
-
-        overflow: hidden;
 
         bottom: 0;
         left: 0;
@@ -177,7 +236,7 @@ export default {
         grid-template-columns: auto 1fr;
         grid-gap: 20px;
 
-        align-items: flex-start;
+        align-items: center;
 
         .number {
           color: #CFCFCF;
@@ -195,6 +254,11 @@ export default {
             padding: 0 5px;
           }
         }
+
+        .text {
+          width: 100%;
+          display: block;
+        }
       }
     }
   }
@@ -209,6 +273,10 @@ export default {
     align-items: center;
 
     background: var(--color-accent-orange);
+
+    &.green {
+      background: var(--color-accent-green);
+    }
 
     .next,
     .prev {
@@ -241,6 +309,23 @@ export default {
     height: 95%;
 
     background: var(--color-accent-green);
+  }
+
+  @media screen and (max-width: 1195px) {
+    .info {
+      font-size: 14px !important;
+      max-height: 100% !important;
+    }
+
+    .additional-block {
+      display: none;
+    }
+
+    .slider,
+    .slide {
+      width: 100% !important;
+      height: calc(100vw / 1.5) !important;
+    }
   }
 }
 </style>
