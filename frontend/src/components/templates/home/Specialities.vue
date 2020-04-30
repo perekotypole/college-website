@@ -3,7 +3,7 @@
     <div class="specialities__top">
       <AppTitle
         class="secialities__title section-title"
-        color="--color-accent-green"
+        color="green"
         :padding="[13, 23]"
         :slope="12"
         :highlight="60"
@@ -11,11 +11,13 @@
 
       <div class="specialities__marking">
         <div class="specialities__marking-item">
-          <div class="specialities__marking-color" :style="{ background: `var(--color-accent-green)` }"></div>
+          <div class="specialities__marking-color"
+            :style="{ background: `var(--color-accent-green)` }" />
           <span class="specialities__marking-text">3 курси</span>
         </div>
         <div class="specialities__marking-item">
-          <div class="specialities__marking-color" :style="{ background: `var(--color-accent-yellow)` }"></div>
+          <div class="specialities__marking-color"
+          :style="{ background: `var(--color-accent-yellow)` }" />
           <span class="specialities__marking-text">4 курси</span>
         </div>
       </div>
@@ -26,16 +28,36 @@
         class="specialities__column"
         v-for="(spec, index) in specialities"
         :key="index"
+        :class="{
+          'opened': spec.opened,
+        }"
       >
-        <div class="specialities__column-title"><span>{{ spec.title }}</span></div>
+        <div
+          class="specialities__column-title"
+          @click="spec.opened = !spec.opened"
+        >
+          <div class="">
+            {{ spec.title }}
+          </div>
+
+          <div class="specialities__column-icon">
+            <img
+              src="@/assets/icons/ChevronTop.svg"
+              alt="chevron top"
+            />
+          </div>
+        </div>
+        
+        <div class="specialities__list">
           <SpecialitiesCard 
             class="specialities__card"
             v-for="(item, index) in spec.items"
             :key="index"
             :color="item.courses == 4 ? `--color-accent-yellow` : `--color-accent-green`"
-            :icon="item.icon"
+            :icon="item.number"
             :number="item.number"
           >{{ item.name }}</SpecialitiesCard>
+        </div>
       </div>
     </div>
 
@@ -44,40 +66,46 @@
 
 <script>
 
-import AppTitle from '@/components/ui/AppTitle'
-import SpecialitiesCard from '@/components/templates/home/SpecialitiesCard'
+import AppTitle from '@/components/ui/AppTitle.vue'
+import SpecialitiesCard from '@/components/templates/home/SpecialitiesCard.vue'
 
 export default {
   name: 'specialities',
-  components: { AppTitle, SpecialitiesCard },
+  components: {
+    AppTitle,
+    SpecialitiesCard,
+  },
   data: () => ({
     specialities: [
       { 
         title: "ВІДДІЛЕННЯ КОМП'ЮТЕРНИХ ТЕХНОЛОГІЙ",
+        opened: false,
         items: [
-          { icon: 'code-window.svg', number: '121', name: 'Інженерія програмного забезпечення', courses: 4 },
-          { icon: 'chip.svg', number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4 },
-        ]
+          { number: '121', name: 'Інженерія програмного забезпечення', courses: 4 },
+          { number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4 },
+        ],
       },
       { 
-        title: "ЕКОНОМІЧНЕ ВІДДІЛЕННЯ",
+        title: 'ЕКОНОМІЧНЕ ВІДДІЛЕННЯ',
+        opened: false,
         items: [
-          { icon: 'document-with-pen.svg', number: '071', name: 'Облік і оподаткування', courses: 3 },
-          { icon: 'money.svg', number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3 },
-          { icon: 'people-managing.svg', number: '073', name: 'Менеджмент', courses: 4 },
-          { icon: 'market-charts.svg', number: '075', name: 'Маркетинг', courses: 3 },
-        ]
+          { number: '071', name: 'Облік і оподаткування', courses: 3 },
+          { number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3 },
+          { number: '073', name: 'Менеджмент', courses: 4 },
+          { number: '075', name: 'Маркетинг', courses: 3 },
+        ],
       },
       { 
-        title: "МЕХАНІКО-ТЕХНОЛОГІЧНЕ ВІДДІЛЕННЯ",
+        title: 'МЕХАНІКО-ТЕХНОЛОГІЧНЕ ВІДДІЛЕННЯ',
+        opened: false,
         items: [
-          { icon: 'gear.svg', number: '133', name: 'Галузеве машинобудування', courses: 4 },
-          { icon: 'sewing-machine.svg', number: '182', name: 'Технологія легкої промисловості', courses: 4 },
-          { icon: 'woodworking.svg', number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4 },
-        ]
-      }
-    ]
-  })
+          { number: '133', name: 'Галузеве машинобудування', courses: 4 },
+          { number: '182', name: 'Технологія легкої промисловості', courses: 4 },
+          { number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4 },
+        ],
+      },
+    ],
+  }),
 }
 </script>
 
@@ -125,23 +153,96 @@ export default {
 
   &__column {
     max-width: 357px;
+
+    &-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 30px;
+      color: var(--color-font-super-light);
+
+      display: flex;
+      align-items: center;
+      height: 55px;
+
+      margin-bottom: 35px;
+    }
+
+    &-icon {
+      display: none;
+    }
   }
 
-  &__column-title {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 30px;
-    color: var(--color-font-super-light);
-
-    display: flex;
-    align-items: center;
-    height: 55px;
-
-    margin-bottom: 35px;
-  }
 
   &__card {
     margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 1195px) {
+
+    &__top{
+      flex-direction: column;
+    }
+
+    &__marking {
+      margin-top: 40px;
+      margin-bottom: 20px;
+
+      &-item {
+        margin-left: 0;
+        margin-right: 10px;
+
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &__content {
+      display: block;
+    }
+
+    &__column {
+
+      &-title {
+        display: grid;
+        grid-template-columns: 1fr 30px;
+        grid-gap: 20px;
+        height: auto;
+
+        align-items: center;
+
+        padding: 20px;
+
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.06);
+      }
+
+      &-icon {
+        display: block;
+        text-align: center;
+
+        transform: rotate(180deg);
+        transition: all .45s;
+      }
+      
+      .specialities-card{
+        width: 100%;
+      }
+    }
+
+    &__list {
+      display: none;
+    }
+
+    &__column {
+      &.opened {
+        .specialities__list {
+          display: block;
+        }
+
+        .specialities__column-icon {
+          transform: rotate(0deg);
+        }
+      }
+    }
   }
 }
 

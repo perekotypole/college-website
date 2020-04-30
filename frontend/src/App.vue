@@ -1,26 +1,22 @@
 <template>
   <div id="app">
+    <app-navigation></app-navigation>
 
-    <component :is="layout">
-      <router-view />
-    </component>
+    <router-view/>
 
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-
-import MainLayout from '@/layouts/MainLayout.vue'
+import AppNavigation from '@/components/ui/AppNavigation.vue'
+import AppFooter from '@/components/ui/AppFooter.vue'
 
 export default {
   name: 'app',
   components: {
-    MainLayout,
-  },
-  computed: {
-    layout() {
-      return `${this.$route.meta.layout}-layout`
-    },
+    AppNavigation,
+    AppFooter,
   },
 }
 </script>
@@ -62,14 +58,10 @@ a {
   --color-font-main: #313131;
   --color-font-light: #565656;
   --color-font-super-light: #717171;
+  --color-font-link: #6A8777;
 }
 
 .container {
-  width: 1170px;
-  margin: 0 auto;
-}
-
-.workspace {
   width: 1180px;
   margin: 0 auto;
 }
@@ -80,6 +72,18 @@ body {
   color: var(--color-font-main);
 
   // height: 3000px;
+}
+
+.yellow{
+  background: var(--color-accent-yellow);
+}
+
+.green{
+  background: var(--color-accent-green);
+}
+
+.red{
+  background: var(--color-accent-red);
 }
 
 // Scrollbar
@@ -102,6 +106,12 @@ body {
 }
 ::-webkit-scrollbar-corner {
     background-color: transparent;
+}
+
+@media screen and (max-width: 1195px) {
+  .container {
+    width: 90%;
+  }
 }
 
 </style>

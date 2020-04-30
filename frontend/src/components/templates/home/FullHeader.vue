@@ -6,7 +6,7 @@
           :padding="[5, 7]"
           :slope="10"
           :highlight="70"
-          color="--color-accent-yellow"
+          color="yellow"
           class="header__greeting"
           >ВАС ВІТАЄ</AppTitle>
 
@@ -23,63 +23,99 @@
         </div>
 
         <div class="header__buttons">
-          <AppButton :padding="[14, 25]" color="--color-accent-green" :slope="10">ПРО КОЛЕДЖ</AppButton>
-          <div class="header__spec-button">СПЕЦІАЛЬНОСТІ</div>
+          <AppButton
+            :padding="[15, 20]"
+            color="green"
+            :slope="10"
+            >ПРО КОЛЕДЖ</AppButton>
+          <AppButton
+            :padding="[15, 20]"
+            >СПЕЦІАЛЬНОСТІ</AppButton>
         </div>
       </div>
 
       <div class="header__right">
         <div class="header__news">
-          <NewsSlider />
-          <div class="header__news-bg-rect"></div>
+          <NewsSlider 
+            title="новини"
+            :slides="[
+              { text: 'Запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/2-300x225.jpg' },
+              { text: 'Знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/1.jpg' },
+              { text: 'І ще знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03-300x225.jpg' },
+            ]"
+            class="desktop-slider">
+          </NewsSlider>
         </div>
+      </div>
+    </div>
+
+    <div class="shadow"></div>
+    
+    <div class="header__mobile-slider">
+      <div class="header__mobile-news">
+        <NewsSlider 
+          title="новини"
+          :slides="[
+            { text: 'Запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/2-300x225.jpg' },
+            { text: 'Знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/1.jpg' },
+            { text: 'І ще знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03-300x225.jpg' },
+          ]"
+          class="mobile-slider">
+        </NewsSlider>
       </div>
     </div>
   </header>
 </template>
 
 <script>
-import AppTitle from "../../ui/AppTitle"
-import AppButton from "../../ui/AppButton"
-import NewsSlider from "./NewsSlider"
+import AppTitle from '@/components/ui/AppTitle.vue'
+import AppButton from '@/components/ui/AppButton.vue'
+import NewsSlider from '@/components/templates/home/NewsSlider.vue'
 
-import anime from 'animejs/lib/anime.es.js'; 
+import anime from 'animejs/lib/anime.es' 
 
 export default {
-  name: "full-header",
+  name: 'full-header',
   components: {
-    AppTitle, AppButton, NewsSlider
+    AppTitle, AppButton, NewsSlider,
   },
   mounted() {
     anime({
-        targets: '.header__place-name-text',
-        translateY: [500, 0],
-        easing: 'spring(1, 70, 13, 1)',
-        duration: 300
-    });
+      targets: '.header__place-name-text',
+      translateY: [500, 0],
+      easing: 'spring(1, 70, 13, 1)',
+      duration: 300,
+    })
     anime({
-        targets: '.header .header__place-lastname-text',
-        translateY: [-500, 0],
-        easing: 'spring(1, 70, 13, 1)',
-        duration: 300
-    });
-  }
-};
+      targets: '.header .header__place-lastname-text',
+      translateY: [-500, 0],
+      easing: 'spring(1, 70, 13, 1)',
+      duration: 300,
+    })
+  },
+}
 </script>
 
 <style lang="less" scoped>
 .header {
-  height: calc(100vh - 81px - 40px); // 100vh - AppNavigation height - padding
-  box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.03);
-  max-height: 600px;
   padding-top: 40px;
 
   margin-bottom: 110px;
 
+  .shadow {
+    width: 100%;
+    height: 30px;
+
+    margin-top: 120px;
+
+    background: linear-gradient(rgba(0,0,0,.03), transparent);
+  }
+
   &__container {
     display: grid;
+    max-height: 600px;
     grid-template-areas: "left right";
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 500px;
   }
 
   &__greeting {
@@ -125,20 +161,51 @@ export default {
     justify-content: center;
     align-items: center;
   }
-}
 
-.header__news {
-  padding-top: 20px;
+  &__mobile-news {
+    display: none;
+  }
 
-  &-bg-rect {
-    width: 520px;
-    height: 340px;
+  @media screen and (max-width: 1195px) {
+    padding-top: 0;
+    margin-bottom: 50px;
 
-    z-index: 0;
-    transform: translate(20px, 25px);
-    margin-top: 30px;
+    &__container {
+      grid-template-columns: 1fr;
+    }
 
-    background: var(--color-accent-green);
+    .shadow {
+      margin-top: 50px;
+    }
+
+    &__place{
+
+      &-name-text {
+        font-size: 35px;
+        line-height: 1.1em;
+      }
+  
+      &-lastname-text {
+        width: 90%;
+      }
+    }
+
+    &__news {
+      display: none;
+    }
+
+    &__buttons{
+      font-size: 12px;
+    }
+
+    &__mobile-news {
+      display: block;
+
+      margin: 0 auto;
+      margin-bottom: 50px;
+      width: 300px;
+      margin-bottom: 100px;
+    }
   }
 }
       

@@ -15,19 +15,26 @@
       </div>
     </div>
     <div class="courses-info__right">
-      <p class="courses-info__text">Запис на курси проводиться в <span class="courses-info__bold">каб. 208</span> (приймальня директора). Додаткову інформацію можна отримати за телефонами:</p>
+      <p class="courses-info__text">
+        Запис на курси проводиться в 
+        <span class="courses-info__bold">каб. 208</span> 
+        (приймальня директора). Додаткову інформацію можна отримати за телефонами:
+      </p>
       <p class="courses-info__numbers">(03433) 5-03-39 <br> 4-77-26</p>
       <p class="courses-info__text">(навчання розпочинається по мірі комплектації груп)</p>
 
-      <span class="courses-info__important">Успішне завершення курсів, дає змогу <br> додатково отримати до 50-ти балів при вступі! </span>
+      <span class="courses-info__important">
+        Успішне завершення курсів, дає змогу <br />
+        додатково отримати до 50-ти балів при вступі!
+      </span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "courses-info"
-};
+  name: 'courses-info',
+}
 </script>
 
 <style lang="less">
@@ -83,6 +90,15 @@ export default {
   &__bold {
     font-weight: 600;
   }
+
+  @media screen and (max-width: 1195px) {
+    display: block;
+    
+    &__line {
+      font-size: 16px;
+    }
+  }
+
 }
 
 </style>

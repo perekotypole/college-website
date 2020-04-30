@@ -1,8 +1,13 @@
 <template>
   <div class="calendar-slider">
     <span class="calendar-slider__day">14 березня</span>
-    <div class="caledar-slider__counter"><div><span class="calendar-slider__counter_current">01</span>/02</div></div>
-    <div class="calendar-slider__content">
+    <div class="caledar-slider__counter">
+      <div>
+        <span class="calendar-slider__counter_current">01</span>
+        /02
+      </div>
+    </div>
+    <!-- <div class="calendar-slider__content">
       <div class="calendar-slider__control">
         <button class="calendar-slider__control-prev-button"></button>
         <button class="calendar-slider__control-next-button"></button>
@@ -13,9 +18,32 @@
           <span class="calendar-slider__item-title">Запрошуємо на день відкритих дверей</span>
         </div>
       </div>
-    </div>
+    </div> -->
+    <NewsSlider
+    class="calendar-slider__content"
+      :slides="[
+        { text: 'Запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/2-300x225.jpg' },
+        { text: 'Знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/1.jpg' },
+        { text: 'І ще знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03-300x225.jpg' },
+      ]"
+      @slide="slider => slideInfo = slider"
+      :showAdditionalBlock="false"
+      controlsColor="green"
+      :width="530"
+      :height="320"
+    ></NewsSlider>
   </div>
 </template>
+
+<script>
+import NewsSlider from '@/components/templates/home/NewsSlider.vue'
+
+export default {
+  components: {
+    NewsSlider,
+  },
+}
+</script>
 
 <style lang="less" scoped>
 
@@ -105,7 +133,7 @@
       cursor: pointer;
 
       border: none;
-      background: url("../../../assets/icons/left-arrow.svg") no-repeat;
+      background: url("../../../assets/icons/LeftArrow.svg") no-repeat;
       background-position: center;
     }
 
@@ -119,7 +147,6 @@
     }
   }
 }
-
 
 
 </style>

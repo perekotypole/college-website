@@ -2,7 +2,7 @@
   <div :style="cardStyle" class="specialities-card">
     <div class="specialities-card__left">
       <div class="specialities-card__icon">
-        <img :src="require(`../../../assets/icons/${icon}`)" :alt="icon">
+        <img :src="require(`@/assets/icons/specialities/${icon}.svg`)" :alt="icon">
       </div>
       <span class="specialities-card__number">{{ number }}</span>
     </div>
@@ -17,20 +17,20 @@
 <script>
 
 export default {
-  name: "specialities-card",
-  props: ["color", "icon", "number"],
+  name: 'specialities-card',
+  props: ['color', 'icon', 'number'],
   computed: {
     cardStyle() {
-      let { color, icon, number } = this.$props;
+      const { color } = this.$props
 
       return {
-        background: `var(${color})`
-      };
+        background: `var(${color})`,
+      }
     },
   },
   mounted() {
-  }
-};
+  },
+}
 </script>
 
 <style lang="less" scoped>
@@ -39,9 +39,7 @@ export default {
   padding: 25px 35px;
   width: 357px;
  
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  grid-column-gap: 20px;
+  display: flex;
 
   color: var(--color-font-cards);
 
@@ -49,6 +47,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    margin-right: 20px;
   }
 
   &__icon {

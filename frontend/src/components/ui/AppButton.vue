@@ -1,5 +1,11 @@
 <template>
-  <div :style="bgStyle" class="button" ref="button">
+  <div
+    class="button"
+    :style="{
+      padding: `${padding[0]}px ${padding[1] + slope}px`,
+      clipPath: `polygon(${slope}px 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`,
+    }"
+    :class="[color]">
     <span>
       <slot></slot>
     </span>
@@ -8,26 +14,30 @@
 
 <script>
 export default {
-  name: "button",
-  props: ["padding", "color", "slope", "hover"],
-  computed: {
-    bgStyle: function() {
-      const { padding, color, slope } = this.$props;
-
-      if (padding && color && slope) {
-        return {
-          padding: `${padding[0]}px ${padding[1] + parseInt(slope)}px`,
-          background: `var(${color})`,
-          clipPath: `polygon(${slope}px 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`
-        };
-      } else {
-        return {}
-      }
-    }
+  props: {
+    padding: {
+      type: Array,
+      required: false,
+      default: () => [10, 20],
+    },
+    color: {
+      type: String,
+      required: false,
+      default: () => '',
+    },
+    slope: {
+      type: Number,
+      required: false,
+      default: () => 0,
+    },
   },
 }
 </script>
 
 <style lang="less" scoped>
+
+.button{
+  cursor: pointer;
+}
 
 </style>

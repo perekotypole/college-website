@@ -1,7 +1,7 @@
 <template>
   <div class="advert container">
-    <h2 ref="title" class="advert__title">
-      <slot name="title"></slot>
+    <h2 class="advert__title">
+      {{ title }}
     </h2>
     <slot></slot>
   </div>
@@ -9,15 +9,15 @@
 
 <script>
 export default {
-  name: "advert",
-  props: ["titleUpper"],
-  mounted() {
-    if (this.$props.titleUpper) {
-      let title = this.$refs.title;
-      title.innerHTML = title.innerHTML.toUpperCase();
-    }
-  }
-};
+  name: 'advert',
+  props: {
+    title: {
+      type: String,
+      require: true,
+      default: () => '',
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
@@ -33,11 +33,24 @@ export default {
   &__title {
     font-size: 36px;
     font-weight: 900;
-    line-height: 50px;
+    line-height: 1.4em;
+    text-transform: uppercase;
 
     color: var(--color-font-light);
 
     margin-bottom: 40px;
+  }
+
+  @media screen and (max-width: 1195px) {
+    padding: 20px 20px;
+
+     &__title {
+      font-size: 23px;
+
+      color: var(--color-font-light);
+
+      margin-bottom: 40px;
+    }
   }
 }
 </style>

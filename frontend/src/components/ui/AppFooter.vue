@@ -8,7 +8,7 @@
         <div class="footer__contacts">
           <div class="footer__contacts-item">
             <div class="footer__contacts-icon">
-              <img src="@/assets/icons/building.svg" alt="location" />
+              <img src="@/assets/icons/location.svg" alt="location" />
             </div>
             <span class="footer__contacts-text"
               >вул. Чехова, 20 м. Коломия, Івано-Франківська обл., 78203</span
@@ -42,8 +42,8 @@
             >
                 <AppTitle 
                     class="footer__navigation-title"
-                    color="--color-accent-green"
-                    :padding="[8, 19]"
+                    color="green"
+                    :padding="[5, 19]"
                     :slope="7"
                     :higlight="100"
                 >
@@ -67,10 +67,10 @@
 
 <script>
 
-import AppTitle from '@/components/ui/AppTitle'
+import AppTitle from '@/components/ui/AppTitle.vue'
 
 export default {
-  name: "app-footer",
+  name: 'app-footer',
   components: { AppTitle },
   data: () => ({
     sitemap: [
@@ -78,9 +78,9 @@ export default {
       { title: 'АБІТУРІЄНТАМ', links: ['Підготовчі курси', 'Освітня програма', 'Правила прийому', 'Приймальна комісія', 'Обсяг державних замовлень', 'Програма вступних випробувань', 'Розлад', 'Результати'] },
       { title: 'СТУДЕНТАМ', links: ['Навчання', 'Екзамени', 'Практика', 'Консультації', 'ЗНО', 'Стипендіальне забезпечення'] },
       { title: 'ІНШЕ', links: ['Циклові комісії', 'Спеціальності', 'Бібліотека', 'Документація бібліотеки', 'Правила бібліотеки', 'Електронні підручники', 'Новини', 'Контакти'] },
-    ]
-  })
-};
+    ],
+  }),
+}
 </script>
 
 <style lang="less" scoped>
@@ -115,6 +115,7 @@ export default {
 
   &__contacts {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding: 0 30px;
 
@@ -137,7 +138,6 @@ export default {
     &-text {
       font-size: 18px;
       text-align: center;
-      line-height: 30px;
     }
 
     &_small-text {
@@ -155,11 +155,11 @@ export default {
     justify-content: space-between;
 
     &-title {
-      margin-bottom: 33px;
+      margin-bottom: 20px;
     } 
 
     &-link {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
   }
 
@@ -171,6 +171,43 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+
+  @media screen and (max-width: 1195px) {
+    margin-top: 50px;
+
+    &__content {
+      padding-bottom: 10px;
+    }
+
+    &__navigation {
+      display: none;
+    }
+
+    &__contacts {
+      padding: 0;
+      margin: auto;
+      width: fit-content;
+
+      flex-direction: column;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-icon {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__copyright {
+    text-align: center;
+
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

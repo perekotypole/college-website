@@ -1,78 +1,60 @@
 <template>
-  <div class="title">
-    <div 
-      :style="highlightStyle" 
+  <span
+    class="title"
+    :style="{
+        padding: `${padding[0]}px ${padding[1] + slope}px`,
+      }"
+  >
+    <div
+      :style="{
+        width: `${highlight}%`,
+        padding: `${padding[0]}px ${padding[1]}px`,
+        clipPath: `polygon(0 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`,
+      }"
       class="title__highlight"
-    >
-    </div>
-    <span
-      :style="textStyle" 
-      ref="text" 
-      class="title__text">
+      :class="[color]"
+    ></div>
+
+    <span class="title__text">
       <slot></slot>
     </span>
-   
-  </div>
+  </span>
 </template>
 
 <script>
-
-import anime from 'animejs/lib/anime.es.js'; 
+import anime from 'animejs/lib/anime.es' 
 
 export default {
-  name: 'app-title',
-  props: ['highlight', 'padding', 'max-width', 'slope', 'color'],
-  data: () => ({
-    height: null,
-    width: null,
-    highlightStyle: {},
-    textStyle: {}
-  }),
-  methods: {
-    // updateTextHeight(e) {
-    //   this.height = this.$refs.text.offsetHeight + this.$props.padding[0] * 2
-    // }
-  },
-  created() {
-    // window.addEventListener("resize", this.updateTextHeight.bind(this))
+  props: {
+    color: {
+      type: String,
+      required: true,
+    },
+    highlight: {
+      type: Number,
+      required: false,
+      default: () => 100,
+    },
+    slope: {
+      type: Number,
+      required: false,
+      default: () => 0,
+    },
+    padding: {
+      type: Array,
+      required: false,
+      default: () => [10, 20],
+    },
   },
   mounted() {
-    let { width, height } = this
-    let { slope, padding, highlight, color, maxWidth } = this.$props
-    let text = this.$refs.text
-
-    width = text.offsetWidth + padding[1] * 2 + slope 
-    height = text.offsetHeight + padding[0] * 2 
-
-    if (this.$props.maxWidth) {
-      text.style.maxWidth = maxWidth - padding[1] + 'px';
-      width = maxWidth + padding[1] + slope
-      height = text.offsetHeight + padding[0] * 2
-    }
-    
-    if (highlight) {
-      width = width / 100 * highlight
-    }
-
-    this.highlightStyle = {
-        height: `${height}px`,
-        width: `${width}px`,
-        clipPath: `polygon(0 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`,
-        background: `var(${color})`
-    }
-
-    this.textStyle = {
-      transform: `translate(${padding[1]}px, calc(-100% - ${padding[0]}px))`,
-    }
-
     // Animations
     anime({
-        targets: '.header__greeting .title__highlight',
-        width: [0, width],
-        easing: 'spring(1, 70, 13, 1)',
-        duration: 300
-    });
-  }
+      targets: '.header__greeting .title__highlight',
+      translateX: [-100, 0],
+      easing: 'spring(1, 70, 13, 1)',
+      duration: 300,
+    })
+  },
 }
 </script>
 
@@ -80,12 +62,25 @@ export default {
 
 .title {
   position: relative;
-  z-index: 1;
-} 
+  overflow: hidden;
+  display: inline-block;
 
-.title__text {
-  position: absolute;
-  transform: translate(20px, -100%);
+  &__text {
+    position: relative;
+    z-index: 100;
+  }
+
+  &__highlight{
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      z-index: 95;
+
+      height: 100%;
+
+      // clip-path: polygon(0% 0%, 100% 0, 90% 100%, 0% 100%);
+    }
 }
 
 </style>

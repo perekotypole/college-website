@@ -2,7 +2,7 @@
   <div class="events-calendar container">
     <AppTitle
       class="section-title events-calendar__title"
-      color="--color-accent-green"
+      color="green"
       :padding="[13, 23]"
       :slope="12"
       :highlight="60"
@@ -14,11 +14,11 @@
       <div class="calendar__left">
         <div class="calendar__navigation">
           <div class="calendar__navigation-prev">
-            <img src="@/assets/icons/left-arrow-dark.svg" alt="prev">
+            <img src="@/assets/icons/LeftArrow.svg" alt="prev">
           </div>
           <span class="calendar__month-name">Березень 2020</span>
           <div class="calendar__navigation-next">
-            <img src="@/assets/icons/left-arrow-dark.svg" alt="next">
+            <img src="@/assets/icons/RightArrow.svg" alt="next">
           </div>
         </div>
 
@@ -40,7 +40,9 @@
                 class="calendar__day"
                 v-for="(day, index) in row"
                 :key="index"
-                :style="day.number && { background: day.empty ? `var(--color-accent-yellow)` : `var(--color-accent-green)` }"
+                :style="day.number && { background: day.empty ? 
+                  `var(--color-accent-yellow)` : 
+                  `var(--color-accent-green)` }"
               >
                 {{ day.number }}
               </div>
@@ -57,13 +59,14 @@
 
 <script>
 
-import AppTitle from '@/components/ui/AppTitle'
-import CalendarSlider from './CalendarSlider'
+import AppTitle from '@/components/ui/AppTitle.vue'
+import CalendarSlider from './CalendarSlider.vue'
 
 export default {
   name: 'events-calendar',
   components: {
-    AppTitle, CalendarSlider
+    AppTitle,
+    CalendarSlider,
   },
   data: () => ({
     dayNames: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'],
@@ -75,7 +78,7 @@ export default {
         { number: '' }, 
         { number: '' }, 
         { number: '' }, 
-        { number: '01', empty: true }
+        { number: '01', empty: true },
       ],
       [
         { number: '02', empty: true }, 
@@ -84,7 +87,7 @@ export default {
         { number: '05', empty: true }, 
         { number: '06', empty: true }, 
         { number: '07', empty: true }, 
-        { number: '08', empty: true }
+        { number: '08', empty: true },
       ],
       [
         { number: '09', empty: true }, 
@@ -93,7 +96,7 @@ export default {
         { number: '12', empty: true }, 
         { number: '13', empty: true }, 
         { number: '14', empty: false }, 
-        { number: '15', empty: true }
+        { number: '15', empty: true },
       ],
       [
         { number: '16', empty: true }, 
@@ -102,7 +105,7 @@ export default {
         { number: '19', empty: false }, 
         { number: '20', empty: true }, 
         { number: '21', empty: true }, 
-        { number: '22', empty: true }
+        { number: '22', empty: true },
       ],
       [
         { number: '23', empty: true }, 
@@ -111,7 +114,7 @@ export default {
         { number: '26', empty: true }, 
         { number: '27', empty: true }, 
         { number: '28', empty: true }, 
-        { number: '29', empty: true }
+        { number: '29', empty: true },
       ],
       [
         { number: '30', empty: false }, 
@@ -120,9 +123,9 @@ export default {
         { number: '' }, 
         { number: '' }, 
         { number: '' }, 
-        { number: '' }
+        { number: '' },
       ],
-    ]
+    ],
   }),
 }
 </script>
@@ -159,7 +162,7 @@ export default {
   }
 
   &__navigation-next {
-    transform: rotate(180deg);
+    margin-top: 5px;
   }
 
   // Content 
@@ -218,6 +221,31 @@ export default {
     -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
     -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
+  }
+
+  @media screen and (max-width: 1195px) {
+    display: block;
+
+    &__right{
+      display: none;
+    }
+
+    &__left {
+      padding: 50px 30px;
+    }
+
+    &__month-name {
+      margin: 0 10px;
+
+      font-size: 18px;
+    }
+
+    &__day {
+      width: 30px;
+      height: 30px;
+
+      font-size: 14px;
+    }
   }
 }
 
