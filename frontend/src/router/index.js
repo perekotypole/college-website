@@ -2,18 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import About from './modules/About'
-import Study from './modules/Study'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: () => import('@/views/Home'),
   },
   ...About,
-  ...Study,
 ]
 
 const router = new VueRouter({

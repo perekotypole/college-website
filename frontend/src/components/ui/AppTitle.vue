@@ -1,89 +1,82 @@
 <template>
   <span
-    class="title"
-    :style="{
-        padding: `${padding[0]}px ${padding[1] + slope}px`,
-      }"
+    class="app-title"
+    :class="[
+      background,
+      (perc === 100 ? 'paralelogram' : 'sliced'),
+    ]"
   >
     <div
+      v-if="perc !== 100"
       :style="{
-        width: `${highlight}%`,
-        padding: `${padding[0]}px ${padding[1]}px`,
-        clipPath: `polygon(0 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`,
+        width: `${perc}%`,
       }"
-      class="title__highlight"
-      :class="[color]"
+      class="slice"
+      :class="[background]"
     ></div>
 
-    <span class="title__text">
+    <span class="text">
       <slot></slot>
     </span>
   </span>
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es' 
-
 export default {
   props: {
-    color: {
+    background: {
       type: String,
-      required: true,
+      required: false,
+      default: () => '',
     },
-    highlight: {
+    perc: {
       type: Number,
       required: false,
       default: () => 100,
     },
-    slope: {
-      type: Number,
-      required: false,
-      default: () => 0,
-    },
-    padding: {
-      type: Array,
-      required: false,
-      default: () => [10, 20],
-    },
-  },
-  mounted() {
-    // Animations
-    anime({
-      targets: '.header__greeting .title__highlight',
-      translateX: [-100, 0],
-      easing: 'spring(1, 70, 13, 1)',
-      duration: 300,
-    })
   },
 }
 </script>
+
+<style lang="less" scoped>
+.app-title {
+  display: inline-block;
+
+  .colors {
+    &.green {
+      background: var(--color-accent-green);
+    }
+
+    &.red {
+      background: var(--color-accent-red);
+    }
+
+    &.orange {
+      background: var(--color-accent-orange);
+    }
+  }
+
+  &.paralelogram {
+    padding: 10px 20px;
+    padding-right: 40px;
+    clip-path: polygon(10% 0%, 85% 0, 75% 100%, 0% 100%);
+
+    .colors();
+  }
 
   &.sliced {
     position: relative;
     padding: 10px;
 
-.title {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
+    .text {
+      position: relative;
+      z-index: 100;
+    }
 
-  &__text {
-    position: relative;
-    z-index: 100;
-  }
-
-  &__highlight{
+    .slice {
       position: absolute;
       top: 0;
       left: 0;
-
-      z-index: 95;
-
-      height: 100%;
-
-      // clip-path: polygon(0% 0%, 100% 0, 90% 100%, 0% 100%);
-    }
-}
 
       z-index: 95;
 

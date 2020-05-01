@@ -1,6 +1,6 @@
 <template>
-  <div class="app-navigation container">
-    <div class="links left">
+  <div class="app-navigation">
+    <div class="links">
       <router-link
         v-for="(link, index) in leftSideLinks"
         v-bind:key="index"
@@ -21,20 +21,19 @@
 
     <div class="logo">
       <img
-        src="@/assets/img/KPK_LP.png"
+        src="@/assets/KPK_LP.png"
         alt="College logotype"
         @click="go('Home')"
       />
     </div>
 
-    <div class="links right">
+    <div class="links">
       <router-link
         v-for="(link, index) in rightSideLinks"
         v-bind:key="index"
         class="link"
         :to="{ name: link.routeName }"
       >{{link.name}}</router-link>
-
     </div>
 
     <div class="search">
@@ -82,9 +81,9 @@ export default {
     return {
       mobileMenuIsOpened: false,
       leftSideLinks: [
-        { name: 'головна', routeName: 'home' },
+        { name: 'головна', routeName: 'Home' },
         { name: 'про коледж', routeName: 'about' },
-        { name: 'навчання', routeName: 'study' },
+        { name: 'навчання', routeName: '' },
         { name: 'абітурієнту', routeName: '' },
       ],
       rightSideLinks: [
@@ -105,10 +104,9 @@ export default {
 
 <style lang="less" scoped>
 .app-navigation {
-  display: grid;
-  grid-template-areas: 'left logo right';
-  grid-template-columns: 1fr auto 1fr 30px;
-  grid-gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   margin: 20px auto;
 
@@ -121,32 +119,23 @@ export default {
   }
 
   .links {
-    display: flex;
-    align-items: center;
-
     .link {
+      margin: 0 20px;
       color: var(--color-font-main);
       font-weight: 500;
-      margin: 0 15px;
 
       text-decoration: none;
       text-transform: uppercase;
     }
-
-    &.left{
-      grid-area: left;
-      justify-content: flex-end;
-    }
-
-    &.right{
-      grid-area: right;
-      justify-content: flex-start;
-    }
   }
 
   .search {
-    align-self: center;
-    cursor: pointer;
+    margin-left: 10px;
+
+    img {
+      cursor: pointer;
+      height: 25px;
+    }
   }
 
   .menu-icon,
@@ -158,16 +147,6 @@ export default {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    align-items: center;
-
-    padding: 10px 0;
-
-    .logo {
-      
-      img {
-        height: 60px;
-      }
-    }
 
     .mobile-menu {
       display: block;
