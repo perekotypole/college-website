@@ -1,228 +1,214 @@
 <template>
-  <div class="app-footer">
-    <div class="shadow"></div>
-
-    <div class="content workspace">
-      <div class="contact-info">
-        <div class="location">
-          <div class="icon">
-            <img
-              src="@/assets/icons/location.svg"
-              alt="university icon"
-            />
-          </div>
-
-          <div class="text">
-            <div>вул. Чехова, 20 м. Коломия</div>
-            <div>Івано-Франківська обл., 78203</div>
-          </div>
-        </div>
-
-        <div class="phone">
-          <div class="icon">
-            <img
-              src="@/assets/icons/phone.svg"
-              alt="phone icon"
-            />
-          </div>
-
-          <div class="text">
-            (03433) 5-03-39
-
-            <div class="selection">Відбіркова комісія:</div>
-
-            <div>(03433) 2-79-85, (03433) 2-66-75</div>
-          </div>
-        </div>
-
-        <div class="phone">
-          <div class="icon">
-            <img
-              src="@/assets/icons/email.svg"
-              alt="email icon"
-            />
-          </div>
-
-          <div class="text">
-            polynet100@gmail.com
-          </div>
-        </div>
-      </div>
-
-      <div class="sitemap">
-        <div
-          v-for="(section, index) in sitemap"
-          v-bind:key="index"
-          class="section"
-        >
-          <app-title
-            background="green"
-            :perc="99"
-            class="title"
-          >{{section.name}}</app-title>
-
-          <div class="pages">
-            <router-link
-              v-for="(page, i) in section.pages"
-              v-bind:key="i"
-              class="page"
-              :to="{ name: page.routeName || 'Home' }"
-            >{{page.name}}</router-link>
-          </div>
-        </div>
-      </div>
-
-      <div class="copyright">Коломийський політехнічний коледж © 2020</div>
+  <footer class="footer">
+    <div class="footer__to-top-button">
+        <img src="@/assets/icons/up-arrow.svg" all="to top">
     </div>
-  </div>
+    <div class="footer__content">
+      <div class="container footer__container">
+        <div class="footer__contacts">
+          <div class="footer__contacts-item">
+            <div class="footer__contacts-icon">
+              <img src="@/assets/icons/location.svg" alt="location" />
+            </div>
+            <span class="footer__contacts-text"
+              >вул. Чехова, 20 м. Коломия, Івано-Франківська обл., 78203</span
+            >
+          </div>
+
+          <div class="footer__contacts-item">
+            <div class="footer__contacts-icon">
+              <img src="@/assets/icons/phone.svg" alt="phone" />
+            </div>
+            <span class="footer__contacts-text"
+              >(03433) 5-03-39 <br />
+              <span class="footer__contacts_small-text">Відбіркова комісія:</span> <br />
+              (03433) 2-79-85, (03433) 2-66-75</span
+            >
+          </div>
+
+          <div class="footer__contacts-item">
+            <div class="footer__contacts-icon">
+              <img src="@/assets/icons/email.svg" alt="email" />
+            </div>
+            <span class="footer__contacts-text">polynet100@gmail.com</span>
+          </div>
+        </div>
+
+        <div class="footer__navigation">
+            <div
+              v-for="(col, index) in sitemap"
+              :key="index" 
+              class="footer__navigation-column"
+            >
+                <AppTitle 
+                    class="footer__navigation-title"
+                    color="green"
+                    :padding="[5, 19]"
+                    :slope="7"
+                    :higlight="100"
+                >
+                    {{ col.title }}
+                </AppTitle>
+                <ul class="footer__navigation-links">
+                    <li 
+                      class="footer__navigation-link"
+                      v-for="(link, index) in col.links"
+                      :key="index"
+                    ><router-link to="#">{{ link }}</router-link></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer__copyright"><span>Коломийський політехнічний коледж © 2020</span></div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <script>
-import AppTitle from './AppTitle.vue'
+
+import AppTitle from '@/components/ui/AppTitle.vue'
 
 export default {
-  components: {
-    AppTitle,
-  },
-  data() {
-    return {
-      sitemap: [
-        {
-          name: 'Коледж',
-          pages: [
-            { name: 'Історія', routeName: '' },
-            { name: 'Адміністрація', routeName: '' },
-            { name: 'Документація', routeName: '' },
-            { name: 'Галерея', routeName: '' },
-            { name: 'Спорт', routeName: '' },
-            { name: 'Викладачі', routeName: '' },
-            { name: 'Студенти', routeName: '' },
-            { name: 'Гуртожиток', routeName: '' },
-          ],
-        },
-        {
-          name: 'Абітурієнтам',
-          pages: [
-            { name: 'Підготовчі курси', routeName: '' },
-            { name: 'Освітня програма', routeName: '' },
-            { name: 'Правила прийому', routeName: '' },
-            { name: 'Приймальна комісія', routeName: '' },
-            { name: 'Обсяг державних замовлень', routeName: '' },
-            { name: 'Програма вступних випробувань', routeName: '' },
-            { name: 'Розклад', routeName: '' },
-            { name: 'Результати', routeName: '' },
-          ],
-        },
-        {
-          name: 'Студентам',
-          pages: [
-            { name: 'Навчання', routeName: '' },
-            { name: 'Екзамени', routeName: '' },
-            { name: 'Практика', routeName: '' },
-            { name: 'Консультації', routeName: '' },
-            { name: 'ЗНО', routeName: '' },
-            { name: 'Стипендіальне забезпечення', routeName: '' },
-          ],
-        },
-        {
-          name: 'Інше',
-          pages: [
-            { name: 'Циклові комісії', routeName: '' },
-            { name: 'Спеціальності', routeName: '' },
-            { name: 'Бібліотека', routeName: '' },
-            { name: 'Документація бібліотеки', routeName: '' },
-            { name: 'Правила бібліотеки', routeName: '' },
-            { name: 'Електронні підручники', routeName: '' },
-            { name: 'Новини', routeName: '' },
-            { name: 'Контакти', routeName: '' },
-          ],
-        },
-      ],
-    }
-  },
+  name: 'app-footer',
+  components: { AppTitle },
+  data: () => ({
+    sitemap: [
+      { title: 'КОЛЕДЖ', links: ['Історія', 'Адміністрація', 'Документація', 'Галерея', 'Спорт', 'Викладачі', 'Студенти', 'Гуртожиток'] },
+      { title: 'АБІТУРІЄНТАМ', links: ['Підготовчі курси', 'Освітня програма', 'Правила прийому', 'Приймальна комісія', 'Обсяг державних замовлень', 'Програма вступних випробувань', 'Розлад', 'Результати'] },
+      { title: 'СТУДЕНТАМ', links: ['Навчання', 'Екзамени', 'Практика', 'Консультації', 'ЗНО', 'Стипендіальне забезпечення'] },
+      { title: 'ІНШЕ', links: ['Циклові комісії', 'Спеціальності', 'Бібліотека', 'Документація бібліотеки', 'Правила бібліотеки', 'Електронні підручники', 'Новини', 'Контакти'] },
+    ],
+  }),
 }
 </script>
 
 <style lang="less" scoped>
-.app-footer {
-  .shadow {
-    width: 100%;
-    height: 30px;
+.footer {
+  margin-top: 100px;
 
-    background: linear-gradient(transparent, rgba(0,0,0,.06));
+  filter: drop-shadow(-1px 0px 20px rgba(0, 0, 0, 0.06));
+
+  &__to-top-button {
+    width: 131px;
+    height: 42px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 35px);
+    z-index: 1;
+
+    cursor: pointer;
+
+    background: var(--color-accent-yellow);
   }
 
-  .content {
-    padding: 30px;
+  &__content {
+    padding: 100px 0 40px 0;
+    background: var(--color-bg-main);
+    clip-path: polygon(0 0, 100% 30px, 100% 100%, 0 100%);
+  }
 
-    .contact-info {
+  &__contacts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 30px;
+
+    &-item {
+      width: 300px;
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 30px;
+      grid-template-rows: 90px 1fr;
+      grid-row-gap: 35px;
+    }
 
-      margin-top: 50px;
-      font-weight: 300;
+    &-icon {
+      height: 90px;
 
-      .icon {
-        height: 130px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
 
-      text-align: center;
+    &-text {
       font-size: 18px;
-
-      .phone {
-        .selection {
-          margin: 10px 0 5px;
-          font-size: 14px;
-        }
-      }
-    }
-
-    .sitemap {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 50px;
-
-      margin: 70px 0;
-
-      .section {
-        .title {
-          padding-right: 30px;
-        }
-
-        .pages {
-          margin-top: 20px;
-
-          .page {
-            margin-bottom: 20px;
-            display: block;
-            color: var(--color-font-main);
-            text-decoration: none;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-
-    .copyright {
       text-align: center;
-      font-size: 18px;
-      margin-top: 50px;
-      font-weight: 100;
     }
+
+    &_small-text {
+      font-size: 14px;
+    }
+  }
+
+  // Navigation
+
+  &__navigation {
+    margin-top: 80px;
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: space-between;
+
+    &-title {
+      margin-bottom: 20px;
+    } 
+
+    &-link {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__copyright {
+    margin-top: 75px;
+
+    font-size: 16px;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   @media screen and (max-width: 1195px) {
-    .sitemap {
-      display: none !important;
+    margin-top: 50px;
+
+    &__content {
+      padding-bottom: 10px;
     }
 
-    .contact-info {
-      grid-template-columns: 1fr !important;
+    &__navigation {
+      display: none;
+    }
+
+    &__contacts {
+      padding: 0;
+      margin: auto;
+      width: fit-content;
+
+      flex-direction: column;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-icon {
+        margin-bottom: 20px;
+      }
     }
   }
+
+  &__copyright {
+    text-align: center;
+
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
+
 </style>

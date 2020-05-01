@@ -2,27 +2,34 @@
   <div class="home">
     <app-header></app-header>
 
-    <app-specialities class="workspace specialities"></app-specialities>
+    <Specialities class="home__section"/>
 
-    <app-listeners class="workspace listeners"></app-listeners>
-
-    <app-events-calendar class="workspace calendar"></app-events-calendar>
+    <Advert
+      class="home__section"
+      title="Відкрито набір слухачів на курси підготовки до вступу в 2020 році"
+    >
+      <CoursesInfo />
+    </Advert>
+    
+    <EventsCalendar />
   </div>
 </template>
 
 <script>
-import AppHeader from '@/components/templates/home/AppHeader.vue'
-import AppSpecialities from '@/components/templates/home/AppSpecialities.vue'
-import AppListeners from '@/components/templates/home/AppListeners.vue'
-import AppEventsCalendar from '@/components/templates/home/AppEventsCalendar.vue'
+import FullHeader from '@/components/templates/home/FullHeader.vue'
+import Specialities from '@/components/templates/home/Specialities.vue'
+import Advert from '@/components/ui/Advert.vue'
+import CoursesInfo from '@/components/templates/home/CoursesInfo.vue'
+import EventsCalendar from '@/components/templates/home/EventsCalendar.vue'
 
 export default {
   name: 'Home',
   components: {
-    AppHeader,
-    AppSpecialities,
-    AppListeners,
-    AppEventsCalendar,
+    FullHeader,
+    Specialities,
+    Advert,
+    CoursesInfo,
+    EventsCalendar,
   },
 }
 </script>
@@ -36,6 +43,12 @@ export default {
 
   .calendar {
     margin: 100px auto;
+  }
+
+  @media screen and (max-width: 1195px) {
+    .home__section {
+      margin-bottom: 50px;
+    }
   }
 }
 </style>

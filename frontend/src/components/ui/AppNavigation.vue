@@ -1,6 +1,6 @@
 <template>
-  <div class="app-navigation">
-    <div class="links">
+  <div class="app-navigation container">
+    <div class="links left">
       <router-link
         v-for="(link, index) in leftSideLinks"
         v-bind:key="index"
@@ -21,19 +21,20 @@
 
     <div class="logo">
       <img
-        src="@/assets/KPK_LP.png"
+        src="@/assets/img/KPK_LP.png"
         alt="College logotype"
         @click="go('Home')"
       />
     </div>
 
-    <div class="links">
+    <div class="links right">
       <router-link
         v-for="(link, index) in rightSideLinks"
         v-bind:key="index"
         class="link"
         :to="{ name: link.routeName }"
       >{{link.name}}</router-link>
+
     </div>
 
     <div class="search">
@@ -81,9 +82,9 @@ export default {
     return {
       mobileMenuIsOpened: false,
       leftSideLinks: [
-        { name: 'головна', routeName: 'Home' },
+        { name: 'головна', routeName: 'home' },
         { name: 'про коледж', routeName: 'about' },
-        { name: 'навчання', routeName: '' },
+        { name: 'навчання', routeName: 'study' },
         { name: 'абітурієнту', routeName: '' },
       ],
       rightSideLinks: [
@@ -104,9 +105,10 @@ export default {
 
 <style lang="less" scoped>
 .app-navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-areas: 'left logo right';
+  grid-template-columns: 1fr auto 1fr 30px;
+  grid-gap: 10px;
 
   margin: 20px auto;
 
@@ -119,23 +121,32 @@ export default {
   }
 
   .links {
+    display: flex;
+    align-items: center;
+
     .link {
-      margin: 0 20px;
       color: var(--color-font-main);
       font-weight: 500;
+      margin: 0 15px;
 
       text-decoration: none;
       text-transform: uppercase;
     }
+
+    &.left{
+      grid-area: left;
+      justify-content: flex-end;
+    }
+
+    &.right{
+      grid-area: right;
+      justify-content: flex-start;
+    }
   }
 
   .search {
-    margin-left: 10px;
-
-    img {
-      cursor: pointer;
-      height: 25px;
-    }
+    align-self: center;
+    cursor: pointer;
   }
 
   .menu-icon,
@@ -147,6 +158,16 @@ export default {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 0;
+
+    .logo {
+      
+      img {
+        height: 60px;
+      }
+    }
 
     .mobile-menu {
       display: block;
