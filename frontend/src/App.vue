@@ -1,24 +1,17 @@
 <template>
   <div id="app">
-    <app-navigation></app-navigation>
 
     <router-view/>
 
-    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import AppNavigation from '@/components/ui/AppNavigation.vue'
-import AppFooter from '@/components/ui/AppFooter.vue'
 
 export default {
   name: 'app',
-  components: {
-    AppNavigation,
-    AppFooter,
-  },
 }
+
 </script>
 
 <style lang="less">
@@ -62,7 +55,7 @@ a {
 }
 
 .container {
-  width: 1180px;
+  width: 1170px;
   margin: 0 auto;
 }
 
@@ -70,8 +63,6 @@ body {
   font: 14px 'Montserrat', Sans-Serif, Tahoma, Arial;
   font-weight: 500;
   color: var(--color-font-main);
-
-  // height: 3000px;
 }
 
 .yellow{

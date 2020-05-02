@@ -2,7 +2,7 @@
   <span
     class="title"
     :style="{
-        padding: `${padding[0]}px ${padding[1] + slope}px`,
+        padding: `${padding[0]}px ${padding[1] + slope}px ${padding[0]}px ${padding[1]}px`,
       }"
   >
     <div

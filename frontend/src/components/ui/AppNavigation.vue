@@ -1,78 +1,71 @@
 <template>
   <div class="app-navigation container">
-    <div class="links left">
-      <router-link
-        v-for="(link, index) in leftSideLinks"
-        v-bind:key="index"
-        class="link"
-        :to="{ name: link.routeName }"
-      >{{link.name}}</router-link>
+    <div class="app-navigation__left">
+      <div class="app-navigation__links">
+        <router-link
+          v-for="(link, index) in leftSideLinks"
+          :key="index"
+          :to="{ name: link.routeName }"
+          class="app-navigation__link"
+        >
+          {{ link.text }}
+        </router-link>
+      </div>
+
+      <div
+        class="app-navigation__menu-toggle"
+        @click="mobileMenuIsOpened = !mobileMenuIsOpened"
+      >
+        <div 
+          class="app-navigation__menu-icon"
+          :class="{'app-navigation__close-icon': mobileMenuIsOpened }"
+        ></div>
+      </div>
     </div>
 
-    <div
-      class="menu-icon"
-      @click="mobileMenuIsOpened = true"
-    >
-      <img
-        src="@/assets/icons/MenuIcon.svg"
-        alt="menu icon"
-      />
+    <div class="app-navigation__logo">
+      <router-link to="/">
+        <img class="logo__img" src="@/assets/img/logo.png" alt="logotype">
+      </router-link>
     </div>
 
-    <div class="logo">
-      <img
-        src="@/assets/img/KPK_LP.png"
-        alt="College logotype"
-        @click="go('Home')"
-      />
-    </div>
+    <div class="app-navigation__right">
+      <div class="app-navigation__links">
+        <router-link
+          v-for="(link, index) in rightSideLinks"
+          :key="index"
+          :to="{ name: link.routeName }"
+          class="app-navigation__link"
+        >
+          {{ link.text }}
+        </router-link>
+      </div>
 
-    <div class="links right">
-      <router-link
-        v-for="(link, index) in rightSideLinks"
-        v-bind:key="index"
-        class="link"
-        :to="{ name: link.routeName }"
-      >{{link.name}}</router-link>
-
-    </div>
-
-    <div class="search">
-      <img
-        src="@/assets/icons/SearchIcon.svg"
-        alt="search icon"
-      />
+      <div class="app-navigation__search">
+        <img class="app-navigation__search-icon" src="@/assets/icons/SearchIcon.svg" alt="search">
+      </div>
     </div>
 
     <div
       class="mobile-menu"
       :class="{
-        'opened': mobileMenuIsOpened,
+        'mobile-menu__opened': mobileMenuIsOpened,
       }"
     >
-      <div class="header">
-        <h3>Меню</h3>
-
-        <div
-          class="close"
-          @click="mobileMenuIsOpened = false"
-        >
-          <img
-            src="@/assets/icons/Close.svg"
-            alt="close icon"
-          />
-        </div>
+      <div class="mobile-menu__header">
+        <h3 class="mobile-menu__title">Меню</h3>
       </div>
 
-      <div class="list">
+      <div class="mobile-menu__list">
         <router-link
           v-for="(link, index) in [...leftSideLinks, ...rightSideLinks]"
+          @click.native="mobileMenuIsOpened = false"
           :key="index"
           :to="{ name: link.routeName }"
-          class="link"
-        >{{link.name}}</router-link>
+          class="mobile-menu__link"
+        >{{link.text}}</router-link>
       </div>
-    </div>
+    </div>    
   </div>
 </template>
 
@@ -82,16 +75,16 @@ export default {
     return {
       mobileMenuIsOpened: false,
       leftSideLinks: [
-        { name: 'головна', routeName: 'home' },
-        { name: 'про коледж', routeName: 'about' },
-        { name: 'навчання', routeName: 'study' },
-        { name: 'абітурієнту', routeName: '' },
+        { text: 'ГОЛОВНА', routeName: 'home' },
+        { text: 'ПРО КОЛЕДЖ', routeName: 'about' },
+        { text: 'НАВЧАННЯ', routeName: 'study' },
+        { text: 'АБІТУРІЄНТУ', routeName: '' },
       ],
       rightSideLinks: [
-        { name: 'студенту', routeName: '' },
-        { name: 'новини', routeName: '' },
-        { name: 'бібліотека', routeName: '' },
-        { name: 'контакти', routeName: '' },
+        { text: 'СТУДЕНТУ', routeName: '' },
+        { text: 'НОВИНИ', routeName: '' },
+        { text: 'БІБЛІОТЕКА', routeName: '' },
+        { text: 'КОНТАКТИ', routeName: '' },
       ],
     }
   },
@@ -104,52 +97,102 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .app-navigation {
   display: grid;
   grid-template-areas: 'left logo right';
-  grid-template-columns: 1fr auto 1fr 30px;
-  grid-gap: 10px;
+  grid-template-columns: 1fr auto 1fr;
 
   padding: 20px 0;
 
-  .logo {
-    margin: 0 35px;
-
-    img {
-      height: 70px;
-    }
-  }
-
-  .links {
+  &__left {
+    grid-area: left;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-
-    .link {
-      color: var(--color-font-main);
-      font-weight: 500;
-      margin: 0 15px;
-
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-    &.left{
-      grid-area: left;
-      justify-content: flex-end;
-    }
-
-    &.right{
-      grid-area: right;
-      justify-content: flex-start;
-    }
   }
 
-  .search {
-    align-self: center;
+  &__right {
+    grid-area: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__link {
+    margin: 0 15px;
+  }
+
+  &__logo {
+    margin: 0 20px;
+  }
+
+  &__search-icon {
     cursor: pointer;
   }
 
-  .menu-icon,
+
+  &__menu-toggle {
+    display: none;
+
+    position: absolute;
+    z-index: 206;
+
+    width: 25px;
+    height: 26px;
+    cursor: pointer;
+  }
+
+// Menu Toggle Animation
+
+  &__menu-icon,
+  &__menu-icon::after,
+  &__menu-icon::before {
+    content: '';
+    position: absolute;
+
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-font-super-light);
+
+    transition: .5s;
+  }
+    
+  &__menu-icon {
+    top: 50%;
+    transform: translateY(-100%);
+
+    width: 20px;
+    
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  &__menu-icon::after {
+    width: 13px;
+    transform: translateY(10px);
+  }
+
+  &__menu-icon::before {
+    width: 25px;
+    transform: translateY(-10px);
+  }
+    
+  &__close-icon {
+    width: 25px;
+
+    transform: rotate(-45deg);
+  }
+  
+  &__close-icon::after {
+    opacity: 0;
+  }
+
+  &__close-icon::before {
+    transform: rotate(90deg);
+  }
+
+
   .mobile-menu {
     display: none;
   }
@@ -160,15 +203,6 @@ export default {
     justify-content: space-between;
     align-items: center;
 
-    padding: 10px 0;
-
-    .logo {
-      
-      img {
-        height: 60px;
-      }
-    }
-
     .mobile-menu {
       display: block;
 
@@ -177,64 +211,60 @@ export default {
       left: -100%;
 
       opacity: 0;
-
       z-index: 205;
 
-      padding: 40px;
-
       background: #fff;
-
+      
+      padding: 40px;
 
       width: 100%;
       height: 100%;
 
-      &.opened {
+      &__opened {
+        display: block;
+
         left: 0%;
         opacity: 1;
       }
 
       transition: all .3s ease-in-out;
 
-
-      .header {
+      &__list {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        margin-bottom: 30px;
-
-        h3 {
-          font-size: 30px;
-          font-weight: 400;
-        }
-
-        .close {
-          img {
-            height: 25px;
-          }
-        }
+        flex-direction: column;
       }
 
-      .list {
-        .link {
-          font-size: 17px;
-          margin-bottom: 20px;
-          display: block;
-          text-transform: uppercase;
-          text-decoration: none;
+      &__header {
+        margin-bottom: 40px;
+      }
 
-          color: var(--color-font-main);
-        }
+      &__title {
+        font-size: 26px;
+        font-weight: 600;
+      }
+
+      &__link {
+        font-size: 18px;
+        margin-bottom: 25px;
+      }
+    }
+    
+    &__logo {
+      .logo__img {
+        width: 56px;
       }
     }
 
-    .links {
+    &__links {
       display: none;
     }
 
-    .menu-icon {
+    &__menu-toggle {
       display: block;
+      position: absolute;
     }
+
   }
 }
+
 </style>

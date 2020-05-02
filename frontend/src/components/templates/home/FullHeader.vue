@@ -3,9 +3,9 @@
     <div class="container header__container">
       <div class="header__left">
         <AppTitle
-          :padding="[5, 7]"
+          :padding="[5, 8]"
           :slope="10"
-          :highlight="70"
+          :highlight="72"
           color="yellow"
           class="header__greeting"
           >ВАС ВІТАЄ</AppTitle>
@@ -24,12 +24,12 @@
 
         <div class="header__buttons">
           <AppButton
-            :padding="[15, 20]"
+            :padding="[14, 28]"
             color="green"
             :slope="10"
             >ПРО КОЛЕДЖ</AppButton>
           <AppButton
-            :padding="[15, 20]"
+            :padding="[14, 28]"
             >СПЕЦІАЛЬНОСТІ</AppButton>
         </div>
       </div>
