@@ -16,8 +16,6 @@ module.exports = {
     semi: ['error', 'never'],
     'no-trailing-spaces': 'off',
     'no-mixed-operators': 'off',
-    'linebreak-style': ['error', 'unix'],
   },
 }
 
-/* eslint linebreak-style: ["error", "unix"] */
