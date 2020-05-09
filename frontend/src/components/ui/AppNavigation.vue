@@ -78,13 +78,13 @@ export default {
         { text: 'ГОЛОВНА', routeName: 'home' },
         { text: 'ПРО КОЛЕДЖ', routeName: 'about' },
         { text: 'НАВЧАННЯ', routeName: 'study' },
-        { text: 'АБІТУРІЄНТУ', routeName: '' },
+        { text: 'АБІТУРІЄНТУ', routeName: 'entrants' },
       ],
       rightSideLinks: [
-        { text: 'СТУДЕНТУ', routeName: '' },
+        { text: 'СТУДЕНТУ', routeName: 'student' },
         { text: 'НОВИНИ', routeName: '' },
-        { text: 'БІБЛІОТЕКА', routeName: '' },
-        { text: 'КОНТАКТИ', routeName: '' },
+        { text: 'БІБЛІОТЕКА', routeName: 'library' },
+        { text: 'КОНТАКТИ', routeName: 'contacts' },
       ],
     }
   },

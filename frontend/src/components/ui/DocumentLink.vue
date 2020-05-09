@@ -1,5 +1,6 @@
 <template>
-  <div class="document-link">
+  <div class="document-link"
+    v-if="link">
     <div class="document-link__mark"></div>
 
     <span class="document-link__name">

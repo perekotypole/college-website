@@ -40,7 +40,7 @@ export default {
 
 <style lang="less" scoped>
 .app-section {
-  min-width: 270px;
+  width: 270px;
 
   .section {
     padding: 30px;
@@ -58,6 +58,10 @@ export default {
 
     .icon {
       margin-right: 30px;
+
+      img {
+        max-height: 30px;
+      }
     }
   }
 }

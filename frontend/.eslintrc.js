@@ -18,4 +18,3 @@ module.exports = {
     'no-mixed-operators': 'off',
   },
 }
-

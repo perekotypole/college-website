@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.43" height="32.915" viewBox="0 0 21.43 32.915">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #313131;
+      }
+    </style>
+  </defs>
+  <g id="doorway" transform="translate(-89.326 0)">
+    <g id="Group_322" data-name="Group 322" transform="translate(96.09 17.065)">
+      <g id="Group_321" data-name="Group 321" transform="translate(0)">
+        <path id="Path_207" data-name="Path 207" class="cls-1" d="M197.058,265.452h-1.941a.568.568,0,1,0,0,1.136h1.941a.568.568,0,1,0,0-1.136Z" transform="translate(-194.549 -265.452)"/>
+      </g>
+    </g>
+    <g id="Group_324" data-name="Group 324" transform="translate(89.326 0)">
+      <g id="Group_323" data-name="Group 323" transform="translate(0 0)">
+        <path id="Path_208" data-name="Path 208" class="cls-1" d="M110.188,1.648h-8.377V.568A.568.568,0,0,0,101.1.019L89.748,3.046a.568.568,0,0,0-.422.549V5.428a.568.568,0,1,0,1.136,0v-1.4l10.214-2.724V31.654L90.462,29.611V7.342a.568.568,0,1,0-1.136,0V30.077a.568.568,0,0,0,.456.557l11.35,2.27a.568.568,0,0,0,.679-.557V31.266h5.233a.568.568,0,1,0,0-1.136h-5.233V28.51h5.621a.568.568,0,0,0,.568-.568V4.972a.568.568,0,0,0-.568-.568h-5.621V2.784h7.809V30.13h-.81a.568.568,0,0,0,0,1.136h1.378a.568.568,0,0,0,.568-.568V2.216A.568.568,0,0,0,110.188,1.648ZM106.864,5.54V27.374h-5.053V5.54Z" transform="translate(-89.326 0)"/>
+      </g>
+    </g>
+  </g>
+</svg>

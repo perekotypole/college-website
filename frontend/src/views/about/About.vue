@@ -24,12 +24,12 @@ export default {
   data() {
     return {
       sections: [
-        { name: 'Історія', icon: 'history.svg' },
+        { name: 'Історія', icon: 'history.svg', routeName: 'history' },
         { name: 'Адміністрація', icon: 'manager.svg', routeName: 'administration' },
         { name: 'Документація', icon: 'file.svg', routeName: 'documentation' },
         { name: 'Галерея', icon: 'gallery.svg' },
         { name: 'Діяльність', icon: 'education.svg' },
-        { name: 'Гуртожиток', icon: 'sleep.svg' },
+        { name: 'Гуртожиток', icon: 'sleep.svg', routeName: 'chummer' },
       ],
     }
   },

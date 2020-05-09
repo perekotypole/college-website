@@ -38,6 +38,15 @@ a {
   color: var(--color-font-main);
 }
 
+p{
+  margin-bottom: 20px;
+  line-height: 30px;
+}
+
+b{
+  font-weight: 600;
+}
+
 :root {
   --color-bg-main: #FFFFFF;
   --color-advert-bg: #FFFFFF;

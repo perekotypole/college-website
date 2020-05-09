@@ -5,6 +5,11 @@ export default [
     component: () => import('@/views/about/About'),
   },
   {
+    name: 'history',
+    path: '/about/history',
+    component: () => import('@/views/about/History'),
+  },
+  {
     name: 'administration',
     path: '/about/administration',
     component: () => import('@/views/about/Administration'),
@@ -13,5 +18,10 @@ export default [
     name: 'documentation',
     path: '/about/documentation',
     component: () => import('@/views/about/Documentation'),
+  },
+  {
+    name: 'chummer',
+    path: '/about/chummer',
+    component: () => import('@/views/about/Chummer'),
   },
 ]

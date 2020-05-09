@@ -1,15 +1,19 @@
 <template>
   <section class="specialities container">
     <div class="specialities__top">
-      <AppTitle
-        class="secialities__title section-title"
-        color="green"
-        :padding="[13, 23]"
-        :slope="12"
-        :highlight="60"
-      >СПЕЦІАЛЬНОСТІ</AppTitle>
+      <div>
+        <AppTitle
+          v-if="title"
+          class="secialities__title section-title"
+          color="green"
+          :padding="[13, 23]"
+          :slope="12"
+          :highlight="60"
+        >СПЕЦІАЛЬНОСТІ</AppTitle>
+      </div>
 
-      <div class="specialities__marking">
+      <div class="specialities__marking"
+        v-if="courses">
         <div class="specialities__marking-item">
           <div class="specialities__marking-color"
             :style="{ background: `var(--color-accent-green)` }" />
@@ -74,6 +78,18 @@ export default {
   components: {
     AppTitle,
     SpecialitiesCard,
+  },
+  props: {
+    title: {
+      type: Boolean,
+      require: false,
+      default: () => true,
+    },
+    courses: {
+      type: Boolean,
+      require: false,
+      default: () => true,
+    },
   },
   data: () => ({
     specialities: [

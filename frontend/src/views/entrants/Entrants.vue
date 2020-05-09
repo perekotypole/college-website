@@ -1,13 +1,13 @@
 <template>
-  <div class="app-study">
+  <div class="app-entrants">
     <app-pagename
-      name="Навчання"
-      routeWay="Головна >> Навчання"
+      name="Абітурієнту"
+      routeWay="Головна >> Абітурієнту"
     ></app-pagename>
 
     <sections-list
       :sections="sections"
-      class="sections"
+      class="app-entrants__sections"
     ></sections-list>
   </div>
 </template>
@@ -24,9 +24,8 @@ export default {
   data() {
     return {
       sections: [
-        { name: 'Циклові комісії', icon: 'meeting.svg' },
-        { name: 'Спеціальності', icon: 'network.svg', routeName: 'specialties' },
-        { name: 'Освітня програма', icon: 'files.svg', routeName: 'program' },
+        { name: 'Підготовчі курси', icon: 'homework.svg', routeName: 'courses' },
+        { name: 'Вступна кампанія', icon: 'doorway.svg', routeName: 'entrance' },
       ],
     }
   },

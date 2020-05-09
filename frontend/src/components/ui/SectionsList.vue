@@ -33,7 +33,7 @@ export default {
 .sections-list {
 
   .sections {
-    margin: auto;
+    margin: 0 auto;
     width: fit-content;
     
     display: flex;
@@ -48,6 +48,11 @@ export default {
     .sections {
       width: 100%;
       display: block;
+
+      .section{
+        margin: 10px 0;
+        width: 100%;
+      }
     }
   }
 }

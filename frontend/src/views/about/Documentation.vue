@@ -112,19 +112,13 @@ export default {
 
 <style lang="less" scoped>
 .app-documentation {
+
+  p{
+    text-indent: 40px;
+  }
   
-  &__item{
-
-    &-text{
-
-      p{
-        margin: 40px 0;
-
-        text-indent: 40px;
-        line-height: 30px;
-      }
-    }
-
+  &__item-text{
+    margin: 75px 0;
   }
 }
 </style>

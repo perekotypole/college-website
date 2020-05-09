@@ -3,22 +3,32 @@ import VueRouter from 'vue-router'
 
 import About from './modules/About'
 import Study from './modules/Study'
+import Student from './modules/Student'
+import Library from './modules/Library'
+import Entrants from './modules/Entrants'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'main',
     component: () => import('@/layouts/Main'),
     children: [
       {
-        path: '/',
+        path: '',
         name: 'home',
         component: () => import('@/views/Home'),
       },
       ...About,
       ...Study,
+      ...Student,
+      ...Library,
+      ...Entrants,
+      {
+        path: '/contacts',
+        name: 'contacts',
+        component: () => import('@/views/Contacts'),
+      },
     ],
   },
 ]
