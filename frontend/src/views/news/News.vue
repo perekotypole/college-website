@@ -221,8 +221,8 @@ export default {
   -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
 
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
 
   &__item {
     display: flex;
@@ -231,6 +231,10 @@ export default {
 
   &__title {
     margin-right: 10px;
+  }
+
+  &__show-count {
+    justify-self: end;
   }
 }
 
