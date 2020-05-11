@@ -52,7 +52,7 @@ export default {
 
   .name {
     font-size: 48px;
-    font-weight: 700;
+    font-weight: 800;
   }
 
   .route-way {

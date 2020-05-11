@@ -61,6 +61,8 @@ b{
   --color-font-light: #565656;
   --color-font-super-light: #717171;
   --color-font-link: #6A8777;
+
+  --font-main: 500 14px 'Montserrat', Sans-Serif, Tahoma, Arial;
 }
 
 .container {
@@ -69,8 +71,7 @@ b{
 }
 
 body {
-  font: 14px 'Montserrat', Sans-Serif, Tahoma, Arial;
-  font-weight: 500;
+  font: var(--font-main);
   color: var(--color-font-main);
 }
 
@@ -89,24 +90,38 @@ body {
 // Scrollbar
 
 ::-webkit-scrollbar {
-    width: 13px;
-    height: 18px;
+  width: 13px;
+  height: 18px;
 }
 ::-webkit-scrollbar-thumb {
-    height: 6px;
-    border: 4px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    -webkit-border-radius: 7px;
-    background-color: #717171;
+  height: 6px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  -webkit-border-radius: 7px;
+  background-color: #717171;
 }
 ::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
-    display: none;
+  width: 0;
+  height: 0;
+  display: none;
 }
 ::-webkit-scrollbar-corner {
-    background-color: transparent;
+  background-color: transparent;
 }
+
+
+input {
+  font: var(--font-main);
+  color: var(--color-font-main);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 
 @media screen and (max-width: 1195px) {
   .container {

@@ -82,7 +82,7 @@ export default {
       ],
       rightSideLinks: [
         { text: 'СТУДЕНТУ', routeName: 'student' },
-        { text: 'НОВИНИ', routeName: '' },
+        { text: 'НОВИНИ', routeName: 'news' },
         { text: 'БІБЛІОТЕКА', routeName: 'library' },
         { text: 'КОНТАКТИ', routeName: 'contacts' },
       ],

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import About from './modules/About'
 import Study from './modules/Study'
 import Student from './modules/Student'
+import News from './modules/News'
 import Library from './modules/Library'
 import Entrants from './modules/Entrants'
 
@@ -22,6 +23,7 @@ const routes = [
       ...About,
       ...Study,
       ...Student,
+      ...News,
       ...Library,
       ...Entrants,
       {
