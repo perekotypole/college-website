@@ -5,6 +5,11 @@ export default [
     component: () => import('@/views/student/Student'),
   },
   {
+    name: 'schedule',
+    path: '/student/schedule/',
+    component: () => import('@/views/student/Schedule'),
+  },
+  {
     name: 'exam',
     path: '/student/exam',
     component: () => import('@/views/student/Exam'),

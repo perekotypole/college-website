@@ -123,6 +123,46 @@ input::-webkit-inner-spin-button {
 }
 
 
+.section {
+
+  &__title {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    margin-bottom: 80px;
+  }
+
+  &__col-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}
+
+.section-lv-2 {
+
+  &__title {
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    margin-bottom: 55px;
+  }
+}
+
+.section-lv-3 {
+  
+  &__title {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    margin-bottom: 20px;
+  }
+}
+
+
 @media screen and (max-width: 1195px) {
   .container {
     width: 90%;

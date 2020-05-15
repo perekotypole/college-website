@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       sections: [
-        { name: 'Розклад навчання', icon: 'timetable.svg', routeName: '' },
+        { name: 'Розклад навчання', icon: 'timetable.svg', routeName: 'schedule' },
         { name: 'Екзамени', icon: 'test.svg', routeName: 'exam' },
         { name: 'Практика', icon: 'work.svg', routeName: 'practice' },
         { name: 'Консультації', icon: 'consalt.svg', routeName: 'consultation' },

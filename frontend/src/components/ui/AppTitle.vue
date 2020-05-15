@@ -78,8 +78,6 @@ export default {
       z-index: 95;
 
       height: 100%;
-
-      // clip-path: polygon(0% 0%, 100% 0, 90% 100%, 0% 100%);
     }
 }
 

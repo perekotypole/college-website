@@ -20,6 +20,11 @@ export default [
     component: () => import('@/views/about/Documentation'),
   },
   {
+    name: 'activity',
+    path: '/about/activity',
+    component: () => import('@/views/about/Activity'),
+  },
+  {
     name: 'chummer',
     path: '/about/chummer',
     component: () => import('@/views/about/Chummer'),

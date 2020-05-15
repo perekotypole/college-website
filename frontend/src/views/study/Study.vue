@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       sections: [
-        { name: 'Циклові комісії', icon: 'meeting.svg' },
+        { name: 'Циклові комісії', icon: 'meeting.svg', routeName: 'commissions' },
         { name: 'Спеціальності', icon: 'network.svg', routeName: 'specialties' },
         { name: 'Освітня програма', icon: 'files.svg', routeName: 'program' },
       ],

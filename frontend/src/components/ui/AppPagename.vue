@@ -38,7 +38,7 @@ export default {
 
 <style lang="less" scoped>
 .app-pagename {
-  margin-bottom: 100px;
+  margin-bottom: 120px;
 
   box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.03);
   padding-top: 50px;

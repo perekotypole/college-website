@@ -12,7 +12,7 @@
         `app-image__image`,
         `app-image__image-${position}`,
       ]"
-      :style="`background-image: url(${link})`"/>
+      :style="`background: url(${link}) center / cover no-repeat`"/>
   </div>
 </template>
 
@@ -21,12 +21,12 @@ export default {
   props: {
     link: {
       type: String,
-      require: true,
+      required: true,
       default: () => '',
     },
     position: {
       type: String,
-      require: true,
+      required: true,
       default: () => 'left',
     },
   },

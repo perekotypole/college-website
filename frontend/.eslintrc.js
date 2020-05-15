@@ -16,7 +16,7 @@ module.exports = {
     semi: ['error', 'never'],
     'no-trailing-spaces': 'off',
     'no-mixed-operators': 'off',
-    'max-len': [2, 200, 4],
+    'max-len': [2, 300, 4],
     'prefer-template': 'off',
     'prefer-const': 'off',
     'no-plusplus': 'off',

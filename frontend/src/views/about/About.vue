@@ -28,7 +28,7 @@ export default {
         { name: 'Адміністрація', icon: 'manager.svg', routeName: 'administration' },
         { name: 'Документація', icon: 'file.svg', routeName: 'documentation' },
         { name: 'Галерея', icon: 'gallery.svg' },
-        { name: 'Діяльність', icon: 'education.svg' },
+        { name: 'Діяльність', icon: 'education.svg', routeName: 'activity' },
         { name: 'Гуртожиток', icon: 'sleep.svg', routeName: 'chummer' },
       ],
     }
