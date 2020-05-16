@@ -1,6 +1,7 @@
 <template>
   <div class="select">
     <div 
+      v-click-outside="() => { opened = false }"
       class="select__current"
       :style="{
         clipPath: `polygon(0 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`,
@@ -30,6 +31,9 @@
 </template>
 
 <script>
+
+import ClickOutside from 'vue-click-outside'
+
 export default {
   props: {
     slope: {
@@ -49,7 +53,10 @@ export default {
   data: () => ({
     opened: false,
     active: 0,
-  }),
+  }), 
+  directives: {
+    ClickOutside,
+  },
 }
 </script>
 
@@ -81,8 +88,11 @@ export default {
     position: absolute;
     z-index: 10000;
 
-    display: none;
+    display: flex;
     flex-direction: column;
+
+    visibility: hidden;
+    opacity: 0;
 
     padding: 10px 0;
 
@@ -92,8 +102,17 @@ export default {
     -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
 
+    transform: scale(0.5);
+    
+    transition: .1s;
+
     &_opened {
-      display: flex;
+      visibility: visible;
+      opacity: 1;
+      height: auto;
+      transform: scale(1);
+
+      transition: .1s;
     }
   }
 

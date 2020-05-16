@@ -12,7 +12,9 @@
     </div>
 
     <div class="app-news-item__right">
-      <span class="app-news-item__title">{{ title }}</span>
+      <router-link :to="`news/${id}`">
+        <span class="app-news-item__title">{{ title }}</span>
+      </router-link>
       <div class="app-news-item__date">
         <img class="app-news-item__calendar-icon" src="@/assets/icons/calendar-filled.svg" alt="calendar icon">
         <span>{{ pubDate | dateFormat }}</span>
@@ -25,6 +27,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: Number,
+      requried: true,
+    },
     title: {
       type: String,
       required: true,

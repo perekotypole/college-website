@@ -12,6 +12,7 @@
         class="app-news__item"
         v-for="item in newsToShow"
         :key="item.id"
+        :id="item.id"
         :title="item.title"
         :image="item.image"
         :category="item.category"
@@ -50,6 +51,7 @@
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNews from '@/components/ui/AppNews.vue' 
 import AppPagination from '@/components/ui/AppPagination.vue'
+import AppSelect from '@/components/ui/AppSelect.vue'
 
 import NewsFilters from '@/components/templates/news/NewsFilters.vue'
 
@@ -66,7 +68,7 @@ for (let i = 0; i < 50; i++) {
 
 export default {
   components: {
-    AppPagename, AppNews, AppPagination, NewsFilters,
+    AppPagename, AppNews, AppPagination, AppSelect, NewsFilters,
   },
   data: () => ({
     news,
