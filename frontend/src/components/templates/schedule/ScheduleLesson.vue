@@ -8,7 +8,7 @@
         <img 
           class="schedule-lesson__toggle-icon" 
           :class="{'schedule-lesson__toggle-icon_up': opened}"
-          src="@/assets/icons/ChevronTop.svg" alt="more">
+          src="@/assets/icons/chevron-top.svg" alt="more">
       </div>
     </div>
     

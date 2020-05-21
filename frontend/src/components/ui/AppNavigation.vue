@@ -42,7 +42,7 @@
       </div>
 
       <div class="app-navigation__search">
-        <img class="app-navigation__search-icon" src="@/assets/icons/SearchIcon.svg" alt="search">
+        <img class="app-navigation__search-icon" src="@/assets/icons/search-icon.svg" alt="search">
       </div>
     </div>
 

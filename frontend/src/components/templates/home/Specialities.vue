@@ -46,7 +46,7 @@
 
           <div class="specialities__column-icon">
             <img
-              src="@/assets/icons/ChevronTop.svg"
+              src="@/assets/icons/chevron-top.svg"
               alt="chevron top"
             />
           </div>
@@ -60,6 +60,8 @@
             :color="item.courses == 4 ? `--color-accent-yellow` : `--color-accent-green`"
             :icon="item.number"
             :number="item.number"
+            :studyForm="item.studyForm"
+            :qualification="item.qualification"
           >{{ item.name }}</SpecialitiesCard>
         </div>
       </div>
@@ -97,27 +99,45 @@ export default {
         title: "ВІДДІЛЕННЯ КОМП'ЮТЕРНИХ ТЕХНОЛОГІЙ",
         opened: false,
         items: [
-          { number: '121', name: 'Інженерія програмного забезпечення', courses: 4 },
-          { number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4 },
+          {
+            number: '121', name: 'Інженерія програмного забезпечення', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік-програміст', 
+          },
+          {
+            number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'електромеханік', 
+          },
         ],
       },
       { 
         title: 'ЕКОНОМІЧНЕ ВІДДІЛЕННЯ',
         opened: false,
         items: [
-          { number: '071', name: 'Облік і оподаткування', courses: 3 },
-          { number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3 },
-          { number: '073', name: 'Менеджмент', courses: 4 },
-          { number: '075', name: 'Маркетинг', courses: 3 },
+          {
+            number: '071', name: 'Облік і оподаткування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'бухгалтер', 
+          },
+          {
+            number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з фінансів', 
+          },
+          {
+            number: '073', name: 'Менеджмент', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'помічник керівника виробничого підрозділу', 
+          },
+          {
+            number: '075', name: 'Маркетинг', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з маркетингу', 
+          },
         ],
       },
       { 
         title: 'МЕХАНІКО-ТЕХНОЛОГІЧНЕ ВІДДІЛЕННЯ',
         opened: false,
         items: [
-          { number: '133', name: 'Галузеве машинобудування', courses: 4 },
-          { number: '182', name: 'Технологія легкої промисловості', courses: 4 },
-          { number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4 },
+          {
+            number: '133', name: 'Галузеве машинобудування', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік з експлуатації та ремонту устаткування', 
+          },
+          {
+            number: '182', name: 'Технологія легкої промисловості', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – конструктор', 
+          },
+          {
+            number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – технолог', 
+          },
         ],
       },
     ],

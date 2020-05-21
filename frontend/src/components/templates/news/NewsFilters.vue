@@ -6,7 +6,7 @@
             class="search__input" 
             type="text" 
             placeholder="Пошук" />
-          <img class="search__icon" src="@/assets/icons/SearchIcon.svg" alt="search icon" />
+          <img class="search__icon" src="@/assets/icons/search-icon.svg" alt="search icon" />
         </div>
 
         <div class="filters__pub-date">

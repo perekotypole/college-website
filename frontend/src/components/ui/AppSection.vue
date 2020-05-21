@@ -13,7 +13,7 @@
         >
       </div>
 
-      <div class="text">{{name}}</div>
+      <div class="app-section__text">{{name}}</div>
     </router-link>
   </div>
 </template>
@@ -51,6 +51,10 @@ export default {
 <style lang="less" scoped>
 .app-section {
   cursor: pointer;
+
+  &__text {
+    font-weight: 600;
+  }
 
   .section-card {
     padding: 30px;

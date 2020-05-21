@@ -1,15 +1,29 @@
 <template>
-  <div :style="cardStyle" class="specialities-card">
-    <div class="specialities-card__left">
-      <div class="specialities-card__icon">
-        <img :src="require(`@/assets/icons/specialities/${icon}.svg`)" :alt="icon">
+  <div class="specialities-card">
+    <div :style="cardStyle" class="specialities-card__front">
+      <div class="specialities-card__left">
+        <div class="specialities-card__icon">
+          <img :src="require(`@/assets/icons/specialities/${icon}.svg`)" :alt="icon">
+        </div>
+        <span class="specialities-card__number">{{ number }}</span>
       </div>
-      <span class="specialities-card__number">{{ number }}</span>
+      <div class="specialities-card__right">
+        <span class="specialities-card__text">
+          <slot></slot>
+        </span>
+      </div>
     </div>
-    <div class="specialities-card__right">
-      <span class="specialities-card__text">
-        <slot></slot>
+
+    <div :style="cardStyle" class="specialities-card__back">
+      <span><span class="specialities-card__title">Форма навчання: </span>
+        <span
+          v-for="(form, i) in studyForm"
+          :key="i"
+        >
+          {{ form }}<span v-if="i != studyForm.length - 1">,</span>
+        </span>
       </span>
+      <span><span class="specialities-card__title">Кваліфікація: </span>{{ qualification }}</span>
     </div>
   </div>
 </template>
@@ -18,7 +32,29 @@
 
 export default {
   name: 'specialities-card',
-  props: ['color', 'icon', 'number'],
+  props: {
+    color: {
+      type: String,
+      required: false,
+      default: '--color-accent-yellow',
+    },
+    icon: {
+      type: String,
+      required: true,
+    }, 
+    number: {
+      type: String,
+      required: true,
+    },
+    studyForm: {
+      type: String,
+      required: true,
+    },
+    qualification: {
+      type: String,
+      required: true,
+    },
+  },
   computed: {
     cardStyle() {
       const { color } = this.$props
@@ -36,12 +72,43 @@ export default {
 <style lang="less" scoped>
 
 .specialities-card {
-  padding: 25px 35px;
   width: 357px;
  
-  display: flex;
+  position: relative;
+  perspective: 1000px;
 
   color: var(--color-font-cards);
+
+  &:hover &__front {transform: rotateX(180deg);}
+  &:hover &__back {transform: rotateX(360deg);}
+
+  &__front {
+    padding: 25px 35px;
+    display: flex;
+    transition: 1s;
+    backface-visibility: hidden;
+  }
+
+  &__back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    padding: 25px 35px;
+
+    font-size: 14px;
+
+    transition: 1s;
+    backface-visibility: hidden;
+    transform: rotateX(180deg);
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 
   &__left {
     display: flex;
@@ -78,6 +145,13 @@ export default {
     font-weight: 700;
 
     line-height: 24px;
+  }
+
+  &__title {
+    font-weight: 700;
+
+    margin-top: 4px;
+    margin-bottom: 2px;
   }
 }
 

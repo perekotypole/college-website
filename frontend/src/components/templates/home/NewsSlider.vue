@@ -66,7 +66,7 @@
         "
       >
         <img
-          src="@/assets/icons/LeftArrow.svg"
+          src="@/assets/icons/left-arrow.svg"
           alt="Prev. slide"
         >
       </div>
@@ -79,7 +79,7 @@
         "
       >
         <img
-          src="@/assets/icons/RightArrow.svg"
+          src="@/assets/icons/right-arrow.svg"
           alt="Next slide"
         >
       </div>

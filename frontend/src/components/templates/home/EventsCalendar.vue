@@ -14,11 +14,11 @@
       <div class="calendar__left">
         <div class="calendar__navigation">
           <div class="calendar__navigation-prev">
-            <img src="@/assets/icons/LeftArrow.svg" alt="prev">
+            <img src="@/assets/icons/left-arrow.svg" alt="prev">
           </div>
           <span class="calendar__month-name">Березень 2020</span>
           <div class="calendar__navigation-next">
-            <img src="@/assets/icons/RightArrow.svg" alt="next">
+            <img src="@/assets/icons/right-arrow.svg" alt="next">
           </div>
         </div>
 

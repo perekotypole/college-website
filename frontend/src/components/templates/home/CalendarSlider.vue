@@ -133,7 +133,7 @@ export default {
       cursor: pointer;
 
       border: none;
-      background: url("../../../assets/icons/LeftArrow.svg") no-repeat;
+      background: url("../../../assets/icons/left-arrow.svg") no-repeat;
       background-position: center;
     }
 

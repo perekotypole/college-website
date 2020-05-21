@@ -2,7 +2,7 @@
   <div class="app-pagination">
     <!-- Left arrow -->
     <div @click="prev()" class="app-pagination__arrow">
-      <img class="app-pagination__arrow-icon" src="@/assets/icons/LeftArrow.svg" alt="left arrow">
+      <img class="app-pagination__arrow-icon" src="@/assets/icons/left-arrow.svg" alt="left arrow">
     </div>
 
     <div class="app-pagination__pages">
@@ -40,7 +40,7 @@
 
     <!-- Right arrow -->
     <div @click="next()" class="app-pagination__arrow">
-      <img class="app-pagination__arrow-icon app-pagination__arrow-icon_right" src="@/assets/icons/LeftArrow.svg" alt="right arrow">
+      <img class="app-pagination__arrow-icon app-pagination__arrow-icon_right" src="@/assets/icons/left-arrow.svg" alt="right arrow">
     </div>
   </div>
 </template>
