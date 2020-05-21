@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "5ec6799e9f50002cacddaaa5"
+  },
+  "members": [],
+  "name": "Фізичного виховання та захисту Вітчизни",
+  "icon": "sport.svg",
+  "leader": {
+    "$oid": "5ebecdfd0f909444dcce6d11"
+  },
+  "__v": 0
+}]
