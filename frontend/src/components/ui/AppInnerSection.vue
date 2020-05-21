@@ -12,7 +12,7 @@
         >
       </div>
 
-      <div class="section-car__text">{{name}}</div>
+      <div class="section-card__text">{{name}}</div>
     </div>
   </div>
 </template>
@@ -64,10 +64,6 @@ export default {
   margin: auto;
   cursor: pointer;
 
-  &__text {
-    font-weight: 600;
-  }
-
   .section-card {
     padding: 30px;
     width: 270px;
@@ -82,6 +78,10 @@ export default {
 
     text-decoration: none;
     font-size: 16px;
+
+    &__text {
+      font-weight: 600;
+    }
 
     &__left {
       margin-right: 25px;
