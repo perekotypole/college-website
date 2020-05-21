@@ -1,36 +1,76 @@
 <template>
   <div class="sections-list container">
-    <div class="sections">
-      <app-section v-for="({ icon, name, routeName }, index) in sections"
-        :key="index"
-        :icon="icon"
-        :name="name"
-        :routeName="routeName"
-        class="section"
-      ></app-section>
-    </div>
+      <template v-if="type === 'outer'">
+        <div 
+          class="sections"
+          :class="{'sections_big': cardSize === 'big'}"
+        >
+          <app-section
+            v-for="({ icon, name, routeName }, index) in sections"
+            :key="index"
+            :icon="icon"
+            :name="name"
+            :routeName="routeName"
+            class="section-card"
+            :type="type"
+            :size="cardSize"
+          ></app-section>
+        </div>
+      </template>
+      
+      <template v-else>
+        <div 
+          class="sections sections_inner"
+          :class="{'sections_big': cardSize === 'big'}"
+        >
+          <app-inner-section
+            v-for="({ icon, name, elementId }, index) in sections"
+            :key="index"
+            :icon="icon"
+            :name="name"
+            :elementId="elementId"
+            class="section-card"
+            :type="type"
+            :size="cardSize"
+          ></app-inner-section>
+        </div>
+      </template>
   </div>
 </template>
 
 <script>
 import AppSection from '@/components/ui/AppSection.vue'
+import AppInnerSection from '@/components/ui/AppInnerSection.vue'
 
 export default {
   components: {
-    AppSection,
+    AppSection, AppInnerSection,
   },
   props: {
     sections: {
       type: Array,
-      require: true,
+      required: true,
       default: () => [],
+    },
+    type: {
+      type: String,
+      required: false,
+      default: 'outer',
+      validator: (value) => {
+        return ['outer', 'inner'].indexOf(value) !== -1
+      },
+    },
+    cardSize: {
+      type: String,
+      required: false,
+      default: 'small',
     },
   },
 }
 </script>
 
 <style lang="less" scoped>
-.sections-list {
+.sections-list {  
 
   .sections {
     margin: 0 auto;
@@ -39,7 +79,11 @@ export default {
     display: flex;
     flex-wrap: wrap;
 
-    .section{
+    &_inner {
+      margin-bottom: 120px;
+    }
+
+    .section-card {
       margin: 10px;
     }
   }
@@ -49,7 +93,7 @@ export default {
       width: 100%;
       display: block;
 
-      .section{
+      .section-card {
         margin: 10px 0;
         width: 100%;
       }

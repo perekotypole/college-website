@@ -1,7 +1,6 @@
 <template>
-  <div class="app-section">
-    <router-link
-      :to="{ name: routeName || 'home' }"
+  <div @click="scrollTo(elementId)" class="app-section">
+    <div 
       class="section-card"
       :class="{'section-card_big': size === 'big'}"
     >
@@ -14,7 +13,7 @@
       </div>
 
       <div class="text">{{name}}</div>
-    </router-link>
+    </div>
   </div>
 </template>
 
@@ -31,10 +30,10 @@ export default {
       required: true,
       default: () => '',
     },
-    routeName: {
+    elementId: {
       type: String,
       required: false,
-      default: () => '',
+      default: '',
     },
     size: {
       type: String,
@@ -45,21 +44,29 @@ export default {
       },
     },
   },
+  methods: {
+    scrollTo(id) {
+      const target = document.getElementById(id)
+      console.log(this.$props.size)
+
+      window.scroll({
+        left: 0, 
+        top: target.offsetTop - 20, 
+        behavior: 'smooth',
+      })
+    },
+  },
 }
 </script>
 
 <style lang="less" scoped>
 .app-section {
+  margin: auto;
   cursor: pointer;
 
   .section-card {
     padding: 30px;
     width: 270px;
-
-    &_big {
-      width: 357px;
-      padding: 35px;
-    }
 
     height: 100%;
 
@@ -73,10 +80,7 @@ export default {
     font-size: 16px;
 
     &__left {
-      margin-right: 30px;
-
-      display: flex;
-      align-items: center;
+      margin-right: 25px;
     }
 
     &__icon {
@@ -84,12 +88,13 @@ export default {
     }
 
     &_big {
-      // width: 357px;
+      width: 357px;
       padding: 35px;
 
       .section-card__icon {
         max-height: 35px;
       }
+
     }
   }
 }

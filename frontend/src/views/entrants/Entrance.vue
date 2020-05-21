@@ -6,7 +6,16 @@
     ></app-pagename>
 
     <div class="app-entance__content container">
-      <div class="app-entance__item">
+      <sections-list
+        :sections="sections"
+        type="inner"
+        cardSize="big"
+      />
+
+      <div 
+        class="app-entance__item"
+        id="admissionRulesSection"
+      >
         <div class="app-entance__title">
           <app-name-title>
             Правила прийому
@@ -23,7 +32,10 @@
         </div>
       </div>
 
-      <div class="app-entance__item">
+      <div 
+        class="app-entance__item"
+        id="entranceCommissionSection"
+      >
         <div class="app-entance__title">
           <app-name-title>
             Приймальна комісія
@@ -97,7 +109,10 @@
         </div>
       </div>
 
-      <div class="app-entance__item">
+      <div 
+        class="app-entance__item"
+        id="govrnmentOrderSection"
+      >
         <div class="app-entance__title">
           <app-name-title>
             Обсяг державних замовлень
@@ -114,7 +129,10 @@
         </div>
       </div>
 
-      <div class="app-entance__item">
+      <div 
+        class="app-entance__item"
+        id="examsProgramSection"
+      >
         <div class="app-entance__title">
           <app-name-title>
             Програма вступних випробувань
@@ -226,7 +244,10 @@
         </div>
       </div>
 
-      <div class="app-entance__item">
+      <div 
+        class="app-entance__item"
+        id="examsScheduleSection"
+      >
         <div class="app-entance__title">
           <app-name-title>
             Розклад вступних випробувань
@@ -243,7 +264,10 @@
         </div>
       </div>
 
-      <div class="app-entance__item">
+      <div 
+        class="app-entance__item"
+        id="examsResultsSection"
+      >
         <div class="app-entance__title">
           <app-name-title>
             Результати вступних випробувань
@@ -298,7 +322,10 @@
         </div>
       </div>
 
-      <div class="app-entance__item">
+      <div 
+        class="app-entance__item"
+        id="znoSection"
+      >
         <div class="app-entance__title">
           <app-name-title>
             ЗНО
@@ -324,6 +351,7 @@ import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import AppSubtitle from '@/components/ui/AppSubtitle.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
 import DocumentLink from '@/components/ui/DocumentLink.vue'
+import SectionsList from '@/components/ui/SectionsList.vue'
 
 export default {
   components: {
@@ -332,9 +360,19 @@ export default {
     AppTitle,
     AppSubtitle,
     DocumentLink,
+    SectionsList,
   },
   data() {
     return {
+      sections: [
+        { name: 'Правила прийому', icon: 'file.svg', elementId: 'admissionRulesSection' },
+        { name: 'Приймальна комісія', icon: 'commission.svg', elementId: 'entranceCommissionSection' },
+        { name: 'Обсяг державних замовлень', icon: 'profiles.svg', elementId: 'govrnmentOrderSection' },
+        { name: 'Програма вступних випробувань', icon: 'check-list.svg', elementId: 'examsProgramSection' },
+        { name: 'Розклад', icon: 'calendar.svg', elementId: 'examsScheduleSection' },
+        { name: 'Результати', icon: 'bar-chart.svg', elementId: 'examsResultsSection' },
+        { name: 'ЗНО', icon: 'exam.svg', elementId: 'znoSection' },
+      ],
       rules: [
         {
           title: 'Правила прийому на 2020 рік',

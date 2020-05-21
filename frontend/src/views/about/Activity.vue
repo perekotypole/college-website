@@ -5,9 +5,14 @@
       routeWay="Головна >> Про коледж >> Діяльність"
     />
 
+    <sections-list 
+      :sections="sections"
+      type="inner"
+    />
+
     <div class="app-activity__content container">
 
-      <section class="app-activity__section app-activity__sport section">
+      <section :id="sections.sport.elementId" class="app-activity__section app-activity__sport section">
         <app-name-title class="section__title">Спортивно-масова робота коледжу</app-name-title>
 
         <div class="section__col-block">
@@ -97,7 +102,7 @@
         </section>
       </section>
 
-      <section class="app-activity__section section">
+      <section :id="sections.teachers.elementId" class="app-activity__section section">
         <app-name-title class="section__title">Викладачі</app-name-title>
 
         <div class="app-activity__teachers-event-list">
@@ -161,7 +166,7 @@
         </section>
       </section>
 
-      <section class="app-activity__section section">
+      <section :id="sections.educActivity.elementId" class="app-activity__section section">
         <app-name-title
           class="section__title"
         >
@@ -190,14 +195,18 @@ import AppImage from '@/components/ui/AppImage.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
 import DocumentLink from '@/components/ui/DocumentLink.vue'
 import AppNews from '@/components/ui/AppNews.vue' 
+import SectionsList from '@/components/ui/SectionsList.vue'
 
 export default {
   components: {
-    AppPagename, AppNameTitle, AppImage, AppTitle, AppNews, DocumentLink,
+    AppPagename, AppNameTitle, AppImage, AppTitle, AppNews, DocumentLink, SectionsList,
   },
   data: () => ({
     sections: {
       sport: {
+        name: 'Спорт',
+        icon: 'dumbbell.svg',
+        elementId: 'sportAtivitySection',
         workers: [
           { 
             title: 'директор коледжу',
@@ -281,6 +290,9 @@ export default {
         ],
       },
       teachers: {
+        name: 'Викладачі',
+        icon: 'teacher.svg',
+        elementId: 'teacherAtivitySection',
         events: [
           {
             id: 0,
@@ -336,6 +348,9 @@ export default {
         },
       },
       educActivity: {
+        name: 'Студенти',
+        icon: 'study.svg',
+        elementId: 'studentActivitySection',
         events: [
           {
             id: 0,

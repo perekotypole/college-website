@@ -6,7 +6,16 @@
     />
 
     <div class="container">
-      <section class="section app-schedule__section">
+       <sections-list
+        :sections="sections"
+        type="inner"
+        cardSize="big"
+      />
+
+      <section 
+        class="section app-schedule__section"
+        id="studyProcessScheduleSection"
+      >
         <app-name-title class="section__title">Графік навчального процесу</app-name-title>
 
         <document-link
@@ -16,7 +25,10 @@
         >{{ doc.title }}</document-link>
       </section>
 
-      <section class="section app-schedule__section lesson-schedule">
+      <section 
+        class="section app-schedule__section lesson-schedule"
+        id="lessonsScheduleSection"
+      >
         <app-name-title class="section__title">Розклад занять</app-name-title>
 
         <schedule-filters />
@@ -54,7 +66,10 @@
         >Розклад занять на II семестр 2019-2020 н.р. (денна форма)</document-link>
       </section>
 
-      <seciton class="section app-schedule__section bell-schedule">
+      <section 
+        class="section app-schedule__section bell-schedule"
+        id="bellsScheduleSection"
+      >
         <app-name-title class="section__title">Розклад дзвінків</app-name-title>
 
         <div class="bell-schedule__bells">
@@ -100,7 +115,7 @@
             </div>
           </div>
         </div>
-      </seciton>
+      </section>
     </div>
   </div>
 </template>
@@ -111,15 +126,21 @@ import AppPagename from '@/components/ui/AppPagename.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import DocumentLink from '@/components/ui/DocumentLink.vue'
+import SectionsList from '@/components/ui/SectionsList.vue'
 
 import ScheduleFilters from '@/components/templates/schedule/ScheduleFilters.vue'
 import ScheduleLesson from '@/components/templates/schedule/ScheduleLesson.vue'
 
 export default {
   components: {
-    AppPagename, AppNameTitle, AppTitle, DocumentLink, ScheduleFilters, ScheduleLesson,
+    AppPagename, AppNameTitle, AppTitle, DocumentLink, ScheduleFilters, ScheduleLesson, SectionsList,
   },
   data: () => ({
+    sections: [
+      { name: 'Графік навчального процесу', icon: 'calendar.svg', elementId: 'studyProcessScheduleSection' },
+      { name: 'Розклад занать', icon: 'presentation.svg', elementId: 'lessonsScheduleSection' },
+      { name: 'Розклад дзвінків', icon: 'bell.svg', elementId: 'bellsScheduleSection' },
+    ],
     studyProcessDocs: [
       {
         title: 'Графік навчального процесу на 2019-2020 н.р. (денна форма навчання)',

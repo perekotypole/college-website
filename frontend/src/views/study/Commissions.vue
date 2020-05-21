@@ -5,11 +5,17 @@
       routeWay="Головна >> Навчання >> Циклові комісії"
     />
 
+    <sections-list
+      :sections="commissions"
+      type="inner"
+    />
+
     <div class="container">
       <section 
         class="app-commissions__section section"
         v-for="(commission, i) in commissions"
         :key="i"
+        :id="commission.elementId"
       >
         <app-name-title
           class="section__title"
@@ -75,15 +81,18 @@ import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
 import AppNews from '@/components/ui/AppNews.vue'
+import SectionsList from '@/components/ui/SectionsList.vue'
 
 export default {
   components: {
-    AppPagename, AppNameTitle, AppTitle, AppNews,
+    AppPagename, AppNameTitle, AppTitle, AppNews, SectionsList,
   },
   data: () => ({
     commissions: [
       {
         name: 'Суспільних дисциплін',
+        icon: 'sociology.svg',
+        elementId: 'socialCommissionSection',
         head: 'Бриндзак Олександра Василівна',
         members: [
           'Фучко Василь Богданович', 'Максим’юк Галина Дмитрівна', 'Матіос Оксана Петрівна', 'Плиторак Марія Олексіївна',
@@ -100,6 +109,8 @@ export default {
       },
       {
         name: 'Іноземних мов',
+        icon: 'languages.svg',
+        elementId: 'foreignLanguagesCommissionSection',
         head: 'Лютак Наталія Петрівна',
         members: [
           'Дуб Інеса Володимирівна', 'Загорняк Наталія Василівна', 'Тимофєєва Галина Михайлівна', 'Лоїк Оксана Михайлівна', 'Чорнописька Ніна Іванівна', 'Юзюк Оксана Петрівна',
