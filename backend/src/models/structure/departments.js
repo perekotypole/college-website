@@ -19,6 +19,6 @@ export default model('Department', new Schema({
   specialties: {
     type: [Schema.Types.ObjectId],
     ref: 'Specialty',
-    unique: true,
+    default: () => [],
   },
 }))

@@ -7,6 +7,11 @@ export default model('Commission', new Schema({
     required: true,
     trim: true,
   },
+  icon: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   description: {
     type: String,
     trim: true,
@@ -20,6 +25,5 @@ export default model('Commission', new Schema({
   members: {
     type: [Schema.Types.ObjectId],
     ref: 'Employee',
-    unique: true,
   },
 }))

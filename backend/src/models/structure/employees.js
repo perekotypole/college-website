@@ -7,7 +7,7 @@ export default model('Employee', new Schema({
     required: true,
     trim: true,
   },
-  work: {
+  works: {
     type: [String],
     trim: true,
   },
@@ -15,21 +15,20 @@ export default model('Employee', new Schema({
     type: Boolean,
     default: false,
   },
-  commission: {
-    type: Schema.Types.ObjectId,
-    ref: 'Commission',
-    required: true,
-  },
   contacts: {
-    type: Map,
-    of: String,
+    phone: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
   },
   achievement: {
     type: [String],
     trim: true,
     alias: 'achv',
   },
-  image: {
+  photo: {
     type: Schema.Types.ObjectId,
     ref: 'Image',
     unique: true,

@@ -6,17 +6,29 @@ export default model('News', new Schema({
     required: true,
     trim: true,
   },
-  mainImage: {
-    type: Schema.Types.ObjectId,
-    ref: 'Image',
+  views: {
+    type: Number,
+    default: () => 0,
   },
   description: {
     type: String,
     trim: true,
   },
-  tagList: {
-    type: [Schema.Types.ObjectId],
+  mainTag: {
+    type: Schema.Types.ObjectId,
     ref: 'Tag',
+  },
+  optionalTags: {
+    type: [Schema.Types.ObjectId],
+  },
+  mainImage: {
+    type: Schema.Types.ObjectId,
+    ref: 'Image',
+  },
+  imagesList: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Image',
+    alias: 'images',
   },
   publicationDate: {
     type: Date,
@@ -27,21 +39,16 @@ export default model('News', new Schema({
     type: Date,
     alias: 'event',
   },
-  page: {
+  avdert: {
+    type: Boolean,
+    default: false,
+  },
+  text: {
     type: String,
   },
-  imageList: {
-    type: [Schema.Types.ObjectId],
-    ref: 'Image',
-    alias: 'images',
-  },
-  documentList: {
+  documentsList: {
     type: [Schema.Types.ObjectId],
     ref: 'Document',
     alias: 'documents',
-  },
-  notification: {
-    type: Boolean,
-    default: false,
   },
 }), 'news')

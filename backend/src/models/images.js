@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
 
 export default model('Image', new Schema({
-  image: {
+  path: {
     type: String,
     unique: true,
     required: true,
