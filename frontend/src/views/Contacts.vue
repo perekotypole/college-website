@@ -210,20 +210,21 @@ export default {
       font-size: 22px;
       font-weight: 600;
 
-      margin-bottom: 50px;
+      margin-bottom: 65px;
     }
   }
 
   &__list{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 40px 100px;
+    grid-gap: 50px 100px;
   }
   
   &__item{
     
     &-title{
       font-size: 14px;
+      margin-bottom: 10px;
     }
     
     &-icon {

@@ -545,7 +545,7 @@ export default {
 
   &__title{
     text-align: center;
-    margin-bottom: 75px;
+    margin-bottom: 80px;
   }
   
   &__subtitle{
@@ -564,7 +564,19 @@ export default {
   }
 
   &__section{
-    margin-bottom: 75px;
+    margin-bottom: 120px;
+  }
+
+  &__list-title {
+    margin-bottom: 20px;
+  }
+
+  &__list-text {
+    margin-bottom: 50px;
+  }
+
+  &__docs {
+    margin-bottom: 50px;
   }
 
   @media screen and (max-width: 1195px){
