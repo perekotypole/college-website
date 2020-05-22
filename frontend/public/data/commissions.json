@@ -1,12 +1,26 @@
-[{
-  "_id": {
-    "$oid": "5ec6799e9f50002cacddaaa5"
-  },
-  "members": [],
-  "name": "Фізичного виховання та захисту Вітчизни",
-  "icon": "sport.svg",
-  "leader": {
-    "$oid": "5ebecdfd0f909444dcce6d11"
-  },
-  "__v": 0
-}]
+{
+  "finded": true,
+  "commissions": [
+    {
+      "members": [],
+      "_id": "5ec6799e9f50002cacddaaa5",
+      "name": "Фізичного виховання та захисту Вітчизни",
+      "icon": "sport.svg",
+      "leader": {
+        "contacts": {
+          "phone": "(03433)2-79-85"
+        },
+        "works": [
+          "Керівник фізичного виховання коледжу"
+        ],
+        "administration": true,
+        "achievement": [],
+        "_id": "5ebecdfd0f909444dcce6d11",
+        "name": "Островський Ярослав Геннадійович",
+        "photo": "5ebecdf236626b233ccd1fc8",
+        "__v": 0
+      },
+      "__v": 0
+    }
+  ]
+}
