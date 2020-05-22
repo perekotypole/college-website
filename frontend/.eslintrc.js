@@ -21,5 +21,6 @@ module.exports = {
     'prefer-const': 'off',
     'no-plusplus': 'off',
     'arrow-body-style': 'off',
+    'no-unused-vars': 'off',
   },
 }

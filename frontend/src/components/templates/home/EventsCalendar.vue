@@ -51,7 +51,22 @@
         </div>
       </div>
       <div class="calendar__right">
-        <CalendarSlider />
+        <div class="calendar__right-content">
+          <div class="calendar__current-day">14 березня</div>
+          <div class="calendar__news-slider-counter">
+            <span class="calendar__news-slider-counter_current">{{ currentNewsSlide + 1 | addZero }}</span>
+            /{{ news.length | addZero }}
+          </div>
+          <NewsSlider 
+            class="calendar__news-slider"
+            sliderId="newsSliderCalendar"
+            :onSlideChange="currentSlideUpdate"
+            :category="false"
+            controlColor="green"
+            :slides="news"
+          >
+          </NewsSlider>
+        </div>
       </div>
     </div>
   </div>
@@ -60,15 +75,21 @@
 <script>
 
 import AppTitle from '@/components/ui/AppTitle.vue'
-import CalendarSlider from './CalendarSlider.vue'
+import NewsSlider from '@/components/templates/home/NewsSlider.vue'
 
 export default {
   name: 'events-calendar',
   components: {
     AppTitle,
-    CalendarSlider,
+    NewsSlider,
   },
   data: () => ({
+    currentNewsSlide: 0,
+    news: [
+      { title: 'Запрошуємо на день відкритих дверей', category: 'студенти', link: 'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg' },
+      { title: 'Коломийський політехнічний коледж Університету повністю виконав державне замовлення з прийому студентів', category: 'викладачі', link: 'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298' },
+      { title: 'Критичне мислення', category: 'спорт', link: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg' },
+    ],
     dayNames: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'],
     month: [
       [
@@ -127,6 +148,11 @@ export default {
       ],
     ],
   }),
+  methods: {
+    currentSlideUpdate(i) {
+      this.currentNewsSlide = i
+    },
+  },
 }
 </script>
 
@@ -221,6 +247,36 @@ export default {
     -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
     -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
+  }
+
+  &__right-content {
+    display: grid;
+    grid-template-areas:
+    'day counter'
+    'slider slider';
+    grid-template-columns: 1fr auto;
+    grid-gap: 30px;
+  }
+
+  &__current-day {
+    transform: translate(-20px, -15px);
+
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  &__news-slider-counter {
+
+    &_current {
+      font-size: 24px;
+    }
+  }
+
+  &__news-slider {
+    grid-area: slider;
+
+    width: 534px;
+    height: 320px;
   }
 
   @media screen and (max-width: 1195px) {
