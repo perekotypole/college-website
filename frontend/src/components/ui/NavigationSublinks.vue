@@ -28,7 +28,7 @@ export default {
 <style lang="less" scoped>
 
 .sublinks {
-  margin-top: 20px;
+  margin-top: 10px;
 
   visibility: hidden;
   opacity: 0;
