@@ -1,22 +1,24 @@
 <template>
   <div class="home">
-    <FullHeader />
+    <full-header />
+    <news-mobile />
 
-    <Specialities class="home__section"/>
+    <specialities class="home__section"/>
 
-    <Advert
+    <advert
       class="home__section"
       title="Відкрито набір слухачів на курси підготовки до вступу в 2020 році"
     >
-      <CoursesInfo />
-    </Advert>
+      <courses-info />
+    </advert>
     
-    <EventsCalendar />
+    <events-calendar />
   </div>
 </template>
 
 <script>
 import FullHeader from '@/components/templates/home/FullHeader.vue'
+import NewsMobile from '@/components/templates/home/NewsMobile.vue'
 import Specialities from '@/components/templates/home/Specialities.vue'
 import Advert from '@/components/ui/Advert.vue'
 import CoursesInfo from '@/components/templates/home/CoursesInfo.vue'
@@ -26,6 +28,7 @@ export default {
   name: 'home',
   components: {
     FullHeader,
+    NewsMobile,
     Specialities,
     Advert,
     CoursesInfo,

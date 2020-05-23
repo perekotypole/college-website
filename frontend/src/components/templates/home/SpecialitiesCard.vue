@@ -47,7 +47,7 @@ export default {
       required: true,
     },
     studyForm: {
-      type: String,
+      type: Array,
       required: true,
     },
     qualification: {

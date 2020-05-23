@@ -165,7 +165,7 @@ input::-webkit-inner-spin-button {
 
 @media screen and (max-width: 1195px) {
   .container {
-    width: 90%;
+    width: 340px;
   }
 }
 

@@ -203,6 +203,25 @@ export default {
   &__right-arrow {
     transform: translateY(4px) rotate(180deg);
   }
+
+  @media screen and (max-width: 1195px) {
+
+    &__number {
+      margin-right: 13px;
+      margin-top: 0px;
+    }
+
+    &__text {
+      font-size: 14px;
+      padding: 15px 20px 20px 20px;
+
+      clip-path: polygon(0 0, 100% 5px, 100% 100%, 0 100%);
+    }
+
+    &__title {
+      line-height: 20px;
+    }
+  }
 }
 
 </style>

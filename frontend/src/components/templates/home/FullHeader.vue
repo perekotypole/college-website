@@ -2,13 +2,13 @@
   <header class="header">
     <div class="container header__container">
       <div class="header__left">
-        <AppTitle
+        <app-title
           :padding="[5, 8]"
           :slope="10"
           :highlight="72"
           color="yellow"
           class="header__greeting"
-          >ВАС ВІТАЄ</AppTitle>
+          >ВАС ВІТАЄ</app-title>
 
         <div class="header__place-name">
           <span class="header__place-name-text"
@@ -23,20 +23,20 @@
         </div>
 
         <div class="header__buttons">
-          <AppButton
+          <app-button
             :padding="[14, 28]"
             color="green"
             :slope="10"
-            >ПРО КОЛЕДЖ</AppButton>
-          <AppButton
+            >ПРО КОЛЕДЖ</app-button>
+          <app-button
             :padding="[14, 28]"
-            >СПЕЦІАЛЬНОСТІ</AppButton>
+            >СПЕЦІАЛЬНОСТІ</app-button>
         </div>
       </div>
 
       <div class="header__right">
         <div class="header__news">
-          <NewsSlider 
+          <news-slider
             class="header__news-slider"
             :showCategory="true"
             sliderId="newsSliderHeader"
@@ -46,27 +46,13 @@
               { title: 'Критичне мислення', category: 'спорт', link: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg' },
             ]"
           >
-          </NewsSlider>
+          </news-slider>
           <div class="header__news-bg-rect"></div>
         </div>
       </div>
     </div>
 
     <div class="shadow"></div>
-    
-    <div class="header__mobile-slider">
-      <div class="header__mobile-news">
-        <NewsSlider 
-            sliderId="newsSliderHeaderMobile"
-            :slides="[
-              { title: 'Запрошуємо на день відкритих дверей', category: 'студенти', link: 'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg' },
-              { title: 'Коломийський політехнічний коледж Університету повністю виконав державне замовлення з прийому студентів', category: 'викладачі', link: 'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298' },
-              { title: 'Критичне мислення', category: 'спорт', link: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg' },
-            ]"
-          >
-        </NewsSlider>
-      </div>
-    </div>
   </header>
 </template>
 
@@ -188,6 +174,11 @@ export default {
     display: none;
   }
 
+  &__mobile-slider {
+    width: 335px;
+    height: 245px;
+  }
+
   @media screen and (max-width: 1195px) {
     padding-top: 0;
     margin-bottom: 50px;
@@ -218,15 +209,6 @@ export default {
 
     &__buttons{
       font-size: 12px;
-    }
-
-    &__mobile-news {
-      display: block;
-
-      margin: 0 auto;
-      margin-bottom: 50px;
-      width: 300px;
-      margin-bottom: 100px;
     }
   }
 }
