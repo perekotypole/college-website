@@ -37,14 +37,17 @@
       <div class="header__right">
         <div class="header__news">
           <NewsSlider 
-            title="новини"
+            class="header__news-slider"
+            :showCategory="true"
+            sliderId="newsSliderHeader"
             :slides="[
-              { text: 'Запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/2-300x225.jpg' },
-              { text: 'Знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/1.jpg' },
-              { text: 'І ще знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03-300x225.jpg' },
+              { title: 'Запрошуємо на день відкритих дверей', category: 'студенти', link: 'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg' },
+              { title: 'Коломийський політехнічний коледж Університету повністю виконав державне замовлення з прийому студентів', category: 'викладачі', link: 'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298' },
+              { title: 'Критичне мислення', category: 'спорт', link: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg' },
             ]"
-            class="desktop-slider">
+          >
           </NewsSlider>
+          <div class="header__news-bg-rect"></div>
         </div>
       </div>
     </div>
@@ -54,13 +57,13 @@
     <div class="header__mobile-slider">
       <div class="header__mobile-news">
         <NewsSlider 
-          title="новини"
-          :slides="[
-            { text: 'Запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/2-300x225.jpg' },
-            { text: 'Знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2019/09/1.jpg' },
-            { text: 'І ще знову запрошуємо на день відкритих дверей', image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03-300x225.jpg' },
-          ]"
-          class="mobile-slider">
+            sliderId="newsSliderHeaderMobile"
+            :slides="[
+              { title: 'Запрошуємо на день відкритих дверей', category: 'студенти', link: 'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg' },
+              { title: 'Коломийський політехнічний коледж Університету повністю виконав державне замовлення з прийому студентів', category: 'викладачі', link: 'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298' },
+              { title: 'Критичне мислення', category: 'спорт', link: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg' },
+            ]"
+          >
         </NewsSlider>
       </div>
     </div>
@@ -111,11 +114,30 @@ export default {
     background: linear-gradient(rgba(0,0,0,.03), transparent);
   }
 
+  &__news {
+    padding-top: 20px;
+
+    &-slider {
+      position: absolute;
+    }
+
+    &-bg-rect {
+      width: 520px;
+      height: 340px;
+
+      z-index: 0;
+      transform: translate(20px, 50px);
+      // margin-top: 30px;
+
+      background: var(--color-accent-green);
+    }
+  }
+
   &__container {
     display: grid;
     max-height: 600px;
     grid-template-areas: "left right";
-    grid-template-columns: 1fr 500px;
+    grid-template-columns: 1fr 1fr;
   }
 
   &__greeting {
