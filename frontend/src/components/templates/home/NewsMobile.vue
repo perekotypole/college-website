@@ -53,14 +53,10 @@ export default {
   }
 
   @media screen and (max-width: 1195px) {
+    display: block;
 
-    & {
-      display: block;
-
-      margin: 0 auto;
-      margin-bottom: 50px;
-      margin-bottom: 100px;
-    }
+    margin: 0 auto;
+    margin-bottom: 100px;
   }
 }
 

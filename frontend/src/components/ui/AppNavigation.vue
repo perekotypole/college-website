@@ -9,6 +9,14 @@
           class="app-navigation__link"
         >
           {{ link.text }}
+          <div class="app-navigation__underline"></div>
+
+          <div v-if="link.sublinks">
+            <navigation-sublinks 
+              :sublinks="link.sublinks"
+              class="app-navigation__sublinks"
+            />
+          </div>
         </router-link>
       </div>
 
@@ -38,6 +46,14 @@
           class="app-navigation__link"
         >
           {{ link.text }}
+          <div class="app-navigation__underline"></div>
+
+          <div v-if="link.sublinks" class="app-navigation__sublinks-wrapper_right">
+            <navigation-sublinks 
+              :sublinks="link.sublinks"
+              class="app-navigation__sublinks"
+            />
+          </div>
         </router-link>
       </div>
 
@@ -70,20 +86,72 @@
 </template>
 
 <script>
+
+import NavigationSublinks from '@/components/ui/NavigationSublinks.vue'
+
 export default {
+  components: {
+    NavigationSublinks,
+  },
   data() {
     return {
       mobileMenuIsOpened: false,
       leftSideLinks: [
         { text: 'ГОЛОВНА', routeName: 'home' },
-        { text: 'ПРО КОЛЕДЖ', routeName: 'about' },
-        { text: 'НАВЧАННЯ', routeName: 'study' },
-        { text: 'АБІТУРІЄНТУ', routeName: 'entrants' },
+        { 
+          text: 'ПРО КОЛЕДЖ', 
+          routeName: 'about', 
+          sublinks: [
+            { name: 'Історія', icon: 'history.svg', routeName: 'history' },
+            { name: 'Адміністрація', icon: 'manager.svg', routeName: 'administration' },
+            { name: 'Документація', icon: 'file.svg', routeName: 'documentation' },
+            { name: 'Галерея', icon: 'gallery.svg' },
+            { name: 'Діяльність', icon: 'education.svg', routeName: 'activity' },
+            { name: 'Гуртожиток', icon: 'sleep.svg', routeName: 'chummer' },
+          ],
+        },
+        { 
+          text: 'НАВЧАННЯ', 
+          routeName: 'study',
+          sublinks: [
+            { name: 'Циклові комісії', icon: 'meeting.svg', routeName: 'commissions' },
+            { name: 'Спеціальності', icon: 'network.svg', routeName: 'specialties' },
+            { name: 'Освітня програма', icon: 'files.svg', routeName: 'program' },
+          ],  
+        },
+        { 
+          text: 'АБІТУРІЄНТУ', 
+          routeName: 'entrants', 
+          sublinks: [
+            { name: 'Підготовчі курси', icon: 'homework.svg', routeName: 'courses' },
+            { name: 'Вступна кампанія', icon: 'doorway.svg', routeName: 'entrance' },
+          ],
+        },
       ],
       rightSideLinks: [
-        { text: 'СТУДЕНТУ', routeName: 'student' },
+        { 
+          text: 'СТУДЕНТУ', 
+          routeName: 'student',
+          sublinks: [
+            { name: 'Розклад навчання', icon: 'timetable.svg', routeName: 'schedule' },
+            { name: 'Екзамени', icon: 'test.svg', routeName: 'exam' },
+            { name: 'Практика', icon: 'work.svg', routeName: 'practice' },
+            { name: 'Консультації', icon: 'consalt.svg', routeName: 'consultation' },
+            { name: 'ЗНО', icon: 'thinking.svg', routeName: 'zno' },
+            { name: 'Стипендіальне забезпечення', icon: 'scholarship.svg', routeName: 'scholarship' },
+          ],
+        },
         { text: 'НОВИНИ', routeName: 'news' },
-        { text: 'БІБЛІОТЕКА', routeName: 'library' },
+        { 
+          text: 'БІБЛІОТЕКА', 
+          routeName: 'library',
+          sublinks: [
+            { name: 'Про бібліотеку', icon: 'library.svg', routeName: 'aboutLibrary' },
+            { name: 'Положення', icon: 'rules.svg', routeName: 'principle' },
+            { name: 'Правила користування', icon: 'file.svg', routeName: 'rules' },
+            { name: 'Електронні підручники', icon: 'ebooks.svg', routeName: 'ebooks' },
+          ],
+        },
         { text: 'КОНТАКТИ', routeName: 'contacts' },
       ],
     }
@@ -100,12 +168,15 @@ export default {
 
 .app-navigation {
   display: grid;
-  grid-template-areas: 'left logo right';
+  grid-template-areas: 
+  'left logo right';
   grid-template-columns: 1fr auto 1fr;
 
   padding: 20px 0;
 
   &__left {
+    margin-top: 15px;
+
     grid-area: left;
     display: flex;
     justify-content: flex-end;
@@ -113,6 +184,8 @@ export default {
   }
 
   &__right {
+    margin-top: 15px;
+
     grid-area: right;
     display: flex;
     justify-content: space-between;
@@ -121,6 +194,42 @@ export default {
 
   &__link {
     margin: 0 15px;
+    display: inline-block;
+
+    &:hover .app-navigation__sublinks {
+      visibility: visible;
+      opacity: 1;
+
+      transition: .3s;
+    }
+  }
+
+  &__sublinks-wrapper_right {
+    direction: rtl;
+  }
+
+  &__underline {
+    margin-top: 7px;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    display: block;
+    width: 0px;
+    height: 2px;
+    background: var(--color-accent-green);
+
+    transition: .3s;
+  }
+
+  &__link.router-link-exact-active {
+    
+    .app-navigation__underline {
+      width: 30px;
+
+      transition: .3s;
+    }
   }
 
   &__logo {
@@ -128,9 +237,10 @@ export default {
   }
 
   &__search-icon {
+    transform: translateY(-3px);
+
     cursor: pointer;
   }
-
 
   &__menu-toggle {
     display: none;

@@ -113,7 +113,6 @@ export default {
 
       z-index: 0;
       transform: translate(20px, 50px);
-      // margin-top: 30px;
 
       background: var(--color-accent-green);
     }
