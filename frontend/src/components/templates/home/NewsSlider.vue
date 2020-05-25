@@ -204,7 +204,12 @@ export default {
     transform: translateY(4px) rotate(180deg);
   }
 
-  @media screen and (max-width: 1195px) {
+  @media screen and (max-width: 576px) {
+    
+    &__control {
+      padding: 8px 20px !important;
+      transform: translate(-10px, -10px) !important;
+    }
 
     &__number {
       margin-right: 13px;

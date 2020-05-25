@@ -1,5 +1,5 @@
 <template>
-  <div class="news-mobile container">
+  <div class="news-mobile container home-section">
     <app-title
       class="news-mobile__title section-title"
       color="green"
@@ -46,8 +46,11 @@ export default {
   }
 
   &__slider {
-    width: 340px;
-    height: 235px;
+    width: 100%;
+    height: 350px; // for legacy browsers
+    height: calc(90vw / 16 * 10);
+    max-width: 600px;
+    max-height: 375px;
     
     transform: translateX(20px);
   }

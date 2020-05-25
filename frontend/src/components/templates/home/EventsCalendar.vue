@@ -297,6 +297,15 @@ export default {
     }
 
     &__day {
+      width: 10%;
+      height: 30px;
+
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    &__day {
       width: 30px;
       height: 30px;
 

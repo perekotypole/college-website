@@ -27,9 +27,11 @@
             :padding="[14, 28]"
             color="green"
             :slope="10"
+            class="header__button"
             >ПРО КОЛЕДЖ</app-button>
           <app-button
             :padding="[14, 28]"
+            class="header__button"
             >СПЕЦІАЛЬНОСТІ</app-button>
         </div>
       </div>
@@ -179,11 +181,28 @@ export default {
   }
 
   @media screen and (max-width: 1195px) {
-    padding-top: 0;
+    padding-top: 30px;
     margin-bottom: 50px;
 
     &__container {
       grid-template-columns: 1fr;
+    }
+
+    &__news {
+      display: none;
+    }
+
+  }
+
+  @media screen and (max-width: 576px) {
+    padding-top: 10px;
+
+    &__greeting {
+      font-size: 18px;
+    }
+
+    &__left {
+      margin-top: 10px;
     }
 
     .shadow {
@@ -191,23 +210,27 @@ export default {
     }
 
     &__place{
+      &-name {
+        margin-top: 12px;
+        margin-bottom: 15px;
+      }
 
       &-name-text {
-        font-size: 35px;
-        line-height: 1.1em;
+        font-size: 38px;
+        line-height: 48px;
       }
   
       &-lastname-text {
-        width: 90%;
+        font-size: 18px;
       }
     }
 
-    &__news {
-      display: none;
+    &__buttons{
+      font-size: 13px;
     }
 
-    &__buttons{
-      font-size: 12px;
+    &__button {
+      padding: 15px 26px !important; 
     }
   }
 }

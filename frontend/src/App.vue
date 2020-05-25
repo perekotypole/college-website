@@ -19,6 +19,8 @@ export default {
 * {
   outline: none;
   box-sizing: border-box;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 *,
@@ -165,7 +167,7 @@ input::-webkit-inner-spin-button {
 
 @media screen and (max-width: 1195px) {
   .container {
-    width: 340px;
+    width: 90%;
   }
 }
 
