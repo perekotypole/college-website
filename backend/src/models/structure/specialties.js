@@ -33,26 +33,29 @@ export default model('Specialty', new Schema({
     full: {
       type: Number,
       min: 0,
+      default: () => 0,
     },
     basic: {
       type: Number,
       min: 0,
+      default: () => 0,
     },
   },
   forms: {
     fulltime: {
       type: Boolean,
-      default: false,
+      default: () => false,
     },
     external: {
       type: Boolean,
-      default: false,
+      default: () => false,
     },
   },
   professions: {
     type: [String],
     trim: true,
     lowercase: true,
+    default: () => [],
   },
   description: {
     type: String,
