@@ -4,72 +4,87 @@ import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
   router.get('/commissions', async (req, res) => {
-    Commission.find()
-      .populate('leader')
-      .populate('members')
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          commissions: finded,
-        })
+    try {
+      const result = await Commission.find()
+        .populate('leader')
+        .populate('members')
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.post('/commission', verifyUser, async (req, res) => {
-    Commission.create(req.body)
-      .then((created) => {
-        res.json({
-          created: !!created,
-          commission: created,
-        })
+    const commission = req.body
+
+    try {
+      const result = await Commission.create(commission)
+
+      return res.json({
+        created: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.delete('/commission', verifyUser, async (req, res) => {
-    Commission.findByIdAndRemove(req.body.id)
-      .then((deleted) => {
-        res.json({
-          deleted: !!deleted,
-          commission: deleted,
-        })
+    const { id } = req.body
+
+    const query = Commission.findById(id)
+
+    try {
+      if (!await query) throw { msg: 'Commission is not found' }
+
+      const result = await query.findOneAndRemove({})
+
+      return res.json({
+        deleted: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.put('/commission', verifyUser, async (req, res) => {
-    Commission.findByIdAndUpdate(req.body.id,
-      {
-        name: req.body.name,
-        icon: req.body.icon,
-        description: req.body.description,
-        leader: req.body.leader,
-        members: req.body.members,
+    const commission = req.body
+
+    const query = Commission.findById(commission.id)
+
+    try {
+      if (!await query) throw { msg: 'Commission is not found' }
+
+      const result = await query.findOneAndUpdate({}, commission)
+
+      return res.json({
+        updated: !!result,
+        news: result,
       })
-      .then((updated) => {
-        res.json({
-          updated: !!updated,
-          commission: updated,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
-      })
+    }
   })
 
   // router.get('/commission', async (req, res) => {

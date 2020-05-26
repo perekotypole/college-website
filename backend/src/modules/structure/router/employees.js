@@ -5,74 +5,85 @@ import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
   router.get('/admins', async (req, res) => {
-    Employee.find({ administration: true })
-      .populate({ path: 'photo', model: Image })
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          teachers: finded,
-        })
+    try {
+      const result = await Employee.find({ administration: true })
+        .populate({ path: 'photo', model: Image })
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.post('/teacher', verifyUser, async (req, res) => {
-    Employee.create(req.body)
-      .then((created) => {
-        res.json({
-          created: !!created,
-          teacher: created,
-        })
+    const teacher = req.body
+
+    try {
+      const result = await Employee.create(teacher)
+
+      return res.json({
+        created: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.delete('/teacher', verifyUser, async (req, res) => {
-    Employee.findByIdAndRemove(req.body.id)
-      .then((deleted) => {
-        res.json({
-          deleted: !!deleted,
-          teacher: deleted,
-        })
+    const { id } = req.body
+
+    const query = Employee.findById(id)
+
+    try {
+      if (!await query) throw { msg: 'Teacher is not found' }
+
+      const result = await query.findOneAndRemove({})
+
+      return res.json({
+        deleted: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.put('/teacher', verifyUser, async (req, res) => {
-    Employee.findByIdAndUpdate(req.body.id,
-      {
-        name: req.body.name,
-        works: req.body.works,
-        administration: req.body.administration,
-        contacts: {
-          phone: req.body.contacts.phone,
-          email: req.body.contacts.email,
-        },
-        achievement: req.body.achievement,
-        photo: req.body.photo,
+    const teacher = req.body
+
+    const query = Employee.findById(teacher.id)
+
+    try {
+      if (!await query) throw { msg: 'Teacher is not found' }
+
+      const result = await query.findOneAndUpdate({}, teacher)
+
+      return res.json({
+        updated: !!result,
+        news: result,
       })
-      .then((updated) => {
-        res.json({
-          updated: !!updated,
-          teacher: updated,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
-      })
+    }
   })
 }

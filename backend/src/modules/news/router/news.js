@@ -6,174 +6,198 @@ import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
   router.get('/list', async (req, res) => {
-    const query = News.find().sort('-publicationDate')
+    try {
+      const query = News.find().sort('-publicationDate')
 
-    if (req.body.tag) query.where({ mainTag: req.body.tag })
-    if (req.body.date) {
-      query.$where(`
-        this.publicationDate >= ${req.body.date.from ? Date.parse(req.body.date.from) : Date.parse('2000-01-01')} &&
-        this.publicationDate <= ${req.body.date.to ? Date.parse(req.body.date.to) : Date.now()}
-      `)
+      if (req.body.tag) query.where({ mainTag: req.body.tag })
+      if (req.body.date) {
+        query.$where(`
+          this.publicationDate >= ${req.body.date.from ? Date.parse(req.body.date.from) : Date.parse('2000-01-01')} &&
+          this.publicationDate <= ${req.body.date.to ? Date.parse(req.body.date.to) : Date.now()}
+        `)
+      }
+
+      const result = await query
+        .skip((req.body.page - 1) * req.body.number)
+        .limit(req.body.number)
+        .populate({ path: 'mainTag', model: Tag })
+        .populate({ path: 'mainImage', model: Image })
+        .select('-text -imagesList -documentsList')
+
+      return res.json({
+        finded: !!result,
+        news: result,
+      })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
+      })
     }
-
-    query
-      .skip((req.body.page - 1) * req.body.number)
-      .limit(req.body.number)
-      .populate({ path: 'mainTag', model: Tag })
-      .populate({ path: 'mainImage', model: Image })
-      .select('-text -imagesList -documentsList')
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          news: finded,
-        })
-      })
-      .catch((error) => {
-        res.json({
-          error,
-        })
-      })
   })
 
   router.get('/slider', async (req, res) => {
-    News.find()
-      .sort('-publicationDate')
-      .limit(req.body.number)
-      .populate({ path: 'mainTag', model: Tag })
-      .populate({ path: 'mainImage', model: Image })
-      .select('-text -imagesList -documentsList')
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          news: finded,
-        })
+    const { number } = req.body
+
+    try {
+      const result = await News.find()
+        .sort('-publicationDate')
+        .limit(number)
+        .populate({ path: 'mainTag', model: Tag })
+        .populate({ path: 'mainImage', model: Image })
+        .select('-text -imagesList -documentsList')
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.get('/events', async (req, res) => {
     const date = new Date(req.body.date)
 
-    News.find({ eventDate: { $exists: true } })
-      .sort('-eventDate')
-      .$where(`
-        this.eventDate.getFullYear() === ${date.getFullYear()} &&
-        this.eventDate.getMonth() === ${date.getMonth()}
-      `)
-      .populate({ path: 'mainTag', model: Tag })
-      .populate({ path: 'mainImage', model: Image })
-      .select('-text -imagesList -documentsList')
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          news: finded,
-        })
+    try {
+      const result = await News.find({ eventDate: { $exists: true } })
+        .sort('-eventDate')
+        .$where(`
+          this.eventDate.getFullYear() === ${date.getFullYear()} &&
+          this.eventDate.getMonth() === ${date.getMonth()}
+        `)
+        .populate({ path: 'mainTag', model: Tag })
+        .populate({ path: 'mainImage', model: Image })
+        .select('-text -imagesList -documentsList')
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.get('/:id', async (req, res) => {
-    News.findById(req.params.id)
-      .populate({ path: 'mainTag', model: Tag })
-      .populate({ path: 'mainImage', model: Image })
-      .populate({ path: 'imageList', model: Image })
-      .populate('documentList')
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          news: finded,
-        })
+    const { id } = req.params.id
+
+    try {
+      const result = await News.findById(id)
+        .populate({ path: 'mainTag', model: Tag })
+        .populate({ path: 'mainImage', model: Image })
+        .populate({ path: 'imageList', model: Image })
+        .populate('documentList')
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.get('/byOptionalTags', async (req, res) => {
-    News.find({ optionalTags: { $in: req.body.tags } })
-      .sort('-publicationDate')
-      .skip((req.body.page - 1) * req.body.number)
-      .limit(req.body.number)
-      .populate({ path: 'mainTag', model: Tag })
-      .populate({ path: 'mainImage', model: Image })
-      .select('-text -imagesList -documentsList')
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          news: finded,
-        })
+    const { tags, page, number } = req.body
+
+    try {
+      const result = await News.find({ optionalTags: { $in: tags } })
+        .sort('-publicationDate')
+        .skip((page - 1) * number)
+        .limit(number)
+        .populate({ path: 'mainTag', model: Tag })
+        .populate({ path: 'mainImage', model: Image })
+        .select('-text -imagesList -documentsList')
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.post('/', verifyUser, async (req, res) => {
-    News.create(req.body)
-      .then((created) => {
-        res.json({
-          created: !!created,
-          news: created,
-        })
+    const news = req.body
+
+    try {
+      const result = await News.create(news)
+
+      return res.json({
+        created: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.delete('/', verifyUser, async (req, res) => {
-    News.findOneAndDelete(req.body.id)
-      .then((deleted) => {
-        res.json({
-          deleted: !!deleted,
-          news: deleted,
-        })
+    const { id } = req.body
+
+    const query = News.findById(id)
+
+    try {
+      if (!await query) throw { msg: 'News is not found' }
+
+      const result = await query.findOneAndRemove({})
+
+      return res.json({
+        deleted: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.put('/', verifyUser, async (req, res) => {
-    News.findOneAndUpdate(req.body.id,
-      {
-        title: req.body.title,
-        description: req.body.description,
-        mainTag: req.body.mainTag,
-        optionalTags: req.body.optionalTags,
-        mainImage: req.body.mainImage,
-        imagesList: req.body.imagesList,
-        eventDate: req.body.eventDate,
-        avdert: req.body.avdert,
-        text: req.body.text,
-        documentsList: req.body.documentsList,
+    const news = req.body
+
+    const query = News.findById(news.id)
+
+    try {
+      if (!await query) throw { msg: 'News is not found' }
+
+      const result = await query.findOneAndUpdate({}, news)
+
+      return res.json({
+        updated: !!result,
+        news: result,
       })
-      .then((updated) => {
-        res.json({
-          updated: !!updated,
-          news: updated,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
-      })
+    }
   })
 }

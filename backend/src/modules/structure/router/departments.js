@@ -4,54 +4,68 @@ import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
   router.post('/department', verifyUser, async (req, res) => {
-    Departments.create(req.body)
-      .then((created) => {
-        res.json({
-          created: !!created,
-          department: created,
-        })
+    const department = req.body
+
+    try {
+      const result = await Departments.create(department)
+
+      return res.json({
+        created: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.delete('/department', verifyUser, async (req, res) => {
-    Departments.findByIdAndRemove(req.body.id)
-      .then((deleted) => {
-        res.json({
-          deleted: !!deleted,
-          department: deleted,
-        })
+    const { id } = req.body
+
+    const query = Departments.findById(id)
+
+    try {
+      if (!await query) throw { msg: 'Department is not found' }
+
+      const result = await query.findOneAndRemove({})
+
+      return res.json({
+        deleted: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.put('/department', verifyUser, async (req, res) => {
-    Departments.findByIdAndUpdate(req.body.id,
-      {
-        name: req.body.name,
-        description: req.body.description,
-        leader: req.body.leader,
-        specialties: req.body.members,
+    const department = req.body
+
+    const query = Departments.findById(department.id)
+
+    try {
+      if (!await query) throw { msg: 'Department is not found' }
+
+      const result = await query.findOneAndUpdate({}, department)
+
+      return res.json({
+        updated: !!result,
+        news: result,
       })
-      .then((updated) => {
-        res.json({
-          updated: !!updated,
-          department: updated,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
-      })
+    }
   })
 
   // router.get('/department', async (req, res) => {

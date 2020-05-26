@@ -5,98 +5,116 @@ import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
   router.get('/specialties', async (req, res) => {
-    Departments.find()
-      .populate({ path: 'leader' })
-      .populate({ path: 'specialties', model: Specialties })
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          departments: finded,
-        })
+    try {
+      const result = await Departments.find()
+        .populate({ path: 'leader' })
+        .populate({ path: 'specialties', model: Specialties })
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.post('/specialty', verifyUser, async (req, res) => {
-    Specialties.deleteMany({}).exec()
+    const specialty = req.body
 
-    Specialties.create(req.body)
-      .then((created) => {
-        Departments.findByIdAndUpdate(created.department,
-          { $push: { specialties: created.id } }).exec()
+    try {
+      const result = await Specialties.create(specialty)
 
-        return res.json({
-          created: !!created,
-          specialty: created,
-        })
+      if (result) {
+        Departments.findByIdAndUpdate(specialty.department,
+          { $push: { specialties: specialty.id } }).exec()
+      }
+
+      return res.json({
+        created: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.delete('/specialty', verifyUser, async (req, res) => {
-    Specialties.findByIdAndRemove(req.body.id)
-      .then((deleted) => {
-        Departments.findByIdAndUpdate(deleted.department,
-          { $pull: { specialties: deleted.id } }).exec()
+    const { id } = req.body
 
-        return res.json({
-          deleted: !!deleted,
-          specialty: deleted,
-        })
+    const specialtyQuery = Specialties.findById(id)
+
+    try {
+      if (!await specialtyQuery) throw { msg: 'Specialty is not found' }
+
+      const specialty = await specialtyQuery
+
+      if (specialty.department) {
+        const departmentQuery = Departments.findById(specialty.department)
+
+        if (!await departmentQuery) throw { msg: 'Department is not found' }
+
+        if (!await departmentQuery.findOneAndUpdate({}, { $pull: { specialties: id } })) {
+          throw { msg: 'Specialty cannot be deleted' }
+        }
+      }
+
+      const result = await specialtyQuery.findOneAndRemove({})
+
+      return res.json({
+        deleted: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.put('/specialty', verifyUser, async (req, res) => {
-    Specialties.findByIdAndUpdate(req.body.id,
-      {
-        code: req.body.code,
-        name: req.body.name,
-        icon: req.body.icon,
-        department: req.body.department,
-        qualification: req.body.qualification,
-        // terms: {
-        //   full: req.body.terms.full,
-        //   basic: req.body.terms.basic,
-        // },
-        // forms: {
-        //   fulltime: req.body.forms.fulltime,
-        //   external: req.body.forms.external,
-        // },
-        professions: req.body.professions,
-        description: req.body.description,
-      })
-      .then((updated) => {
-        if (req.body.department && !(updated.department.equals(req.body.department))) {
-          Departments.findByIdAndUpdate(req.body.department,
-            { $push: { specialties: updated.id } }).exec()
+    const specialty = req.body
 
-          Departments.findByIdAndUpdate(updated.department,
-            { $pull: { specialties: updated.id } }).exec()
-        }
+    const specialtyQuery = Specialties.findById(specialty.id)
 
-        return res.json({
-          updated: !!updated,
-          specialty: updated,
-          check: (updated.department.equals(req.body.department)),
-        })
+    try {
+      if (!await specialtyQuery) throw { msg: 'Specialty is not found' }
+
+      const oldSpecialty = await specialtyQuery
+
+      if (specialty.department) {
+        const departmentQuery = Departments.findById(specialty.department)
+
+        if (!await departmentQuery) throw { msg: 'Department is not found' }
+
+        await departmentQuery.findOneAndUpdate({},
+          { $push: { specialties: specialty.id } })
+        await Departments.findByIdAndUpdate(oldSpecialty.department,
+          { $pull: { specialties: specialty.id } })
+      }
+
+      const result = await specialtyQuery.findOneAndUpdate({}, specialty)
+
+      return res.json({
+        updated: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 }

@@ -1,54 +1,91 @@
 import Tag from '../../../models/news/tags'
+import News from '../../../models/news/news'
 
 import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
   router.get('/tags', async (req, res) => {
-    Tag.find()
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          tags: finded,
-        })
+    try {
+      const result = await Tag.find()
+
+      return res.json({
+        finded: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
   })
 
   router.post('/tag', verifyUser, async (req, res) => {
-    Tag.create(req.body)
-      .then((finded) => {
-        res.json({
-          finded: !!finded,
-          tag: finded,
-        })
+    const tag = req.body
+
+    try {
+      const result = await Tag.create(tag)
+
+      return res.json({
+        created: !!result,
+        news: result,
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
+    }
+  })
+
+  router.delete('/tag', verifyUser, async (req, res) => {
+    const { id } = req.body
+
+    const query = Tag.findById(id)
+
+    try {
+      if (!await query) throw { msg: 'Tag is not found' }
+
+      if (await News.findOne({ mainTag: id })) throw { msg: 'Tag cannot be deleted' }
+
+      const result = await query.findOneAndRemove({})
+
+      return res.json({
+        deleted: !!result,
+        news: result,
+      })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
+      })
+    }
   })
 
   router.put('/tag', verifyUser, async (req, res) => {
-    Tag.findByIdAndUpdate(req.body.id,
-      {
-        name: req.body.name,
+    const tag = req.body
+
+    const query = Tag.findById(tag.id)
+
+    try {
+      if (!await query) throw { msg: 'Tag is not found' }
+
+      const result = await query.findOneAndUpdate({}, tag)
+
+      return res.json({
+        updated: !!result,
+        news: result,
       })
-      .then((updated) => {
-        res.json({
-          updated: !!updated,
-          tag: updated,
-        })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
-      .catch((error) => {
-        res.json({
-          error,
-        })
-      })
+    }
   })
 
   // router.post('/tag', async (req, res) => {

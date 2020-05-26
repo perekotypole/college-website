@@ -2,7 +2,7 @@ import uuid from 'uuid/v1'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-import { hash, token } from '../../configs/auth'
+import { /* hash, */ token } from '../../configs/auth'
 
 import Admin from '../../models/auth/admin'
 import RefreshToken from '../../models/auth/token'
@@ -19,7 +19,7 @@ async function generateToken(userID) {
   const accessToken = await jwt.sign(
     { userID },
     token.access.secret,
-    { expiresIn: `${token.access.time}m`}
+    { expiresIn: `${token.access.time}m` },
   )
 
   return {
@@ -84,7 +84,7 @@ export default (router) => {
     }
 
     const deactivate = await RefreshToken.findOneAndDelete({ value: req.body.token })
-    
+
     if (!deactivate) {
       return res.json({
         error: 'Token is not valida',
@@ -106,13 +106,13 @@ export default (router) => {
     }
 
     const deactivate = await RefreshToken.findOneAndDelete({ value: req.body.token })
-    
+
     if (!deactivate) {
       return res.json({
         error: 'Token is not valida',
       })
     }
-    
+
     const tokens = await generateToken(admin._id)
 
     return res.json({
