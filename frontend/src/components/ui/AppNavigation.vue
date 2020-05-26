@@ -161,6 +161,15 @@ export default {
       this.$router.push({ name })
     },
   },
+  watch: {
+    mobileMenuIsOpened() {
+      if (this.mobileMenuIsOpened) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = 'auto'
+      }
+    },
+  },
 }
 </script>
 
@@ -316,6 +325,8 @@ export default {
     .mobile-menu {
       display: block;
 
+      overflow: hidden;
+
       position: fixed;
       top: 0;
       left: -100%;
@@ -372,8 +383,14 @@ export default {
     &__menu-toggle {
       display: block;
       position: absolute;
+
+      transform: translateY(-7px);
     }
 
+    &__search-icon {
+      height: 24px;
+      transform: translateY(-7px);
+    }
   }
 }
 

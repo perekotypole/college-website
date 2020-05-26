@@ -53,7 +53,17 @@ export default {
 
   @media screen and (max-width: 1195px) {
     .home__section {
+      margin-bottom: 90px;
+    }
+
+    .section-title {
       margin-bottom: 50px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .home__section {
+      margin-bottom: 80px;
     }
   }
 }

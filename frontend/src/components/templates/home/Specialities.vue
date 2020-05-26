@@ -188,7 +188,6 @@ export default {
   }
 
   &__column {
-    max-width: 357px;
 
     &-title {
       font-size: 20px;
@@ -215,13 +214,18 @@ export default {
 
   @media screen and (max-width: 1195px) {
 
+    &__content {
+      display: block;
+      width: 100%;
+    }
+
     &__top{
       flex-direction: column;
+      margin-bottom: 30px;
     }
 
     &__marking {
-      margin-top: 40px;
-      margin-bottom: 20px;
+      margin-bottom: 0px;
 
       &-item {
         margin-left: 0;
@@ -232,11 +236,8 @@ export default {
       }
     }
 
-    &__content {
-      display: block;
-    }
-
     &__column {
+      width: 100%;
 
       &-title {
         display: grid;

@@ -96,6 +96,7 @@ export default {
     
     &__line {
       font-size: 16px;
+      max-width: 500px;
     }
   }
 
