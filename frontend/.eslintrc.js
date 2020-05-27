@@ -23,5 +23,6 @@ module.exports = {
     'arrow-body-style': 'off',
     'no-unused-vars': 'off',
     'no-param-reassign': 'off',
+    'global-require': 'off',
   },
 }

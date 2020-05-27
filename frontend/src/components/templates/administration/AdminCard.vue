@@ -10,15 +10,23 @@
     <div class="info">
       <div
         class="place"
-      >{{place}}</div>
+      ><span v-for="(element, index) in place"
+          :key="index" class="item">
+          {{ element }}
+        </span>
+      </div>
 
       <div class="base">
         <div class="name">{{name}}</div>
 
         <div
-          v-if="description"
+          v-if="description.length"
           class="description"
-        >{{description}}</div>
+        ><span v-for="(element, index) in description"
+            :key="index" class="item">
+            {{ element }}
+          </span>
+        </div>
       </div>
 
       <div class="contact">
@@ -66,7 +74,7 @@ export default {
       required: true,
     },
     place: {
-      type: String,
+      type: [String, Array],
       required: true,
     },
     phone: {
@@ -80,7 +88,7 @@ export default {
       default: () => '',
     },
     description: {
-      type: String,
+      type: [String, Array],
       required: false,
       default: () => '',
     },
@@ -96,6 +104,10 @@ export default {
 
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.06);
     padding: 20px;
+
+    .item + .item:before {
+      content: ", ";
+    }
 
     .image {
       width: 200px;
