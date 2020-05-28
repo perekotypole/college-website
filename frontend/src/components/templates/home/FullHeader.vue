@@ -233,6 +233,34 @@ export default {
       padding: 15px 26px !important;
     }
   }
+
+  
+  @media screen and (max-width: 576px) {
+    &__greeting {
+      font-size: 14px;
+    }
+
+    &__place {
+      &-name {
+        margin-top: 12px;
+        margin-bottom: 15px;
+      }
+
+      &-name-text {
+        font-size: 34px;
+        line-height: 36px;
+      }
+  
+      &-lastname-text {
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+
+    &__buttons{
+      font-size: 11px;
+    }
+  }
 }
 
 </style>

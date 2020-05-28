@@ -183,8 +183,8 @@ export default {
   }
 
   &__content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   &__column {
