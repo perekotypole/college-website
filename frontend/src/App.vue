@@ -154,7 +154,7 @@ input::-webkit-inner-spin-button {
 }
 
 .section-lv-3 {
-  
+
   &__title {
     font-size: 14px;
     text-transform: uppercase;

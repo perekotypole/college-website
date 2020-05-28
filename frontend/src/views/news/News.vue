@@ -1,14 +1,14 @@
 <template>
   <div class="app-news">
-    <app-pagename 
-      name="Новини" 
+    <app-pagename
+      name="Новини"
       routeWay="Головна >> Новини">
     </app-pagename>
 
     <news-filters class="app-news__filters"/>
 
     <div class="app-news__list container">
-      <app-news 
+      <app-news
         class="app-news__item"
         v-for="item in newsToShow"
         :key="item.id"
@@ -17,19 +17,19 @@
         :image="item.image"
         :category="item.category"
         :pubDate="item.pubDate"
-      /> 
+      />
     </div>
 
     <div class="app-news__view-settings view-settings">
       <div class="view-settings__sort view-settings__item">
         <span class="view-settings__title">Сортування:</span>
-        <app-select 
+        <app-select
           :slope="4"
           :items="['зверху нові', 'зверху старі']"
         />
       </div>
 
-      <app-pagination 
+      <app-pagination
         :count="news.length"
         :pageLength="5"
         :changePageHandler="changePageHandler"
@@ -37,7 +37,7 @@
 
       <div class="view-settings__show-count view-settings__item">
         <span class="view-settings__title">Показати:</span>
-        <app-select 
+        <app-select
           :slope="4"
           :items="[5, 10, 20]"
         />
@@ -49,13 +49,13 @@
 <script>
 
 import AppPagename from '@/components/ui/AppPagename.vue'
-import AppNews from '@/components/ui/AppNews.vue' 
+import AppNews from '@/components/ui/AppNews.vue'
 import AppPagination from '@/components/ui/AppPagination.vue'
 import AppSelect from '@/components/ui/AppSelect.vue'
 
 import NewsFilters from '@/components/templates/news/NewsFilters.vue'
 
-let news = []
+const news = []
 for (let i = 0; i < 50; i++) {
   news.push({
     id: i,

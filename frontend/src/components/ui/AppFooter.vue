@@ -37,10 +37,10 @@
         <div class="footer__navigation">
             <div
               v-for="(col, index) in sitemap"
-              :key="index" 
+              :key="index"
               class="footer__navigation-column"
             >
-                <AppTitle 
+                <AppTitle
                     class="footer__navigation-title"
                     color="green"
                     :padding="[5, 19]"
@@ -50,7 +50,7 @@
                     {{ col.title }}
                 </AppTitle>
                 <ul class="footer__navigation-links">
-                    <li 
+                    <li
                       class="footer__navigation-link"
                       v-for="(link, index) in col.links"
                       :key="index"
@@ -156,7 +156,7 @@ export default {
 
     &-title {
       margin-bottom: 20px;
-    } 
+    }
 
     &-link {
       margin-bottom: 15px;

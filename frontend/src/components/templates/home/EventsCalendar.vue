@@ -31,17 +31,17 @@
             >{{ dayName }}</div>
           </div>
           <div class="calendar__days">
-            <div 
+            <div
               class="calendar__days-row"
               v-for="(row, index) in month"
               :key="index"
             >
-              <div 
+              <div
                 class="calendar__day"
                 v-for="(day, index) in row"
                 :key="index"
-                :style="day.number && { background: day.empty ? 
-                  `var(--color-accent-yellow)` : 
+                :style="day.number && { background: day.empty ?
+                  `var(--color-accent-yellow)` :
                   `var(--color-accent-green)` }"
               >
                 {{ day.number }}
@@ -57,7 +57,7 @@
             <span class="calendar__news-slider-counter_current">{{ currentNewsSlide + 1 | addZero }}</span>
             /{{ news.length | addZero }}
           </div>
-          <NewsSlider 
+          <NewsSlider
             class="calendar__news-slider"
             sliderId="newsSliderCalendar"
             :onSlideChange="currentSlideUpdate"
@@ -93,57 +93,57 @@ export default {
     dayNames: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'],
     month: [
       [
-        { number: '' }, 
-        { number: '' }, 
-        { number: '' }, 
-        { number: '' }, 
-        { number: '' }, 
-        { number: '' }, 
+        { number: '' },
+        { number: '' },
+        { number: '' },
+        { number: '' },
+        { number: '' },
+        { number: '' },
         { number: '01', empty: true },
       ],
       [
-        { number: '02', empty: true }, 
-        { number: '03', empty: false }, 
-        { number: '04', empty: true }, 
-        { number: '05', empty: true }, 
-        { number: '06', empty: true }, 
-        { number: '07', empty: true }, 
+        { number: '02', empty: true },
+        { number: '03', empty: false },
+        { number: '04', empty: true },
+        { number: '05', empty: true },
+        { number: '06', empty: true },
+        { number: '07', empty: true },
         { number: '08', empty: true },
       ],
       [
-        { number: '09', empty: true }, 
-        { number: '10', empty: true }, 
-        { number: '11', empty: true }, 
-        { number: '12', empty: true }, 
-        { number: '13', empty: true }, 
-        { number: '14', empty: false }, 
+        { number: '09', empty: true },
+        { number: '10', empty: true },
+        { number: '11', empty: true },
+        { number: '12', empty: true },
+        { number: '13', empty: true },
+        { number: '14', empty: false },
         { number: '15', empty: true },
       ],
       [
-        { number: '16', empty: true }, 
-        { number: '17', empty: true }, 
-        { number: '18', empty: true }, 
-        { number: '19', empty: false }, 
-        { number: '20', empty: true }, 
-        { number: '21', empty: true }, 
+        { number: '16', empty: true },
+        { number: '17', empty: true },
+        { number: '18', empty: true },
+        { number: '19', empty: false },
+        { number: '20', empty: true },
+        { number: '21', empty: true },
         { number: '22', empty: true },
       ],
       [
-        { number: '23', empty: true }, 
-        { number: '24', empty: true }, 
-        { number: '25', empty: true }, 
-        { number: '26', empty: true }, 
-        { number: '27', empty: true }, 
-        { number: '28', empty: true }, 
+        { number: '23', empty: true },
+        { number: '24', empty: true },
+        { number: '25', empty: true },
+        { number: '26', empty: true },
+        { number: '27', empty: true },
+        { number: '28', empty: true },
         { number: '29', empty: true },
       ],
       [
-        { number: '30', empty: false }, 
-        { number: '31', empty: true }, 
-        { number: '' }, 
-        { number: '' }, 
-        { number: '' }, 
-        { number: '' }, 
+        { number: '30', empty: false },
+        { number: '31', empty: true },
+        { number: '' },
+        { number: '' },
+        { number: '' },
+        { number: '' },
         { number: '' },
       ],
     ],
@@ -191,7 +191,7 @@ export default {
     margin-top: 5px;
   }
 
-  // Content 
+  // Content
 
   &__day-names {
     margin-top: 30px;
@@ -233,7 +233,7 @@ export default {
     cursor: pointer;
   }
 
-  // Right 
+  // Right
 
   &__right {
     height: 505px;

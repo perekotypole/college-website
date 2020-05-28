@@ -40,9 +40,7 @@ export default {
       type: String,
       required: false,
       default: 'small',
-      validator: (value) => {
-        return ['small', 'big'].indexOf(value) !== -1
-      },
+      validator: (value) => ['small', 'big'].indexOf(value) !== -1,
     },
   },
 }

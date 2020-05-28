@@ -17,7 +17,6 @@ export default {
 
   actions: {
     loadAdmins({ commit }) {
-      console.log("require('../../public/data/administration.json')")
       commit('setAdmins', require('../../public/data/administration.json'))
     },
   },

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es' 
+import anime from 'animejs/lib/anime.es'
 
 export default {
   props: {

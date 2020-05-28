@@ -16,8 +16,8 @@
     </div>
     <div class="courses-info__right">
       <p class="courses-info__text">
-        Запис на курси проводиться в 
-        <span class="courses-info__bold">каб. 208</span> 
+        Запис на курси проводиться в
+        <span class="courses-info__bold">каб. 208</span>
         (приймальня директора). Додаткову інформацію можна отримати за телефонами:
       </p>
       <p class="courses-info__numbers">(03433) 5-03-39 <br> 4-77-26</p>
@@ -93,7 +93,7 @@ export default {
 
   @media screen and (max-width: 1195px) {
     display: block;
-    
+
     &__line {
       font-size: 16px;
       max-width: 500px;

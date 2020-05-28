@@ -5,18 +5,18 @@
       <div class="schedule-lesson__name">{{ name }}</div>
 
       <div class="schedule-lesson__toggle">
-        <img 
-          class="schedule-lesson__toggle-icon" 
+        <img
+          class="schedule-lesson__toggle-icon"
           :class="{'schedule-lesson__toggle-icon_up': opened}"
           src="@/assets/icons/chevron-top.svg" alt="more">
       </div>
     </div>
-    
-    <div 
+
+    <div
       class="schedule-lesson__content"
       v-show="opened"
     >
-      <div 
+      <div
         class="schedule-lesson__audience"
         v-for="(audience, i) in audiences"
         :key="i"
@@ -24,7 +24,7 @@
         <div class="schedule-lesson__audience-number">{{ audience.number }}</div>
         <div class="schedule-lesson__teacher-name">{{ audience.teacherName }}</div>
       </div>
-    </div>    
+    </div>
   </div>
 </template>
 
@@ -91,7 +91,7 @@ export default {
   }
 
   &__name {
-    padding: 12px 13px; 
+    padding: 12px 13px;
 
     font-size: 14px;
     font-weight: 700;
@@ -108,7 +108,7 @@ export default {
     transform: rotate(180deg);
     width: 14px;
     transition: .3s;
-    
+
     &_up {
       transform: rotate(0deg);
       transition: .3s;

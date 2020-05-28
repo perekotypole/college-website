@@ -1,7 +1,7 @@
 <template>
   <div class="sections-list container">
       <template v-if="type === 'outer'">
-        <div 
+        <div
           class="sections"
           :class="{'sections_big': cardSize === 'big'}"
         >
@@ -17,9 +17,9 @@
           ></app-section>
         </div>
       </template>
-      
+
       <template v-else>
-        <div 
+        <div
           class="sections sections_inner"
           :class="{'sections_big': cardSize === 'big'}"
         >
@@ -56,9 +56,7 @@ export default {
       type: String,
       required: false,
       default: 'outer',
-      validator: (value) => {
-        return ['outer', 'inner'].indexOf(value) !== -1
-      },
+      validator: (value) => ['outer', 'inner'].indexOf(value) !== -1,
     },
     cardSize: {
       type: String,
@@ -70,12 +68,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.sections-list {  
+.sections-list {
 
   .sections {
     margin: 0 auto;
     width: fit-content;
-    
+
     display: flex;
     flex-wrap: wrap;
 

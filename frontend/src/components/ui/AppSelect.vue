@@ -1,6 +1,6 @@
 <template>
   <div class="select">
-    <div 
+    <div
       v-click-outside="() => { opened = false }"
       class="select__current"
       :style="{
@@ -12,15 +12,15 @@
       <span class="select__curent-text">{{ items[active] }}</span>
       <img class="select__arrow-icon" src="@/assets/icons/up-arrow.svg" alt="arrow icon">
     </div>
-    <div 
+    <div
       class="select__list"
       :class="{'select__list_opened': opened}"
     >
-      <span 
+      <span
         class="select__item"
         v-for="(item, i) in items"
         :key="i"
-        :style="{ 
+        :style="{
           'minWidth': `${minWidth}px`,
         }"
         v-show="i !== active"
@@ -46,14 +46,14 @@ export default {
       required: true,
     },
     minWidth: {
-      type: Number, 
+      type: Number,
       required: false,
     },
   },
   data: () => ({
     opened: false,
     active: 0,
-  }), 
+  }),
   directives: {
     ClickOutside,
   },
@@ -103,7 +103,7 @@ export default {
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
 
     transform: scale(0.5);
-    
+
     transition: .1s;
 
     &_opened {

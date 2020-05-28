@@ -1,6 +1,6 @@
 <template>
   <div @click="scrollTo(elementId)" class="app-section">
-    <div 
+    <div
       class="section-card"
       :class="{'section-card_big': size === 'big'}"
     >
@@ -39,9 +39,7 @@ export default {
       type: String,
       required: false,
       default: 'small',
-      validator: (value) => {
-        return ['small', 'big'].indexOf(value) !== -1
-      },
+      validator: (value) => ['small', 'big'].indexOf(value) !== -1,
     },
   },
   methods: {
@@ -50,8 +48,8 @@ export default {
       console.log(this.$props.size)
 
       window.scroll({
-        left: 0, 
-        top: target.offsetTop - 20, 
+        left: 0,
+        top: target.offsetTop - 20,
         behavior: 'smooth',
       })
     },

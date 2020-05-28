@@ -41,7 +41,7 @@ export default {
     icon: {
       type: String,
       required: true,
-    }, 
+    },
     number: {
       type: String,
       required: true,
@@ -73,7 +73,7 @@ export default {
 
 .specialities-card {
   width: 357px;
- 
+
   position: relative;
   perspective: 1000px;
 

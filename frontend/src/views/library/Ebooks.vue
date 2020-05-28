@@ -129,7 +129,7 @@ export default {
   @media screen and (max-width: 1195px) {
     &__content{
       display: block;
-    } 
+    }
 
     &__item{
       margin-top: 40px;

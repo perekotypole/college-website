@@ -8,12 +8,12 @@
     <div class="app-program__content container">
       <document-link
         link="http://kpk-lp.com.ua/wp-content/uploads/2019/09/%D0%9E%D1%81%D0%B2%D1%96%D1%82%D0%BD%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0.pdf">
-        Освітня програма - профільної середньої освіти для 
-        підготовки молодших спеціалістів на основі базової 
+        Освітня програма - профільної середньої освіти для
+        підготовки молодших спеціалістів на основі базової
         загальної середньої освіти
       </document-link>
 
-      <specialities 
+      <specialities
         :title="false"
         :courses="false"/>
 
@@ -149,7 +149,7 @@ export default {
 
   &__spec{
     margin-top: 40px;
-    
+
     &-name{
       font-size: 22px;
     }

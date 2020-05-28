@@ -1,13 +1,13 @@
-<template>  
+<template>
   <div :id="sliderId" class="news-slider">
     <div class="swiper-container">
 
       <div class="swiper-wrapper">
-        <div 
-          class="swiper-slide news-slider__item" 
+        <div
+          class="swiper-slide news-slider__item"
           :class="{'news-slider__item_with-category': showCategory}"
           v-for="({title, link, category}, i) in slides" :key="i"
-        > 
+        >
           <app-title
             v-if="showCategory"
             class="news-slider__category"
@@ -16,13 +16,13 @@
             :slope="7"
           >{{ category }}</app-title>
 
-          <div 
+          <div
             class="news-slider__photo"
             :style="{
               background: `url('${link}') no-repeat`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-            }"  
+            }"
           >
           </div>
 
@@ -54,11 +54,11 @@ import AppTitle from '../../ui/AppTitle.vue'
 
 export default {
   components: {
-    AppTitle, 
+    AppTitle,
   },
   props: {
     slides: {
-      type: Array, 
+      type: Array,
       required: true,
     },
     sliderId: {
@@ -84,7 +84,7 @@ export default {
   mounted() {
     const { sliderId, onSlideChange, slides } = this.$props
 
-    let swiper = new Swiper('.swiper-container', {
+    const swiper = new Swiper('.swiper-container', {
       effect: 'coverflow',
 
       navigation: {
@@ -128,7 +128,7 @@ export default {
     }
 
     .news-slider__text {
-      width: calc(100% - 20px); 
+      width: calc(100% - 20px);
       left: 20px;
     }
   }
@@ -136,7 +136,7 @@ export default {
   &__category {
     text-transform: uppercase;
     position: absolute;
-    
+
     font-size: 16px;
   }
 
@@ -152,7 +152,7 @@ export default {
     color: #fff;
     font-size: 18px;
     font-weight: 500;
-    
+
     width: 100%;
 
     clip-path: polygon(0 0, 100% 10px, 100% 100%, 0 100%);
@@ -205,7 +205,7 @@ export default {
   }
 
   @media screen and (max-width: 576px) {
-    
+
     &__control {
       padding: 8px 20px !important;
       transform: translate(-10px, -10px) !important;

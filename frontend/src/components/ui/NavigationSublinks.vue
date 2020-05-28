@@ -1,6 +1,6 @@
 <template>
   <div class="sublinks">
-    <div 
+    <div
       v-for="(sublink, i) in sublinks" :key="i"
     >
       <router-link

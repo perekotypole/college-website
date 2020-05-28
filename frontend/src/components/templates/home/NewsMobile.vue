@@ -11,7 +11,7 @@
     </app-title>
 
     <news-slider
-      class="news-mobile__slider"  
+      class="news-mobile__slider"
       sliderId="newsSliderHeaderMobile"
       :slides="[
         { title: 'Запрошуємо на день відкритих дверей', category: 'студенти', link: 'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg' },
@@ -20,7 +20,7 @@
       ]"
     >
     </news-slider>
-  </div>    
+  </div>
 </template>
 
 <script>
@@ -51,7 +51,7 @@ export default {
     height: calc(90vw / 16 * 10);
     max-width: 600px;
     max-height: 375px;
-    
+
     transform: translateX(20px);
   }
 

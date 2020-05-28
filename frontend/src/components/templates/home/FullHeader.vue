@@ -63,7 +63,7 @@ import AppTitle from '@/components/ui/AppTitle.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import NewsSlider from '@/components/templates/home/NewsSlider.vue'
 
-import anime from 'animejs/lib/anime.es' 
+import anime from 'animejs/lib/anime.es'
 
 export default {
   name: 'full-header',
@@ -219,7 +219,7 @@ export default {
         font-size: 38px;
         line-height: 48px;
       }
-  
+
       &-lastname-text {
         font-size: 18px;
       }
@@ -230,9 +230,9 @@ export default {
     }
 
     &__button {
-      padding: 15px 26px !important; 
+      padding: 15px 26px !important;
     }
   }
 }
-      
+
 </style>

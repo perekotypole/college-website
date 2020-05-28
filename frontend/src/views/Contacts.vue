@@ -219,14 +219,14 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 50px 100px;
   }
-  
+
   &__item{
-    
+
     &-title{
       font-size: 14px;
       margin-bottom: 10px;
     }
-    
+
     &-icon {
       width: 20px;
       margin-right: 12px;

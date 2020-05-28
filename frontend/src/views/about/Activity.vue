@@ -5,7 +5,7 @@
       routeWay="Головна >> Про коледж >> Діяльність"
     />
 
-    <sections-list 
+    <sections-list
       :sections="sections"
       type="inner"
     />
@@ -24,20 +24,20 @@
             ></app-image>
           </div>
           <div class="app-activity__sport-right">
-            <p>Завітавши на Прикарпаття, до мальовничого міста Коломия, зі своїми звичаями і традиціями можна почути про 
-            один з найстаріших освітянських закладів в Україні – Коломийський політехнічний 
+            <p>Завітавши на Прикарпаття, до мальовничого міста Коломия, зі своїми звичаями і традиціями можна почути про
+            один з найстаріших освітянських закладів в Україні – Коломийський політехнічний
             коледж Національного університету «Львівська політехніка».</p>
-            <p>За період з 1945 р.р. навчальний заклад закінчили понад 25 тисяч випускників, 
-            серед яких багато майстрів спорту. Гордістю коледжу є його випускник, заслужений 
-            майстер спорту України з боксу Андрій Федчук – бронзовий призер Олімпійських ігор в 
-            Сіднеї 2000 року; майстер спорту міжнародного класу з легкої атлетики – Віктор Гураль; 
-            майстер спорту міжнародного класу з вільної боротьби – Олег Іванов; Чемпіон світу 2019р. 
+            <p>За період з 1945 р.р. навчальний заклад закінчили понад 25 тисяч випускників,
+            серед яких багато майстрів спорту. Гордістю коледжу є його випускник, заслужений
+            майстер спорту України з боксу Андрій Федчук – бронзовий призер Олімпійських ігор в
+            Сіднеї 2000 року; майстер спорту міжнародного класу з легкої атлетики – Віктор Гураль;
+            майстер спорту міжнародного класу з вільної боротьби – Олег Іванов; Чемпіон світу 2019р.
             з бодибілдингу Олег Даниш.</p>
           </div>
         </div>
 
         <div class="app-activity__sport-workers">
-          <section 
+          <section
             class="section-lv-3 app-activity__section-lv-3"
             v-for="(section, i) in sections.sport.workers"
             :key="i"
@@ -50,7 +50,7 @@
             >
               {{ section.title }}
             </app-title>
-            <div 
+            <div
               class="app-activity__worker"
               v-for="(person, j) in section.persons"
               :key="j"
@@ -63,9 +63,9 @@
         </div>
 
         <div class="app-activity__sport-achievements">
-          <p class="app-activity__sport-achievements-desc">Коломийський політехнічний коледж п’ятиразовий призер Всеукраїнського огляду-конкурсу 
-          на кращий стан фізичного виховання та спорту серед ВНЗ I-II рівнів акредитації. 
-          В 2013 – 2014 н.р. переможець Всеукраїнського огляду-конкурсу на кращий стан фізичного 
+          <p class="app-activity__sport-achievements-desc">Коломийський політехнічний коледж п’ятиразовий призер Всеукраїнського огляду-конкурсу
+          на кращий стан фізичного виховання та спорту серед ВНЗ I-II рівнів акредитації.
+          В 2013 – 2014 н.р. переможець Всеукраїнського огляду-конкурсу на кращий стан фізичного
           виховання та спорту серед ВНЗ І-ІІ рівнів акредитації.</p>
 
           <document-link
@@ -89,7 +89,7 @@
           </app-title>
 
           <div class="app-activity__sport-events-list">
-            <app-news 
+            <app-news
               class="app-activity__sport-event"
               v-for="event in sections.sport.events"
               :key="event.id"
@@ -97,7 +97,7 @@
               :image="event.image"
               :category="event.category"
               :pubDate="event.pubDate"
-            /> 
+            />
           </div>
         </section>
       </section>
@@ -106,7 +106,7 @@
         <app-name-title class="section__title">Викладачі</app-name-title>
 
         <div class="app-activity__teachers-event-list">
-          <app-news 
+          <app-news
             class="app-activity__sport-event"
             v-for="event in sections.teachers.events"
             :key="event.id"
@@ -136,7 +136,7 @@
               color="yellow"
               :slope="10"
               :padding="[7, 14]"
-            > 
+            >
               голова методоб'єднання
             </app-title>
 
@@ -173,7 +173,7 @@
           Виховна робота коледжу
         </app-name-title>
 
-        <app-news 
+        <app-news
           class="app-activity__sport-event"
           v-for="event in sections.educActivity.events"
           :key="event.id"
@@ -194,7 +194,7 @@ import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import AppImage from '@/components/ui/AppImage.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
 import DocumentLink from '@/components/ui/DocumentLink.vue'
-import AppNews from '@/components/ui/AppNews.vue' 
+import AppNews from '@/components/ui/AppNews.vue'
 import SectionsList from '@/components/ui/SectionsList.vue'
 
 export default {
@@ -208,21 +208,21 @@ export default {
         icon: 'dumbbell.svg',
         elementId: 'sportAtivitySection',
         workers: [
-          { 
+          {
             title: 'директор коледжу',
             persons: [
-              { 
-                name: 'Ляшеник Андрій Васильович', 
-                desc: 'кандидат технічних наук, доцент', 
+              {
+                name: 'Ляшеник Андрій Васильович',
+                desc: 'кандидат технічних наук, доцент',
               },
             ],
           },
-          { 
+          {
             title: 'керівник фізичного виховання',
             persons: [
-              { 
-                name: 'Островський Ярослав Генадійович', 
-                desc: '«викладач-методист», «Відмінник освіти України»', 
+              {
+                name: 'Островський Ярослав Генадійович',
+                desc: '«викладач-методист», «Відмінник освіти України»',
               },
             ],
           },
@@ -255,11 +255,11 @@ export default {
         achievements: {
           desc: '...',
           documents: [
-            { 
+            {
               title: 'Підсумкова таблиця обласної спартакіади серед вищих навчальних закладів рівня коледжів за 2017-2018 навчальний рік',
               link: '#',
             },
-            { 
+            {
               title: 'Підсумкова таблиця обласного огляд-конкурсу на кращий стан фізичного виховання та спорту у закладах вищої освіти рівня коледжів За 2017-2018 навчальний рік',
               link: '#',
             },
@@ -406,7 +406,7 @@ export default {
     &-workers {
       margin-top: 50px;
     }
-    
+
     &-left {
       margin-right: 20px;
 

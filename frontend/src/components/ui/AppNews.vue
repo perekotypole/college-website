@@ -2,7 +2,7 @@
   <div class="app-news-item">
     <div class="app-news-item__left">
       <div class="app-news-item__category">{{ category }}</div>
-      <div 
+      <div
         class="app-news-item__image"
         :style="{
           background: `url('${image}') center / cover no-repeat`,
@@ -20,7 +20,7 @@
         <span>{{ pubDate | dateFormat }}</span>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -64,7 +64,7 @@ export default {
   background: var(--color-bg-main);
 
   transform: translateX(12px);
-  
+
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
   -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);

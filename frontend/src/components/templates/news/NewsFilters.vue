@@ -2,9 +2,9 @@
   <div class="app-news__filters filters">
       <form action="" class="filters__form">
         <div class="filters__search search">
-          <input 
-            class="search__input" 
-            type="text" 
+          <input
+            class="search__input"
+            type="text"
             placeholder="Пошук" />
           <img class="search__icon" src="@/assets/icons/search-icon.svg" alt="search icon" />
         </div>
@@ -13,17 +13,17 @@
           <span class="filters__title">Дата публікації:</span>
           <date-input />
           <div class="filters__separator"></div>
-          <date-input 
-            :slope="4" 
+          <date-input
+            :slope="4"
           />
         </div>
 
         <div class="filters__category">
           <span class="filters__title">Категорія:</span>
-          <app-select 
+          <app-select
             class="filters__category-select"
-            :slope="4" 
-            :items="categories" 
+            :slope="4"
+            :items="categories"
             :minWidth="160"
           />
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="app-schedule">
-    <app-pagename 
+    <app-pagename
       name="Розклад навчання"
       routeWay="Головна >> Студенту >> Розклад навчання"
     />
@@ -12,7 +12,7 @@
         cardSize="big"
       />
 
-      <section 
+      <section
         class="section app-schedule__section"
         id="studyProcessScheduleSection"
       >
@@ -25,7 +25,7 @@
         >{{ doc.title }}</document-link>
       </section>
 
-      <section 
+      <section
         class="section app-schedule__section lesson-schedule"
         id="lessonsScheduleSection"
       >
@@ -34,7 +34,7 @@
         <schedule-filters />
 
         <div class="lessons-schedule__week">
-          <div 
+          <div
             class="lessons-schedule__day"
             v-for="(day, i) in lessons"
             :key="i"
@@ -49,7 +49,7 @@
             </app-title>
 
             <div class="lessons-schedule__lessons-list">
-              <schedule-lesson 
+              <schedule-lesson
                 class="lessons-schedule__lesson"
                 v-for="(lesson, j) in day.list"
                 :key="j"
@@ -66,7 +66,7 @@
         >Розклад занять на II семестр 2019-2020 н.р. (денна форма)</document-link>
       </section>
 
-      <section 
+      <section
         class="section app-schedule__section bell-schedule"
         id="bellsScheduleSection"
       >
@@ -83,7 +83,7 @@
               повні пари
             </app-title>
 
-            <div 
+            <div
               class="bell-schedule__bell"
               v-for="bell in fullBells"
               :key="bell.number"
@@ -93,7 +93,7 @@
               <div class="bell-schedule__break">{{ bell.break }} хвилин</div>
             </div>
           </div>
-          
+
           <div class="bell-schedule__col">
             <app-title
               class="bell-schedule__title"
@@ -104,7 +104,7 @@
               скорочені пари
             </app-title>
 
-            <div 
+            <div
               class="bell-schedule__bell"
               v-for="bell in abbreviatedBells"
               :key="bell.number"
@@ -399,7 +399,7 @@ export default {
 
   &__week {
     margin-top: 55px;
-    
+
     display: grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(3, auto);
@@ -424,7 +424,7 @@ export default {
 }
 
 .bell-schedule {
-  
+
   &__bells {
     display: flex;
   }
@@ -472,7 +472,7 @@ export default {
 
   &__time {
     padding: 8px 0;
-    
+
     font-size: 16px;
 
     text-align: center;

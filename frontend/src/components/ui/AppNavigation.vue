@@ -12,7 +12,7 @@
           <div class="app-navigation__underline"></div>
 
           <div v-if="link.sublinks">
-            <navigation-sublinks 
+            <navigation-sublinks
               :sublinks="link.sublinks"
               class="app-navigation__sublinks"
             />
@@ -24,7 +24,7 @@
         class="app-navigation__menu-toggle"
         @click="mobileMenuIsOpened = !mobileMenuIsOpened"
       >
-        <div 
+        <div
           class="app-navigation__menu-icon"
           :class="{'app-navigation__close-icon': mobileMenuIsOpened }"
         ></div>
@@ -49,7 +49,7 @@
           <div class="app-navigation__underline"></div>
 
           <div v-if="link.sublinks" class="app-navigation__sublinks-wrapper_right">
-            <navigation-sublinks 
+            <navigation-sublinks
               :sublinks="link.sublinks"
               class="app-navigation__sublinks"
             />
@@ -81,7 +81,7 @@
           class="mobile-menu__link"
         >{{link.text}}</router-link>
       </div>
-    </div>    
+    </div>
   </div>
 </template>
 
@@ -98,9 +98,9 @@ export default {
       mobileMenuIsOpened: false,
       leftSideLinks: [
         { text: 'ГОЛОВНА', routeName: 'home' },
-        { 
-          text: 'ПРО КОЛЕДЖ', 
-          routeName: 'about', 
+        {
+          text: 'ПРО КОЛЕДЖ',
+          routeName: 'about',
           sublinks: [
             { name: 'Історія', icon: 'history.svg', routeName: 'history' },
             { name: 'Адміністрація', icon: 'manager.svg', routeName: 'administration' },
@@ -110,18 +110,18 @@ export default {
             { name: 'Гуртожиток', icon: 'sleep.svg', routeName: 'chummer' },
           ],
         },
-        { 
-          text: 'НАВЧАННЯ', 
+        {
+          text: 'НАВЧАННЯ',
           routeName: 'study',
           sublinks: [
             { name: 'Циклові комісії', icon: 'meeting.svg', routeName: 'commissions' },
             { name: 'Спеціальності', icon: 'network.svg', routeName: 'specialties' },
             { name: 'Освітня програма', icon: 'files.svg', routeName: 'program' },
-          ],  
+          ],
         },
-        { 
-          text: 'АБІТУРІЄНТУ', 
-          routeName: 'entrants', 
+        {
+          text: 'АБІТУРІЄНТУ',
+          routeName: 'entrants',
           sublinks: [
             { name: 'Підготовчі курси', icon: 'homework.svg', routeName: 'courses' },
             { name: 'Вступна кампанія', icon: 'doorway.svg', routeName: 'entrance' },
@@ -129,8 +129,8 @@ export default {
         },
       ],
       rightSideLinks: [
-        { 
-          text: 'СТУДЕНТУ', 
+        {
+          text: 'СТУДЕНТУ',
           routeName: 'student',
           sublinks: [
             { name: 'Розклад навчання', icon: 'timetable.svg', routeName: 'schedule' },
@@ -142,8 +142,8 @@ export default {
           ],
         },
         { text: 'НОВИНИ', routeName: 'news' },
-        { 
-          text: 'БІБЛІОТЕКА', 
+        {
+          text: 'БІБЛІОТЕКА',
           routeName: 'library',
           sublinks: [
             { name: 'Про бібліотеку', icon: 'library.svg', routeName: 'aboutLibrary' },
@@ -177,7 +177,7 @@ export default {
 
 .app-navigation {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
   'left logo right';
   grid-template-columns: 1fr auto 1fr;
 
@@ -223,7 +223,7 @@ export default {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    
+
     display: block;
     width: 0px;
     height: 2px;
@@ -233,7 +233,7 @@ export default {
   }
 
   &__link.router-link-exact-active {
-    
+
     .app-navigation__underline {
       width: 30px;
 
@@ -276,17 +276,17 @@ export default {
 
     transition: .5s;
   }
-    
+
   &__menu-icon {
     top: 50%;
     transform: translateY(-100%);
 
     width: 20px;
-    
+
     display: flex;
     justify-content: flex-end;
   }
-  
+
   &__menu-icon::after {
     width: 13px;
     transform: translateY(10px);
@@ -296,13 +296,13 @@ export default {
     width: 25px;
     transform: translateY(-10px);
   }
-    
+
   &__close-icon {
     width: 25px;
 
     transform: rotate(-45deg);
   }
-  
+
   &__close-icon::after {
     opacity: 0;
   }
@@ -335,7 +335,7 @@ export default {
       z-index: 205;
 
       background: #fff;
-      
+
       padding: 40px;
 
       width: 100%;
@@ -369,7 +369,7 @@ export default {
         margin-bottom: 25px;
       }
     }
-    
+
     &__logo {
       .logo__img {
         width: 56px;

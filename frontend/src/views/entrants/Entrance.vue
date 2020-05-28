@@ -12,7 +12,7 @@
         cardSize="big"
       />
 
-      <div 
+      <div
         class="app-entance__item"
         id="admissionRulesSection"
       >
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div 
+      <div
         class="app-entance__item"
         id="entranceCommissionSection"
       >
@@ -109,7 +109,7 @@
         </div>
       </div>
 
-      <div 
+      <div
         class="app-entance__item"
         id="govrnmentOrderSection"
       >
@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <div 
+      <div
         class="app-entance__item"
         id="examsProgramSection"
       >
@@ -184,7 +184,7 @@
             class="app-entance__subtitle"
             color="green"
             :slope="10">
-            ПРОГРАМА ВСТУПНОГО ВИПРОБУВАННЯ ДЛЯ АБІТУРІЄНТІВ, ЩО ВСТУПАЮТЬ 
+            ПРОГРАМА ВСТУПНОГО ВИПРОБУВАННЯ ДЛЯ АБІТУРІЄНТІВ, ЩО ВСТУПАЮТЬ
             НА ПЕРШИЙ КУРС НАВЧАННЯ НА ОСВІТНЬО-ПРОФЕСІЙНУ ПРОГРАМУ ПІДГОТОВКИ
             МОЛОДШОГО СПЕЦІАЛІСТА НА ОСНОВІ БАЗОВОЇ ЗАГАЛЬНОЇ СЕРЕДНЬОЇ ОСВІТИ
           </app-title>
@@ -225,9 +225,9 @@
             class="app-entance__subtitle"
             color="green"
             :slope="10">
-            ПРОГРАМА ФАХОВИХ ВИПРОБУВАНЬ ДЛЯ ВСТУПУ НА НАВЧАННЯ  НА ОСНОВІ 
-            ОСВІТНЬО-КВАЛІФІКАЦІЙНОГО РІВНЯ «КВАЛІФІКОВАНИЙ РОБІТНИК» ТА НА ОСНОВІ 
-            ОСВІТНЬО-КВАЛІФІКАЦІЙНОГО РІВНЯ “МОЛОДШИЙ СПЕЦІАЛІСТ” ЗА ІНШОЮ СПЕЦІАЛЬНІСТЮ  
+            ПРОГРАМА ФАХОВИХ ВИПРОБУВАНЬ ДЛЯ ВСТУПУ НА НАВЧАННЯ  НА ОСНОВІ
+            ОСВІТНЬО-КВАЛІФІКАЦІЙНОГО РІВНЯ «КВАЛІФІКОВАНИЙ РОБІТНИК» ТА НА ОСНОВІ
+            ОСВІТНЬО-КВАЛІФІКАЦІЙНОГО РІВНЯ “МОЛОДШИЙ СПЕЦІАЛІСТ” ЗА ІНШОЮ СПЕЦІАЛЬНІСТЮ
             ДЛЯ ЗДОБУТТЯ  ОСВІТНЬО-КВАЛІФІКАЦІЙНОГО РІВНЯ «МОЛОДШИЙ СПЕЦІАЛІСТ»
           </app-title>
 
@@ -244,7 +244,7 @@
         </div>
       </div>
 
-      <div 
+      <div
         class="app-entance__item"
         id="examsScheduleSection"
       >
@@ -264,7 +264,7 @@
         </div>
       </div>
 
-      <div 
+      <div
         class="app-entance__item"
         id="examsResultsSection"
       >
@@ -322,7 +322,7 @@
         </div>
       </div>
 
-      <div 
+      <div
         class="app-entance__item"
         id="znoSection"
       >
@@ -547,7 +547,7 @@ export default {
     text-align: center;
     margin-bottom: 80px;
   }
-  
+
   &__subtitle{
     text-transform: uppercase;
     font-weight: 600;

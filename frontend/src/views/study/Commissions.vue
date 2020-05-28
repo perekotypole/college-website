@@ -1,6 +1,6 @@
 <template>
-  <div class="app-commissions"> 
-    <app-pagename 
+  <div class="app-commissions">
+    <app-pagename
       name="Циклові комісії"
       routeWay="Головна >> Навчання >> Циклові комісії"
     />
@@ -11,7 +11,7 @@
     />
 
     <div class="container">
-      <section 
+      <section
         class="app-commissions__section section"
         v-for="(commission, i) in commissions"
         :key="i"
@@ -48,7 +48,7 @@
             члени комісії
           </app-title>
 
-          <div 
+          <div
             class="app-commissions__worker"
             v-for="(member, i) in commission.members"
             :key="i"
@@ -140,7 +140,7 @@ export default {
 
   &__workers {
     margin-bottom: 35px;
-    
+
     :last-child {
       margin-bottom: 0;
     }

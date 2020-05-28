@@ -1,6 +1,6 @@
 <template>
   <div class="app-image">
-    
+
     <div
       :class="[
         `app-image__block`,
@@ -83,7 +83,7 @@ export default {
       background: var(--color-accent-yellow);
     }
   }
-  
+
   @media screen and (max-width: 1195px)  {
     max-width: 400px;
     max-height: 250px;

@@ -8,7 +8,7 @@
     <div class="app-pagination__pages">
       <!-- First page -->
       <template v-if="pagesToShow.indexOf(1) === -1">
-        <div 
+        <div
           class="app-pagination__page"
           :class="{'app-pagination__page_active': active === 1}"
           @click="changePage(1)"
@@ -18,19 +18,19 @@
       </template>
 
       <!-- 3 pages -->
-      <div 
+      <div
         class="app-pagination__page"
         v-for="page in pageCount < 3 ? pageCount : pagesToShow"
         :key="page"
         :class="{'app-pagination__page_active': page === active}"
         @click="changePage(page)"
       >{{ page | addZero }}</div>
-      
+
       <!-- Last page -->
       <template v-if="pagesToShow.indexOf(pageCount) === -1">
         <div class="app-pagination__dots">...</div>
 
-        <div 
+        <div
           class="app-pagination__page"
           :class="{'app-pagination__page_active': pageCount === active}"
           @click="changePage(pageCount)"
@@ -93,14 +93,14 @@ export default {
     },
     next() {
       const { active, pageCount, pagesToShow } = this
-      
+
       if (active < pageCount) {
         if (pagesToShow[pagesToShow.length - 1] === active) {
           this.pagesToShow = pagesToShow.map((num) => num + 1)
         }
 
         this.active += 1
-      } 
+      }
     },
     prev() {
       const { active, pagesToShow } = this
@@ -116,11 +116,11 @@ export default {
   },
   watch: {
     active() {
-      let { changePageHandler, pageLength } = this.$props
+      const { changePageHandler, pageLength } = this.$props
 
       changePageHandler(
-        { 
-          from: (this.active - 1) * pageLength, 
+        {
+          from: (this.active - 1) * pageLength,
           to: this.active * pageLength,
         },
       )
@@ -161,7 +161,7 @@ export default {
   }
 
   &__arrow {
-    cursor: pointer; 
+    cursor: pointer;
 
     &-icon {
       width: 33px;

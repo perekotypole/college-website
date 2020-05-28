@@ -6,7 +6,7 @@
     ></app-pagename>
 
     <div class="app-specialties__content container">
-      <specialities 
+      <specialities
         :title="false"/>
 
       <div class="app-specialties__item"
@@ -40,7 +40,7 @@
               </app-title>
 
               <p>
-                <span v-if="specialty.forms.fulltime 
+                <span v-if="specialty.forms.fulltime
                   && specialty.forms.external">Денна, заочна</span>
                 <span v-else-if="specialty.forms.fulltime">Денна</span>
                 <span v-else-if="specialty.forms.external">Заочна</span>

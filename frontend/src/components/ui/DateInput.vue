@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     class="date-select"
     :style="{
       clipPath: `polygon(0 0, 100% 0, calc(100% - ${slope}px) 100%, 0 100%)`,
@@ -23,7 +23,7 @@ export default {
       default: 0,
     },
     value: {
-      
+
     },
   },
 }
@@ -41,7 +41,7 @@ export default {
   &__icon {
     margin-right: 8px;
   }
-  
+
   &__number {
     text-align: center;
 

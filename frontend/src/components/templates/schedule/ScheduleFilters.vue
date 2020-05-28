@@ -2,54 +2,54 @@
   <div class="lesson-schedule__filters filters">
     <div class="filters__filter">
       <span class="filters__title">Група</span>
-      <app-select 
-        class="filters__select" 
-        :slope="4" 
-        :items="filters.groups" 
+      <app-select
+        class="filters__select"
+        :slope="4"
+        :items="filters.groups"
       />
     </div>
 
     <div class="filters__filter">
       <span class="filters__title">Викладач</span>
-      <app-select 
-        class="filters__select" 
-        :slope="4" 
-        :items="filters.teachers" 
-        :minWidth="160" 
+      <app-select
+        class="filters__select"
+        :slope="4"
+        :items="filters.teachers"
+        :minWidth="160"
       />
     </div>
 
     <div class="filters__filter">
       <span class="filters__title">Аудиторія</span>
-      <app-select 
-        class="filters__select" 
-        :slope="4" 
-        :items="filters.audiences" 
+      <app-select
+        class="filters__select"
+        :slope="4"
+        :items="filters.audiences"
       />
     </div>
 
     <div class="filters__filter">
       <span class="filters__title">День</span>
-      <app-select 
-        class="filters__select" 
-        :slope="4" 
-        :items="filters.days" 
-        :minWidth="130" 
+      <app-select
+        class="filters__select"
+        :slope="4"
+        :items="filters.days"
+        :minWidth="130"
       />
     </div>
 
     <div class="filters__filter">
       <span class="filters__title">Пари</span>
-      <app-select 
-        class="filters__select" 
-        :slope="4" 
-        :items="filters.lessons" 
+      <app-select
+        class="filters__select"
+        :slope="4"
+        :items="filters.lessons"
       />
       <span class="filters__separator"></span>
-      <app-select 
-        class="filters__select" 
-        :slope="4" 
-        :items="filters.lessons" 
+      <app-select
+        class="filters__select"
+        :slope="4"
+        :items="filters.lessons"
       />
     </div>
   </div>
@@ -94,7 +94,7 @@ export default {
     height: 2px;
 
     margin: 0 5px;
-    
+
     background: var(--color-font-super-light);
   }
 

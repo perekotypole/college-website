@@ -28,7 +28,7 @@
     </div>
 
     <div class="specialities__content">
-      <div 
+      <div
         class="specialities__column"
         v-for="(spec, index) in specialities"
         :key="index"
@@ -51,9 +51,9 @@
             />
           </div>
         </div>
-        
+
         <div class="specialities__list">
-          <SpecialitiesCard 
+          <SpecialitiesCard
             class="specialities__card"
             v-for="(item, index) in spec.items"
             :key="index"
@@ -95,48 +95,48 @@ export default {
   },
   data: () => ({
     specialities: [
-      { 
+      {
         title: "ВІДДІЛЕННЯ КОМП'ЮТЕРНИХ ТЕХНОЛОГІЙ",
         opened: false,
         items: [
           {
-            number: '121', name: 'Інженерія програмного забезпечення', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік-програміст', 
+            number: '121', name: 'Інженерія програмного забезпечення', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік-програміст',
           },
           {
-            number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'електромеханік', 
+            number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'електромеханік',
           },
         ],
       },
-      { 
+      {
         title: 'ЕКОНОМІЧНЕ ВІДДІЛЕННЯ',
         opened: false,
         items: [
           {
-            number: '071', name: 'Облік і оподаткування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'бухгалтер', 
+            number: '071', name: 'Облік і оподаткування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'бухгалтер',
           },
           {
-            number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з фінансів', 
+            number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з фінансів',
           },
           {
-            number: '073', name: 'Менеджмент', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'помічник керівника виробничого підрозділу', 
+            number: '073', name: 'Менеджмент', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'помічник керівника виробничого підрозділу',
           },
           {
-            number: '075', name: 'Маркетинг', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з маркетингу', 
+            number: '075', name: 'Маркетинг', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з маркетингу',
           },
         ],
       },
-      { 
+      {
         title: 'МЕХАНІКО-ТЕХНОЛОГІЧНЕ ВІДДІЛЕННЯ',
         opened: false,
         items: [
           {
-            number: '133', name: 'Галузеве машинобудування', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік з експлуатації та ремонту устаткування', 
+            number: '133', name: 'Галузеве машинобудування', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік з експлуатації та ремонту устаткування',
           },
           {
-            number: '182', name: 'Технологія легкої промисловості', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – конструктор', 
+            number: '182', name: 'Технологія легкої промисловості', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – конструктор',
           },
           {
-            number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – технолог', 
+            number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – технолог',
           },
         ],
       },
@@ -177,7 +177,7 @@ export default {
     &-color {
       width: 37px;
       height: 31px;
-  
+
       clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
     }
   }
@@ -259,7 +259,7 @@ export default {
         transform: rotate(180deg);
         transition: all .45s;
       }
-      
+
       .specialities-card{
         width: 100%;
       }

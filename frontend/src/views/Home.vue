@@ -11,7 +11,7 @@
     >
       <courses-info />
     </advert>
-    
+
     <events-calendar />
   </div>
 </template>
