@@ -85,12 +85,12 @@ export default {
     background: var(--color-accent-green);
     border-radius: 20px;
 
-    padding: 30px 50px;
+    padding: 30px 0px;
 
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.06);
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 
     &-item {
       display: flex;
