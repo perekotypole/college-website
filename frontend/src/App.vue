@@ -92,7 +92,7 @@ body {
 // Scrollbar
 
 ::-webkit-scrollbar {
-  width: 13px;
+  width: 12px;
   height: 18px;
 }
 ::-webkit-scrollbar-thumb {
@@ -100,7 +100,7 @@ body {
   border: 4px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
   -webkit-border-radius: 7px;
-  background-color: #717171;
+  background-color: #d1d1d1;
 }
 ::-webkit-scrollbar-button {
   width: 0;
@@ -161,6 +161,15 @@ input::-webkit-inner-spin-button {
     font-weight: 600;
 
     margin-bottom: 20px;
+  }
+}
+
+.admin-view {
+  padding-top: 20px;
+
+  &__title {
+    font-size: 28px;
+    font-weight: 600;
   }
 }
 

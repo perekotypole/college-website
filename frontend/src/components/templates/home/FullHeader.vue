@@ -234,7 +234,6 @@ export default {
     }
   }
 
-  
   @media screen and (max-width: 576px) {
     &__greeting {
       font-size: 14px;

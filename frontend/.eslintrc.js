@@ -25,5 +25,6 @@ module.exports = {
     'prefer-const': 'off',
     'arrow-body-style': 'off',
     'no-param-reassign': 'off',
+    'no-multiple-empty-lines': 'off',
   },
 }

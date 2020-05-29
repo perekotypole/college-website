@@ -7,6 +7,7 @@ import Student from './modules/Student'
 import News from './modules/News'
 import Library from './modules/Library'
 import Entrants from './modules/Entrants'
+import Admin from './modules/Admin'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,13 @@ const routes = [
         name: 'contacts',
         component: () => import('@/views/Contacts'),
       },
+    ],
+  },
+  {
+    path: '/admin',
+    component: () => import('@/layouts/AdminPanel'),
+    children: [
+      ...Admin,
     ],
   },
 ]
