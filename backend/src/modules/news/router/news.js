@@ -5,21 +5,23 @@ import Image from '../../../models/images'
 import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
-  router.get('/list', async (req, res) => {
+  router.post('/list', async (req, res) => {
+    const { tag, date, number, page } = req.body
+
     try {
       const query = News.find().sort('-publicationDate')
 
-      if (req.body.tag) query.where({ mainTag: req.body.tag })
-      if (req.body.date) {
+      if (tag) query.where({ mainTag: tag })
+      if (date) {
         query.$where(`
-          this.publicationDate >= ${req.body.date.from ? Date.parse(req.body.date.from) : Date.parse('2000-01-01')} &&
-          this.publicationDate <= ${req.body.date.to ? Date.parse(req.body.date.to) : Date.now()}
+          this.publicationDate >= ${date.from ? Date.parse(date.from) : Date.parse('2000-01-01')} &&
+          this.publicationDate <= ${date.to ? Date.parse(date.to) : Date.now()}
         `)
       }
 
       const result = await query
-        .skip((req.body.page - 1) * req.body.number)
-        .limit(req.body.number)
+        .skip((page - 1) * number)
+        .limit(number)
         .populate({ path: 'mainTag', model: Tag })
         .populate({ path: 'mainImage', model: Image })
         .select('-text -imagesList -documentsList')
@@ -37,13 +39,13 @@ export default (router) => {
     }
   })
 
-  router.get('/slider', async (req, res) => {
-    const { number } = req.body
+  router.get('/slider/:number', async (req, res) => {
+    const { number } = req.params
 
     try {
       const result = await News.find()
         .sort('-publicationDate')
-        .limit(number)
+        .limit(Number(number))
         .populate({ path: 'mainTag', model: Tag })
         .populate({ path: 'mainImage', model: Image })
         .select('-text -imagesList -documentsList')

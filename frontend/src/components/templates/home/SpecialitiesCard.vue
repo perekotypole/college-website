@@ -3,7 +3,7 @@
     <div :style="cardStyle" class="specialities-card__front">
       <div class="specialities-card__left">
         <div class="specialities-card__icon">
-          <img :src="require(`@/assets/icons/specialities/${icon}.svg`)" :alt="icon">
+          <img :src="require(`@/assets/icons/specialities/${icon}`)" alt="icon">
         </div>
         <span class="specialities-card__number">{{ number }}</span>
       </div>
@@ -16,12 +16,12 @@
 
     <div :style="cardStyle" class="specialities-card__back">
       <span><span class="specialities-card__title">Форма навчання: </span>
-        <span
-          v-for="(form, i) in studyForm"
-          :key="i"
-        >
-          {{ form }}<span v-if="i != studyForm.length - 1">,</span>
-        </span>
+        <span v-if="studyForm.fulltime"
+          class="specialities-card__list"
+          >денна</span>
+        <span v-if="studyForm.external"
+          class="specialities-card__list"
+          >заочна</span>
       </span>
       <span><span class="specialities-card__title">Кваліфікація: </span>{{ qualification }}</span>
     </div>
@@ -47,7 +47,7 @@ export default {
       required: true,
     },
     studyForm: {
-      type: Array,
+      type: [Array, Object],
       required: true,
     },
     qualification: {
@@ -152,6 +152,10 @@ export default {
 
     margin-top: 4px;
     margin-bottom: 2px;
+  }
+
+  &__list + &__list:before {
+    content: ", ";
   }
 }
 

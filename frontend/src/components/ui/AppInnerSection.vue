@@ -45,7 +45,6 @@ export default {
   methods: {
     scrollTo(id) {
       const target = document.getElementById(id)
-      console.log(this.$props.size)
 
       window.scroll({
         left: 0,

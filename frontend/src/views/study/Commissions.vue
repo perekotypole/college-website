@@ -6,16 +6,18 @@
     />
 
     <sections-list
-      :sections="commissions"
+      v-if="list.finded"
+      :sections="list.commissions"
       type="inner"
     />
 
-    <div class="container">
+    <div class="container"
+      v-if="list.finded">
       <section
         class="app-commissions__section section"
-        v-for="(commission, i) in commissions"
+        v-for="(commission, i) in list.commissions"
         :key="i"
-        :id="commission.elementId"
+        :id="commission._id"
       >
         <app-name-title
           class="section__title"
@@ -23,7 +25,8 @@
           {{ commission.name }}
         </app-name-title>
 
-        <section class="section-lv-3 app-commissions__workers">
+        <section class="section-lv-3 app-commissions__workers"
+          v-if="commission.leader">
           <app-title
             class="section-lv-3__title"
             color="yellow"
@@ -34,12 +37,13 @@
           </app-title>
 
           <div class="app-commissions__worker">
-            {{ commission.head }}
+            {{ commission.leader.name }}
           </div>
         </section>
 
         <section class="section-lv-3 app-commissions__workers">
           <app-title
+            v-if="commission.members"
             class="section-lv-3__title"
             color="yellow"
             :slope="10"
@@ -53,7 +57,7 @@
             v-for="(member, i) in commission.members"
             :key="i"
           >
-            {{ member }}
+            {{ member.name }}
           </div>
 
           <div class="app-commissions__event-list">
@@ -76,6 +80,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
@@ -87,46 +92,19 @@ export default {
   components: {
     AppPagename, AppNameTitle, AppTitle, AppNews, SectionsList,
   },
-  data: () => ({
-    commissions: [
-      {
-        name: 'Суспільних дисциплін',
-        icon: 'sociology.svg',
-        elementId: 'socialCommissionSection',
-        head: 'Бриндзак Олександра Василівна',
-        members: [
-          'Фучко Василь Богданович', 'Максим’юк Галина Дмитрівна', 'Матіос Оксана Петрівна', 'Плиторак Марія Олексіївна',
-        ],
-        events: [
-          {
-            id: 0,
-            title: 'В Коломийському політехнічному коледжі було проведено І – ий етап обласної олімпіади з історії України. Участь взяли кращі студенти коледжу',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'викладачі',
-            pubDate: new Date(),
-          },
-        ],
-      },
-      {
-        name: 'Іноземних мов',
-        icon: 'languages.svg',
-        elementId: 'foreignLanguagesCommissionSection',
-        head: 'Лютак Наталія Петрівна',
-        members: [
-          'Дуб Інеса Володимирівна', 'Загорняк Наталія Василівна', 'Тимофєєва Галина Михайлівна', 'Лоїк Оксана Михайлівна', 'Чорнописька Ніна Іванівна', 'Юзюк Оксана Петрівна',
-        ],
-        events: [
-          {
-            id: 0,
-            title: 'Обласне методичне об’єднання викладачів німецької та французької мов ВНЗ І – ІІ рівнів акредитації Івано – Франківської області',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'викладачі',
-            pubDate: new Date(),
-          },
-        ],
-      },
-    ],
-  }),
+  computed: {
+    ...mapGetters({
+      list: 'commissions/list',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      loadCommissions: 'commissions/loadCommissions',
+    }),
+  },
+  created() {
+    this.loadCommissions()
+  },
 }
 </script>
 

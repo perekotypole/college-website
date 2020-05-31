@@ -6,20 +6,21 @@
         <div
           class="swiper-slide news-slider__item"
           :class="{'news-slider__item_with-category': showCategory}"
-          v-for="({title, link, category}, i) in slides" :key="i"
+          v-for="({title, mainImage, mainTag}, i) in slides" :key="i"
         >
           <app-title
-            v-if="showCategory"
+            v-if="showCategory && mainTag"
             class="news-slider__category"
             :padding="[10, 19]"
             color="green"
             :slope="7"
-          >{{ category }}</app-title>
+          >{{ mainTag.name }}</app-title>
 
           <div
+            v-if="mainImage"
             class="news-slider__photo"
             :style="{
-              background: `url('${link}') no-repeat`,
+              background: `url('${mainImage.path}') no-repeat`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }"
@@ -205,6 +206,9 @@ export default {
   }
 
   @media screen and (max-width: 576px) {
+    &__photo{
+      height: calc(100% - 10px);
+    }
 
     &__control {
       padding: 8px 20px !important;

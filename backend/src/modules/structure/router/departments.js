@@ -11,7 +11,7 @@ export default (router) => {
 
       return res.json({
         created: !!result,
-        news: result,
+        department: result,
       })
     } catch (error) {
       return res.json({
@@ -34,7 +34,7 @@ export default (router) => {
 
       return res.json({
         deleted: !!result,
-        news: result,
+        department: result,
       })
     } catch (error) {
       return res.json({
@@ -57,7 +57,7 @@ export default (router) => {
 
       return res.json({
         updated: !!result,
-        news: result,
+        department: result,
       })
     } catch (error) {
       return res.json({

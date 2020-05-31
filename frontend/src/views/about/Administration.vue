@@ -8,7 +8,7 @@
     <div class="container">
       <div v-if="administration.finded" class="people">
         <admin-card
-          v-for="(person, index) in administration.teachers"
+          v-for="(person, index) in administration.admins"
           :key="index"
           class="person"
           :picture="person.photo.path"

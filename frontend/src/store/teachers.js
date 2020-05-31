@@ -1,3 +1,5 @@
+import axios from '../tools/axios'
+
 export default {
   namespaced: true,
 
@@ -16,8 +18,18 @@ export default {
   },
 
   actions: {
-    loadAdmins({ commit }) {
-      commit('setAdmins', require('../../public/data/administration.json'))
+    async loadAdmins({ commit }) {
+      // commit('setAdmins', require('../../public/data/administration.json'))
+
+      axios.get('/structure/admins').then(({ data }) => {
+        if (data.errors) {
+          return Promise.reject(data.errors)
+        }
+
+        commit('setAdmins', data)
+
+        return Promise.resolve()
+      }).catch(() => {})
     },
   },
 }

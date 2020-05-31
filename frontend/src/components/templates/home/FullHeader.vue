@@ -37,16 +37,13 @@
       </div>
 
       <div class="header__right">
-        <div class="header__news">
+        <div class="header__news"
+          v-if="slider.finded">
           <news-slider
             class="header__news-slider"
             :showCategory="true"
             sliderId="newsSliderHeader"
-            :slides="[
-              { title: 'Запрошуємо на день відкритих дверей', category: 'студенти', link: 'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg' },
-              { title: 'Коломийський політехнічний коледж Університету повністю виконав державне замовлення з прийому студентів', category: 'викладачі', link: 'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298' },
-              { title: 'Критичне мислення', category: 'спорт', link: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg' },
-            ]"
+            :slides="slider.news"
           >
           </news-slider>
           <div class="header__news-bg-rect"></div>
@@ -59,6 +56,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import AppTitle from '@/components/ui/AppTitle.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import NewsSlider from '@/components/templates/home/NewsSlider.vue'
@@ -69,6 +68,19 @@ export default {
   name: 'full-header',
   components: {
     AppTitle, AppButton, NewsSlider,
+  },
+  computed: {
+    ...mapGetters({
+      slider: 'news/slider',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      loadSlider: 'news/loadSlider',
+    }),
+  },
+  created() {
+    this.loadSlider(3)
   },
   mounted() {
     anime({

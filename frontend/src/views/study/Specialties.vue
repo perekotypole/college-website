@@ -5,12 +5,13 @@
       routeWay="Головна >> Навчання >> Спеціальності"
     ></app-pagename>
 
-    <div class="app-specialties__content container">
+    <div class="app-specialties__content container"
+      v-if="list.finded">
       <specialities
         :title="false"/>
 
       <div class="app-specialties__item"
-        v-for="({ name, specialties }, index) in dapartments"
+        v-for="({ name, specialties }, index) in list.departments"
         :key="index">
 
         <div class="app-specialties__title">
@@ -40,10 +41,12 @@
               </app-title>
 
               <p>
-                <span v-if="specialty.forms.fulltime
-                  && specialty.forms.external">Денна, заочна</span>
-                <span v-else-if="specialty.forms.fulltime">Денна</span>
-                <span v-else-if="specialty.forms.external">Заочна</span>
+                <span v-if="specialty.forms.fulltime"
+                  class="app-specialties__spec-info-list"
+                  >денна</span>
+                <span v-if="specialty.forms.external"
+                  class="app-specialties__spec-info-list"
+                  >заочна</span>
               </p>
             </div>
 
@@ -72,17 +75,23 @@
 
               <p class="app-specialties__spec-info-section">
                 <span v-if="specialty.terms.full">
-                  <b>{{ specialty.terms.full }}</b> - на основі базової загальної середньої освіти
+                  <b>{{ specialty.terms.full | term }}</b> - на основі базової загальної середньої освіти
                   <br/>
                 </span>
                 <span v-if="specialty.terms.basic">
-                  <b>{{ specialty.terms.basic }}</b> - на основі повної загальної середньої освіти
+                  <b>{{ specialty.terms.basic | term }}</b> - на основі повної загальної середньої освіти
                 </span>
               </p>
             </div>
 
-            <p class="app-specialties__spec-info-section">
-              {{ specialty.description }}
+            <p class="app-specialties__spec-info-section"
+              v-if="specialty.professions">
+              Фахівці можуть обіймати такі посади:
+              <span v-for="(element, index) in specialty.professions"
+                :key="index"
+                class="app-specialties__spec-info-list">
+                {{ element }}
+              </span>.
             </p>
           </div>
         </div>
@@ -92,6 +101,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import AppSubtitle from '@/components/ui/AppSubtitle.vue'
@@ -106,64 +117,77 @@ export default {
     AppTitle,
     Specialities,
   },
-  data() {
-    return {
-      dapartments: [
-        {
-          name: 'Відділення комп\'ютерних технологій',
-          specialties: [
-            {
-              name: 'ІНЖЕНЕРІЯ програмного ЗАБЕЗПЕЧЕННЯ',
-              code: '121',
-              forms: {
-                fulltime: true,
-                external: true,
-              },
-              terms: {
-                full: '3 роки 10 місяців',
-                basic: '2 роки 10 місяців',
-              },
-              qualification: 'Технік-програміст',
-              description: 'Фахівці можуть обіймати такі посади: технік-програміст, фахівець з інформаційних технологій, фахівець з розробки та тестування програмного забезпечення, фахівець з розроблення комп’ютерних програм.',
-            },
-            {
-              name: 'АВТОМАТИЗАЦІЯ ТА КОМП\'ЮТЕРНО-ІНТЕГРОВАНІ ТЕХНОЛОГІЇ',
-              code: '151',
-              forms: {
-                fulltime: true,
-                external: true,
-              },
-              terms: {
-                full: '3 роки 10 місяців',
-                basic: '2 роки 10 місяців',
-              },
-              qualification: 'Електромеханік',
-              description: 'Фахівці можуть обіймати такі посади: електромеханік, електромеханік дільниці, технік-конструктор (технік-електромеханік) з автоматизації виробничих процесів, технік з налагоджування та випробувань, кресляр-конструктор систем автоматизації, лаборант з обслуговування засобів автоматизації.',
-            },
-          ],
-        },
-        {
-          name: 'Економічне відділення',
-          specialties: [
-            {
-              name: 'ОБЛІК І ОПОДАТКУВАННЯ',
-              code: '121',
-              forms: {
-                fulltime: true,
-                external: true,
-              },
-              terms: {
-                full: '3 роки 10 місяців',
-                basic: '2 роки 10 місяців',
-              },
-              qualification: 'Технік-програміст',
-              description: 'Фахівці можуть обіймати такі посади: технік-програміст, фахівець з інформаційних технологій, фахівець з розробки та тестування програмного забезпечення, фахівець з розроблення комп’ютерних програм.',
-            },
-          ],
-        },
-      ],
-    }
+  computed: {
+    ...mapGetters({
+      list: 'specialties/list',
+    }),
   },
+  methods: {
+    ...mapActions({
+      loadSpecialties: 'specialties/loadSpecialties',
+    }),
+  },
+  created() {
+    this.loadSpecialties()
+  },
+  // data() {
+  //   return {
+  //     dapartments: [
+  //       {
+  //         name: 'Відділення комп\'ютерних технологій',
+  //         specialties: [
+  //           {
+  //             name: 'ІНЖЕНЕРІЯ програмного ЗАБЕЗПЕЧЕННЯ',
+  //             code: '121',
+  //             forms: {
+  //               fulltime: true,
+  //               external: true,
+  //             },
+  //             terms: {
+  //               full: '3 роки 10 місяців',
+  //               basic: '2 роки 10 місяців',
+  //             },
+  //             qualification: 'Технік-програміст',
+  //             description: 'Фахівці можуть обіймати такі посади: технік-програміст, фахівець з інформаційних технологій, фахівець з розробки та тестування програмного забезпечення, фахівець з розроблення комп’ютерних програм.',
+  //           },
+  //           {
+  //             name: 'АВТОМАТИЗАЦІЯ ТА КОМП\'ЮТЕРНО-ІНТЕГРОВАНІ ТЕХНОЛОГІЇ',
+  //             code: '151',
+  //             forms: {
+  //               fulltime: true,
+  //               external: true,
+  //             },
+  //             terms: {
+  //               full: '3 роки 10 місяців',
+  //               basic: '2 роки 10 місяців',
+  //             },
+  //             qualification: 'Електромеханік',
+  //             description: 'Фахівці можуть обіймати такі посади: електромеханік, електромеханік дільниці, технік-конструктор (технік-електромеханік) з автоматизації виробничих процесів, технік з налагоджування та випробувань, кресляр-конструктор систем автоматизації, лаборант з обслуговування засобів автоматизації.',
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         name: 'Економічне відділення',
+  //         specialties: [
+  //           {
+  //             name: 'ОБЛІК І ОПОДАТКУВАННЯ',
+  //             code: '121',
+  //             forms: {
+  //               fulltime: true,
+  //               external: true,
+  //             },
+  //             terms: {
+  //               full: '3 роки 10 місяців',
+  //               basic: '2 роки 10 місяців',
+  //             },
+  //             qualification: 'Технік-програміст',
+  //             description: 'Фахівці можуть обіймати такі посади: технік-програміст, фахівець з інформаційних технологій, фахівець з розробки та тестування програмного забезпечення, фахівець з розроблення комп’ютерних програм.',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   }
+  // },
 }
 </script>
 
@@ -189,6 +213,10 @@ export default {
 
     &-info{
       font-size: 16px;
+
+      &-list + &-list:before {
+        content: ", ";
+      }
     }
   }
 

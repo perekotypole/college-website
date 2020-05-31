@@ -51,11 +51,11 @@
 
         <div class="app-contacts__list">
           <div class="app-contacts__item"
-            v-for="({ place, phone, email}, index) in contacts"
+            v-for="({ works, contacts: { phone, email } }, index) in list.admins"
             :key="index">
             <app-subtitle
               class="app-contacts__item-title">
-              {{ place }}
+              {{ works[0] }}
             </app-subtitle>
 
             <div class="app-contacts__item-contact">
@@ -95,6 +95,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
 import AppSubtitle from '@/components/ui/AppSubtitle.vue'
@@ -105,52 +107,65 @@ export default {
     AppTitle,
     AppSubtitle,
   },
+  computed: {
+    ...mapGetters({
+      list: 'teachers/admins',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      loadAdmins: 'teachers/loadAdmins',
+    }),
+  },
+  created() {
+    this.loadAdmins()
+  },
   data() {
     return {
       map: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10568.002070728826!2d25.0403637!3d48.5332218!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xbe99f0c2dee6921f!2sKolomyys%CA%B9kyy%20Politekhnichnyy%20Koledzh!5e0!3m2!1sru!2sua!4v1588608452587!5m2!1sru!2sua',
-      contacts: [
-        {
-          email: 'lyashenyk@gmail.com',
-          place: 'Директор коледжу',
-        },
-        {
-          phone: '(03433)5-03-45',
-          place: 'Заступник директора з навчальної роботи',
-        },
-        {
-          phone: '(03433)5 – 03 – 30',
-          place: 'Заступник директора з виховної роботи',
-        },
-        {
-          phone: '(03433)2-79-85',
-          place: 'Керівник фізичного виховання коледжу',
-        },
-        {
-          phone: '(03433)5-03-57',
-          email: 'vasylyshyn8@i.ua',
-          place: 'ЗАВІДУВАЧ ДЕННОГО ВІДДІЛЕННЯ КОМ\'ЮТЕРНИХ ТЕХНОЛОГІЙ',
-        },
-        {
-          phone: '(03433)5-10-50',
-          place: 'ЗАВІДУВАЧ ДЕННОГО МЕХАНІКО-ТЕХНОЛОГІЧНОГО ВІДДІЛЕННЯ',
-        },
-        {
-          phone: '(03433)5-03- 57',
-          place: 'ЗАВІДУВАЧ ДЕННОГО ЕКОНОМІЧНОГО ВІДДІЛЕННЯ',
-        },
-        {
-          phone: '(03433)5-03-45',
-          place: 'ЗАВІДУВАЧ ЗАОЧНОГО МЕХАНІКО-ЕКОНОМІЧНОГО ВІДДІЛЕННЯ',
-        },
-        {
-          phone: '(03433)5-03-57',
-          place: 'СЕКРЕТАР НАВЧАЛЬНОЇ ЧАСИТИНИ',
-        },
-        {
-          phone: '(03433)5-03-45',
-          place: 'ІНСПЕКТОР ВІДДІЛУ КАДРІВ',
-        },
-      ],
+      // contacts: [
+      //   {
+      //     email: 'lyashenyk@gmail.com',
+      //     place: 'Директор коледжу',
+      //   },
+      //   {
+      //     phone: '(03433)5-03-45',
+      //     place: 'Заступник директора з навчальної роботи',
+      //   },
+      //   {
+      //     phone: '(03433)5 – 03 – 30',
+      //     place: 'Заступник директора з виховної роботи',
+      //   },
+      //   {
+      //     phone: '(03433)2-79-85',
+      //     place: 'Керівник фізичного виховання коледжу',
+      //   },
+      //   {
+      //     phone: '(03433)5-03-57',
+      //     email: 'vasylyshyn8@i.ua',
+      //     place: 'ЗАВІДУВАЧ ДЕННОГО ВІДДІЛЕННЯ КОМ\'ЮТЕРНИХ ТЕХНОЛОГІЙ',
+      //   },
+      //   {
+      //     phone: '(03433)5-10-50',
+      //     place: 'ЗАВІДУВАЧ ДЕННОГО МЕХАНІКО-ТЕХНОЛОГІЧНОГО ВІДДІЛЕННЯ',
+      //   },
+      //   {
+      //     phone: '(03433)5-03- 57',
+      //     place: 'ЗАВІДУВАЧ ДЕННОГО ЕКОНОМІЧНОГО ВІДДІЛЕННЯ',
+      //   },
+      //   {
+      //     phone: '(03433)5-03-45',
+      //     place: 'ЗАВІДУВАЧ ЗАОЧНОГО МЕХАНІКО-ЕКОНОМІЧНОГО ВІДДІЛЕННЯ',
+      //   },
+      //   {
+      //     phone: '(03433)5-03-57',
+      //     place: 'СЕКРЕТАР НАВЧАЛЬНОЇ ЧАСИТИНИ',
+      //   },
+      //   {
+      //     phone: '(03433)5-03-45',
+      //     place: 'ІНСПЕКТОР ВІДДІЛУ КАДРІВ',
+      //   },
+      // ],
     }
   },
 }

@@ -12,7 +12,7 @@ export default (router) => {
 
       return res.json({
         finded: !!result,
-        news: result,
+        departments: result,
       })
     } catch (error) {
       return res.json({
@@ -36,7 +36,7 @@ export default (router) => {
 
       return res.json({
         created: !!result,
-        news: result,
+        specialty: result,
       })
     } catch (error) {
       return res.json({
@@ -71,7 +71,7 @@ export default (router) => {
 
       return res.json({
         deleted: !!result,
-        news: result,
+        specialty: result,
       })
     } catch (error) {
       return res.json({
@@ -107,7 +107,7 @@ export default (router) => {
 
       return res.json({
         updated: !!result,
-        news: result,
+        specialty: result,
       })
     } catch (error) {
       return res.json({

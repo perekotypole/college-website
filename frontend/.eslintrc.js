@@ -18,6 +18,7 @@ module.exports = {
     'no-plusplus': 'off',
     'no-unused-vars': 'off',
     'global-require': 'off',
+    'no-unused-expressions': 'off',
     //---------------------------
     'no-trailing-spaces': 'off',
     'no-mixed-operators': 'off',

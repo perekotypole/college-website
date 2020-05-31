@@ -30,18 +30,18 @@
     <div class="specialities__content">
       <div
         class="specialities__column"
-        v-for="(spec, index) in specialities"
+        v-for="(department, index) in list.departments"
         :key="index"
         :class="{
-          'opened': spec.opened,
+          'opened': department.opened,
         }"
       >
         <div
           class="specialities__column-title"
-          @click="spec.opened = !spec.opened"
+          @click="department.opened = !department.opened"
         >
           <div class="">
-            {{ spec.title }}
+            {{ department.name }}
           </div>
 
           <div class="specialities__column-icon">
@@ -55,14 +55,14 @@
         <div class="specialities__list">
           <SpecialitiesCard
             class="specialities__card"
-            v-for="(item, index) in spec.items"
+            v-for="(specialty, index) in department.specialties"
             :key="index"
-            :color="item.courses == 4 ? `--color-accent-yellow` : `--color-accent-green`"
-            :icon="item.number"
-            :number="item.number"
-            :studyForm="item.studyForm"
-            :qualification="item.qualification"
-          >{{ item.name }}</SpecialitiesCard>
+            :color="specialty.courses == 4 ? `--color-accent-yellow` : `--color-accent-green`"
+            :icon="specialty.icon"
+            :number="specialty.code"
+            :studyForm="specialty.forms"
+            :qualification="specialty.qualification"
+          >{{ specialty.name }}</SpecialitiesCard>
         </div>
       </div>
     </div>
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 import AppTitle from '@/components/ui/AppTitle.vue'
 import SpecialitiesCard from '@/components/templates/home/SpecialitiesCard.vue'
@@ -93,55 +94,68 @@ export default {
       default: () => true,
     },
   },
-  data: () => ({
-    specialities: [
-      {
-        title: "ВІДДІЛЕННЯ КОМП'ЮТЕРНИХ ТЕХНОЛОГІЙ",
-        opened: false,
-        items: [
-          {
-            number: '121', name: 'Інженерія програмного забезпечення', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік-програміст',
-          },
-          {
-            number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'електромеханік',
-          },
-        ],
-      },
-      {
-        title: 'ЕКОНОМІЧНЕ ВІДДІЛЕННЯ',
-        opened: false,
-        items: [
-          {
-            number: '071', name: 'Облік і оподаткування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'бухгалтер',
-          },
-          {
-            number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з фінансів',
-          },
-          {
-            number: '073', name: 'Менеджмент', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'помічник керівника виробничого підрозділу',
-          },
-          {
-            number: '075', name: 'Маркетинг', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з маркетингу',
-          },
-        ],
-      },
-      {
-        title: 'МЕХАНІКО-ТЕХНОЛОГІЧНЕ ВІДДІЛЕННЯ',
-        opened: false,
-        items: [
-          {
-            number: '133', name: 'Галузеве машинобудування', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік з експлуатації та ремонту устаткування',
-          },
-          {
-            number: '182', name: 'Технологія легкої промисловості', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – конструктор',
-          },
-          {
-            number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – технолог',
-          },
-        ],
-      },
-    ],
-  }),
+  computed: {
+    ...mapGetters({
+      list: 'specialties/list',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      loadSpecialties: 'specialties/loadSpecialties',
+    }),
+  },
+  created() {
+    this.loadSpecialties()
+  },
+  // data: () => ({
+  //   specialities: [
+  //     {
+  //       title: "ВІДДІЛЕННЯ КОМП'ЮТЕРНИХ ТЕХНОЛОГІЙ",
+  //       opened: false,
+  //       items: [
+  //         {
+  //           number: '121', name: 'Інженерія програмного забезпечення', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік-програміст',
+  //         },
+  //         {
+  //           number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'електромеханік',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: 'ЕКОНОМІЧНЕ ВІДДІЛЕННЯ',
+  //       opened: false,
+  //       items: [
+  //         {
+  //           number: '071', name: 'Облік і оподаткування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'бухгалтер',
+  //         },
+  //         {
+  //           number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з фінансів',
+  //         },
+  //         {
+  //           number: '073', name: 'Менеджмент', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'помічник керівника виробничого підрозділу',
+  //         },
+  //         {
+  //           number: '075', name: 'Маркетинг', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з маркетингу',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: 'МЕХАНІКО-ТЕХНОЛОГІЧНЕ ВІДДІЛЕННЯ',
+  //       opened: false,
+  //       items: [
+  //         {
+  //           number: '133', name: 'Галузеве машинобудування', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік з експлуатації та ремонту устаткування',
+  //         },
+  //         {
+  //           number: '182', name: 'Технологія легкої промисловості', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – конструктор',
+  //         },
+  //         {
+  //           number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – технолог',
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // }),
 }
 </script>
 
