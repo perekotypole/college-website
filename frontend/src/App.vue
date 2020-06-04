@@ -40,12 +40,12 @@ a {
   color: var(--color-font-main);
 }
 
-p{
+p {
   margin-bottom: 20px;
   line-height: 30px;
 }
 
-b{
+b {
   font-weight: 600;
 }
 
@@ -77,15 +77,15 @@ body {
   color: var(--color-font-main);
 }
 
-.yellow{
+.yellow {
   background: var(--color-accent-yellow);
 }
 
-.green{
+.green {
   background: var(--color-accent-green);
 }
 
-.red{
+.red {
   background: var(--color-accent-red);
 }
 
@@ -111,6 +111,11 @@ body {
   background-color: transparent;
 }
 
+
+textarea {
+  font: var(--font-main);
+  color: var(--color-font-main);
+}
 
 input {
   font: var(--font-main);
@@ -173,6 +178,29 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.picture-input { 
+
+  &__change-button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-font-main);
+    border-radius: 30px;
+    background: url('./assets/icons/refresh.svg') no-repeat;
+    background-size: 17px;
+    background-position: center;
+  }
+
+  &__remove-button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-font-main);
+    border-radius: 30px;
+    background: url('./assets/icons/delete.svg') no-repeat;
+    background-size: 17px;
+    background-position: center;
+  }
+}
+ 
 
 @media screen and (max-width: 1195px) {
   .container {

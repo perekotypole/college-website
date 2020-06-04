@@ -152,6 +152,7 @@ export default {
   border-radius: 0 20px 20px 0;
 
   position: fixed;
+  z-index: 10003;
 
   height: 100vh;
 

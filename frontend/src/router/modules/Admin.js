@@ -9,4 +9,9 @@ export default [
     path: '/admin/news',
     component: () => import('@/views/admin/News'),
   },
+  {
+    name: 'news-creator',
+    path: '/admin/news/create',
+    component: () => import('@/views/admin/NewsCreator'),
+  },
 ]
