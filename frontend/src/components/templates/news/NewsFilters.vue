@@ -1,37 +1,40 @@
 <template>
   <div class="app-news__filters filters">
-      <form action="" class="filters__form">
-        <div class="filters__search search">
-          <input
-            class="search__input"
-            type="text"
-            placeholder="Пошук" />
-          <img class="search__icon" src="@/assets/icons/search-icon.svg" alt="search icon" />
-        </div>
+    <form action="" class="filters__form">
+      <div class="filters__search search">
+        <input
+          class="search__input"
+          type="text"
+          placeholder="Пошук" />
+        <img class="search__icon" src="@/assets/icons/search-icon.svg" alt="search icon" />
+      </div>
 
-        <div class="filters__pub-date">
-          <span class="filters__title">Дата публікації:</span>
-          <date-input />
-          <div class="filters__separator"></div>
-          <date-input
-            :slope="4"
-          />
-        </div>
+      <div class="filters__pub-date">
+        <span class="filters__title">Дата публікації:</span>
+        <date-input />
+        <div class="filters__separator"></div>
+        <date-input
+          :slope="4"
+        />
+      </div>
 
-        <div class="filters__category">
-          <span class="filters__title">Категорія:</span>
-          <app-select
-            class="filters__category-select"
-            :slope="4"
-            :items="categories"
-            :minWidth="160"
-          />
-        </div>
-      </form>
-    </div>
+      <div class="filters__category"
+        v-if="categories.length">
+        <span class="filters__title">Категорія:</span>
+        <app-select
+          class="filters__category-select"
+          :slope="4"
+          :items="categories"
+          :minWidth="160"
+          @getValue="tag = $event"
+        />
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 import DateInput from '@/components/ui/DateInput.vue'
 import AppSelect from '@/components/ui/AppSelect.vue'
@@ -41,8 +44,28 @@ export default {
     DateInput, AppSelect,
   },
   data: () => ({
-    categories: ['всі', 'спорт', 'студенти', 'викладачі'],
+    tag: null,
   }),
+  props: {
+    categories: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
+  },
+  methods: {
+    ...mapActions({
+      setSelectTag: 'news/setSelectTag',
+    }),
+  },
+  watch: {
+    tag(val) {
+      this.setSelectTag(val)
+    },
+  },
+  created() {
+    this.setSelectTag(this.tag)
+  },
 }
 </script>
 

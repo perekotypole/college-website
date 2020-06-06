@@ -1,5 +1,5 @@
 <template>
-  <div
+  <router-link :to="link"
     class="button"
     :style="{
       padding: `${padding[0]}px ${padding[1] + slope}px`,
@@ -9,7 +9,7 @@
     <span>
       <slot></slot>
     </span>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -19,6 +19,11 @@ export default {
       type: Array,
       required: false,
       default: () => [10, 20],
+    },
+    link: {
+      type: String,
+      required: false,
+      default: () => '#',
     },
     color: {
       type: String,

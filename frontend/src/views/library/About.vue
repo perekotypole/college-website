@@ -23,7 +23,7 @@
 
         <app-image
           class="app-about__item-image"
-          :link="images[0]"
+          :link="photo.images[0].path"
           position="right"
           ></app-image>
 
@@ -48,7 +48,7 @@
 
         <app-image
           class="app-about__item-image"
-          :link="images[1]"
+          :link="photo.images[1].path"
           position="left"
           ></app-image>
 
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppImage from '@/components/ui/AppImage.vue'
 
@@ -85,11 +87,16 @@ export default {
   },
   data() {
     return {
-      images: [
-        'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg',
-        'https://lh3.googleusercontent.com/phcAnWdgEWSUaGOYXBlNIQFqx-7KC8KjFWW8wqOEGMTWyjUE_O7pCy3P8qU735I2MaK8mPt0vQu0SQ1w=w645-h484-rw-no',
-      ],
+      photo: [],
     }
+  },
+  methods: {
+    ...mapActions({
+      loadImages: 'images/loadImages',
+    }),
+  },
+  async created() {
+    this.photo = await this.loadImages(['5ebd605e36626b233ccd1fc2', '5ebd5ebb36626b233ccd1fc1'])
   },
 }
 </script>

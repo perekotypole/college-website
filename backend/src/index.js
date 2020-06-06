@@ -7,6 +7,7 @@ import { production, development } from './configs/db'
 import structure from './modules/structure'
 import news from './modules/news'
 import auth from './modules/auth'
+import files from './modules/files'
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -32,5 +33,6 @@ mongoose
 auth(app)
 structure(app)
 news(app)
+files(app)
 
 app.listen(port)

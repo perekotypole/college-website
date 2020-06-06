@@ -6,10 +6,13 @@ import verifyUser from '../../../middlewares/verifyUser'
 
 export default (router) => {
   router.post('/list', async (req, res) => {
-    const { tag, date, number, page } = req.body
+    const {
+      tag, date, number, page, sort,
+    } = req.body
+
 
     try {
-      const query = News.find().sort('-publicationDate')
+      const query = News.find().sort({ publicationDate: -sort })
 
       if (tag) query.where({ mainTag: tag })
       if (date) {
@@ -21,10 +24,27 @@ export default (router) => {
 
       const result = await query
         .skip((page - 1) * number)
-        .limit(number)
+        .limit(Number(number))
         .populate({ path: 'mainTag', model: Tag })
         .populate({ path: 'mainImage', model: Image })
         .select('-text -imagesList -documentsList')
+
+      return res.json({
+        finded: !!result,
+        news: result,
+      })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
+      })
+    }
+  })
+
+  router.get('/number', async (req, res) => {
+    try {
+      const result = await News.find().count()
 
       return res.json({
         finded: !!result,
@@ -113,7 +133,32 @@ export default (router) => {
     }
   })
 
-  router.get('/byOptionalTags', async (req, res) => {
+  router.post('/byTag', async (req, res) => {
+    const { tag, page, number } = req.body
+
+    try {
+      const result = await News.find({ mainTag: tag })
+        .sort('-publicationDate')
+        .skip((page - 1) * number)
+        .limit(number)
+        .populate({ path: 'mainTag', model: Tag })
+        .populate({ path: 'mainImage', model: Image })
+        .select('-text -imagesList -documentsList')
+
+      return res.json({
+        finded: !!result,
+        news: result,
+      })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
+      })
+    }
+  })
+
+  router.post('/byOptionalTags', async (req, res) => {
     const { tags, page, number } = req.body
 
     try {

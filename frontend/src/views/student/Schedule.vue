@@ -19,10 +19,10 @@
         <app-name-title class="section__title">Графік навчального процесу</app-name-title>
 
         <document-link
-          v-for="(doc, i) in studyProcessDocs"
+          v-for="(doc, i) in studyProcessDocs.documents"
           :key="i"
-          :link="doc.link"
-        >{{ doc.title }}</document-link>
+          :link="doc.path"
+        >{{ doc.name }}</document-link>
       </section>
 
       <section
@@ -62,8 +62,10 @@
         </div>
 
         <document-link
-          :link="'#'"
-        >Розклад занять на II семестр 2019-2020 н.р. (денна форма)</document-link>
+          v-for="(doc, i) in scheduleDocs.documents"
+          :key="i"
+          :link="doc.path"
+        >{{ doc.name }}</document-link>
       </section>
 
       <section
@@ -121,6 +123,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
@@ -135,22 +138,23 @@ export default {
   components: {
     AppPagename, AppNameTitle, AppTitle, DocumentLink, ScheduleFilters, ScheduleLesson, SectionsList,
   },
+  methods: {
+    ...mapActions({
+      loadDocuments: 'documents/loadDocuments',
+    }),
+  },
+  async created() {
+    this.studyProcessDocs = await this.loadDocuments(['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
+    this.scheduleDocs = await this.loadDocuments(['5ed51fe6d4cd813fcc566e61'])
+  },
   data: () => ({
     sections: [
       { name: 'Графік навчального процесу', icon: 'calendar.svg', elementId: 'studyProcessScheduleSection' },
       { name: 'Розклад занать', icon: 'presentation.svg', elementId: 'lessonsScheduleSection' },
       { name: 'Розклад дзвінків', icon: 'bell.svg', elementId: 'bellsScheduleSection' },
     ],
-    studyProcessDocs: [
-      {
-        title: 'Графік навчального процесу на 2019-2020 н.р. (денна форма навчання)',
-        link: '#',
-      },
-      {
-        title: 'Графік навчального процесу на 2019-2020 н.р. (заочна форма навчання)',
-        link: '#',
-      },
-    ],
+    studyProcessDocs: {},
+    scheduleDocs: {},
     lessons: [
       {
         dayName: 'понеділок',

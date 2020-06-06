@@ -30,8 +30,8 @@ export default (router) => {
       const result = await Specialties.create(specialty)
 
       if (result) {
-        Departments.findByIdAndUpdate(specialty.department,
-          { $push: { specialties: specialty.id } }).exec()
+        Departments.findByIdAndUpdate(result.department,
+          { $push: { specialties: result._id } }).exec()
       }
 
       return res.json({

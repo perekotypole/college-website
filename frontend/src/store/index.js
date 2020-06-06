@@ -5,6 +5,8 @@ import teachers from './teachers'
 import commissions from './commissions'
 import news from './news'
 import specialties from './specialties'
+import documents from './documents'
+import images from './images'
 
 Vue.use(Vuex)
 
@@ -20,5 +22,7 @@ export default new Vuex.Store({
     commissions,
     news,
     specialties,
+    documents,
+    images,
   },
 })

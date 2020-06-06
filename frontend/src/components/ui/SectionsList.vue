@@ -24,11 +24,11 @@
           :class="{'sections_big': cardSize === 'big'}"
         >
           <app-inner-section
-            v-for="({ icon, name, _id }, index) in sections"
+            v-for="({ icon, name, elementId }, index) in sections"
             :key="index"
             :icon="icon"
             :name="name"
-            :elementId="_id"
+            :elementId="elementId"
             class="section-card"
             :type="type"
             :size="cardSize"
@@ -48,7 +48,7 @@ export default {
   },
   props: {
     sections: {
-      type: Array,
+      type: [Array, Object],
       required: true,
       default: () => [],
     },

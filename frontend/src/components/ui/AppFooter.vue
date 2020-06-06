@@ -1,6 +1,7 @@
 <template>
   <footer class="footer">
-    <div class="footer__to-top-button">
+    <div class="footer__to-top-button"
+      @click="toTop()">
         <img src="@/assets/icons/up-arrow.svg" all="to top">
     </div>
     <div class="footer__content">
@@ -54,7 +55,7 @@
                       class="footer__navigation-link"
                       v-for="(link, index) in col.links"
                       :key="index"
-                    ><router-link to="#">{{ link }}</router-link></li>
+                    ><router-link :to="link.routeName">{{ link.name }}</router-link></li>
                 </ul>
             </div>
         </div>
@@ -66,18 +67,75 @@
 </template>
 
 <script>
+import anime from 'animejs/lib/anime.es'
 
 import AppTitle from '@/components/ui/AppTitle.vue'
 
 export default {
   name: 'app-footer',
   components: { AppTitle },
+  methods: {
+    toTop() {
+      anime({
+        targets: window.document.scrollingElement,
+        scrollTop: 0,
+        duration: 800,
+        easing: 'easeInOutQuad',
+      })
+    },
+  },
   data: () => ({
     sitemap: [
-      { title: 'КОЛЕДЖ', links: ['Історія', 'Адміністрація', 'Документація', 'Галерея', 'Спорт', 'Викладачі', 'Студенти', 'Гуртожиток'] },
-      { title: 'АБІТУРІЄНТАМ', links: ['Підготовчі курси', 'Освітня програма', 'Правила прийому', 'Приймальна комісія', 'Обсяг державних замовлень', 'Програма вступних випробувань', 'Розлад', 'Результати'] },
-      { title: 'СТУДЕНТАМ', links: ['Навчання', 'Екзамени', 'Практика', 'Консультації', 'ЗНО', 'Стипендіальне забезпечення'] },
-      { title: 'ІНШЕ', links: ['Циклові комісії', 'Спеціальності', 'Бібліотека', 'Документація бібліотеки', 'Правила бібліотеки', 'Електронні підручники', 'Новини', 'Контакти'] },
+      { 
+        title: 'КОЛЕДЖ',
+        links: [
+          { name: 'Історія', routeName: '/about/history' },
+          { name: 'Адміністрація', routeName: '/about/administration' },
+          { name: 'Документація', routeName: '/about/documentation' },
+          { name: 'Галерея', routeName: '/about/galery' },
+          { name: 'Спорт', routeName: '/about/activity' },
+          { name: 'Викладачі', routeName: '/about/activity' },
+          { name: 'Студенти', routeName: '/about/activity' },
+          { name: 'Гуртожиток', routeName: '/about/chummer' },
+        ],
+      },
+      { 
+        title: 'АБІТУРІЄНТАМ',
+        links: [
+          { name: 'Підготовчі курси', routeName: '/entrants/courses' },
+          { name: 'Освітня програма', routeName: '/study/program' },
+          { name: 'Правила прийому', routeName: '/entrants/entrance' },
+          { name: 'Приймальна комісія', routeName: '/entrants/entrance' },
+          { name: 'Обсяг державних замовлень', routeName: '/entrants/entrance' },
+          { name: 'Програма вступних випробувань', routeName: '/entrants/entrance' },
+          { name: 'Розлад', routeName: '/entrants/entrance' },
+          { name: 'Результати', routeName: '/entrants/entrance' },
+        ],
+      },
+      { 
+        title: 'СТУДЕНТАМ',
+        links: [
+          { name: 'Навчання', routeName: '/student/schedule' },
+          { name: 'Екзамени', routeName: '/student/exam' },
+          { name: 'Практика', routeName: '/student/practice' },
+          { name: 'Консультації', routeName: '/student/consultation' },
+          { name: 'ЗНО', routeName: '/student/zno' },
+          { name: 'Стипендіальне забезпечення', routeName: '/student/scholarship' },
+        ],
+      },
+      { 
+        title: 'ІНШЕ',
+        links: [
+          { name: 'Циклові комісії', routeName: '/study/commissions' },
+          { name: 'Спеціальності', routeName: '/study/specialties' },
+          { name: 'Бібліотека', routeName: '/library/about' },
+          { name: 'Документація бібліотеки', routeName: '/library/principle' },
+          { name: 'Правила бібліотеки', routeName: '/library/rules' },
+          { name: 'Електронні підручники', routeName: '/library/ebooks' },
+          { name: 'Новини', routeName: '/news' },
+          { name: 'Контакти', routeName: '/contacts' },
+        ],
+      },
     ],
   }),
 }

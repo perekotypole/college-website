@@ -57,7 +57,7 @@
             class="specialities__card"
             v-for="(specialty, index) in department.specialties"
             :key="index"
-            :color="specialty.courses == 4 ? `--color-accent-yellow` : `--color-accent-green`"
+            :color="specialty.terms.basic > 34 ? `--color-accent-yellow` : `--color-accent-green`"
             :icon="specialty.icon"
             :number="specialty.code"
             :studyForm="specialty.forms"
@@ -107,55 +107,6 @@ export default {
   created() {
     this.loadSpecialties()
   },
-  // data: () => ({
-  //   specialities: [
-  //     {
-  //       title: "ВІДДІЛЕННЯ КОМП'ЮТЕРНИХ ТЕХНОЛОГІЙ",
-  //       opened: false,
-  //       items: [
-  //         {
-  //           number: '121', name: 'Інженерія програмного забезпечення', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік-програміст',
-  //         },
-  //         {
-  //           number: '151', name: 'Автоматизація та комп’ютерно-інтегровані технології', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'електромеханік',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: 'ЕКОНОМІЧНЕ ВІДДІЛЕННЯ',
-  //       opened: false,
-  //       items: [
-  //         {
-  //           number: '071', name: 'Облік і оподаткування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'бухгалтер',
-  //         },
-  //         {
-  //           number: '072', name: 'Фінанси, банківська справа та страхування', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з фінансів',
-  //         },
-  //         {
-  //           number: '073', name: 'Менеджмент', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'помічник керівника виробничого підрозділу',
-  //         },
-  //         {
-  //           number: '075', name: 'Маркетинг', courses: 3, studyForm: ['денна', 'заочна'], qualification: 'молодший спеціаліст з маркетингу',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: 'МЕХАНІКО-ТЕХНОЛОГІЧНЕ ВІДДІЛЕННЯ',
-  //       opened: false,
-  //       items: [
-  //         {
-  //           number: '133', name: 'Галузеве машинобудування', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік з експлуатації та ремонту устаткування',
-  //         },
-  //         {
-  //           number: '182', name: 'Технологія легкої промисловості', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – конструктор',
-  //         },
-  //         {
-  //           number: '205', name: 'Лісове господарство (спеціалізація: “Деревообробні та меблеві технології”)', courses: 4, studyForm: ['денна', 'заочна'], qualification: 'технік – технолог',
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // }),
 }
 </script>
 

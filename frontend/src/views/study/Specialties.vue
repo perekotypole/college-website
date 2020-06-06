@@ -74,12 +74,12 @@
               </app-title>
 
               <p class="app-specialties__spec-info-section">
-                <span v-if="specialty.terms.full">
-                  <b>{{ specialty.terms.full | term }}</b> - на основі базової загальної середньої освіти
-                  <br/>
-                </span>
                 <span v-if="specialty.terms.basic">
-                  <b>{{ specialty.terms.basic | term }}</b> - на основі повної загальної середньої освіти
+                  <b>{{ specialty.terms.basic | term }}</b> - на основі базової загальної середньої освіти
+                </span>
+                  <br/>
+                <span v-if="specialty.terms.full">
+                  <b>{{ specialty.terms.full | term }}</b> - на основі повної загальної середньої освіти
                 </span>
               </p>
             </div>

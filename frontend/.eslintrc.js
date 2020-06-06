@@ -19,6 +19,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'global-require': 'off',
     'no-unused-expressions': 'off',
+    'no-underscore-dangle': 'off',
     //---------------------------
     'no-trailing-spaces': 'off',
     'no-mixed-operators': 'off',

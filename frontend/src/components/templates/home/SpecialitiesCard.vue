@@ -87,6 +87,8 @@ export default {
     display: flex;
     transition: 1s;
     backface-visibility: hidden;
+
+    text-transform: uppercase;
   }
 
   &__back {

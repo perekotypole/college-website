@@ -1,5 +1,6 @@
 <template>
-  <div class="select">
+  <div class="select"
+    >
     <div
       v-click-outside="() => { opened = false }"
       class="select__current"
@@ -9,7 +10,7 @@
       }"
       @click="opened = !opened"
     >
-      <span class="select__curent-text">{{ items[active] }}</span>
+      <span class="select__curent-text">{{ items[active].name }}</span>
       <img class="select__arrow-icon" src="@/assets/icons/up-arrow.svg" alt="arrow icon">
     </div>
     <div
@@ -24,8 +25,8 @@
           'minWidth': `${minWidth}px`,
         }"
         v-show="i !== active"
-        @click="active = i"
-      >{{ item }}</span>
+        @click="(active = i) & $emit('getValue', items[active].value)"
+      >{{ item.name }}</span>
     </div>
   </div>
 </template>
@@ -56,6 +57,9 @@ export default {
   }),
   directives: {
     ClickOutside,
+  },
+  created() {
+    this.$emit('getValue', this.items[this.active].value)
   },
 }
 </script>

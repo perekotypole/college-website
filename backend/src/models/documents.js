@@ -1,9 +1,13 @@
 import { Schema, model } from 'mongoose'
 
 export default model('Document', new Schema({
-  document: {
+  name: {
     type: String,
-    unique: true,
     required: true,
+  },
+  path: {
+    type: String,
+    required: true,
+    unique: true,
   },
 }))

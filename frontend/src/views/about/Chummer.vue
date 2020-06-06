@@ -32,7 +32,7 @@
 
         <app-image
           class="app-history__item-image"
-          :link="images[0]"
+          :link="photo.images[0].path"
           position="right"
           ></app-image>
 
@@ -54,7 +54,7 @@
 
         <app-image
           class="app-history__item-image"
-          :link="images[1]"
+          :link="photo.images[1].path"
           position="left"
           ></app-image>
 
@@ -83,7 +83,7 @@
 
         <app-image
           class="app-history__item-image"
-          :link="images[2]"
+          :link="photo.images[2].path"
           position="right"
           ></app-image>
       </div>
@@ -98,15 +98,17 @@
       <div class="app-history__galery">
         <img
         class="app-history__galery-photo"
-        v-for="(photo, index) in galery"
+        v-for="(image, index) in galery.images"
         :key="index"
-        :src="`${photo}`">
+        :src="`${image.path}`">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppImage from '@/components/ui/AppImage.vue'
 import AppTitle from '@/components/ui/AppTitle.vue'
@@ -119,21 +121,32 @@ export default {
   },
   data() {
     return {
-      images: [
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7391.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7408.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7418.jpg',
-      ],
-      galery: [
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7391.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7408.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7418.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7437.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7454.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7414.jpg',
-        'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7466.jpg',
-      ],
+      photo: [],
+      // photo: [
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7391.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7408.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7418.jpg',
+      // ],
+      galery: [],
+      // galery: [
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7391.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7408.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7418.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7437.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7454.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7414.jpg',
+      //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7466.jpg',
+      // ],
     }
+  },
+  methods: {
+    ...mapActions({
+      loadImages: 'images/loadImages',
+    }),
+  },
+  async created() {
+    this.photo = await this.loadImages(['5ebd605e36626b233ccd1fc2', '5ebd5ebb36626b233ccd1fc1', '5ebecda036626b233ccd1fc7'])
+    this.galery = await this.loadImages(['5ebd605e36626b233ccd1fc2', '5ebd5ebb36626b233ccd1fc1', '5ebecda036626b233ccd1fc7'])
   },
 }
 </script>

@@ -27,10 +27,12 @@
             :padding="[14, 28]"
             color="green"
             :slope="10"
+            link="/about"
             class="header__button"
             >ПРО КОЛЕДЖ</app-button>
           <app-button
             :padding="[14, 28]"
+            link="/study/specialties"
             class="header__button"
             >СПЕЦІАЛЬНОСТІ</app-button>
         </div>

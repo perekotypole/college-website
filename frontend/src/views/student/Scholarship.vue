@@ -7,15 +7,10 @@
 
     <div class="app-scholarship__content container">
       <document-link
-        link="http://kpk-lp.com.ua/wp-content/uploads/2019/09/%D0%9E%D1%81%D0%B2%D1%96%D1%82%D0%BD%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0.pdf">
-        ПРАВИЛА  призначення стипендій в Коломийському політехнічному коледжі
-        НУ “Львівська політехніка” (із змінами та доповненнями )
-      </document-link>
-
-      <document-link
-        link="http://kpk-lp.com.ua/wp-content/uploads/2019/09/%D0%9E%D1%81%D0%B2%D1%96%D1%82%D0%BD%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0.pdf">
-        ЗМІНИ ТА ДОПОВНЕННЯ до Правил призначення СОЦІАЛЬНИХ стипендій в
-        Коломийському політехнічному коледжі НУ “Львівська політехніка”
+        v-for="({ name, path }, index) in documents.documents"
+        :key="index"
+        :link="path">
+        {{ name }}
       </document-link>
 
       <div class="app-scholarship__item">
@@ -66,6 +61,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import AppSubtitle from '@/components/ui/AppSubtitle.vue'
@@ -78,8 +75,17 @@ export default {
     AppSubtitle,
     DocumentLink,
   },
+  methods: {
+    ...mapActions({
+      loadDocuments: 'documents/loadDocuments',
+    }),
+  },
+  async created() {
+    this.documents = await this.loadDocuments(['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
+  },
   data() {
     return {
+      documents: {},
       dapartments: [
         {
           name: 'Відділення комп\'ютерних технологій',

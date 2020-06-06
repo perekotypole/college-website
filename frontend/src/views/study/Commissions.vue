@@ -60,15 +60,17 @@
             {{ member.name }}
           </div>
 
-          <div class="app-commissions__event-list">
+          <div class="app-commissions__event-list"
+            v-if="commission.events">
+            <!-- {{commission.events[0].news[0]}} -->
             <app-news
               class="app-commissions__event"
-              v-for="event in commission.events"
-              :key="event.id"
+              v-for="event in commission.events.news"
+              :key="event._id"
               :title="event.title"
-              :image="event.image"
-              :category="event.category"
-              :pubDate="event.pubDate"
+              :image="event.mainImage.path"
+              :category="event.mainTag.name"
+              :pubDate="new Date(event.publicationDate)"
             />
           </div>
         </section>

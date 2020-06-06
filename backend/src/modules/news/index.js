@@ -5,8 +5,8 @@ import tags from './router/tags'
 
 const router = Router()
 
-news(router)
 tags(router)
+news(router)
 
 export default (app) => {
   app.use('/news', router)

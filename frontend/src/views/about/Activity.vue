@@ -17,10 +17,11 @@
 
         <div class="section__col-block">
           <div class="app-activity__sport-left">
+            <!-- link="http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg" -->
             <app-image
             class="app-activity__image"
-            link="http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg"
             position="left"
+            :link="photo.images[0].path"
             ></app-image>
           </div>
           <div class="app-activity__sport-right">
@@ -69,15 +70,16 @@
           виховання та спорту серед ВНЗ І-ІІ рівнів акредитації.</p>
 
           <document-link
-            v-for="(doc, i) in sections.sport.achievements.documents"
+            v-for="(doc, i) in sections.sport.achievements.documents.documents"
             :key="i"
-            :link="doc.link"
+            :link="doc.path"
           >
-            {{ doc.title }}
+            {{ doc.name }}
           </document-link>
         </div>
 
-        <section class="section-lv-2 app-activity__section-lv-2 app-activity__sport-events">
+        <section class="section-lv-2 app-activity__section-lv-2 app-activity__sport-events"
+          v-if="sections.sport.events.finded">
           <app-title
             class="section-lv-2__title"
             color="green"
@@ -91,12 +93,12 @@
           <div class="app-activity__sport-events-list">
             <app-news
               class="app-activity__sport-event"
-              v-for="event in sections.sport.events"
-              :key="event.id"
+              v-for="event in sections.sport.events.news"
+              :key="event._id"
               :title="event.title"
-              :image="event.image"
-              :category="event.category"
-              :pubDate="event.pubDate"
+              :image="event.mainImage.path"
+              :category="event.mainTag.name"
+              :pubDate="new Date(event.publicationDate)"
             />
           </div>
         </section>
@@ -105,15 +107,16 @@
       <section :id="sections.teachers.elementId" class="app-activity__section section">
         <app-name-title class="section__title">Викладачі</app-name-title>
 
-        <div class="app-activity__teachers-event-list">
+        <div class="app-activity__teachers-event-list"
+          v-if="sections.teachers.events.finded">
           <app-news
             class="app-activity__sport-event"
-            v-for="event in sections.teachers.events"
-            :key="event.id"
+            v-for="event in sections.teachers.events.news"
+            :key="event._id"
             :title="event.title"
-            :image="event.image"
-            :category="event.category"
-            :pubDate="event.pubDate"
+            :image="event.mainImage.path"
+            :category="event.mainTag.name"
+            :pubDate="new Date(event.publicationDate)"
           />
         </div>
 
@@ -156,11 +159,11 @@
             </app-title>
 
             <document-link
-              v-for="(doc, i) in sections.teachers.methAssoc.documents"
+              v-for="(doc, i) in sections.teachers.methAssoc.documents.documents"
               :key="i"
-              :link="doc.link"
+              :link="doc.path"
             >
-              {{ doc.title }}
+              {{ doc.name }}
             </document-link>
           </section>
         </section>
@@ -175,12 +178,12 @@
 
         <app-news
           class="app-activity__sport-event"
-          v-for="event in sections.educActivity.events"
-          :key="event.id"
+          v-for="event in sections.educActivity.events.news"
+          :key="event._id"
           :title="event.title"
-          :image="event.image"
-          :category="event.category"
-          :pubDate="event.pubDate"
+          :image="event.mainImage.path"
+          :category="event.mainTag.name"
+          :pubDate="new Date(event.publicationDate)"
         />
       </section>
     </div>
@@ -188,6 +191,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
@@ -201,7 +205,25 @@ export default {
   components: {
     AppPagename, AppNameTitle, AppImage, AppTitle, AppNews, DocumentLink, SectionsList,
   },
+  methods: {
+    ...mapActions({
+      loadNewsByTag: 'news/loadNewsByTag',
+      loadImages: 'images/loadImages',
+      loadDocuments: 'documents/loadDocuments',
+    }),
+  },
+  async created() {
+    this.photo = await this.loadImages(['5ebece9836626b233ccd1fca'])
+    
+    this.sections.sport.events = await this.loadNewsByTag({ tag: '5ebd5a07c524342928139269' })
+    this.sections.teachers.events = await this.loadNewsByTag({ tag: '5ebd5a11c52434292813926a' })
+    this.sections.educActivity.events = await this.loadNewsByTag({ tag: '5ebd5a00c524342928139268' })
+
+    this.sections.sport.achievements.documents = await this.loadDocuments(['5ed51fcad4cd813fcc566e60', '5ed51fe6d4cd813fcc566e61'])
+    this.sections.teachers.methAssoc.documents = await this.loadDocuments(['5ed51fcad4cd813fcc566e60', '5ed51fe6d4cd813fcc566e61'])
+  },
   data: () => ({
+    photo: {},
     sections: {
       sport: {
         name: 'Спорт',
@@ -254,126 +276,26 @@ export default {
         ],
         achievements: {
           desc: '...',
-          documents: [
-            {
-              title: 'Підсумкова таблиця обласної спартакіади серед вищих навчальних закладів рівня коледжів за 2017-2018 навчальний рік',
-              link: '#',
-            },
-            {
-              title: 'Підсумкова таблиця обласного огляд-конкурсу на кращий стан фізичного виховання та спорту у закладах вищої освіти рівня коледжів За 2017-2018 навчальний рік',
-              link: '#',
-            },
-          ],
+          documents: {},
         },
-        events: [
-          {
-            id: 0,
-            title: 'Коломийський політехнічний коледж - переможець Всеукраїнського огляд-конкурсу на кращий стан фізичного виховання та спорту у вищих навчальних закладах Укрїни',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-          {
-            id: 1,
-            title: 'Зональні змагання спартакіади області з волейболу  07 – 08 березня',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-          {
-            id: 2,
-            title: 'Фінальні змагання спартакіади області з баскетболу 3*3 серед юнаків і дівчат м.Івано-Франківськ',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-        ],
+        events: {},
       },
       teachers: {
         name: 'Викладачі',
         icon: 'teacher.svg',
         elementId: 'teacherAtivitySection',
-        events: [
-          {
-            id: 0,
-            title: 'Відкриття лабораторії LEONI у коледжі',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-          {
-            id: 1,
-            title: 'Викладачі коледжу взяли участь у міжнародному форумі “SMART BUILDING 2020',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-          {
-            id: 2,
-            title: 'Oбласне методичне об’єднання викладачів німецької та французької мов',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-        ],
+        events: {},
         methAssoc: {
           title: 'Обласне методоб’єднання керівників фізичного виховання ВНЗ І-ІІ р.а.',
           head: 'Островський Ярослав Геннадійович',
-          documents: [
-            {
-              title: 'Звіт про роботу обласного методичного об’єднання керівників фізичного виховання Івано-Франківської області в 2018 – 2019 навчальному році',
-              link: '#',
-            },
-            {
-              title: 'План роботи обласного методичного об’єднання керівників фізичного виховання закладів вищої освіти (коледжі, училища, технікуми) з навчально-методичної, спортивно-масової та оздоровчої роботи на 2018 – 2019 навчальний рік',
-              link: '#',
-            },
-            {
-              title: 'Звіт про роботу обласного методичного об’єднання керівників фізичного виховання Івано-Франківської області в 2017 – 2018 навчальному році',
-              link: '#',
-            },
-            {
-              title: 'Друге засідання обласного методичного об’єднання керівників фізичного виховання Івано-Франківської області в 2017 – 2018 навчальному році',
-              link: '#',
-            },
-            {
-              title: 'Перше засідання обласного методичного об’єднання керівників фізичного виховання Івано-Франківської області в 2017 – 2018 навчальному році',
-              link: '#',
-            },
-            {
-              title: 'Звіт про роботу обласного методичного об’єднання за 2016 – 2017 н.р.',
-              link: '#',
-            },
-          ],
+          documents: [],
         },
       },
       educActivity: {
         name: 'Студенти',
         icon: 'study.svg',
         elementId: 'studentActivitySection',
-        events: [
-          {
-            id: 0,
-            title: 'День відкритих дверей в КПК НУ «Львівська політехніка»',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-          {
-            id: 1,
-            title: 'Обласний конкурс (творчий звіт) аматорських колективів «Україна – єдина країна»',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-          {
-            id: 2,
-            title: 'День відкритих дверей в КПК НУ «Львівська політехніка»',
-            image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-            category: 'студенти',
-            pubDate: new Date(),
-          },
-        ],
+        events: {},
       },
     },
   }),

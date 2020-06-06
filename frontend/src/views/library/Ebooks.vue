@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppSubtitle from '@/components/ui/AppSubtitle.vue'
 import DocumentLink from '@/components/ui/DocumentLink.vue'

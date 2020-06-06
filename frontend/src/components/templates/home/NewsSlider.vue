@@ -6,7 +6,7 @@
         <div
           class="swiper-slide news-slider__item"
           :class="{'news-slider__item_with-category': showCategory}"
-          v-for="({title, mainImage, mainTag}, i) in slides" :key="i"
+          v-for="({ _id, title, mainImage, mainTag}, i) in slides" :key="i"
         >
           <app-title
             v-if="showCategory && mainTag"
@@ -27,10 +27,10 @@
           >
           </div>
 
-          <div class="news-slider__text">
+          <router-link :to="`news/${_id}`" class="news-slider__text">
             <span class="news-slider__number">{{ i + 1 | addZero }}</span>
             <span class="news-slider__title">{{ title }}</span>
-          </div>
+          </router-link>
         </div>
       </div>
 

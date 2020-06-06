@@ -6,12 +6,13 @@
     ></app-pagename>
 
     <div class="app-documentation__content container">
-      <div class="app-documentation__item-links">
+      <div class="app-documentation__item-links"
+        v-if="firstList.finded">
         <document-link
           class="app-documentation__link"
-          v-for="({ name, link }, index) in firstList"
+          v-for="({ name, path }, index) in firstList.documents"
           :key="index"
-          :link="link"
+          :link="path"
           >{{ name }}</document-link>
       </div>
 
@@ -50,12 +51,13 @@
         </p>
       </div>
 
-      <div class="app-documentation__item-links">
+      <div class="app-documentation__item-links"
+        v-if="secondList.finded">
         <document-link
           class="app-documentation__link"
-          v-for="({ name, link }, index) in secondList"
+          v-for="({ name, path }, index) in secondList.documents"
           :key="index"
-          :link="link"
+          :link="path"
           >{{ name }}</document-link>
       </div>
     </div>
@@ -63,6 +65,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import DocumentLink from '@/components/ui/DocumentLink.vue'
 
@@ -73,39 +77,18 @@ export default {
   },
   data() {
     return {
-      firstList: [
-        {
-          name: 'Результати вибору електронних версій оригінал-макетів підручників для 11 класу закладів загальної освіти , поданих на конкурсний відбір проектів підручників для 6 та 11 класів закладів середньої освіти',
-          link: 'http://kpk-lp.com.ua/wp-content/uploads/2019/03/%D0%9F%D1%83%D0%B1%D0%BB%D1%96%D1%87%D0%BD%D0%B0-%D1%96%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D1%96%D1%8F-%D0%BF%D0%BE-%D0%BF%D1%96%D0%B4%D1%80%D1%83%D1%87%D0%BD%D0%B8%D0%BA%D0%B0%D1%85.pdf',
-        },
-        {
-          name: 'Витяг з протоколу №7 засідання педагогічної ради від 26.04.2018 р. про результати вибору електронних версій оригінал-макетів підручників',
-          link: 'http://kpk-lp.com.ua/wp-content/uploads/2018/04/%D0%B2%D0%B8%D1%82%D1%8F%D0%B3-%D0%B7-%D0%BF%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB%D1%83-%E2%84%967%D0%BF%D1%96%D0%B4%D1%80%D1%83%D1%87%D0%BD%D0%B8%D0%BA%D0%B8.pdf',
-        },
-      ],
-      secondList: [
-        {
-          name: 'Положення про відокремлений структурний підрозділ – Коломийський політехнічний коледж національного університету “Львівська політехніка”',
-          link: 'http://kpk-lp.com.ua/wp-content/uploads/2017/11/jpg2pdf.pdf',
-        },
-        {
-          name: 'Наказ про затвердження положення про відокремлений структурний підрозділ – Коломийський політехнічний коледж національного університету “Львівська політехніка”',
-          link: 'http://kpk-lp.com.ua/wp-content/uploads/2017/11/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-%D0%BF%D1%80%D0%BE-%D0%B7%D0%B0%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F.jpg',
-        },
-        {
-          name: 'Наказ на зміну наказу про затвердження положення про відокремлений структурний підрозділ – Коломийський політехнічний коледж національного університету “Львівська політехніка”',
-          link: 'http://kpk-lp.com.ua/wp-content/uploads/2017/11/%D0%97%D0%BC%D1%96%D0%BD%D0%B8-%D0%B4%D0%BE-%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7%D1%83.jpg',
-        },
-        {
-          name: 'Кошторис на 2019 рік',
-          link: 'http://kpk-lp.com.ua/wp-content/uploads/2019/01/%D0%9A%D0%BE%D1%88%D1%82%D0%BE%D1%80%D0%B8%D1%81-%D0%BD%D0%B0-2019-%D1%80%D1%96%D0%BA.pdf',
-        },
-        {
-          name: 'Річний план закупівель на 2019 рік',
-          link: 'http://kpk-lp.com.ua/wp-content/uploads/2019/02/%D0%A0%D1%96%D1%87%D0%BD%D0%B8%D0%B9-%D0%BF%D0%BB%D0%B0%D0%BD-%D0%B7%D0%B0%D0%BA%D1%83%D0%BF%D1%96%D0%B2%D0%B5%D0%BB%D1%8C-%D0%BD%D0%B0-2019-%D1%80..pdf',
-        },
-      ],
+      firstList: { finded: false },
+      secondList: { finded: false },
     }
+  },
+  methods: {
+    ...mapActions({
+      loadDocuments: 'documents/loadDocuments',
+    }),
+  },
+  async created() {
+    this.firstList = await this.loadDocuments(['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
+    this.secondList = await this.loadDocuments(['5ed51fe6d4cd813fcc566e61'])
   },
 }
 </script>

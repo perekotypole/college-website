@@ -23,11 +23,11 @@
         </div>
 
         <div class="app-entance__docs"
-          v-for="({ title, link }, index) in rules"
+          v-for="({ name, path }, index) in rules.documents"
           :key="index">
           <document-link
-            :link="link">
-            {{ title }}
+            :link="path">
+            {{ name }}
           </document-link>
         </div>
       </div>
@@ -43,11 +43,11 @@
         </div>
 
         <div class="app-entance__docs"
-          v-for="({ title, link }, index) in commission"
+          v-for="({ name, path }, index) in commission.documents"
           :key="index">
           <document-link
-            :link="link">
-            {{ title }}
+            :link="path">
+            {{ name }}
           </document-link>
         </div>
 
@@ -120,11 +120,11 @@
         </div>
 
         <div class="app-entance__docs"
-          v-for="({ title, link }, index) in places"
+          v-for="({ name, path }, index) in places.documents"
           :key="index">
           <document-link
-            :link="link">
-            {{ title }}
+            :link="path">
+            {{ name }}
           </document-link>
         </div>
       </div>
@@ -154,11 +154,11 @@
             </app-subtitle>
 
             <div class="app-entance__docs"
-              v-for="({ title, link }, index) in exams.interview.base"
+              v-for="({ name, path }, index) in exams.interview.base.documents"
               :key="index">
               <document-link
-                :link="link">
-                {{ title }}
+                :link="path">
+                {{ name }}
               </document-link>
             </div>
           </div>
@@ -169,11 +169,11 @@
             </app-subtitle>
 
             <div class="app-entance__docs"
-              v-for="({ title, link }, index) in exams.interview.full"
+              v-for="({ name, path }, index) in exams.interview.full.documents"
               :key="index">
               <document-link
-                :link="link">
-                {{ title }}
+                :link="path">
+                {{ name }}
               </document-link>
             </div>
           </div>
@@ -195,11 +195,11 @@
             </app-subtitle>
 
             <div class="app-entance__docs"
-              v-for="({ title, link }, index) in exams.first.base"
+              v-for="({ name, path }, index) in exams.first.base.documents"
               :key="index">
               <document-link
-                :link="link">
-                {{ title }}
+                :link="path">
+                {{ name }}
               </document-link>
             </div>
           </div>
@@ -210,11 +210,11 @@
             </app-subtitle>
 
             <div class="app-entance__docs"
-              v-for="({ title, link }, index) in exams.first.full"
+              v-for="({ name, path }, index) in exams.first.full.documents"
               :key="index">
               <document-link
-                :link="link">
-                {{ title }}
+                :link="path">
+                {{ name }}
               </document-link>
             </div>
           </div>
@@ -233,11 +233,11 @@
 
           <div class="app-entance__subsection">
             <div class="app-entance__docs"
-              v-for="({ title, link }, index) in exams.other"
+              v-for="({ name, path }, index) in exams.other.documents"
               :key="index">
               <document-link
-                :link="link">
-                {{ title }}
+                :link="path">
+                {{ name }}
               </document-link>
             </div>
           </div>
@@ -255,11 +255,11 @@
         </div>
 
         <div class="app-entance__docs"
-          v-for="({ title, link }, index) in schedule"
+          v-for="({ name, path }, index) in schedule.documents"
           :key="index">
           <document-link
-            :link="link">
-            {{ title }}
+            :link="path">
+            {{ name }}
           </document-link>
         </div>
       </div>
@@ -275,11 +275,11 @@
         </div>
 
         <div class="app-entance__docs"
-          v-for="({ title, link }, index) in results"
+          v-for="({ name, path }, index) in results.documents"
           :key="index">
           <document-link
-            :link="link">
-            {{ title }}
+            :link="path">
+            {{ name }}
           </document-link>
         </div>
       </div>
@@ -297,11 +297,11 @@
           </app-subtitle>
 
           <div class="app-entance__docs"
-            v-for="({ title, link }, index) in recomented.state"
+            v-for="({ name, path }, index) in recomented.state.documents"
             :key="index">
             <document-link
-              :link="link">
-              {{ title }}
+              :link="path">
+              {{ name }}
             </document-link>
           </div>
         </div>
@@ -312,11 +312,11 @@
           </app-subtitle>
 
           <div class="app-entance__docs"
-            v-for="({ title, link }, index) in recomented.paid"
+            v-for="({ name, path }, index) in recomented.paid.documents"
             :key="index">
             <document-link
-              :link="link">
-              {{ title }}
+              :link="path">
+              {{ name }}
             </document-link>
           </div>
         </div>
@@ -333,11 +333,11 @@
         </div>
 
         <div class="app-entance__docs"
-          v-for="({ title, link }, index) in zno"
+          v-for="({ name, link }, index) in zno.documents"
           :key="index">
           <document-link
             :link="link">
-            {{ title }}
+            {{ name }}
           </document-link>
         </div>
       </div>
@@ -346,6 +346,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import AppSubtitle from '@/components/ui/AppSubtitle.vue'
@@ -373,165 +375,36 @@ export default {
         { name: 'Результати', icon: 'bar-chart.svg', elementId: 'examsResultsSection' },
         { name: 'ЗНО', icon: 'exam.svg', elementId: 'znoSection' },
       ],
-      rules: [
-        {
-          title: 'Правила прийому на 2020 рік',
-          link: '#',
-        },
-        {
-          title: 'Додатки до правил прийому на 2020 рік',
-          link: '#',
-        },
-      ],
-      commission: [
-        {
-          title: 'Положення про приймальну комісію',
-          link: '#',
-        },
-      ],
-      places: [
-        {
-          title: 'Орієнтований обсяг державного замовлення у 2019 році',
-          link: '#',
-        },
-      ],
-      schedule: [
-        {
-          title: 'Розклад співбесіди, вступних випробувань з предметів “Українська мова”, “Математика” для абітурієнтів денної форми навчання на основі базової загальної середньої освіти',
-          link: '#',
-        },
-        {
-          title: 'Розклад співбесіди та вступних випробувань (окремі категорії вступників згідно Правил прийому) для абітурієнтів денної форми навчання на основі повної загальної середньої освіти для всіх спеціальностей',
-          link: '#',
-        },
-        {
-          title: 'Розклад фахових випробувань  для абітурієнтів денної та заочної форми навчання на основі диплому кваліфікованого робітника та на основі диплому молодшого спеціаліста за іншою спеціальністю',
-          link: '#',
-        },
-        {
-          title: 'Розклад співбесіди та вступних випробувань для абітурієнтів заочної форми навчання (окремі категорії вступників згідно Правил прийому) на основі повної загальної середньої освіти для всіх спеціальностей',
-          link: '#',
-        },
-      ],
-      results: [
-        {
-          title: 'Розклад співбесіди, вступних випробувань з предметів “Українська мова”, “Математика” для абітурієнтів денної форми навчання на основі базової загальної середньої освіти',
-          link: '#',
-        },
-        {
-          title: 'Розклад співбесіди та вступних випробувань (окремі категорії вступників згідно Правил прийому) для абітурієнтів денної форми навчання на основі повної загальної середньої освіти для всіх спеціальностей',
-          link: '#',
-        },
-      ],
+      rules: [],
+      commission: [],
+      places: [],
+      schedule: [],
+      results: [],
       exams: {
         interview: {
-          base: [
-            {
-              title: 'Математика',
-              link: '#',
-            },
-            {
-              title: 'Українська мова',
-              link: '#',
-            },
-          ],
-          full: [
-            {
-              title: 'Математика',
-              link: '#',
-            },
-            {
-              title: 'Українська мова та література',
-              link: '#',
-            },
-            {
-              title: 'Історія України',
-              link: '#',
-            },
-            {
-              title: 'Фізика',
-              link: '#',
-            },
-          ],
+          base: [],
+          full: [],
         },
         first: {
-          base: [
-            {
-              title: 'Математика',
-              link: '#',
-            },
-            {
-              title: 'Українська мова',
-              link: '#',
-            },
-          ],
-          full: [
-            {
-              title: 'Математика',
-              link: '#',
-            },
-            {
-              title: 'Українська мова та література',
-              link: '#',
-            },
-            {
-              title: 'Історія України',
-              link: '#',
-            },
-            {
-              title: 'Фізика',
-              link: '#',
-            },
-          ],
+          base: [],
+          full: [],
         },
-        other: [
-          {
-            title: '121 «Інженерія програмного забезпечення»',
-            link: '#',
-          },
-          {
-            title: '182 «Технології легкої промисловості»',
-            link: '#',
-          },
-          {
-            title: '205 «Лісове господарство»',
-            link: '#',
-          },
-        ],
+        other: [],
       },
       recomented: {
-        state: [
-          {
-            title: 'Рейтинговий список вступників рекомендованих  до зарахування на місця державного фінансування на основі базової загальної середньої освіти (денна форма навчання) станом на 18.07.2019р.',
-            link: '#',
-          },
-          {
-            title: 'Рейтинговий список абітурієнтів рекомендованих  до зарахування на місця державного фінансування на основі повної загальної середньої освіти (денна форма навчання)',
-            link: '#',
-          },
-        ],
-        paid: [
-          {
-            title: 'Рейтинговий список рекомендованих до зарахування на місця що фінансуються за кошти фізичних та юридичних осіб, на основі повної загальної середньої освіти (денна форма навчання) ',
-            link: '#',
-          },
-          {
-            title: 'Рейтинговий список рекомендованих до зарахування на місця що фінансуються за кошти фізичних та юридичних осіб, на основі повної загальної середньої освіти (заочнана форма навчання)',
-            link: '#',
-          },
-          {
-            title: 'Рейтинговий список рекомендованих до зарахування на місця що фінансуються за кошти фізичних та юридичних осіб, на основі освітньо-кваліфікаційного рівня кваліфікованого робітника (денна форма навчання) ',
-            link: '#',
-          },
-        ],
+        state: [],
+        paid: [],
       },
-      zno: [
-        {
-          title: 'Перелік конкурсних предметів (ЗНО) для вступників з повною загальною середньою освітою',
-          link: '#',
-        },
-      ],
+      zno: [],
     }
+  },
+  methods: {
+    ...mapActions({
+      loadDocuments: 'documents/loadDocuments',
+    }),
+  },
+  async created() {
+    this.rules = await this.loadDocuments(['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
   },
 }
 </script>

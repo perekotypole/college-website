@@ -56,10 +56,6 @@ export default {
       type: Number,
       reuquired: true,
     },
-    changePageHandler: {
-      type: Function,
-      required: true,
-    },
   },
   data: () => ({
     active: 1,
@@ -90,6 +86,8 @@ export default {
       } else if (index === pageCount) {
         this.pagesToShow = [pageCount - 2, pageCount - 1, pageCount]
       }
+
+      this.$emit('getValue', index)
     },
     next() {
       const { active, pageCount, pagesToShow } = this
@@ -112,18 +110,6 @@ export default {
 
         this.active -= 1
       }
-    },
-  },
-  watch: {
-    active() {
-      const { changePageHandler, pageLength } = this.$props
-
-      changePageHandler(
-        {
-          from: (this.active - 1) * pageLength,
-          to: this.active * pageLength,
-        },
-      )
     },
   },
 }

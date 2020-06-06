@@ -5,18 +5,20 @@
       routeWay="Головна >> Новини">
     </app-pagename>
 
-    <news-filters class="app-news__filters"/>
+    <news-filters class="app-news__filters"
+      :categories="tags.tags"/>
 
-    <div class="app-news__list container">
+    <div class="app-news__list container"
+      v-if="list">
       <app-news
         class="app-news__item"
-        v-for="item in newsToShow"
-        :key="item.id"
-        :id="item.id"
+        v-for="item in list.news"
+        :key="item._id"
+        :id="item._id"
         :title="item.title"
-        :image="item.image"
-        :category="item.category"
-        :pubDate="item.pubDate"
+        :image="item.mainImage.path"
+        :category="item.mainTag.name"
+        :pubDate="new Date(item.publicationDate)"
       />
     </div>
 
@@ -25,21 +27,30 @@
         <span class="view-settings__title">Сортування:</span>
         <app-select
           :slope="4"
-          :items="['зверху нові', 'зверху старі']"
+          :items="[
+            { value: 1, name: 'зверху нові' },
+            { value: -1, name: 'зверху старі' }
+          ]"
+          @getValue="setSelectSort($event)"
         />
       </div>
 
       <app-pagination
-        :count="news.length"
-        :pageLength="5"
-        :changePageHandler="changePageHandler"
+        v-if="list.news"
+        :count="count"
+        :pageLength="number"
+        @getValue="setSelectPage($event)"
       />
 
       <div class="view-settings__show-count view-settings__item">
         <span class="view-settings__title">Показати:</span>
         <app-select
           :slope="4"
-          :items="[5, 10, 20]"
+          :items="[
+            { value: 5, name: 5 },
+            { value: 10, name: 10 },
+            { value: 20, name: 20 }]"
+          @getValue="setSelectNumber($event)"
         />
       </div>
     </div>
@@ -47,6 +58,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNews from '@/components/ui/AppNews.vue'
@@ -55,29 +67,48 @@ import AppSelect from '@/components/ui/AppSelect.vue'
 
 import NewsFilters from '@/components/templates/news/NewsFilters.vue'
 
-const news = []
-for (let i = 0; i < 50; i++) {
-  news.push({
-    id: i,
-    title: `News ${i}`,
-    image: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg',
-    category: 'студенти',
-    pubDate: new Date(),
-  })
-}
-
 export default {
   components: {
     AppPagename, AppNews, AppPagination, AppSelect, NewsFilters,
   },
-  data: () => ({
-    news,
-    newsToShow: news.slice(0, 5),
-  }),
+  computed: {
+    ...mapGetters({
+      list: 'news/news',
+      count: 'news/number',
+
+      tags: 'news/tags',
+
+      number: 'news/selectNumber',
+      sort: 'news/selectSort',
+      page: 'news/selectPage',
+      tag: 'news/selectTag',
+    }),
+  },
+  watch: {
+    number() { this.changeNews() },
+    tag() { this.changeNews() },
+    page() { this.changeNews() },
+    sort() { this.changeNews() },
+  },
   methods: {
-    changePageHandler(show) {
-      this.newsToShow = news.slice(show.from, show.to)
+    ...mapActions({
+      loadNews: 'news/loadNews',
+      loadTags: 'news/loadTags',
+      loadNewsNumber: 'news/loadNewsNumber',
+
+      setSelectNumber: 'news/setSelectNumber',
+      setSelectTag: 'news/setSelectTag',
+      setSelectPage: 'news/setSelectPage',
+      setSelectSort: 'news/setSelectSort',
+    }),
+    changeNews() {
+      this.loadNews()
     },
+  },
+  created() {
+    this.loadNews()
+    this.loadTags()
+    this.loadNewsNumber()
   },
 }
 </script>
