@@ -1,6 +1,7 @@
 import News from '../../../models/news/news'
 import Tag from '../../../models/news/tags'
 import Image from '../../../models/images'
+import Documents from '../../../models/documents'
 
 import verifyUser from '../../../middlewares/verifyUser'
 
@@ -44,11 +45,20 @@ export default (router) => {
 
   router.get('/number', async (req, res) => {
     try {
-      const result = await News.find().count()
+      const news = await News.find().countDocuments()
+      const views = await News.aggregate([{
+        $group: {
+          _id: null,
+          number: {
+            $sum: '$views',
+          },
+        },
+      }])
 
       return res.json({
-        finded: !!result,
-        news: result,
+        finded: !!news,
+        news,
+        views: views[0].number,
       })
     } catch (error) {
       return res.json({
@@ -111,7 +121,7 @@ export default (router) => {
   })
 
   router.get('/:id', async (req, res) => {
-    const { id } = req.params.id
+    const { id } = req.params
 
     try {
       const result = await News.findById(id)
@@ -183,10 +193,32 @@ export default (router) => {
     }
   })
 
-  router.post('/', verifyUser, async (req, res) => {
+  router.post('/', async (req, res) => {
     const news = req.body
 
+    news.mainImage = (await Image.create({ path: news.mainImage }))._id
+
     try {
+      if (news.images) {
+        news.imagesList = []
+
+        await Promise.all(news.images.map(
+          async (value) => news.imagesList.push(
+            (await Image.create({ path: value }))._id,
+          ),
+        ))
+      }
+
+      if (news.documents) {
+        news.documentsList = []
+
+        await Promise.all(news.documents.map(
+          async (value) => news.documentsList.push(
+            (await Documents.create({ path: value }))._id,
+          ),
+        ))
+      }
+
       const result = await News.create(news)
 
       return res.json({

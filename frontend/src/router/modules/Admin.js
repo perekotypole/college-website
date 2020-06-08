@@ -5,7 +5,7 @@ export default [
     component: () => import('@/views/admin/Dashboard'),
   },
   {
-    name: 'news',
+    name: 'admin-news',
     path: '/admin/news',
     component: () => import('@/views/admin/News'),
   },

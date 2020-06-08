@@ -2,7 +2,7 @@
   <div class="image-block">
     <div class="image-block__header">
       <span class="image-block__title">Зображення</span>
-      <div @click="$emit('delete', id)" class="image-block__delete">
+      <div @click="$emit('delete')" class="image-block__delete">
         <img
           class="image-block__delete-icon" 
           src="@/assets/icons/admin/delete.svg" 
@@ -10,38 +10,48 @@
         >
       </div>
     </div>
+
     <div class="image-block__upload">
       <picture-input 
         ref="pictureInput" 
         width="170" 
         height="140" 
+        @change="onChange"
         accept="image/jpeg,image/png" 
         size="10" 
-        buttonClass="picture-input__change-button"
-        removeButtonClass="picture-input__remove-button"
-        :removable="true"
+        buttonClass="picture-input__upload-button"
         :customStrings="{
           remove: '',
           drag: 'Виберіть або перетягніть зображення',
           change: ''
         }">
       </picture-input>
+
+      <div
+        v-for="(image, index) in list"
+        :key="index">
+        <div
+          class="image-block__photo"
+          :style="{ backgroundImage: `url(${image})` }"/>
+        <div class="picture-input__remove-button"
+          @click="list.splice(index, 1)"/>
+      </div>
     </div>
     
-    <div class="image-block__size">
+    <!-- <div class="image-block__size">
       <input 
-        :id="sizeCheckbox + id" 
+        :id="sizeCheckbox" 
         type="checkbox"
         class="image-block__size-input"
       >
-      <label :for="sizeCheckbox + id">Не обрізати</label>
-    </div>
+      <label :for="sizeCheckbox">Не обрізати</label>
+    </div> -->
 
-    <input 
+    <!-- <input 
       class="image-block__description" 
       type="text"
       placeholder="Підпис (необов'язково)"
-    >
+    > -->
   </div>
 </template>
 
@@ -50,14 +60,23 @@
 import PictureInput from 'vue-picture-input'
 
 export default {
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-  },
   components: {
     PictureInput,
+  },
+  data() {
+    return {
+      list: [],
+    }
+  },
+  methods: {
+    onChange(image) {
+      this.list.push(image)
+    },
+  },
+  watch: {
+    list(val) {
+      this.$emit('change', val)
+    },
   },
 }
 </script>
@@ -95,7 +114,10 @@ export default {
   }
 
   &__upload {
-    width: 170px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    text-align: center;
   }
 
   &__size {
@@ -110,6 +132,15 @@ export default {
     }
   }
 
+  &__photo{
+    width: 170px;
+    height: 140px;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
   &__description {
     padding: 10px;
     border: 2px solid #c7c7c7;
@@ -121,4 +152,8 @@ export default {
   }
 }
 
+.picture-input__remove-button{
+  margin: 1em auto;
+  cursor: pointer;
+}
 </style>

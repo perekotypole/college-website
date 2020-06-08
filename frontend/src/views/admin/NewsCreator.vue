@@ -5,6 +5,8 @@
     </span>
 
     <div class="news-creator__content">
+      <h3>{{errors}}</h3>
+
       <div class="news-creator__main-image news-creator__section">
         <span class="news-creator__section-title">
           Головне фото
@@ -13,6 +15,8 @@
         <div class="news-creator__image-input">
           <picture-input 
             ref="pictureInput" 
+            @change="onChange"
+            @remove="onChange"
             width="200" 
             height="170" 
             accept="image/jpeg,image/png" 
@@ -29,6 +33,18 @@
         </div>
       </div>
 
+      <div class="news-creator__category"
+        v-if="categories.tags">
+        <span class="news-creator__section-title">Категорія:</span>
+        <app-select
+          class="news-creator__category-select"
+          :slope="4"
+          :items="categories.tags"
+          :minWidth="160"
+          @getValue="mainTag = $event"
+        />
+      </div>
+
       <div class="news-creator__news-title news-creator__section">
         <span class="news-creator__section-title">
           Заголовок
@@ -36,6 +52,7 @@
 
         <input 
           class="news-creator__title-input" 
+          v-model="title"
           type="text"
           placeholder="Введіть заголовок..."
         >
@@ -46,30 +63,15 @@
           Вміст
         </span>
 
-        <div
-          v-for="block in blocks" :key="block.id"
-        >
-          <TextBlock 
-            v-if="block.type === 'text'"
-            :id="block.id"
-            v-on:delete="blockDelete"
-            v-on:change="textBlockChange"
-          />
-
-          <ImageBlock
-            v-else-if="block.type === 'image'"
-            :id="block.id"
-            v-on:delete="blockDelete"
-          />
-        </div>
-
-        <div class="news-creator__add-block add-block">
+        <div class="news-creator__add-block add-block" v-if="!textBlock || !imagesBlock || !docsBlock">
           <span class="add-block__title">
             Додати
           </span>
 
           <div class="add-block__buttons">
-            <div @click="addTextBlock" class="add-block__add-text-block add-block__button">
+            <div @click="textBlock = true"
+              v-if="!textBlock"
+              class="add-block__add-text-block add-block__button">
               <img 
                 class="add-block__icon" 
                 src="@/assets/icons/admin/text.svg" 
@@ -77,7 +79,9 @@
               >
               <span>Текстовий блок</span>
             </div>
-            <div @click="addImageBlock" class="add-block__add-image-block add-block__button">
+            <div @click="imagesBlock = true"
+              v-if="!imagesBlock"
+              class="add-block__add-image-block add-block__button">
               <img 
                 class="add-block__icon" 
                 src="@/assets/icons/admin/picture.svg" 
@@ -85,11 +89,37 @@
               >
               <span>Зображення</span>
             </div>
+            <div @click="docsBlock = true"
+              v-if="!docsBlock"
+              class="add-block__add-image-block add-block__button">
+              <img 
+                class="add-block__icon" 
+                src="@/assets/icons/admin/file.svg" 
+                alt="picture icon"
+              >
+              <span>Документи</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="news-creator__submit">
+      <text-block
+        v-if="textBlock"
+        @change="text = $event"
+        @delete="(textBlock = false) | (text = null)"/>
+
+      <image-block
+        v-if="imagesBlock"
+        @change="images = $event"
+        @delete="(imagesBlock = false) | (images = [])"/>
+
+      <docs-block
+        v-if="docsBlock"
+        @change="docs = $event"
+        @delete="(docsBlock = false) | (docs = [])"/>
+
+      <div class="news-creator__submit"
+        @click="checkData">
         Надіслати
       </div>
     </div>
@@ -97,53 +127,66 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 import PictureInput from 'vue-picture-input'
 
 import TextBlock from '@/components/templates/admin/news_creator/TextBlock.vue'
 import ImageBlock from '@/components/templates/admin/news_creator/ImageBlock.vue'
+import DocsBlock from '@/components/templates/admin/news_creator/DocsBlock.vue'
+import AppSelect from '@/components/ui/AppSelect.vue'
 
 export default {
   components: {
-    PictureInput, TextBlock, ImageBlock,
+    PictureInput, TextBlock, ImageBlock, DocsBlock, AppSelect,
   },
   data: () => ({
+    errors: null,
+
     mainImage: null,
-    blocks: [],
+    title: null,
+    text: null,
+    images: [],
+    docs: [],
+    mainTag: null,
+
+    textBlock: false,
+    imagesBlock: false,
+    docsBlock: false,
   }),
+  computed: {
+    ...mapGetters({
+      categories: 'news/tags',
+    }),
+  },
   methods: {
-    addTextBlock() {
-      const lastBlock = this.blocks[this.blocks.length - 1]
-
-      this.blocks.push({
-        id: lastBlock ? lastBlock.id + 1 : 0,
-        type: 'text',
-        text: '',  
-      })
+    onChange(image) {
+      this.mainImage = image
     },
-    addImageBlock() {
-      const lastBlock = this.blocks[this.blocks.length - 1]
+    checkData() {
+      const {
+        mainImage, title, text, images, docs, mainTag, 
+      } = this
 
-      this.blocks.push({
-        id: lastBlock ? lastBlock.id + 1 : 0,
-        type: 'image',
-        images: [],
-      })
-    },
-    blockDelete(id) {
-      for (let i = 0; i < this.blocks.length; i++) {
-        if (this.blocks[i].id === id) {
-          this.blocks.splice(i, 1)
-        }
+      if (!mainImage || !title) {
+        this.errors = "*Не заповнені обов'язкові поля"
+        return 0
       }
-    },
-    textBlockChange(id, newText) {
-      this.blocks.forEach((block) => {
-        if (block.id === id) {
-          block.text = newText
-        }
+
+      this.errors = null
+      this.createNews({
+        mainImage, title, text, images, docs, mainTag, 
       })
+
+      return 1
     },
+    ...mapActions({
+      loadTags: 'news/loadTags',
+      createNews: 'news/createNews',
+    }),
+  },
+  created() {
+    this.loadTags({ all: false })
   },
 }
 
@@ -153,6 +196,10 @@ export default {
 
 .news-creator {
   padding-bottom: 40px;
+
+  h3 {
+    color: var(--color-accent-red);
+  }
 
   &__main-image {
     display: flex;
@@ -186,6 +233,15 @@ export default {
     border: 2px solid #c7c7c7;
   }
 
+  &__category {
+    display: flex;
+  }
+
+  &__category-select {
+    margin-left: 20px;
+    text-transform: capitalize;
+  }
+
   &__submit {
     width: 170px;
     height: 50px;
@@ -199,13 +255,17 @@ export default {
 
     background: var(--color-accent-green);
   }
+
+  &__hide-block{
+    display: none;
+  }
 }
 
 .add-block {
   box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);
   padding: 20px;
   border-radius: 10px;
-  width: 50%;
+  width: 70%;
 
   &__title {
     font-size: 16px;

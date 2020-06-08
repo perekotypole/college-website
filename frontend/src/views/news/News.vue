@@ -107,7 +107,7 @@ export default {
   },
   created() {
     this.loadNews()
-    this.loadTags()
+    this.loadTags({ all: true })
     this.loadNewsNumber()
   },
 }

@@ -1,5 +1,7 @@
 <template>
-  <div 
+  <router-link 
+    v-if="routeName"
+    :to="{ name: routeName }"
     class="sidebar-link"
     :class="{
       'sidebar-link_opened': opened,
@@ -39,12 +41,16 @@
           <span>{{ subitem.title }}</span>
         </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
 export default {
   props: {
+    routeName: {
+      type: String,
+      required: false,
+    },
     title: {
       type: String,
       required: true,

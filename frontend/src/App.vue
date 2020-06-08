@@ -190,6 +190,16 @@ input::-webkit-inner-spin-button {
     background-position: center;
   }
 
+  &__upload-button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-font-main);
+    border-radius: 30px;
+    background: url('./assets/icons/upload.svg') no-repeat;
+    background-size: 17px;
+    background-position: center;
+  }
+
   &__remove-button {
     width: 30px;
     height: 30px;

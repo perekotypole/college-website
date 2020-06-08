@@ -4,6 +4,7 @@ export default {
   namespaced: true,
 
   state: {
+    details: {},
     slider: [],
     news: [],
     number: 0,
@@ -21,6 +22,8 @@ export default {
 
     news: (state) => state.news,
     number: (state) => state.number,
+
+    details: (state) => state.details,
 
     tags: (state) => state.tags,
 
@@ -42,6 +45,10 @@ export default {
       state.number = number
     },
 
+    setDetails(state, details) {
+      state.details = details
+    },
+
     setTags(state, tags) {
       state.tags = tags
     },
@@ -61,7 +68,7 @@ export default {
   },
 
   actions: {
-    async loadSlider({ commit }, { number }) {
+    async loadSlider({ commit }, number) {
       axios.get(`/news/slider/${number}`).then(({ data }) => {
         if (data.errors) {
           return Promise.reject(data.errors)
@@ -90,19 +97,31 @@ export default {
       }).catch(() => {})
     },
 
+    async loadNewsDetails({ commit }, id) {
+      axios.get(`/news/${id}`).then(({ data }) => {
+        if (data.errors) {
+          return Promise.reject(data.errors)
+        }
+
+        commit('setDetails', data)
+
+        return Promise.resolve()
+      }).catch(() => {})
+    },
+
     async loadNewsNumber({ commit }) {
       axios.get('/news/number').then(({ data }) => {
         if (data.errors) {
           return Promise.reject(data.errors)
         }
 
-        commit('setNumber', data.news)
+        commit('setNumber', data)
 
         return Promise.resolve()
       }).catch(() => {})
     },
 
-    async loadTags({ commit }) {
+    async loadTags({ commit }, { all }) {
       axios.get('/news/tags').then(({ data }) => {
         if (data.errors) {
           return Promise.reject(data.errors)
@@ -112,7 +131,7 @@ export default {
           element.value = element._id
         })
 
-        data.tags.unshift({ name: 'Всі', value: null })
+        if (all) data.tags.unshift({ name: 'Всі', value: null })
 
         commit('setTags', data)
 
@@ -145,6 +164,16 @@ export default {
 
     async loadNewsByOptionalTags({ commit }, { tags, number, page }) {
       return axios.post('/news/ByOptionalTags', { tags, number, page }).then(({ data }) => {
+        if (data.errors) {
+          return Promise.reject(data.errors)
+        }
+        
+        return data
+      }).catch(() => {})
+    },
+
+    async createNews({ commit }, news) {
+      axios.post('/news', news).then(({ data }) => {
         if (data.errors) {
           return Promise.reject(data.errors)
         }

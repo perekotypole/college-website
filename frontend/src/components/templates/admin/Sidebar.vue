@@ -20,6 +20,7 @@
       <div class="sidebar__section">
         <sidebar-link
           v-for="(link, i) in links.common" :key="i"
+          :routeName="link.routeName"
           :title="link.title"
           :icon="link.icon"
           :sidebarOpened="opened"
@@ -36,6 +37,7 @@
         
         <sidebar-link
           v-for="(link, i) in links.pages" :key="i"
+          :routeName="link.routeName"
           :title="link.title"
           :icon="link.icon"
           :sublinks="link.subpages"
@@ -67,7 +69,7 @@ export default {
     links: {
       common: [
         { title: 'Панель керування', icon: 'dashboard.svg' },
-        { title: 'Новини', icon: 'news.svg' },
+        { title: 'Новини', icon: 'news.svg', routeName: 'admin-news' },
       ],
       pages: [
         { 

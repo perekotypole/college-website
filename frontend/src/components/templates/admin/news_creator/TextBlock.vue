@@ -2,7 +2,7 @@
   <div class="text-block">
     <div class="text-block__header">
       <span class="text-block__title">Teкстовий блок</span>
-      <div @click="$emit('delete', id)" class="text-block__delete">
+      <div @click="$emit('delete') | (text = null)" class="text-block__delete">
         <img
           class="text-block__delete-icon" 
           src="@/assets/icons/admin/delete.svg" 
@@ -14,7 +14,7 @@
       class="text-block__textarea" 
       placeholder="Введіть текст..."
       v-model="text"
-      @change="$emit('change', id, text)"
+      @input="$emit('change', text)"
     >
     </textarea>
   </div>    
@@ -22,12 +22,6 @@
 
 <script>
 export default {
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-  },
   data: () => ({
     text: '',
   }),

@@ -9,16 +9,18 @@
         <div class="news__statistics">
           <div class="news__statistics-item">
             <span class="news__statistics-title">Новини</span>
-            <span class="news__statistics-number">51</span>
+            <span class="news__statistics-number">{{count.news}}</span>
           </div>
           <div class="news__statistics-item">
             <span class="news__statistics-title">Перегляди</span>
-            <span class="news__statistics-number">751</span>
+            <span class="news__statistics-number">{{count.views}}</span>
           </div>
 
-          <div class="news__statistics-new">
+          <router-link
+            :to="{ name: 'news-creator' }"
+            class="news__statistics-new">
             + додати новину
-          </div>
+          </router-link>
         </div>
 
         <div class="news__items news-table">
@@ -28,14 +30,15 @@
             <div class="news-table__header-views">Перегляди</div>
           </div>
 
-          <div class="news-table__content">
+          <div class="news-table__content"
+            v-if="list.finded">
             <div 
               class="news-table__item"
-              v-for="i in 20" :key="i"
+              v-for="({ title, publicationDate, views }, i) in list.news" :key="i"
             >
-              <div class="news-table__item-name">Запрошуємо на день відкритих дверей</div>
-              <div class="news-table__item-data">10.10.2020</div>
-              <div class="news-table__item-views">57</div>
+              <div class="news-table__item-name">{{title}}</div>
+              <div class="news-table__item-data">{{new Date(publicationDate) | dateFormat}}</div>
+              <div class="news-table__item-views">{{views}}</div>
             </div>
           </div>
         </div>
@@ -48,14 +51,16 @@
           <input class="news__search-input" type="text" placeholder="Пошук...">
         </div>
 
-        <div class="news__last">
+        <div class="news__last"
+          v-if="last.finded">
           <div class="news__last-header">Останні новини</div>
           <div 
             class="news__last-item"
-            v-for="i in 3" :key="i"
+            v-for="({ mainImage, title }, i) in last.news" :key="i"
           >
-            <div class="news__last-image"></div>
-            <div class="news__last-title">Запрошуємо на день відритих дверей</div>
+            <div class="news__last-image"
+              :style="{ backgroundImage: `url(${mainImage.path})` }"></div>
+            <div class="news__last-title">{{title}}</div>
           </div>
         </div>
       </div>
@@ -64,8 +69,31 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-  
+  computed: {
+    ...mapGetters({
+      list: 'news/news',
+      count: 'news/number',
+
+      last: 'news/slider',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      loadNews: 'news/loadNews',
+      loadNewsNumber: 'news/loadNewsNumber',
+
+      loadSlider: 'news/loadSlider',
+    }),
+  },
+  created() {
+    this.loadNews()
+    this.loadNewsNumber()
+
+    this.loadSlider(3)
+  },
 }
 </script>
 
@@ -172,7 +200,7 @@ export default {
 
       border-radius: 5px;
 
-      background: url('http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg') no-repeat;
+      background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
     }
