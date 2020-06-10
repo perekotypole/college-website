@@ -20,7 +20,7 @@ export default {
         if (data.errors) {
           return Promise.reject(data.errors)
         }
-        
+
         return data
       }).catch(() => {})
     },

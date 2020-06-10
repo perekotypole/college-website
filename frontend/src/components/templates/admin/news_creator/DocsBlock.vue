@@ -4,8 +4,8 @@
       <span class="doc-block__title">Документи</span>
       <div @click="$emit('delete')" class="doc-block__delete">
         <img
-          class="doc-block__delete-icon" 
-          src="@/assets/icons/admin/delete.svg" 
+          class="doc-block__delete-icon"
+          src="@/assets/icons/admin/delete.svg"
           alt="delete"
         >
       </div>
@@ -15,8 +15,8 @@
       <input type="file"
         @change="onChange">
 
-      <input 
-        class="doc-block__description" 
+      <input
+        class="doc-block__description"
         type="text"
         placeholder="Назва"
         v-model="name"
@@ -91,7 +91,7 @@ export default {
 <style lang="less" scoped>
 
 .doc-block {
-  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);  
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);
   border-radius: 10px;
   padding: 20px;
 
@@ -124,10 +124,10 @@ export default {
     width: 120px;
     height: 40px;
     font-size: 14px;
-    
+
     margin-top: 20px;
     margin-left: auto;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;

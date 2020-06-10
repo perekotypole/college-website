@@ -1,5 +1,5 @@
 <template>
-  <router-link 
+  <router-link
     v-if="routeName"
     :to="{ name: routeName }"
     class="sidebar-link"
@@ -9,32 +9,32 @@
     }"
   >
     <div class="sidebar-link__item">
-      <img 
-        :src="require('@/assets/icons/admin/' + icon)" 
+      <img
+        :src="require('@/assets/icons/admin/' + icon)"
         alt="link icon"
         class="sidebar-link__icon"
       >
-      <span 
+      <span
         class="sidebar-link__title"
       >{{ title }}</span>
       <img
-        class="sidebar-link__chevron" 
-        src="@/assets/icons/chevron-top.svg" 
+        class="sidebar-link__chevron"
+        src="@/assets/icons/chevron-top.svg"
         alt="chevron icon"
         v-if="sublinks.length > 0"
         @click="opened = !opened"
       >
-    </div> 
-    <div 
+    </div>
+    <div
       class="sidebar-link__subitems"
       v-if="sublinks.length > 0"
     >
-        <div 
+        <div
           class="sidebar-link__subitem"
-          v-for="(subitem, i) in sublinks" :key="i"  
+          v-for="(subitem, i) in sublinks" :key="i"
         >
-          <img 
-            :src="require('@/assets/icons/sections/' + subitem.icon)" 
+          <img
+            :src="require('@/assets/icons/sections/' + subitem.icon)"
             alt="subpage icon"
             class="sidebar-link__subitem-icon"
           >
@@ -54,9 +54,9 @@ export default {
     title: {
       type: String,
       required: true,
-    }, 
+    },
     icon: {
-      type: String, 
+      type: String,
       required: true,
     },
     sublinks: {
@@ -167,7 +167,7 @@ export default {
 }
 
 .sidebar-link_sidebar-opened {
-  
+
   .sidebar-link {
 
     &__title {

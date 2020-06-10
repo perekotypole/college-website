@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" :class="{'sidebar_opened': opened}">
     <div class="sidebar__header">
-      <div 
+      <div
         class="sidebar__toggle toggle"
         :class="{'toggle_arrow': opened}"
         @click="opened = !opened"
@@ -28,13 +28,13 @@
       </div>
 
       <div class="sidebar__section">
-        <div 
+        <div
           class="sidebar__section-title"
           :class="{'sidebar__section-title_opened': opened}"
         >
           Сторінки
         </div>
-        
+
         <sidebar-link
           v-for="(link, i) in links.pages" :key="i"
           :routeName="link.routeName"
@@ -46,11 +46,11 @@
       </div>
 
       <div class="sidebar__section sidebar__settings">
-        <sidebar-link 
+        <sidebar-link
           title="Налаштування"
           icon="settings.svg"
           :sidebarOpened="opened"
-        />  
+        />
       </div>
     </div>
   </div>
@@ -72,9 +72,9 @@ export default {
         { title: 'Новини', icon: 'news.svg', routeName: 'admin-news' },
       ],
       pages: [
-        { 
-          title: 'Про коледж', 
-          icon: 'about.svg', 
+        {
+          title: 'Про коледж',
+          icon: 'about.svg',
           subpages: [
             { title: 'Історія', icon: 'history.svg', routeName: 'history' },
             { title: 'Адміністрація', icon: 'manager.svg', routeName: 'administration' },
@@ -84,25 +84,25 @@ export default {
             { title: 'Гуртожиток', icon: 'sleep.svg', routeName: 'chummer' },
           ],
         },
-        { 
-          title: 'Навчання', 
+        {
+          title: 'Навчання',
           icon: 'study.svg',
           subpages: [
             { title: 'Циклові комісії', icon: 'meeting.svg', routeName: 'commissions' },
             { title: 'Спеціальності', icon: 'network.svg', routeName: 'specialties' },
             { title: 'Освітня програма', icon: 'files.svg', routeName: 'program' },
-          ], 
+          ],
         },
-        { 
-          title: 'Абітурієнту', 
+        {
+          title: 'Абітурієнту',
           icon: 'entrants.svg',
           subpages: [
             { title: 'Підготовчі курси', icon: 'homework.svg', routeName: 'courses' },
             { title: 'Вступна кампанія', icon: 'doorway.svg', routeName: 'entrance' },
           ],
-        }, 
-        { 
-          title: 'Студенту', 
+        },
+        {
+          title: 'Студенту',
           icon: 'students.svg',
           subpages: [
             { title: 'Розклад навчання', icon: 'timetable.svg', routeName: 'schedule' },
@@ -113,8 +113,8 @@ export default {
             { title: 'Стипендіальне забезпечення', icon: 'scholarship.svg', routeName: 'scholarship' },
           ],
         },
-        { 
-          title: 'Бібліотека', 
+        {
+          title: 'Бібліотека',
           icon: 'library.svg',
           subpages: [
             { title: 'Про бібліотеку', icon: 'library.svg', routeName: 'aboutLibrary' },
@@ -122,11 +122,11 @@ export default {
             { title: 'Правила користування', icon: 'file.svg', routeName: 'rules' },
             { title: 'Електронні підручники', icon: 'ebooks.svg', routeName: 'ebooks' },
           ],
-        },  
-        { 
-          title: 'Контакти', 
+        },
+        {
+          title: 'Контакти',
           icon: 'contacts.svg',
-        },   
+        },
       ],
     },
   }),
@@ -195,7 +195,7 @@ export default {
       }
     }
   }
-  
+
   &__links {
     display: grid;
     grid-template-rows: auto auto 1fr;

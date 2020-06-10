@@ -138,7 +138,7 @@ export default {
         return Promise.resolve()
       }).catch(() => {})
     },
-    
+
     async setSelectTag({ commit }, tag) {
       commit('setSelectTag', tag)
     },
@@ -157,7 +157,7 @@ export default {
         if (data.errors) {
           return Promise.reject(data.errors)
         }
-        
+
         return data
       }).catch(() => {})
     },
@@ -167,7 +167,7 @@ export default {
         if (data.errors) {
           return Promise.reject(data.errors)
         }
-        
+
         return data
       }).catch(() => {})
     },
@@ -177,7 +177,7 @@ export default {
         if (data.errors) {
           return Promise.reject(data.errors)
         }
-        
+
         return data
       }).catch(() => {})
     },

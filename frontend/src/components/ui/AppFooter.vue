@@ -86,7 +86,7 @@ export default {
   },
   data: () => ({
     sitemap: [
-      { 
+      {
         title: 'КОЛЕДЖ',
         links: [
           { name: 'Історія', routeName: '/about/history' },
@@ -99,7 +99,7 @@ export default {
           { name: 'Гуртожиток', routeName: '/about/chummer' },
         ],
       },
-      { 
+      {
         title: 'АБІТУРІЄНТАМ',
         links: [
           { name: 'Підготовчі курси', routeName: '/entrants/courses' },
@@ -112,7 +112,7 @@ export default {
           { name: 'Результати', routeName: '/entrants/entrance' },
         ],
       },
-      { 
+      {
         title: 'СТУДЕНТАМ',
         links: [
           { name: 'Навчання', routeName: '/student/schedule' },
@@ -123,7 +123,7 @@ export default {
           { name: 'Стипендіальне забезпечення', routeName: '/student/scholarship' },
         ],
       },
-      { 
+      {
         title: 'ІНШЕ',
         links: [
           { name: 'Циклові комісії', routeName: '/study/commissions' },

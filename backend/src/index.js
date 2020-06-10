@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 
 import { production, development } from './configs/db'
 
@@ -13,8 +14,8 @@ const app = express()
 const port = process.env.PORT || 4000
 const database = process.env.NODE_ENV === 'production' ? production : development
 
-app.use(express.json({ limit: '10mb' }))
-app.use(express.urlencoded({ limit: '10mb' }))
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 app.use(cors())
 

@@ -263,7 +263,7 @@ export default {
         font-size: 34px;
         line-height: 36px;
       }
-  
+
       &-lastname-text {
         font-size: 16px;
         line-height: 26px;

@@ -178,7 +178,7 @@ input::-webkit-inner-spin-button {
   }
 }
 
-.picture-input { 
+.picture-input {
 
   &__change-button {
     width: 30px;
@@ -210,7 +210,7 @@ input::-webkit-inner-spin-button {
     background-position: center;
   }
 }
- 
+
 
 @media screen and (max-width: 1195px) {
   .container {

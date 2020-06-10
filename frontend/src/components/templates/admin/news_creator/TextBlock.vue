@@ -4,20 +4,20 @@
       <span class="text-block__title">Teкстовий блок</span>
       <div @click="$emit('delete') | (text = null)" class="text-block__delete">
         <img
-          class="text-block__delete-icon" 
-          src="@/assets/icons/admin/delete.svg" 
+          class="text-block__delete-icon"
+          src="@/assets/icons/admin/delete.svg"
           alt="delete"
         >
       </div>
     </div>
-    <textarea 
-      class="text-block__textarea" 
+    <textarea
+      class="text-block__textarea"
       placeholder="Введіть текст..."
       v-model="text"
       @input="$emit('change', text)"
     >
     </textarea>
-  </div>    
+  </div>
 </template>
 
 <script>
@@ -62,10 +62,10 @@ export default {
 
   &__textarea {
     padding: 10px;
-      
+
     border: 2px solid #c7c7c7;
     border-radius: 5px;
-    
+
     min-width: 100%;
     resize: none;
   }

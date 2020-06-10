@@ -214,7 +214,7 @@ export default {
   },
   async created() {
     this.photo = await this.loadImages(['5ebece9836626b233ccd1fca'])
-    
+
     this.sections.sport.events = await this.loadNewsByTag({ tag: '5ebd5a07c524342928139269' })
     this.sections.teachers.events = await this.loadNewsByTag({ tag: '5ebd5a11c52434292813926a' })
     this.sections.educActivity.events = await this.loadNewsByTag({ tag: '5ebd5a00c524342928139268' })

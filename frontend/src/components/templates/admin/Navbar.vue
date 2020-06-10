@@ -5,8 +5,8 @@
         <div class="navbar__last">
           <span>Панель керування</span>
           <img
-            class="navbar__last-close-icon" 
-            src="@/assets/icons/admin/close.svg" 
+            class="navbar__last-close-icon"
+            src="@/assets/icons/admin/close.svg"
             alt="close icon"
           >
         </div>
@@ -19,8 +19,8 @@
       </div>
       <div class="user__name">Admin</div>
       <img
-        class="user__more-icon" 
-        src="@/assets/icons/admin/chevron-top.svg" 
+        class="user__more-icon"
+        src="@/assets/icons/admin/chevron-top.svg"
         alt="more icon"
       >
     </div>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  
+
 }
 </script>
 
@@ -58,7 +58,7 @@ export default {
 
   &__last {
     padding: 5px 10px;
-    background: var(--color-accent-yellow); 
+    background: var(--color-accent-yellow);
 
     border-radius: 10px;
 
@@ -95,7 +95,7 @@ export default {
   &__more-icon {
     transform: rotate(180deg) translateY(-1px);
     width: 10px;
-    
+
     margin-left: 7px;
 
     cursor: pointer;

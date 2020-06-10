@@ -32,7 +32,7 @@
 
           <div class="news-table__content"
             v-if="list.finded">
-            <div 
+            <div
               class="news-table__item"
               v-for="({ title, publicationDate, views }, i) in list.news" :key="i"
             >
@@ -43,7 +43,7 @@
           </div>
         </div>
       </div>
-      
+
 
       <div class="news__right">
         <div class="news__search">
@@ -54,7 +54,7 @@
         <div class="news__last"
           v-if="last.finded">
           <div class="news__last-header">Останні новини</div>
-          <div 
+          <div
             class="news__last-item"
             v-for="({ mainImage, title }, i) in last.news" :key="i"
           >
@@ -108,7 +108,7 @@ export default {
     grid-template-columns: 6fr 3fr;
     grid-gap: 40px;
   }
-  
+
   &__statistics {
     background: var(--color-accent-green);
     border-radius: 20px;
@@ -122,7 +122,7 @@ export default {
 
     &-item {
       display: flex;
-      flex-direction: column; 
+      flex-direction: column;
     }
 
     &-title {
@@ -186,7 +186,7 @@ export default {
 
     &-item {
       padding: 10px;
-      background: #fff;    
+      background: #fff;
       border-radius: 10px;
       box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.07);
 
@@ -249,9 +249,9 @@ export default {
     padding: 10px 0;
 
     border-bottom: 1px dashed silver;
-    
+
     cursor: pointer;
-  }  
+  }
 }
 
 </style>

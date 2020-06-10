@@ -20,13 +20,13 @@ module.exports = {
     'global-require': 'off',
     'no-unused-expressions': 'off',
     'no-underscore-dangle': 'off',
-    //---------------------------
-    'no-trailing-spaces': 'off',
     'no-mixed-operators': 'off',
-    'prefer-template': 'off',
-    'prefer-const': 'off',
-    'arrow-body-style': 'off',
     'no-param-reassign': 'off',
-    'no-multiple-empty-lines': 'off',
+    //---------------------------
+    // 'no-trailing-spaces': 'off',
+    // 'prefer-template': 'off',
+    // 'prefer-const': 'off',
+    // 'arrow-body-style': 'off',
+    // 'no-multiple-empty-lines': 'off',
   },
 }

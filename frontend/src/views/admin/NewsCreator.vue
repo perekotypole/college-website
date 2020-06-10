@@ -13,14 +13,14 @@
         </span>
 
         <div class="news-creator__image-input">
-          <picture-input 
-            ref="pictureInput" 
+          <picture-input
+            ref="pictureInput"
             @change="onChange"
             @remove="onChange"
-            width="200" 
-            height="170" 
-            accept="image/jpeg,image/png" 
-            size="10" 
+            width="200"
+            height="170"
+            accept="image/jpeg,image/png"
+            size="10"
             buttonClass="picture-input__change-button"
             removeButtonClass="picture-input__remove-button"
             :removable="true"
@@ -50,8 +50,8 @@
           Заголовок
         </span>
 
-        <input 
-          class="news-creator__title-input" 
+        <input
+          class="news-creator__title-input"
           v-model="title"
           type="text"
           placeholder="Введіть заголовок..."
@@ -72,9 +72,9 @@
             <div @click="textBlock = true"
               v-if="!textBlock"
               class="add-block__add-text-block add-block__button">
-              <img 
-                class="add-block__icon" 
-                src="@/assets/icons/admin/text.svg" 
+              <img
+                class="add-block__icon"
+                src="@/assets/icons/admin/text.svg"
                 alt="text icon"
               >
               <span>Текстовий блок</span>
@@ -82,9 +82,9 @@
             <div @click="imagesBlock = true"
               v-if="!imagesBlock"
               class="add-block__add-image-block add-block__button">
-              <img 
-                class="add-block__icon" 
-                src="@/assets/icons/admin/picture.svg" 
+              <img
+                class="add-block__icon"
+                src="@/assets/icons/admin/picture.svg"
                 alt="picture icon"
               >
               <span>Зображення</span>
@@ -92,9 +92,9 @@
             <div @click="docsBlock = true"
               v-if="!docsBlock"
               class="add-block__add-image-block add-block__button">
-              <img 
-                class="add-block__icon" 
-                src="@/assets/icons/admin/file.svg" 
+              <img
+                class="add-block__icon"
+                src="@/assets/icons/admin/file.svg"
                 alt="picture icon"
               >
               <span>Документи</span>
@@ -123,7 +123,7 @@
         Надіслати
       </div>
     </div>
-  </div>    
+  </div>
 </template>
 
 <script>
@@ -165,7 +165,7 @@ export default {
     },
     checkData() {
       const {
-        mainImage, title, text, images, docs, mainTag, 
+        mainImage, title, text, images, docs, mainTag,
       } = this
 
       if (!mainImage || !title) {
@@ -175,7 +175,7 @@ export default {
 
       this.errors = null
       this.createNews({
-        mainImage, title, text, images, docs, mainTag, 
+        mainImage, title, text, images, docs, mainTag,
       })
 
       return 1
@@ -246,7 +246,7 @@ export default {
     width: 170px;
     height: 50px;
     font-size: 16px;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -274,7 +274,7 @@ export default {
 
   &__buttons {
     margin-top: 17px;
-    
+
     display: flex;
   }
 

@@ -2,7 +2,7 @@
   <div class="admin-layout">
     <sidebar class="admin-layout__sidebar" />
     <navbar class="admin-layout__navbar" />
-    
+
     <div class="admin-layout__content">
       <router-view/>
     </div>
@@ -23,9 +23,9 @@ export default {
 
 <style lang="less" scoped>
 
-.admin-layout { 
+.admin-layout {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
   'sidebar navbar'
   'sidebar content';
   grid-template-columns: 52px 1fr;

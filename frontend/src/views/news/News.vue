@@ -37,7 +37,7 @@
 
       <app-pagination
         v-if="list.news"
-        :count="count"
+        :count="count.news"
         :pageLength="number"
         @getValue="setSelectPage($event)"
       />

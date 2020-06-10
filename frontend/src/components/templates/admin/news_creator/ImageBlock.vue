@@ -4,21 +4,21 @@
       <span class="image-block__title">Зображення</span>
       <div @click="$emit('delete')" class="image-block__delete">
         <img
-          class="image-block__delete-icon" 
-          src="@/assets/icons/admin/delete.svg" 
+          class="image-block__delete-icon"
+          src="@/assets/icons/admin/delete.svg"
           alt="delete"
         >
       </div>
     </div>
 
     <div class="image-block__upload">
-      <picture-input 
-        ref="pictureInput" 
-        width="170" 
-        height="140" 
+      <picture-input
+        ref="pictureInput"
+        width="170"
+        height="140"
         @change="onChange"
-        accept="image/jpeg,image/png" 
-        size="10" 
+        accept="image/jpeg,image/png"
+        size="10"
         buttonClass="picture-input__upload-button"
         :customStrings="{
           remove: '',
@@ -37,18 +37,18 @@
           @click="list.splice(index, 1)"/>
       </div>
     </div>
-    
+
     <!-- <div class="image-block__size">
-      <input 
-        :id="sizeCheckbox" 
+      <input
+        :id="sizeCheckbox"
         type="checkbox"
         class="image-block__size-input"
       >
       <label :for="sizeCheckbox">Не обрізати</label>
     </div> -->
 
-    <!-- <input 
-      class="image-block__description" 
+    <!-- <input
+      class="image-block__description"
       type="text"
       placeholder="Підпис (необов'язково)"
     > -->
@@ -84,7 +84,7 @@ export default {
 <style lang="less" scoped>
 
 .image-block {
-  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);  
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);
   border-radius: 10px;
   padding: 20px;
 
