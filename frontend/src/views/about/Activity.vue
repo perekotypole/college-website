@@ -21,6 +21,7 @@
             <app-image
             class="app-activity__image"
             position="left"
+            v-if="photo"
             :link="photo.images[0].path"
             ></app-image>
           </div>
@@ -223,7 +224,7 @@ export default {
     this.sections.teachers.methAssoc.documents = await this.loadDocuments(['5ed51fcad4cd813fcc566e60', '5ed51fe6d4cd813fcc566e61'])
   },
   data: () => ({
-    photo: {},
+    photo: null,
     sections: {
       sport: {
         name: 'Спорт',

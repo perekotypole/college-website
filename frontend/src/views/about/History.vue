@@ -30,6 +30,7 @@
 
         <app-image
           class="app-history__item-image"
+          v-if="photo"
           :link="photo.images[0].path"
           position="right"
           ></app-image>
@@ -55,6 +56,7 @@
 
         <app-image
           class="app-history__item-image"
+          v-if="photo"
           :link="photo.images[1].path"
           position="left"
           ></app-image>
@@ -82,7 +84,8 @@
 
         <app-image
           class="app-history__item-image"
-          :link="photo.images[3].path"
+          v-if="photo"
+          :link="photo.images[2].path"
           position="right"
           ></app-image>
       </div>
@@ -103,7 +106,7 @@ export default {
   },
   data() {
     return {
-      photo: [],
+      photo: null,
       // images: [
       //   'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg',
       //   'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298',

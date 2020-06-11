@@ -32,6 +32,7 @@
 
         <app-image
           class="app-history__item-image"
+          v-if="photo"
           :link="photo.images[0].path"
           position="right"
           ></app-image>
@@ -54,6 +55,7 @@
 
         <app-image
           class="app-history__item-image"
+          v-if="photo"
           :link="photo.images[1].path"
           position="left"
           ></app-image>
@@ -83,6 +85,7 @@
 
         <app-image
           class="app-history__item-image"
+          v-if="photo"
           :link="photo.images[2].path"
           position="right"
           ></app-image>
@@ -95,7 +98,8 @@
         :highlight="65"
         >ФОТО</app-title>
 
-      <div class="app-history__galery">
+      <div class="app-history__galery"
+        v-if="galery">
         <img
         class="app-history__galery-photo"
         v-for="(image, index) in galery.images"
@@ -121,13 +125,13 @@ export default {
   },
   data() {
     return {
-      photo: [],
+      photo: null,
       // photo: [
       //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7391.jpg',
       //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7408.jpg',
       //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7418.jpg',
       // ],
-      galery: [],
+      galery: null,
       // galery: [
       //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7391.jpg',
       //   'http://kpk-lp.com.ua/wp-content/uploads/2014/06/IMG_7408.jpg',

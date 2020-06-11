@@ -23,6 +23,7 @@
 
         <app-image
           class="app-about__item-image"
+          v-if="photo"
           :link="photo.images[0].path"
           position="right"
           ></app-image>
@@ -48,6 +49,7 @@
 
         <app-image
           class="app-about__item-image"
+          v-if="photo"
           :link="photo.images[1].path"
           position="left"
           ></app-image>
@@ -87,7 +89,7 @@ export default {
   },
   data() {
     return {
-      photo: [],
+      photo: null,
     }
   },
   methods: {
