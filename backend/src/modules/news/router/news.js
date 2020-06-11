@@ -193,7 +193,7 @@ export default (router) => {
     }
   })
 
-  router.post('/', async (req, res) => {
+  router.post('/', verifyUser, async (req, res) => {
     const news = req.body
 
     news.mainImage = (await Image.create({ path: news.mainImage }))._id

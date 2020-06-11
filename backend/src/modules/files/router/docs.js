@@ -22,7 +22,7 @@ export default (router) => {
     }
   })
 
-  router.post('/docs', async (req, res) => {
+  router.post('/docs', verifyUser, async (req, res) => {
     const { ids } = req.body
 
     try {
@@ -41,7 +41,7 @@ export default (router) => {
     }
   })
 
-  router.post('/doc', async (req, res) => {
+  router.post('/doc', verifyUser, async (req, res) => {
     const doc = req.body
 
     try {

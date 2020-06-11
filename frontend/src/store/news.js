@@ -178,6 +178,26 @@ export default {
           return Promise.reject(data.errors)
         }
 
+        return Promise.resolve()
+      }).catch(() => {})
+    },
+
+    async deleteNews({ dispatch }, id) {
+      return axios({
+        method: 'delete',
+        url: '/news',
+        data: {
+          id,
+        },
+      }).then(({ data }) => {
+        if (data.errors) {
+          return Promise.reject(data.errors)
+        }
+
+        // dispatch('loadNews')
+        // dispatch('loadSlider', 3)
+        // dispatch('loadNewsNumber')
+
         return data
       }).catch(() => {})
     },

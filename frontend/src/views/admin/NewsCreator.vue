@@ -106,17 +106,26 @@
       <text-block
         v-if="textBlock"
         @change="text = $event"
-        @delete="(textBlock = false) | (text = null)"/>
+        @delete="() => {
+          textBlock = false
+          text = null
+        }"/>
 
       <image-block
         v-if="imagesBlock"
         @change="images = $event"
-        @delete="(imagesBlock = false) | (images = [])"/>
+        @delete="() => {
+          imagesBlock = false
+          images = []
+        }"/>
 
       <docs-block
         v-if="docsBlock"
         @change="docs = $event"
-        @delete="(docsBlock = false) | (docs = [])"/>
+        @delete="() => {
+          docsBlock = false
+          docs = []
+        }"/>
 
       <div class="news-creator__submit"
         @click="checkData">
@@ -140,6 +149,7 @@ export default {
   components: {
     PictureInput, TextBlock, ImageBlock, DocsBlock, AppSelect,
   },
+
   data: () => ({
     errors: null,
 
@@ -163,21 +173,21 @@ export default {
     onChange(image) {
       this.mainImage = image
     },
-    checkData() {
+    async checkData() {
       const {
         mainImage, title, text, images, docs, mainTag,
       } = this
 
       if (!mainImage || !title) {
-        this.errors = "*Не заповнені обов'язкові поля"
+        this.errors = '*Не заповнені обов`язкові поля'
         return 0
       }
 
-      this.errors = null
-      this.createNews({
+      await this.createNews({
         mainImage, title, text, images, docs, mainTag,
       })
 
+      this.$router.push({ name: 'admin-news' })
       return 1
     },
     ...mapActions({

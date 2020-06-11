@@ -2,34 +2,59 @@
   <div class="navbar">
     <div class="navbar__left">
       <div class="navbar__links">
-        <div class="navbar__last">
+        <!-- <div class="navbar__last">
           <span>Панель керування</span>
           <img
             class="navbar__last-close-icon"
             src="@/assets/icons/admin/close.svg"
             alt="close icon"
           >
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <div class="navbar__right user">
-      <div class="user__image">
+    <div class="navbar__right">
+      <div class="user" @click="menu = !menu">
+        <!-- <div class="user__image">
 
+        </div> -->
+        <div class="user__name">Admin</div>
+        <img
+          class="user__more-icon"
+          src="@/assets/icons/admin/chevron-top.svg"
+          alt="more icon"
+        >
       </div>
-      <div class="user__name">Admin</div>
-      <img
-        class="user__more-icon"
-        src="@/assets/icons/admin/chevron-top.svg"
-        alt="more icon"
-      >
+
+      <div class="menu"
+        v-show="menu">
+        <div class="menu__button"
+          @click="appLogOut">
+          Вихід
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+import { mapActions } from 'vuex'
 
+export default {
+  data() {
+    return {
+      menu: false,
+    }
+  },
+  methods: {
+    ...mapActions({
+      logOut: 'authorization/logOut',
+    }),
+    async appLogOut() {
+      await this.logOut()
+      this.$router.push({ name: 'signIn' })
+    },
+  },
 }
 </script>
 
@@ -40,8 +65,8 @@ export default {
 
   padding: 15px 25px;
 
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
 
   box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
   border-radius: 10px;
@@ -70,6 +95,8 @@ export default {
 }
 
 .user {
+  justify-content: flex-end;
+
   display: flex;
 
   &__image {
@@ -99,6 +126,26 @@ export default {
     margin-left: 7px;
 
     cursor: pointer;
+  }
+
+}
+
+.menu {
+  background-color: var(--color-bg-main);
+  box-shadow: 0px 20px 15px 0px rgba(0,0,0,0.1);
+  border-radius: 0 0 10px 10px;
+
+  position: absolute;
+  top: 50px;
+  right: 30px;
+
+  min-width: 200px;
+
+  &__button {
+    cursor: pointer;
+
+    padding: 15px 20px;
+    margin-top: 5px;
   }
 }
 

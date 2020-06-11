@@ -22,11 +22,13 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'no-mixed-operators': 'off',
     'no-param-reassign': 'off',
+    'no-empty-pattern': 'off',
+    'no-extra-boolean-cast': 'off',
     //---------------------------
-    // 'no-trailing-spaces': 'off',
-    // 'prefer-template': 'off',
-    // 'prefer-const': 'off',
-    // 'arrow-body-style': 'off',
-    // 'no-multiple-empty-lines': 'off',
+    'no-trailing-spaces': 'off',
+    'prefer-template': 'off',
+    'prefer-const': 'off',
+    'arrow-body-style': 'off',
+    'no-multiple-empty-lines': 'off',
   },
 }

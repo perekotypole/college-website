@@ -3,6 +3,7 @@
     <span class="news__title admin-view__title">
       Новини
     </span>
+    <div @click="logOut">вийти</div>
 
     <div class="news__content">
       <div class="news__left">
@@ -56,22 +57,54 @@
           <div class="news__last-header">Останні новини</div>
           <div
             class="news__last-item"
-            v-for="({ mainImage, title }, i) in last.news" :key="i"
+            v-for="({ mainImage, title, _id }, i) in last.news" :key="i"
           >
             <div class="news__last-image"
               :style="{ backgroundImage: `url(${mainImage.path})` }"></div>
-            <div class="news__last-title">{{title}}</div>
+            <div class="news__last-panel">
+              <div class="news__last-title">{{title}}</div>
+
+              <div class="news__last-buttons">
+                <img src="@/assets/icons/admin/delete.svg"
+                  @click="() => {
+                    message = 'Ви впевнені, що хочете видалити новину?'
+                    act = deleteNews
+                    params = _id
+                    modal = true
+                  }"/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <app-confirm
+      v-if="modal"
+      :message="message"
+      :act="act"
+      :params="params"
+      @close="modal = !$event"/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
+import AppConfirm from '@/components/templates/admin/AppConfirm.vue'
+
 export default {
+  components: {
+    AppConfirm,
+  },
+  data() {
+    return {
+      modal: false,
+      message: null,
+      act: null,
+      params: null,
+    }
+  },
   computed: {
     ...mapGetters({
       list: 'news/news',
@@ -86,13 +119,28 @@ export default {
       loadNewsNumber: 'news/loadNewsNumber',
 
       loadSlider: 'news/loadSlider',
+
+      deleteNews: 'news/deleteNews',
+
+      logOut: 'authorization/logOut',
     }),
+    updateData() {
+      this.loadNews()
+      this.loadNewsNumber()
+
+      this.loadSlider(3)
+    },
   },
   created() {
-    this.loadNews()
-    this.loadNewsNumber()
-
-    this.loadSlider(3)
+    this.updateData()
+  },
+  mounted() {
+    this.updateData()
+  },
+  watch: {
+    modal() {
+      this.updateData()
+    },
   },
 }
 </script>
@@ -205,10 +253,23 @@ export default {
       background-position: center;
     }
 
-    &-title {
+    &-panel {
+      display: flex;
+      justify-content: space-between;
+
+      padding: 10px;
+      padding-top: 20px;
+      
       font-size: 18px;
       font-weight: 600;
-      padding: 20px 10px 10px 10px;
+    }
+
+    &-buttons{
+
+      img{
+        height: 1em;
+        cursor: pointer;
+      }
     }
   }
 }

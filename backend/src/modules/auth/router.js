@@ -47,8 +47,7 @@ export default (router) => {
   // })
 
   router.post('/signIn', async (req, res) => {
-    const user = req.body
-    const { login, password } = user
+    const { login, password } = req.body
 
     Admin.findOne({ login })
       .then(async (admin) => {

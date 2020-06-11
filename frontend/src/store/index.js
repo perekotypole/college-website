@@ -7,6 +7,7 @@ import news from './news'
 import specialties from './specialties'
 import documents from './documents'
 import images from './images'
+import authorization from './authorization'
 
 Vue.use(Vuex)
 
@@ -24,5 +25,6 @@ export default new Vuex.Store({
     specialties,
     documents,
     images,
+    authorization,
   },
 })

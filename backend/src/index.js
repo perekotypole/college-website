@@ -14,8 +14,8 @@ const app = express()
 const port = process.env.PORT || 4000
 const database = process.env.NODE_ENV === 'production' ? production : development
 
-app.use(bodyParser.json({limit: '10mb'}));
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+app.use(bodyParser.json({ limit: '10mb' }))
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 app.use(cors())
 

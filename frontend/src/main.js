@@ -10,6 +10,13 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+import axios from './tools/axios'
+import accessTokenExpired from './tools/accessTokenExpired'
+import accessTokenHeader from './tools/accessTokenHeader'
+
+accessTokenExpired(axios, store)
+accessTokenHeader(axios, store)
+
 Vue.config.productionTip = false
 
 Vue.filter('addZero', addZero)

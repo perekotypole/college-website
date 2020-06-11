@@ -21,7 +21,7 @@ export default (router) => {
     }
   })
 
-  router.post('/images', async (req, res) => {
+  router.post('/images', verifyUser, async (req, res) => {
     const { ids } = req.body
 
     try {
