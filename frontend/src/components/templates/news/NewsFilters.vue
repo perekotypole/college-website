@@ -11,11 +11,13 @@
 
       <div class="filters__pub-date">
         <span class="filters__title">Дата публікації:</span>
-        <date-input />
-        <div class="filters__separator"></div>
-        <date-input
-          :slope="4"
-        />
+        <div class="filters__pub-date-selectors">
+          <date-input/>
+          <div class="filters__separator"></div>
+          <date-input
+            :slope="4"
+          />
+        </div>
       </div>
 
       <div class="filters__category"
@@ -72,7 +74,7 @@ export default {
 <style lang="less" scoped>
 
 .filters {
-  width: 1143px;
+  width: 80%;
   padding: 35px 70px;
 
   background: var(--color-bg-main);
@@ -84,7 +86,7 @@ export default {
   &__form {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 
     justify-content: space-between;
     align-items: center;
@@ -94,6 +96,14 @@ export default {
   &__category {
     display: flex;
     align-items: center;
+  }
+
+  &__pub-date {
+
+    &-selectors{
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__category-select {
@@ -109,6 +119,28 @@ export default {
     width: 6px;
     height: 2px;
     background: var(--color-font-light);
+  }
+
+  @media screen and (max-width: 576px) {
+    padding: 35px;
+
+    &__search,
+    &__pub-date {
+      margin-bottom: 15px;
+    }
+
+    // &__separator{
+    //   display: none;
+    // }
+  
+    &__pub-date {
+      display: block;
+
+      &-selectors{
+        align-self: flex-end;
+        margin-top: 5px;
+      }
+    }
   }
 }
 
@@ -129,6 +161,14 @@ export default {
     position: absolute;
     top: 7px;
     transform: translateX(-17px);
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+
+    &__input {
+      width: 100%;
+    }
   }
 }
 

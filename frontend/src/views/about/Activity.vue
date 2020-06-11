@@ -374,6 +374,20 @@ export default {
   &__teachers-event-list {
     margin-bottom: 90px;
   }
+
+  @media screen and (max-width: 576px) {
+    .section__col-block {
+      display: block;
+    }
+
+    &__sport {
+
+      &-left,
+      &-right {
+        width: 100%;
+      }
+    }
+  }
 }
 
 </style>

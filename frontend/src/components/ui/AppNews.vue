@@ -121,6 +121,7 @@ export default {
 
   &__date {
     position: absolute;
+    z-index: 2;
     padding: 8px 16px 8px 11px;
 
     display: flex;
@@ -135,6 +136,28 @@ export default {
 
   &__calendar-icon {
     margin-right: 9px;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;
+
+    display: block;
+    
+    &__right {
+      padding: 30px;
+    }
+
+    &__image {
+      position: relative;
+      top: 10px;
+
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    &__bg {
+      display: none;
+    }
   }
 }
 

@@ -98,5 +98,11 @@ export default {
 
     }
   }
+
+  @media screen and (max-width: 1195px){
+    .section-card {
+      width: 100%;
+    }
+  }
 }
 </style>

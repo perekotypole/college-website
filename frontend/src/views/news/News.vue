@@ -36,6 +36,7 @@
       </div>
 
       <app-pagination
+        class="view-settings__pages"
         v-if="list.news"
         :count="Number(count.news)"
         :pageLength="number"
@@ -119,7 +120,7 @@ export default {
   padding-bottom: 60px;
 
   &__list {
-    width: 1143px;
+    width: 75%;
 
     padding: 60px 0;
 
@@ -147,11 +148,26 @@ export default {
     left: 50%;
     transform: translateX(-50%);
   }
+
+  @media screen and (max-width: 576px) {
+    &__filters {
+      transform: translate(-50%, -75px);
+    }
+
+    &__list {
+      width: 95%;
+      margin: 170px 0 100px 17px;
+    }
+
+    &__view-settings {
+      transform: translate(-50%, -120px);
+    }
+  }
 }
 
 .view-settings {
-  width: 1143px;
-  padding: 35px 35px;
+  width: 75%;
+  padding: 35px;
 
   background: var(--color-bg-main);
 
@@ -173,6 +189,17 @@ export default {
 
   &__show-count {
     justify-self: end;
+  }
+
+  @media screen and (max-width: 576px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__item,
+    &__pages{
+      margin-bottom: 20px;
+    }
   }
 }
 
