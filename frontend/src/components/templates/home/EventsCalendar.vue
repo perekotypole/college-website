@@ -13,12 +13,13 @@
     <div class="calendar">
       <div class="calendar__left">
         <div class="calendar__navigation">
-          <div class="calendar__navigation-prev">
+          <div @click="prevMonth" class="calendar__navigation-prev">
             <img src="@/assets/icons/left-arrow.svg" alt="prev">
           </div>
-          <span class="calendar__month-name">Березень 2020</span>
-          <div class="calendar__navigation-next">
-            <img src="@/assets/icons/right-arrow.svg" alt="next">
+          <span class="calendar__month-name">{{ monthName(currentMonth) }} {{ currentYear }}</span>
+          <div @click="nextMonth" class="calendar__navigation-next">
+            <img 
+              src="@/assets/icons/right-arrow.svg" alt="next">
           </div>
         </div>
 
@@ -33,7 +34,7 @@
           <div class="calendar__days">
             <div
               class="calendar__days-row"
-              v-for="(row, index) in month"
+              v-for="(row, index) in monthToShow"
               :key="index"
             >
               <div
@@ -43,8 +44,9 @@
                 :style="day.number && { background: day.empty ?
                   `var(--color-accent-yellow)` :
                   `var(--color-accent-green)` }"
+                @click="sliderDayChange(day.number, day.news)"
               >
-                {{ day.number }}
+                {{ day.number | addZero }}
               </div>
             </div>
           </div>
@@ -52,20 +54,31 @@
       </div>
       <div class="calendar__right">
         <div class="calendar__right-content">
-          <div class="calendar__current-day">14 березня</div>
-          <div class="calendar__news-slider-counter">
-            <span class="calendar__news-slider-counter_current">{{ currentNewsSlide + 1 | addZero }}</span>
-            /{{ news.length | addZero }}
-          </div>
-          <NewsSlider
-            class="calendar__news-slider"
-            sliderId="newsSliderCalendar"
-            :onSlideChange="currentSlideUpdate"
-            :category="false"
-            controlColor="green"
-            :slides="news"
+          <template v-if="sliderNews().length > 0">
+            <div class="calendar__current-day">{{ sliderGetDay }} {{ sliderGetMonth }}</div>
+            <div class="calendar__news-slider-counter">
+              <span class="calendar__news-slider-counter_current">{{ currentNewsSlide + 1 | addZero }}</span>
+              /{{ sliderNews().length | addZero }}
+            </div>
+            <NewsSlider
+              class="calendar__news-slider"
+              sliderId="newsSliderCalendar"
+              :onSlideChange="currentSlideUpdate"
+              :getDate="changeDate"
+              :category="false"
+              :swipes="false"
+              :currentDay="selectedDay"
+              controlColor="green"
+              :slides="sliderNews()"
+            >
+            </NewsSlider>
+          </template>
+          <span 
+            v-else
+            class="calendar__empty-month"
           >
-          </NewsSlider>
+            В цьому місяці немає новин
+          </span>
         </div>
       </div>
     </div>
@@ -73,6 +86,8 @@
 </template>
 
 <script>
+
+import { mapActions, mapGetters } from 'vuex'
 
 import AppTitle from '@/components/ui/AppTitle.vue'
 import NewsSlider from '@/components/templates/home/NewsSlider.vue'
@@ -83,75 +98,179 @@ export default {
     AppTitle,
     NewsSlider,
   },
-  data: () => ({
-    currentNewsSlide: 0,
-    news: [
-      { title: 'Запрошуємо на день відкритих дверей', category: 'студенти', link: 'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg' },
-      { title: 'Коломийський політехнічний коледж Університету повністю виконав державне замовлення з прийому студентів', category: 'викладачі', link: 'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298' },
-      { title: 'Критичне мислення', category: 'спорт', link: 'http://kpk-lp.com.ua/wp-content/uploads/2020/02/03.jpg' },
-    ],
-    dayNames: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'],
-    month: [
-      [
-        { number: '' },
-        { number: '' },
-        { number: '' },
-        { number: '' },
-        { number: '' },
-        { number: '' },
-        { number: '01', empty: true },
-      ],
-      [
-        { number: '02', empty: true },
-        { number: '03', empty: false },
-        { number: '04', empty: true },
-        { number: '05', empty: true },
-        { number: '06', empty: true },
-        { number: '07', empty: true },
-        { number: '08', empty: true },
-      ],
-      [
-        { number: '09', empty: true },
-        { number: '10', empty: true },
-        { number: '11', empty: true },
-        { number: '12', empty: true },
-        { number: '13', empty: true },
-        { number: '14', empty: false },
-        { number: '15', empty: true },
-      ],
-      [
-        { number: '16', empty: true },
-        { number: '17', empty: true },
-        { number: '18', empty: true },
-        { number: '19', empty: false },
-        { number: '20', empty: true },
-        { number: '21', empty: true },
-        { number: '22', empty: true },
-      ],
-      [
-        { number: '23', empty: true },
-        { number: '24', empty: true },
-        { number: '25', empty: true },
-        { number: '26', empty: true },
-        { number: '27', empty: true },
-        { number: '28', empty: true },
-        { number: '29', empty: true },
-      ],
-      [
-        { number: '30', empty: false },
-        { number: '31', empty: true },
-        { number: '' },
-        { number: '' },
-        { number: '' },
-        { number: '' },
-        { number: '' },
-      ],
-    ],
-  }),
+  data() {
+    return {
+      currentMonth: new Date().getMonth() + 1,
+      currentYear: new Date().getFullYear(),
+      currentNewsSlide: 0,
+      selectedDay: null,
+      currentSlideDate: null,
+      monthToShow: [],
+      dayNames: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'],
+      years: [],
+    }
+  },  
+  watch: {
+    async currentMonth() {
+      const { getMonthWeeks, currentMonth, currentYear } = this
+      this.monthToShow = await getMonthWeeks(currentMonth, currentYear)
+    },
+  },
+  computed: {
+    ...mapGetters({
+      calendar: 'news/calendar',
+      calendarByDay: 'news/calendarByDay',
+    }),
+    sliderGetDay() {
+      return new Date(this.currentSlideDate).getDate()
+    },
+    sliderGetMonth() {
+      const monthNames = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня']
+      return monthNames[new Date(this.currentSlideDate).getMonth()]
+    },
+  },
   methods: {
+    ...mapActions({
+      loadNews: 'news/loadCalendarNews',
+    }),
+    changeDate(date) {
+      this.currentSlideDate = date
+    },
+    monthName(number) {
+      const names = [
+        'Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень',
+      ]
+
+      return names[number - 1]
+    },
+    sliderNews() {
+      const { currentMonth, currentYear } = this
+      
+      try {
+        const { news } = this.years['y' + currentYear][currentMonth]
+
+        return news
+      } catch {
+        return []
+      }
+    },
     currentSlideUpdate(i) {
       this.currentNewsSlide = i
     },
+    sliderDayChange(num) {
+      this.selectedDay = num
+    },
+    emptyDaysStart(date) {
+      let week = []
+
+      let dayNum = date.getDay() !== 0 ? date.getDay() : 7 // переводим в зручніший формат
+      for (let i = 1; i < dayNum; i++) {
+        week.push({ number: '' })
+      }
+
+      return week
+    },
+    emptyDaysEnd(week) {
+      let emptyCount = 7 - week.length 
+      for (let i = 0; i < emptyCount; i++) {
+        week.push({ number: '' })
+      }
+
+      return week
+    },
+    async generateMonth(monthNum, yearNum) {
+      const { 
+        emptyDaysStart, 
+        emptyDaysEnd, 
+        currentMonth, 
+        currentYear,
+        sliderDayInit,
+      } = this
+
+      let monthDate = new Date(yearNum, monthNum - 1)
+
+      let month = []
+      let week = emptyDaysStart(monthDate)
+
+      // зазрузка даних з сервера
+      await this.loadNews({ 
+        month: this.currentMonth, 
+        year: this.currentYear,
+      })
+      const news = this.calendar
+      const newsByDay = this.calendarByDay
+
+      while (monthDate.getMonth() === monthNum - 1) { // поки місяць не закінчився
+        let dayNumber = monthDate.getDate()
+
+        week.push({ 
+          number: dayNumber, 
+          empty: !newsByDay[dayNumber],
+        })
+
+        monthDate.setDate(monthDate.getDate() + 1) // новий день
+        
+        if (week.length === 7) {
+          month.push(week)
+          week = []
+        }
+      }
+
+      if (week.length > 0) {
+        month.push(emptyDaysEnd(week))
+      }
+
+      month.news = news
+
+      return month
+    },
+    async getMonthWeeks(month, year) {
+      const { years, generateMonth } = this
+      let yearArr = years['y' + year] 
+
+      let res
+
+      if (!yearArr) {
+        yearArr = []
+        this.years['y' + year] = yearArr
+      }
+      
+      if (yearArr[month]) {
+        res = yearArr[month]
+      } else {
+        res = await generateMonth(month, year)
+        this.years['y' + year][month] = res
+      }
+
+      return res
+    },
+    nextMonth() {
+      let { currentYear, currentMonth } = this 
+      if (currentMonth < 12) {
+        currentMonth++
+      } else {
+        currentYear++
+        currentMonth = 1
+      }
+
+      this.currentMonth = currentMonth
+      this.currentYear = currentYear
+    },
+    prevMonth() {
+      let { currentYear, currentMonth } = this
+      if (currentMonth > 1) {
+        currentMonth--
+      } else {
+        currentYear--
+        currentMonth = 12
+      }
+
+      this.currentMonth = currentMonth
+      this.currentYear = currentYear
+    },
+  },
+  async mounted() {
+    this.monthToShow = await this.getMonthWeeks(this.currentMonth, this.currentYear)
   },
 }
 </script>
@@ -189,6 +308,11 @@ export default {
 
   &__navigation-next {
     margin-top: 5px;
+  }
+
+  &__empty-month {
+    font-weight: 600;
+    font-size: 20px;
   }
 
   // Content

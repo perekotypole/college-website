@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import axios from '../tools/axios'
 
 export default {
@@ -15,6 +16,7 @@ export default {
       number: 5,
       sort: 1,
     },
+    calendar: [],
   },
 
   getters: {
@@ -31,6 +33,22 @@ export default {
     selectPage: (state) => state.filter.page,
     selectNumber: (state) => state.filter.number,
     selectSort: (state) => state.filter.sort,
+
+    calendar: (state) => state.calendar,
+    calendarByDay: (state) => {
+      let res = []
+      state.calendar.forEach((item) => {
+        let day = new Date(item.publicationDate).getDate()
+       
+        if (!res[day]) {
+          res[day] = []
+        }
+        
+        res[day].push(item)
+      })
+
+      return res
+    },
   },
 
   mutations: {
@@ -64,6 +82,10 @@ export default {
     },
     setSelectSort(state, selectSort) {
       state.filter.sort = selectSort
+    },
+
+    updateCalendar(state, news) {
+      state.calendar = news
     },
   },
 
@@ -200,6 +222,46 @@ export default {
 
         return data
       }).catch(() => {})
+    },
+
+    // async loadNewsByDate({ commit }, { from, to }) {
+    //   let resp = await axios.post('/news/list', {
+    //     date: {
+    //       from, 
+    //       to,
+    //     },
+    //   })
+
+    //   if (resp.errors) {
+    //     return Promise.reject(res.errors)
+    //   }
+
+    //   return res.data
+    // },
+
+    async loadCalendarNews({ commit }, { month, year }) {
+      function daysInMonth(m, y) {
+        return new Date(y, m, 0).getDate()
+      }
+
+      try {
+        let resp = await axios.post('/news/list', {
+          date: {
+            from: `${year}-${month}-01`,
+            to: `${year}-${month}-${daysInMonth(month, year)}`,
+          },
+        })
+    
+        if (resp.errors) {
+          return Promise.reject(resp.errors)
+        }
+
+        commit('updateCalendar', resp.data.news)    
+      } catch {
+        console.error('Something went wrong')        
+      }
+
+      return 0
     },
   },
 }
