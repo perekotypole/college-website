@@ -135,8 +135,8 @@ export default {
       }).catch(() => {})
     },
 
-    async loadNewsDetails({ commit }, id) {
-      axios.get(`/news/${id}`).then(({ data }) => {
+    async loadNewsDetails({ commit }, { id, viewsIncrement }) {
+      axios.get(`/news/${id}/${viewsIncrement}`).then(({ data }) => {
         if (data.errors) {
           return Promise.reject(data.errors)
         }

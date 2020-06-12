@@ -11,13 +11,12 @@ export default (router) => {
       tag, date, number, page, sort,
     } = req.body
 
-
     try {
-      const query = News.find({ 
+      const query = News.find({
         publicationDate: {
           $gte: date && date.from ? Date.parse(date.from) : Date.parse('2000-01-01'),
           $lte: date && date.to ? Date.parse(date.to) : Date.now(),
-        } 
+        },
       }).sort({ publicationDate: -sort })
 
       if (tag) query.where({ mainTag: tag })
@@ -119,10 +118,16 @@ export default (router) => {
     }
   })
 
-  router.get('/:id', async (req, res) => {
-    const { id } = req.params
+  router.get('/:id/:viewsIncrement', async (req, res) => {
+    const { id, viewsIncrement } = req.params
 
     try {
+      if (viewsIncrement === 'true') {
+        await News.findOneAndUpdate({ _id: id }, {
+          $inc: { views: 1 },
+        })
+      }
+
       const result = await News.findById(id)
         .populate({ path: 'mainTag', model: Tag })
         .populate({ path: 'mainImage', model: Image })

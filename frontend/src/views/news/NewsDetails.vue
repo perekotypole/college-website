@@ -75,7 +75,7 @@ export default {
     }),
   },
   created() {
-    this.loadNewsDetails(this.$route.params.id)
+    this.loadNewsDetails({ id: this.$route.params.id, viewsIncrement: true })
   },
 }
 </script>
