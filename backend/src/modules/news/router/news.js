@@ -13,15 +13,14 @@ export default (router) => {
 
 
     try {
-      const query = News.find().sort({ publicationDate: -sort })
+      const query = News.find({ 
+        publicationDate: {
+          $gte: date && date.from ? Date.parse(date.from) : Date.parse('2000-01-01'),
+          $lte: date && date.to ? Date.parse(date.to) : Date.now(),
+        } 
+      }).sort({ publicationDate: -sort })
 
       if (tag) query.where({ mainTag: tag })
-      if (date) {
-        query.$where(`
-          this.publicationDate >= ${date.from ? Date.parse(date.from) : Date.parse('2000-01-01')} &&
-          this.publicationDate <= ${date.to ? Date.parse(date.to) : Date.now()}
-        `)
-      }
 
       const result = await query
         .skip((page - 1) * number)

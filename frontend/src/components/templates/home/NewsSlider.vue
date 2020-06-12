@@ -76,31 +76,85 @@ export default {
       required: false,
       default: 'yellow',
     },
+    swipes: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    currentDay: {
+      type: Number, 
+      required: false,
+    },
     onSlideChange: {
       type: Function,
       required: false,
       default: () => {},
     },
+    getDate: {
+      type: Function, 
+      required: false,
+      default: () => {},
+    },
+  },
+  data: () => ({
+    swiper: null,
+  }),
+  watch: {
+    currentDay(val) {
+      let res = null
+      let finded = this.$props.slides.find((item, i) => {
+        const day = new Date(item.publicationDate).getDate()
+        res = i
+        return val === day
+      })
+
+      if (finded) {
+        this.swiper.slideTo(res)
+      } 
+    },
+  },
+  methods: {
+    init() {
+      const { 
+        sliderId, 
+        onSlideChange, 
+        slides, 
+        swipes,
+        getDate,
+      } = this.$props
+
+      const swiper = new Swiper(`#${sliderId} .swiper-container`, {
+        effect: 'coverflow',
+        allowTouchMove: swipes,
+        followFinger: swipes,
+
+        navigation: {
+          nextEl: `#${sliderId}NextButton`,
+          prevEl: `#${sliderId}PrevButton`,
+        },
+
+        on: {
+          init() {
+            getDate(slides[this.activeIndex].publicationDate)
+          },
+          slideChange() {
+            if (this.activeIndex < slides.length) {
+              onSlideChange(this.activeIndex)
+            }
+            
+            getDate(slides[this.activeIndex].publicationDate)
+          },
+        },
+      })
+
+      this.swiper = swiper
+    },
   },
   mounted() {
-    const { sliderId, onSlideChange, slides } = this.$props
-
-    const swiper = new Swiper('.swiper-container', {
-      effect: 'coverflow',
-
-      navigation: {
-        nextEl: `#${sliderId}NextButton`,
-        prevEl: `#${sliderId}PrevButton`,
-      },
-
-      on: {
-        slideChange() {
-          if (this.activeIndex < slides.length) {
-            onSlideChange(this.activeIndex)
-          }
-        },
-      },
-    })
+    this.init()
+  },
+  updated() {
+    this.init()
   },
 }
 

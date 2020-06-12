@@ -1,4 +1,6 @@
 export default function addZero(value) {
+  if (!value) return ''
+  
   let res = value
 
   if (value < 10) {
