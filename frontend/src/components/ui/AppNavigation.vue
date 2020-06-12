@@ -9,7 +9,12 @@
           class="app-navigation__link"
         >
           {{ link.text }}
-          <div class="app-navigation__underline"></div>
+          <div 
+            :class="{
+              'app-navigation__underline_main': index === 0,
+              'app-navigation__underline': index !== 0
+            }"
+          ></div>
 
           <div v-if="link.sublinks">
             <navigation-sublinks
@@ -217,7 +222,7 @@ export default {
     direction: rtl;
   }
 
-  &__underline {
+  &__underline, &__underline_main {
     margin-top: 7px;
 
     position: relative;
@@ -232,9 +237,18 @@ export default {
     transition: .3s;
   }
 
-  &__link.router-link-exact-active {
+  &__link.router-link-active {
 
     .app-navigation__underline {
+      width: 30px;
+
+      transition: .3s;
+    }
+  }
+
+  &__link.router-link-exact-active {
+
+    .app-navigation__underline_main {
       width: 30px;
 
       transition: .3s;
