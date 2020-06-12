@@ -83,6 +83,8 @@ export default {
       sort: 'news/selectSort',
       page: 'news/selectPage',
       tag: 'news/selectTag',
+      fromDate: 'news/fromDate',
+      toDate: 'news/toDate',
     }),
   },
   watch: {
@@ -90,6 +92,8 @@ export default {
     tag() { this.changeNews() },
     page() { this.changeNews() },
     sort() { this.changeNews() },
+    fromDate() { this.changeNews() },
+    toDate() { this.changeNews() },
   },
   methods: {
     ...mapActions({

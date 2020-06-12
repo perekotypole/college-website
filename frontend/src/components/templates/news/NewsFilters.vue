@@ -12,9 +12,12 @@
       <div class="filters__pub-date">
         <span class="filters__title">Дата публікації:</span>
         <div class="filters__pub-date-selectors">
-          <date-input/>
+          <date-input 
+            @change="setFromDate($event)"
+          />
           <div class="filters__separator"></div>
           <date-input
+            @change="setToDate($event)"
             :slope="4"
           />
         </div>
@@ -58,6 +61,8 @@ export default {
   methods: {
     ...mapActions({
       setSelectTag: 'news/setSelectTag',
+      setFromDate: 'news/setFromDate',
+      setToDate: 'news/setToDate',
     }),
   },
   watch: {

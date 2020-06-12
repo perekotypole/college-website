@@ -6,11 +6,30 @@
     }"
   >
     <img class="date-select__icon" src="@/assets/icons/calendar.svg" alt="calendar icon">
-    <input type="number" class="date-select__number" value="01">
+    <input 
+      @change="$emit('change', getValue())" 
+      v-model="day" 
+      type="number" 
+      class="date-select__number" 
+      value="01"
+    >
     .
-    <input type="number" class="date-select__number" value="01">
+    <input 
+      @change="$emit('change', getValue())" 
+      v-model="month" 
+      ref="month" 
+      type="number" 
+      class="date-select__number" 
+      value="01"
+    >
     .
-    <input type="number" class="date-select__number date-select__number_long" value="2020">
+    <input 
+      @change="$emit('change', getValue())" 
+      v-model="year" 
+      type="number" 
+      class="date-select__number date-select__number_long" 
+      value="2020"
+    >
   </div>
 </template>
 
@@ -24,6 +43,17 @@ export default {
     },
     value: {
 
+    },
+  },
+  data: () => ({
+    day: null,
+    month: null,
+    year: null,
+  }),
+  methods: {
+    getValue() {
+      const { day, month, year } = this
+      return `${year}-${month}-${day}`
     },
   },
 }

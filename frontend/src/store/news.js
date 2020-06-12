@@ -15,6 +15,10 @@ export default {
       page: 1,
       number: 5,
       sort: 1,
+      date: {
+        from: null,
+        to: null,
+      },
     },
     calendar: [],
   },
@@ -33,6 +37,8 @@ export default {
     selectPage: (state) => state.filter.page,
     selectNumber: (state) => state.filter.number,
     selectSort: (state) => state.filter.sort,
+    fromDate: (state) => state.filter.date.from,
+    toDate: (state) => state.filter.date.to,
 
     calendar: (state) => state.calendar,
     calendarByDay: (state) => {
@@ -83,6 +89,12 @@ export default {
     setSelectSort(state, selectSort) {
       state.filter.sort = selectSort
     },
+    setFromDate(state, date) {
+      state.filter.date.from = date
+    },
+    setToDate(state, date) {
+      state.filter.date.to = date
+    },
 
     updateCalendar(state, news) {
       state.calendar = news
@@ -108,6 +120,10 @@ export default {
         number: getters.selectNumber,
         page: getters.selectPage,
         sort: getters.selectSort,
+        date: {
+          from: getters.fromDate,
+          to: getters.toDate,
+        },
       }).then(({ data }) => {
         if (data.errors) {
           return Promise.reject(data.errors)
@@ -173,6 +189,12 @@ export default {
     async setSelectSort({ commit }, sort) {
       commit('setSelectSort', sort)
     },
+    async setFromDate({ commit }, date) {
+      commit('setFromDate', date)
+    },
+    async setToDate({ commit }, date) {
+      commit('setToDate', date)
+    },
 
     async loadNewsByTag({ commit }, { tag, number, page }) {
       return axios.post('/news/ByTag', { tag, number, page }).then(({ data }) => {
@@ -223,21 +245,6 @@ export default {
         return data
       }).catch(() => {})
     },
-
-    // async loadNewsByDate({ commit }, { from, to }) {
-    //   let resp = await axios.post('/news/list', {
-    //     date: {
-    //       from, 
-    //       to,
-    //     },
-    //   })
-
-    //   if (resp.errors) {
-    //     return Promise.reject(res.errors)
-    //   }
-
-    //   return res.data
-    // },
 
     async loadCalendarNews({ commit }, { month, year }) {
       function daysInMonth(m, y) {
