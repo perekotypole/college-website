@@ -11,7 +11,6 @@
       v-model="day" 
       type="number" 
       class="date-select__number" 
-      value="01"
     >
     .
     <input 
@@ -20,7 +19,6 @@
       ref="month" 
       type="number" 
       class="date-select__number" 
-      value="01"
     >
     .
     <input 
@@ -28,12 +26,14 @@
       v-model="year" 
       type="number" 
       class="date-select__number date-select__number_long" 
-      value="2020"
     >
   </div>
 </template>
 
 <script>
+
+import addZero from '@/filters/addZero.filter'
+
 export default {
   props: {
     slope: {
@@ -42,14 +42,18 @@ export default {
       default: 0,
     },
     value: {
-
+      type: Date,
+      required: false,
+      default: () => new Date(2000, 1, 1),
     },
   },
-  data: () => ({
-    day: null,
-    month: null,
-    year: null,
-  }),
+  data() {
+    return {
+      day: addZero(this.$props.value.getDate()),
+      month: addZero(this.$props.value.getMonth()),
+      year: this.$props.value.getFullYear(),
+    }
+  },
   methods: {
     getValue() {
       const { day, month, year } = this

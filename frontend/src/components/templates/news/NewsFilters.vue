@@ -19,6 +19,7 @@
           <date-input
             @change="setToDate($event)"
             :slope="4"
+            :value="new Date()"
           />
         </div>
       </div>

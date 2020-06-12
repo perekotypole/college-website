@@ -17,7 +17,6 @@
 
         <div class="section__col-block">
           <div class="app-activity__sport-left">
-            <!-- link="http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg" -->
             <app-image
             class="app-activity__image"
             position="left"
@@ -300,6 +299,9 @@ export default {
       },
     },
   }),
+  mounted() {
+    console.log(this.$route)
+  },
 }
 </script>
 
