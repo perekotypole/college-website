@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       day: addZero(this.$props.value.getDate()),
-      month: addZero(this.$props.value.getMonth()),
+      month: addZero(this.$props.value.getMonth() + 1),
       year: this.$props.value.getFullYear(),
     }
   },
