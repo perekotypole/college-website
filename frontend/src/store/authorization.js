@@ -90,5 +90,21 @@ export default {
 
       return Promise.resolve()
     },
+
+    async changePassword({ commit }, { login, password, newPassword }) {
+      const res = await axios.post('/auth/changePassword', {
+        login,
+        oldPassword: password,
+        newPassword,
+      })
+  
+      const { data } = res
+  
+      if (data.errors) {
+        return Promise.reject(data.errors)
+      }
+  
+      return Promise.resolve()
+    },
   },
 }
