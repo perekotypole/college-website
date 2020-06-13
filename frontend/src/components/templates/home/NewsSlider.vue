@@ -261,7 +261,7 @@ export default {
 
   @media screen and (max-width: 576px) {
     &__photo{
-      height: calc(100% - 10px);
+      height: 100%;
     }
 
     &__control {
