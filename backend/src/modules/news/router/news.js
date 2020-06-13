@@ -91,16 +91,19 @@ export default (router) => {
     }
   })
 
-  router.get('/events', async (req, res) => {
-    const date = new Date(req.body.date)
+  router.post('/events', async (req, res) => {
+    const { date } = req.body
 
     try {
-      const result = await News.find({ eventDate: { $exists: true } })
+      const result = await News.find(
+        {
+          eventDate: {
+            $gte: date && date.from ? Date.parse(date.from) : Date.parse('2000-01-01'),
+            $lte: date && date.to ? Date.parse(date.to) : Date.now(),
+          },
+        },
+      )
         .sort('-eventDate')
-        .$where(`
-          this.eventDate.getFullYear() === ${date.getFullYear()} &&
-          this.eventDate.getMonth() === ${date.getMonth()}
-        `)
         .populate({ path: 'mainTag', model: Tag })
         .populate({ path: 'mainImage', model: Image })
         .select('-text -imagesList -documentsList')

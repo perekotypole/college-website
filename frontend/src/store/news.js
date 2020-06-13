@@ -44,7 +44,7 @@ export default {
     calendarByDay: (state) => {
       let res = []
       state.calendar.forEach((item) => {
-        let day = new Date(item.publicationDate).getDate()
+        let day = new Date(item.eventDate).getDate()
        
         if (!res[day]) {
           res[day] = []
@@ -252,14 +252,14 @@ export default {
       }
 
       try {
-        let resp = await axios.post('/news/list', {
+        let resp = await axios.post('/news/events', {
           date: {
             from: `${year}-${month}-01`,
             to: `${year}-${month}-${daysInMonth(month, year)}`,
           },
         })
     
-        if (resp.errors) {
+        if (resp.errors || resp.data.errors) {
           return Promise.reject(resp.errors)
         }
 

@@ -80,7 +80,7 @@ export default {
 <style lang="less" scoped>
 
 .filters {
-  width: 80%;
+  width: 1143px;
   padding: 35px 70px;
 
   background: var(--color-bg-main);
@@ -128,6 +128,7 @@ export default {
   }
 
   @media screen and (max-width: 576px) {
+    width: 80%;
     padding: 35px;
 
     &__search,

@@ -36,6 +36,7 @@
       <div class="news-creator__category"
         v-if="categories.tags">
         <span class="news-creator__section-title">Категорія:</span>
+
         <app-select
           class="news-creator__category-select"
           :slope="4"
@@ -56,6 +57,24 @@
           type="text"
           placeholder="Введіть заголовок..."
         >
+      </div>
+
+      <div class="news-creator__event">
+        <div>
+          <span class="news-creator__section-title">Це подія? </span>
+
+          <input type="checkbox" v-model="event">
+        </div>
+
+        <div v-if="event">
+          <span class="news-creator__section-title">Тоді виберіть дату - </span>
+
+          <input
+            class="news-creator__event-select"
+            v-model="eventDate"
+            type="date"
+            :min="new Date().toISOString().substring(0, 10)"/>
+        </div>
       </div>
 
       <div class="news-creator__news-title news-creator__section">
@@ -153,12 +172,15 @@ export default {
   data: () => ({
     errors: null,
 
+    event: false,
+
     mainImage: null,
     title: null,
     text: null,
     images: [],
     docs: [],
     mainTag: null,
+    eventDate: null,
 
     textBlock: false,
     imagesBlock: false,
@@ -175,7 +197,7 @@ export default {
     },
     async checkData() {
       const {
-        mainImage, title, text, images, docs, mainTag,
+        mainImage, title, text, images, docs, mainTag, eventDate,
       } = this
 
       if (!mainImage || !title) {
@@ -184,7 +206,7 @@ export default {
       }
 
       await this.createNews({
-        mainImage, title, text, images, docs, mainTag,
+        mainImage, title, text, images, docs, mainTag, eventDate,
       })
 
       this.$router.push({ name: 'admin-news' })
@@ -197,6 +219,11 @@ export default {
   },
   created() {
     this.loadTags({ all: false })
+  },
+  watch: {
+    event(val) {
+      if (!val) this.eventDate = null
+    },
   },
 }
 
@@ -245,6 +272,21 @@ export default {
 
   &__category {
     display: flex;
+  }
+
+  &__event {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 500px;
+    height: 3em;
+
+    margin-bottom: 20px;
+
+    *{
+      margin: 0;
+    }
   }
 
   &__category-select {

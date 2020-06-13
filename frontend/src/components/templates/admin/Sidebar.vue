@@ -68,7 +68,7 @@ export default {
     opened: false,
     links: {
       common: [
-        { title: 'Панель керування', icon: 'dashboard.svg' },
+        { title: 'Панель керування', icon: 'dashboard.svg', routeName: 'dashboard' },
         { title: 'Новини', icon: 'news.svg', routeName: 'admin-news' },
       ],
       pages: [

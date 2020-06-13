@@ -85,7 +85,7 @@ export default {
 .news-details {
 
   &__image{
-    max-height: 500px;
+    height: 500px;
     max-width: 100%;
   }
 
@@ -151,6 +151,14 @@ export default {
     margin-top: 35px;
 
     font-size: 16px;
+  }
+
+  @media screen and (max-width: 576px) {
+    &__image{
+      height: auto;
+      
+      width: 100%;
+    }
   }
 }
 

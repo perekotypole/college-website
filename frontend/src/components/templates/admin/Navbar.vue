@@ -13,7 +13,8 @@
       </div>
     </div>
 
-    <div class="navbar__right">
+    <div class="navbar__right"
+      v-click-outside="() => { menu = false }">
       <div class="user" @click="menu = !menu">
         <!-- <div class="user__image">
 
@@ -39,6 +40,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import ClickOutside from 'vue-click-outside'
 
 export default {
   data() {
@@ -54,6 +56,9 @@ export default {
       await this.logOut()
       this.$router.push({ name: 'signIn' })
     },
+  },
+  directives: {
+    ClickOutside,
   },
 }
 </script>

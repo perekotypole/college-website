@@ -124,7 +124,7 @@ export default {
   padding-bottom: 60px;
 
   &__list {
-    width: 75%;
+    width: 1143px;
 
     padding: 60px 0;
 
@@ -170,7 +170,7 @@ export default {
 }
 
 .view-settings {
-  width: 75%;
+  width: 1143px;
   padding: 35px;
 
   background: var(--color-bg-main);
@@ -199,6 +199,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    width: 80%;
 
     &__item,
     &__pages{

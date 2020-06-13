@@ -3,7 +3,6 @@
     <span class="news__title admin-view__title">
       Новини
     </span>
-    <div @click="logOut">вийти</div>
 
     <div class="news__content">
       <div class="news__left">
@@ -121,8 +120,6 @@ export default {
       loadSlider: 'news/loadSlider',
 
       deleteNews: 'news/deleteNews',
-
-      logOut: 'authorization/logOut',
     }),
     updateData() {
       this.loadNews()
@@ -139,6 +136,9 @@ export default {
   },
   watch: {
     modal() {
+      this.updateData()
+    },
+    count() {
       this.updateData()
     },
   },
