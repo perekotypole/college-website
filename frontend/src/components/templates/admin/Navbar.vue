@@ -29,6 +29,13 @@
 
       <div class="menu"
         v-show="menu">
+        <router-link class="menu__button"
+          v-for="({ name, routeName }, index) in list"
+          :key="index"
+          :to="{ name: routeName }">
+          {{name}}
+        </router-link>
+
         <div class="menu__button"
           @click="appLogOut">
           Вихід
@@ -46,6 +53,9 @@ export default {
   data() {
     return {
       menu: false,
+      list: [
+        { name: 'Редагувати', routeName: 'edit-data' },
+      ],
     }
   },
   methods: {
@@ -143,6 +153,7 @@ export default {
   position: absolute;
   top: 50px;
   right: 30px;
+  padding-top: 20px;
 
   min-width: 200px;
 

@@ -2,7 +2,9 @@ import uuid from 'uuid/v1'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-import { /* hash, */ token } from '../../configs/auth'
+import { hash, token } from '../../configs/auth'
+
+import verifyUser from '../../middlewares/verifyUser'
 
 import Admin from '../../models/auth/admin'
 import RefreshToken from '../../models/auth/token'
@@ -39,84 +41,144 @@ export default (router) => {
   //     .then(async (created) => res.json({
   //       created: !!created,
   //     }))
-  //     .catch((error) => {
+  //     .catch((error) =>
   //       res.json({
   //         error,
   //       })
-  //     })
+  //     )
   // })
 
   router.post('/signIn', async (req, res) => {
     const { login, password } = req.body
 
-    Admin.findOne({ login })
-      .then(async (admin) => {
-        const passwordIsCorrectly = await bcrypt.compare(password, admin.password)
+    try {
+      const admin = await Admin.findOne({ login })
 
-        if (!passwordIsCorrectly) {
-          return res.json({
-            error: 'Password is incorrect',
-          })
-        }
-
-        const tokens = await generateToken(admin._id)
-
+      if (!admin) {
         return res.json({
-          signIn: !!admin,
-          tokens,
+          error: 'User is incorrect',
         })
-      })
-      .catch((error) => {
-        res.json({
-          error,
+      }
+
+      const passwordIsCorrectly = await bcrypt.compare(password, admin.password)
+
+      if (!passwordIsCorrectly) {
+        return res.json({
+          error: 'Password is incorrect',
         })
+      }
+
+      const tokens = await generateToken(admin._id)
+
+      return res.json({
+        signIn: !!admin,
+        tokens,
       })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
+      })
+    }
   })
 
   router.post('/logOut', async (req, res) => {
-    const admin = await RefreshToken.findOne({ value: req.body.token })
+    try {
+      const admin = await RefreshToken.findOne({ value: req.body.token })
 
-    if (!admin) {
+      if (!admin) {
+        return res.json({
+          error: 'Token is not valid',
+        })
+      }
+
+      const deactivate = await RefreshToken.findOneAndDelete({ value: req.body.token })
+
+      if (!deactivate) {
+        return res.json({
+          error: 'Token is not valida',
+        })
+      }
+
       return res.json({
-        error: 'Token is not valid',
+        logOut: !!admin,
+      })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
     }
-
-    const deactivate = await RefreshToken.findOneAndDelete({ value: req.body.token })
-
-    if (!deactivate) {
-      return res.json({
-        error: 'Token is not valida',
-      })
-    }
-
-    return res.json({
-      logOut: !!admin,
-    })
   })
 
   router.post('/refresh', async (req, res) => {
-    const admin = await RefreshToken.findOne({ value: req.body.token })
+    try {
+      const admin = await RefreshToken.findOne({ value: req.body.token })
 
-    if (!admin) {
+      if (!admin) {
+        return res.json({
+          error: 'Token is not valid',
+        })
+      }
+
+      const deactivate = await RefreshToken.findOneAndDelete({ value: req.body.token })
+
+      if (!deactivate) {
+        return res.json({
+          error: 'Token is not valida',
+        })
+      }
+
+      const tokens = await generateToken(admin._id)
+
       return res.json({
-        error: 'Token is not valid',
+        refreshed: !!admin,
+        tokens,
+      })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
     }
+  })
 
-    const deactivate = await RefreshToken.findOneAndDelete({ value: req.body.token })
+  router.post('/changePassword', verifyUser, async (req, res) => {
+    const { login, newPassword, oldPassword } = req.body
 
-    if (!deactivate) {
+    try {
+      const user = await Admin.findOne({ login })
+
+      if (!user) {
+        return res.json({
+          error: 'User is incorrect',
+        })
+      }
+
+      const passwordIsCorrectly = await bcrypt.compare(oldPassword, user.password)
+
+      if (!passwordIsCorrectly) {
+        return res.json({
+          error: 'Password is incorrect',
+        })
+      }
+
+      const passwordHash = await bcrypt.hash(newPassword, hash.hashSize)
+
+      await user.updateOne({ password: passwordHash })
+
       return res.json({
-        error: 'Token is not valida',
+        user,
+      })
+    } catch (error) {
+      return res.json({
+        errors: [
+          error || { msg: 'Undefined error' },
+        ],
       })
     }
-
-    const tokens = await generateToken(admin._id)
-
-    return res.json({
-      refreshed: !!admin,
-      tokens,
-    })
   })
 }

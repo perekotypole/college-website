@@ -14,4 +14,9 @@ export default [
     path: '/admin/news/create',
     component: () => import('@/views/admin/NewsCreator'),
   },
+  {
+    name: 'edit-data',
+    path: '/admin/edit',
+    component: () => import('@/views/admin/EditData'),
+  },
 ]
