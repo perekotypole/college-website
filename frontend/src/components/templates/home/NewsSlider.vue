@@ -1,12 +1,11 @@
 <template>
   <div :id="sliderId" class="news-slider">
     <div class="swiper-container">
-
-      <div class="swiper-wrapper">
-        <div
+      <swiper :ref="sliderId" class="swiper-wrapper" :options="swiperOption">
+        <swiper-slide
+          v-for="({ _id, title, mainImage, mainTag }, i) in slides" :key="i"
           class="swiper-slide news-slider__item"
           :class="{'news-slider__item_with-category': showCategory}"
-          v-for="({ _id, title, mainImage, mainTag}, i) in slides" :key="i"
         >
           <app-title
             v-if="showCategory && mainTag"
@@ -31,9 +30,9 @@
             <span class="news-slider__number">{{ i + 1 | addZero }}</span>
             <span class="news-slider__title">{{ title }}</span>
           </router-link>
-        </div>
-      </div>
-
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
     </div>
 
     <div class="news-slider__control" :class="[controlColor]">
@@ -49,12 +48,15 @@
 
 <script>
 
-import Swiper from 'swiper'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 
 import AppTitle from '../../ui/AppTitle.vue'
 
 export default {
   components: {
+    Swiper,
+    SwiperSlide,
     AppTitle,
   },
   props: {
@@ -96,9 +98,6 @@ export default {
       default: () => {},
     },
   },
-  data: () => ({
-    swiper: null,
-  }),
   watch: {
     currentDay(val) {
       let res = null
@@ -113,48 +112,32 @@ export default {
       } 
     },
   },
-  methods: {
-    init() {
-      const { 
-        sliderId, 
-        onSlideChange, 
-        slides, 
-        swipes,
-        getDate,
-      } = this.$props
+  computed: {
+    swiper() {
+      const { getDate, slides, sliderId } = this
 
-      const swiper = new Swiper(`#${sliderId} .swiper-container`, {
-        effect: 'coverflow',
-        allowTouchMove: swipes,
-        followFinger: swipes,
-
-        navigation: {
-          nextEl: `#${sliderId}NextButton`,
-          prevEl: `#${sliderId}PrevButton`,
-        },
-
-        on: {
-          init() {
-            getDate(slides[this.activeIndex].publicationDate)
-          },
-          slideChange() {
-            if (this.activeIndex < slides.length) {
-              onSlideChange(this.activeIndex)
-            }
-            
-            getDate(slides[this.activeIndex].publicationDate)
-          },
-        },
-      })
-
-      this.swiper = swiper
+      return this.$refs[sliderId].$swiper
     },
   },
-  mounted() {
-    this.init()
+  data() {
+    return {
+      swiperOption: {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        navigation: {
+          nextEl: `#${this.sliderId}NextButton`,
+          prevEl: `#${this.sliderId}PrevButton`,
+        },
+        loop: this.$props.slides.length > 1,
+      },
+    }
   },
-  updated() {
-    this.init()
+  mounted() {
+    const { slides, getDate } = this.$props
+
+    getDate(slides[this.swiper.activeIndex].publicationDate)
   },
 }
 

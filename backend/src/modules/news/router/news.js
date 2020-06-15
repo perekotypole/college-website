@@ -8,11 +8,16 @@ import verifyUser from '../../../middlewares/verifyUser'
 export default (router) => {
   router.post('/list', async (req, res) => {
     const {
-      tag, date, number, page, sort,
+      tag, date, number, page, sort, keywords,
     } = req.body
+
+    News.index({ title: 'text' })
 
     try {
       const query = News.find({
+        $text: {
+          $search: keywords,
+        },
         publicationDate: {
           $gte: date && date.from ? Date.parse(date.from) : Date.parse('2000-01-01'),
           $lte: date && date.to ? Date.parse(date.to) : Date.now(),
@@ -27,6 +32,10 @@ export default (router) => {
         .populate({ path: 'mainTag', model: Tag })
         .populate({ path: 'mainImage', model: Image })
         .select('-text -imagesList -documentsList')
+
+
+      // const res = await News.runCommand('text', { search: keywords })
+      // console.log(res)
 
       return res.json({
         finded: !!result,
