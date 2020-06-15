@@ -12,7 +12,7 @@
     </div>
 
     <div class="app-news-item__right">
-      <router-link :to="`news/${id}`">
+      <router-link :to="`/news/${id}`">
         <span class="app-news-item__title">{{ title }}</span>
       </router-link>
       <div class="app-news-item__date">

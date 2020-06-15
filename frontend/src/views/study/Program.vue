@@ -5,7 +5,9 @@
       routeWay="Головна >> Навчання >> Освітня програма"
     ></app-pagename>
 
+
     <div class="app-program__content container">
+    {{programs}}
       <document-link
         link="http://kpk-lp.com.ua/wp-content/uploads/2019/09/%D0%9E%D1%81%D0%B2%D1%96%D1%82%D0%BD%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0.pdf">
         Освітня програма - профільної середньої освіти для
@@ -51,6 +53,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import AppPagename from '@/components/ui/AppPagename.vue'
 import AppNameTitle from '@/components/ui/AppNameTitle.vue'
 import AppSubtitle from '@/components/ui/AppSubtitle.vue'
@@ -131,6 +135,19 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    ...mapGetters({
+      programs: 'specialties/programs',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      loadPrograms: 'specialties/loadPrograms',
+    }),
+  },
+  created() {
+    this.loadPrograms()
   },
 }
 </script>

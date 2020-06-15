@@ -29,6 +29,8 @@ export default {
         data.commissions.forEach(async (element) => {
           element.elementId = element._id
 
+          element.events = []
+
           try {
             element.events = await dispatch('news/loadNewsByOptionalTags',
               { tags: [element._id], number: 3 },
