@@ -1,7 +1,4 @@
 import Vue from 'vue'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-
-import 'swiper/css/swiper.css'
 
 // Filters
 import addZero from '@/filters/addZero.filter'
@@ -21,8 +18,6 @@ accessTokenExpired(axios, store)
 accessTokenHeader(axios, store)
 
 Vue.config.productionTip = false
-
-Vue.use(VueAwesomeSwiper /* { default options with global component } */)
 
 Vue.filter('addZero', addZero)
 Vue.filter('dateFormat', dateFormat)
