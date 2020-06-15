@@ -11,18 +11,21 @@ export default (router) => {
       tag, date, number, page, sort, keywords,
     } = req.body
 
-    News.index({ title: 'text' })
-
     try {
       const query = News.find({
-        $text: {
-          $search: keywords,
-        },
         publicationDate: {
           $gte: date && date.from ? Date.parse(date.from) : Date.parse('2000-01-01'),
           $lte: date && date.to ? Date.parse(date.to) : Date.now(),
         },
       }).sort({ publicationDate: -sort })
+
+      if (keywords) {
+        query.find({
+          $text: {
+            $search: keywords,
+          },
+        })
+      }
 
       if (tag) query.where({ mainTag: tag })
 

@@ -137,7 +137,9 @@ export default {
   mounted() {
     const { slides, getDate } = this.$props
 
-    getDate(slides[this.swiper.activeIndex].publicationDate)
+    if (slides) {
+      getDate(slides[0].publicationDate)
+    }
   },
 }
 

@@ -51,4 +51,4 @@ export default model('News', new Schema({
     ref: 'Document',
     alias: 'documents',
   },
-}), 'news')
+}).index({ title: 'text' }), 'news')
