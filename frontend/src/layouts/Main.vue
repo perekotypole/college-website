@@ -34,30 +34,8 @@ export default {
   animation: going .3s;
 }
 
-// v1
 @keyframes going {
   from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0.96);
-    opacity: 0;
-  }
-}
-@keyframes coming {
-  from {
-    transform: scale(0.96);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-// v2
-/* @keyframes going {
-  from {
     transform: translateY(0);
   }
   to {
@@ -74,6 +52,6 @@ export default {
     transform: translateY(0);
     opacity: 1;
   }
-} */
+}
 
 </style>
