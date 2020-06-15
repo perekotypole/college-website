@@ -9,17 +9,18 @@
       <div class="app-ebooks__item"
         v-for="({ name, books }, index) in sections"
         :key="index">
-        <app-subtitle class="app-ebooks__item-title">
+        <app-subtitle class="app-ebooks__item-title"
+          v-if="books.length">
           {{ name }}
         </app-subtitle>
 
         <div class="app-ebooks__item-docs">
           <document-link
             class="app-ebooks__item-doc"
-            v-for="({ title, link }, index) in books"
+            v-for="({ path, name }, index) in books"
             :key="index"
-            :link="link">
-            {{ title }}
+            :link="path">
+            {{ name }}
           </document-link>
         </div>
       </div>
@@ -45,76 +46,37 @@ export default {
       sections: [
         {
           name: 'Біологія',
-          books: [
-            {
-              title: 'Біологія 10 – й клас (Соболь) - 2018',
-              link: '#',
-            },
-            {
-              title: 'Біологія 11 – й клас (Соболь) - 2019',
-              link: '#',
-            },
-          ],
+          booksID: ['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'],
+          books: [],
         },
         {
           name: 'Географія',
-          books: [
-            {
-              title: 'Географія 10 – й клас (Кобернік) - 2018',
-              link: '#',
-            },
-            {
-              title: 'Географія 11 – й клас (Кобернік) - 2018',
-              link: '#',
-            },
-          ],
+          booksID: ['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'],
+          books: [],
         },
         {
           name: 'Іноземна мова',
-          books: [
-            {
-              title: 'Англійська мова 10 – й клас (Карпюк) - 2018',
-              link: '#',
-            },
-          ],
-        },
-        {
-          name: 'Біологія',
-          books: [
-            {
-              title: 'Біологія 10 – й клас (Соболь) - 2018',
-              link: '#',
-            },
-            {
-              title: 'Біологія 11 – й клас (Соболь) - 2019',
-              link: '#',
-            },
-          ],
-        },
-        {
-          name: 'Географія',
-          books: [
-            {
-              title: 'Географія 10 – й клас (Кобернік) - 2018',
-              link: '#',
-            },
-            {
-              title: 'Географія 11 – й клас (Кобернік) - 2018',
-              link: '#',
-            },
-          ],
-        },
-        {
-          name: 'Іноземна мова',
-          books: [
-            {
-              title: 'Англійська мова 10 – й клас (Карпюк) - 2018',
-              link: '#',
-            },
-          ],
+          booksID: ['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'],
+          books: [],
         },
       ],
     }
+  },
+  methods: {
+    ...mapActions({
+      loadDocuments: 'documents/loadDocuments',
+    }),
+  },
+  created() {
+    this.sections.forEach(async (elem) => {
+      try {
+        const { documents } = await this.loadDocuments(elem.booksID)
+
+        elem.books = documents
+      } catch (error) {
+        elem.books = null
+      }
+    })
   },
 }
 </script>
