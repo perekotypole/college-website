@@ -8,7 +8,7 @@ export default {
     details: {},
     slider: [],
     news: [],
-    keywords: 0,
+    number: 0,
     tags: [],
     filter: {
       keywords: null,
