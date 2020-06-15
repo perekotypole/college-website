@@ -136,8 +136,6 @@ export default {
           return Promise.reject(data.errors)
         }
 
-        console.log('hello')
-
         commit('setNews', data)
 
         return Promise.resolve()
