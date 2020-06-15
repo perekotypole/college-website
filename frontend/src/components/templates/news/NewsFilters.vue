@@ -5,7 +5,9 @@
         <input
           class="search__input"
           type="text"
-          placeholder="Пошук" />
+          placeholder="Пошук" 
+          v-model="keywords"
+        />
         <img class="search__icon" src="@/assets/icons/search-icon.svg" alt="search icon" />
       </div>
 
@@ -51,6 +53,7 @@ export default {
   },
   data: () => ({
     tag: null,
+    keywords: null,
   }),
   props: {
     categories: {
@@ -64,11 +67,15 @@ export default {
       setSelectTag: 'news/setSelectTag',
       setFromDate: 'news/setFromDate',
       setToDate: 'news/setToDate',
+      setKeywords: 'news/setKeywords',
     }),
   },
   watch: {
     tag(val) {
       this.setSelectTag(val)
+    },
+    keywords(val) {
+      this.setKeywords(val)
     },
   },
   created() {

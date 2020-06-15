@@ -85,6 +85,8 @@ export default {
       tag: 'news/selectTag',
       fromDate: 'news/fromDate',
       toDate: 'news/toDate',
+
+      keywords: 'news/keywords',
     }),
   },
   watch: {
@@ -94,6 +96,7 @@ export default {
     sort() { this.changeNews() },
     fromDate() { this.changeNews() },
     toDate() { this.changeNews() },
+    keywords() { this.changeNews() },
   },
   methods: {
     ...mapActions({

@@ -8,9 +8,10 @@ export default {
     details: {},
     slider: [],
     news: [],
-    number: 0,
+    keywords: 0,
     tags: [],
     filter: {
+      keywords: null,
       tag: null,
       page: 1,
       number: 5,
@@ -55,6 +56,8 @@ export default {
 
       return res
     },
+
+    keywords: (state) => state.filter.keywords,
   },
 
   mutations: {
@@ -95,6 +98,9 @@ export default {
     setToDate(state, date) {
       state.filter.date.to = date
     },
+    setKeywords(state, keywords) {
+      state.filter.keywords = keywords
+    },
 
     updateCalendar(state, news) {
       state.calendar = news
@@ -124,10 +130,13 @@ export default {
           from: getters.fromDate,
           to: getters.toDate,
         },
+        keywords: getters.keywords,
       }).then(({ data }) => {
         if (data.errors) {
           return Promise.reject(data.errors)
         }
+
+        console.log('hello')
 
         commit('setNews', data)
 
@@ -194,6 +203,9 @@ export default {
     },
     async setToDate({ commit }, date) {
       commit('setToDate', date)
+    },
+    async setKeywords({ commit }, keywords) {
+      commit('setKeywords', keywords)
     },
 
     async loadNewsByTag({ commit }, { tag, number, page }) {
