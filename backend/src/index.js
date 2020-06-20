@@ -20,11 +20,9 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname + '/public/'))
+  app.use(express.static(`${__dirname}/public/`))
 
-  app.get(/.*/, (req, res) => {
-    return res.sendFile(__dirname + '/public/index.html');
-  });
+  app.get(/.*/, (req, res) => res.sendFile(`${__dirname}/public/index.html`))
 }
 
 mongoose
