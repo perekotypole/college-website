@@ -9,8 +9,15 @@
     </app-title>
 
     <app-title class="route-way"
-      color="yellow"
-      >{{routeWay}}</app-title>
+      color="yellow">
+      <router-link
+        v-for="({ title, link }, index) in path"
+        :key="index"
+        :to="link">
+        {{title}}
+        <span v-if="index !== (path.length - 1)">>></span>
+      </router-link>
+    </app-title>
   </div>
 </template>
 
@@ -20,6 +27,11 @@ import AppTitle from '@/components/ui/AppTitle.vue'
 export default {
   components: {
     AppTitle,
+  },
+  data() {
+    return {
+      path: [],
+    }
   },
   props: {
     name: {
@@ -32,6 +44,31 @@ export default {
       required: true,
       default: () => '',
     },
+  },
+  methods: {
+    pathGeneration() {
+      const routers = this.$route.matched
+
+      routers.forEach((element) => {
+        if (element.meta) {
+          if (element.meta.parents) {
+            element.meta.parents.forEach((route) => {
+              this.path.push(route)
+            })
+          }
+
+          if (element.meta.title) {
+            this.path.push({
+              title: element.meta.title,
+              link: element.path || '/',
+            })
+          }
+        }
+      })
+    },
+  },
+  created() {
+    this.pathGeneration()
   },
 }
 </script>

@@ -19,6 +19,7 @@ const routes = [
     component: () => import('@/layouts/Main'),
     meta: {
       requiresAuth: false,
+      title: 'Головна',
     },
     children: [
       {
@@ -35,6 +36,9 @@ const routes = [
       {
         path: '/contacts',
         name: 'contacts',
+        meta: {
+          title: 'Контакти',
+        },
         component: () => import('@/views/Contacts'),
       },
     ],
