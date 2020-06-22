@@ -5,7 +5,7 @@
       :padding="[15, 40]"
       :slope="15"
       >
-      {{name}}
+      {{pagename}}
     </app-title>
 
     <app-title class="route-way"
@@ -15,7 +15,7 @@
         :key="index"
         :to="link">
         {{title}}
-        <span v-if="index !== (path.length - 1)">>></span>
+        <span v-if="index !== (path.length - 1) || !(pagename = title)">>></span>
       </router-link>
     </app-title>
   </div>
@@ -30,20 +30,9 @@ export default {
   },
   data() {
     return {
+      pagename: '',
       path: [],
     }
-  },
-  props: {
-    name: {
-      type: String,
-      required: true,
-      default: () => '',
-    },
-    routeWay: {
-      type: String,
-      required: true,
-      default: () => '',
-    },
   },
   methods: {
     pathGeneration() {
