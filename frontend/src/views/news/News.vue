@@ -164,6 +164,7 @@ export default {
     &__list {
       width: 95%;
       margin: 170px 0 100px 17px;
+      padding: 230px 0;
     }
 
     &__view-settings {

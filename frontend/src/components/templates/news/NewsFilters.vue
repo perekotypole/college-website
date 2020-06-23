@@ -113,9 +113,10 @@ export default {
 
   &__pub-date {
 
-    &-selectors{
+    &-selectors { 
       display: flex;
       align-items: center;
+      flex-direction: column;
     }
   }
 
@@ -140,19 +141,31 @@ export default {
 
     &__search,
     &__pub-date {
-      margin-bottom: 15px;
+      margin-bottom: 30px;
     }
 
-    // &__separator{
-    //   display: none;
-    // }
+    &__separator{
+      margin: 5px 0;
+    }
+
+    &__title {
+      margin-bottom: 10px;
+    }
+
+    &__category {
+      display: block;
+
+      &-select {
+        margin-top: 10px;
+      }
+    }
   
     &__pub-date {
       display: block;
 
       &-selectors{
         align-self: flex-end;
-        margin-top: 5px;
+        margin-top: 10px;
       }
     }
   }
