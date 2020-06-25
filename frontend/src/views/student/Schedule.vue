@@ -31,7 +31,7 @@
       >
         <app-name-title class="section__title">Розклад занять</app-name-title>
 
-        <schedule-filters />
+        <!-- <schedule-filters />
 
         <div class="lessons-schedule__week">
           <div
@@ -59,7 +59,7 @@
               />
             </div>
           </div>
-        </div>
+        </div> -->
 
         <document-link
           v-for="(doc, i) in scheduleDocs.documents"
@@ -136,7 +136,8 @@ import ScheduleLesson from '@/components/templates/schedule/ScheduleLesson.vue'
 
 export default {
   components: {
-    AppPagename, AppNameTitle, AppTitle, DocumentLink, ScheduleFilters, ScheduleLesson, SectionsList,
+    AppPagename, AppNameTitle, AppTitle, DocumentLink, SectionsList,
+    // ScheduleFilters, ScheduleLesson,
   },
   methods: {
     ...mapActions({
@@ -144,7 +145,7 @@ export default {
     }),
   },
   async created() {
-    this.studyProcessDocs = await this.loadDocuments(['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
+    this.studyProcessDocs = await this.loadDocuments(['5ef1fc4036c51bf067b9d03d'])
     this.scheduleDocs = await this.loadDocuments(['5ed51fe6d4cd813fcc566e61'])
   },
   data: () => ({

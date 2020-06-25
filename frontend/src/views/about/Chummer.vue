@@ -149,8 +149,16 @@ export default {
     }),
   },
   async created() {
-    this.photo = await this.loadImages(['5ebd605e36626b233ccd1fc2', '5ebd5ebb36626b233ccd1fc1', '5ebecda036626b233ccd1fc7'])
-    this.galery = await this.loadImages(['5ebd605e36626b233ccd1fc2', '5ebd5ebb36626b233ccd1fc1', '5ebecda036626b233ccd1fc7'])
+    this.photo = await this.loadImages(['5ef1ecd436c51bf067b9d025', '5ef1ecf336c51bf067b9d026', '5ef1ed1036c51bf067b9d027'])
+    this.galery = await this.loadImages([
+      '5ef1ecd436c51bf067b9d025',
+      '5ef1ecf336c51bf067b9d026',
+      '5ef1ed1036c51bf067b9d027',
+      '5ef1ee4336c51bf067b9d028',
+      '5ef1ee8336c51bf067b9d029',
+      '5ef1eea336c51bf067b9d02a',
+      '5ef1eeb936c51bf067b9d02b',
+    ])
   },
 }
 </script>

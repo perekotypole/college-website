@@ -107,11 +107,6 @@ export default {
   data() {
     return {
       photo: null,
-      // images: [
-      //   'http://kpk-lp.com.ua/wp-content/uploads/2015/12/31.jpg',
-      //   'https://lpnu.ua/sites/default/files/styles/illustration_wide/public/news/2018/09/04/illustrations/kolomcolt.jpg?itok=y4oSxfak&timestamp=1536048298',
-      //   'https://lh3.googleusercontent.com/phcAnWdgEWSUaGOYXBlNIQFqx-7KC8KjFWW8wqOEGMTWyjUE_O7pCy3P8qU735I2MaK8mPt0vQu0SQ1w=w645-h484-rw-no',
-      // ],
     }
   },
   methods: {
@@ -120,7 +115,7 @@ export default {
     }),
   },
   async created() {
-    this.photo = await this.loadImages(['5ebd605e36626b233ccd1fc2', '5ebd5ebb36626b233ccd1fc1', '5ebecda036626b233ccd1fc7'])
+    this.photo = await this.loadImages(['5ef1ea0e57737e417cae9e8e', '5ef1ea2f57737e417cae9e8f', '5ef1ea5157737e417cae9e90'])
   },
 }
 </script>

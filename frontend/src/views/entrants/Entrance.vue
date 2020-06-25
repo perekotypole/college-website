@@ -144,8 +144,8 @@
             class="app-entance__subtitle"
             color="green"
             :slope="10">
-            ПРОГРАМА СПІВБЕСІДИ ДЛЯ ОСІБ, ЯКИМ НАДАНЕ ТАКЕ ПРАВО ДЛЯ ЗДОБУТТЯ
-            ОСВІТНЬО-КВАЛІФІКАЦІЙНОГО РІВНЯ "МОЛОДШИЙ СПЕЦІАЛІСТ"
+            ПРОГРАМА СПІВБЕСІДИ ДЛЯ ОСІБ, ЯКИМ НАДАНЕ ПРАВО ДЛЯ ЗДОБУТТЯ
+            ОСВІТНЬО-КВАЛІФІКАЦІЙНОГО РІВНЯ "фаховий молодший бакалавр"
           </app-title>
 
           <div class="app-entance__subsection">
@@ -404,7 +404,10 @@ export default {
     }),
   },
   async created() {
-    this.rules = await this.loadDocuments(['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
+    this.rules = await this.loadDocuments(['5ef1f93d36c51bf067b9d038', '5ef1f96336c51bf067b9d039'])
+    this.places = await this.loadDocuments(['5ef1f99836c51bf067b9d03a'])
+    this.exams.interview.base = await this.loadDocuments(['5ef1fa6f36c51bf067b9d03b', '5ef1fb0336c51bf067b9d03c'])
+    this.exams.interview.full = await this.loadDocuments(['5ef1fbb357737e417cae9e92', '5ef1fbde57737e417cae9e93'])
   },
 }
 </script>

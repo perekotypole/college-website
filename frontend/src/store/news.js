@@ -14,7 +14,7 @@ export default {
       keywords: null,
       tag: null,
       page: 1,
-      number: 5,
+      number: null,
       sort: 1,
       date: {
         from: null,

@@ -98,7 +98,7 @@ export default {
     }),
   },
   async created() {
-    this.photo = await this.loadImages(['5ebd605e36626b233ccd1fc2', '5ebd5ebb36626b233ccd1fc1'])
+    this.photo = await this.loadImages(['5ef1efbc36c51bf067b9d02c', '5ef1efda36c51bf067b9d02d'])
   },
 }
 </script>

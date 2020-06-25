@@ -116,7 +116,6 @@ export default {
     &-selectors { 
       display: flex;
       align-items: center;
-      flex-direction: column;
     }
   }
 
@@ -164,8 +163,8 @@ export default {
       display: block;
 
       &-selectors{
-        align-self: flex-end;
         margin-top: 10px;
+        flex-direction: column;
       }
     }
   }

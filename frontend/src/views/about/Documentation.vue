@@ -87,8 +87,18 @@ export default {
     }),
   },
   async created() {
-    this.firstList = await this.loadDocuments(['5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
-    this.secondList = await this.loadDocuments(['5ed51fe6d4cd813fcc566e61'])
+    this.firstList = await this.loadDocuments(['5ef1f10d36c51bf067b9d02e', '5ed51f87d4cd813fcc566e5e', '5ed51fcad4cd813fcc566e60'])
+    this.secondList = await this.loadDocuments([
+      '5ed51fe6d4cd813fcc566e61',
+      '5ef1f21e36c51bf067b9d030',
+      '5ef1f2f636c51bf067b9d031',
+      '5ef1f36a36c51bf067b9d032',
+      '5ef1f39236c51bf067b9d033',
+      '5ef1f3c536c51bf067b9d034',
+      '5ef1f3de36c51bf067b9d035',
+      '5ef1f41336c51bf067b9d036',
+      '5ef1f4f136c51bf067b9d037',
+    ])
   },
 }
 </script>

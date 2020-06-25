@@ -69,13 +69,13 @@
           В 2013 – 2014 н.р. переможець Всеукраїнського огляду-конкурсу на кращий стан фізичного
           виховання та спорту серед ВНЗ І-ІІ рівнів акредитації.</p>
 
-          <document-link
+          <!-- <document-link
             v-for="(doc, i) in sections.sport.achievements.documents.documents"
             :key="i"
             :link="doc.path"
           >
             {{ doc.name }}
-          </document-link>
+          </document-link> -->
         </div>
 
         <section class="section-lv-2 app-activity__section-lv-2 app-activity__sport-events"
@@ -148,7 +148,7 @@
             </div>
           </section>
 
-          <section class="section-lv-3 app-activity__section-lv-3">
+          <!-- <section class="section-lv-3 app-activity__section-lv-3">
             <app-title
               class="section-lv-3__title"
               color="yellow"
@@ -165,7 +165,7 @@
             >
               {{ doc.name }}
             </document-link>
-          </section>
+          </section> -->
         </section>
       </section>
 
@@ -203,7 +203,7 @@ import SectionsList from '@/components/ui/SectionsList.vue'
 
 export default {
   components: {
-    AppPagename, AppNameTitle, AppImage, AppTitle, AppNews, DocumentLink, SectionsList,
+    AppPagename, AppNameTitle, AppImage, AppTitle, AppNews, SectionsList,
   },
   methods: {
     ...mapActions({
@@ -213,14 +213,11 @@ export default {
     }),
   },
   async created() {
-    this.photo = await this.loadImages(['5ebece9836626b233ccd1fca'])
+    this.photo = await this.loadImages(['5ef1ec1936c51bf067b9d024'])
 
     this.sections.sport.events = await this.loadNewsByTag({ tag: '5ebd5a07c524342928139269' })
     this.sections.teachers.events = await this.loadNewsByTag({ tag: '5ebd5a11c52434292813926a' })
     this.sections.educActivity.events = await this.loadNewsByTag({ tag: '5ebd5a00c524342928139268' })
-
-    this.sections.sport.achievements.documents = await this.loadDocuments(['5ed51fcad4cd813fcc566e60', '5ed51fe6d4cd813fcc566e61'])
-    this.sections.teachers.methAssoc.documents = await this.loadDocuments(['5ed51fcad4cd813fcc566e60', '5ed51fe6d4cd813fcc566e61'])
   },
   data: () => ({
     photo: null,

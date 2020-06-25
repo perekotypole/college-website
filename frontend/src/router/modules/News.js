@@ -10,6 +10,15 @@ export default [
   {
     name: 'newsDetails',
     path: '/news/:id',
+    meta: {
+      parents: [
+        {
+          title: 'Новини',
+          link: '/news',
+        },
+      ],
+      title: 'Детальніше',
+    },
     component: () => import('@/views/news/NewsDetails'),
   },
 ]
